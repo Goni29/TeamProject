@@ -281,7 +281,6 @@ cursor = con.cursor()
 for idx, row in df.iterrows():
     # 각 행의 데이터를 추출
     product_name = row['제품명']
-    product_price = None
     product_market = 'Amazon'
     product_URL = row['페이지URL']
     product_img_URL = row['이미지URL']
@@ -290,11 +289,11 @@ for idx, row in df.iterrows():
     product_delivery_fee = row['배송비']
     product_keyword = "Logitech G102"
     product_visible = 1
-    product_groupbuying = None
-    product_description = None
-    category_large = "가전"
-    category_medium = '컴퓨터'
-    category_small = '마우스'
+    product_groupbuying = 1
+    product_description = '마우스 / 광 / DPI+5버튼 / 연결 방식: 유선 / USB / 8000DPI / 가속도 30G / RGB라이트 / 게이밍 마우스 / 소프트웨어 지원 / 116.6mm / 62.1mm / 38.2mm / 85g / 2m / 2년 보증'
+    category_large = 1
+    category_medium = 1
+    category_small = 2
     # SQL INSERT 문
     sql_insert = "INSERT INTO LUCLE.MARKET (NUM, PRODUCTNAME, MARKETNAME, URL, IMGURL, WON, DELIVERY, DELIVERYFEE, KEYWORD, VISIBLE, GROUPBUYING, DESCRIPTION) VALUES (seq_market.nextval, :1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11)"
     cursor.execute(sql_insert, (product_name, product_market, product_URL, product_img_URL, product_won, product_delivery, product_delivery_fee, product_keyword, product_visible, product_groupbuying, product_description))
