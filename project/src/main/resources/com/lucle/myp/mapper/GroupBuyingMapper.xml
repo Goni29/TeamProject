@@ -1,0 +1,28 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lucle.myp.mapper.GroupBuyingMapper">
+
+  <insert id="insertGroupBuying" parameterType="com.lucle.myp.domain.GroupBuyingVo">
+    INSERT INTO GROUPBUYING (TITLE, CONTENT, REGIDATE, GOALDATE, GOALTARGET, NUM)
+    VALUES (#{title}, #{content}, #{regidate}, #{goaldate}, #{goaltarget}, #{num})
+  </insert>
+
+  <select id="selectGroupBuying" parameterType="long" resultType="com.lucle.myp.domain.GroupBuyingVo">
+    SELECT * FROM GROUPBUYING WHERE GNO = #{gno}
+  </select>
+
+  <update id="updateGroupBuying" parameterType="com.lucle.myp.domain.GroupBuyingVo">
+    UPDATE GROUPBUYING
+    SET TITLE = #{title}, CONTENT = #{content}, REGIDATE = #{regidate}, 
+        GOALDATE = #{goaldate}, GOALTARGET = #{goaltarget}, NUM = #{num}
+    WHERE GNO = #{gno}
+  </update>
+
+  <delete id="deleteGroupBuying" parameterType="long">
+    DELETE FROM GROUPBUYING WHERE GNO = #{gno}
+  </delete>
+  
+  <select id="listGroupBuying" resultType="com.lucle.myp.domain.GroupBuyingVo">
+        SELECT * FROM GROUPBUYING
+  </select>
+
+</mapper>
