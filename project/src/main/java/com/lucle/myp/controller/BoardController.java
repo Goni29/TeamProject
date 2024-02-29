@@ -1,10 +1,6 @@
 package com.lucle.myp.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,10 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lucle.myp.domain.BoardVo;
 import com.lucle.myp.domain.Criteria;
-import com.lucle.myp.domain.JoinBoardVo;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.PageDto;
-import com.lucle.myp.domain.ReplyVo;
 import com.lucle.myp.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
@@ -39,7 +33,7 @@ public class BoardController {
 	
 	// JSON 형식으로 게시글 목록을 반환하는 메서드
 	@ResponseBody
-	@GetMapping(value = "/json/{sort}/{page}/{category}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value = "/json/{sort}/{page}", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<BoardVo> jsonList (
 			@PathVariable String sort,
 	        @PathVariable int page,

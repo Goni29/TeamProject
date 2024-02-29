@@ -33,12 +33,11 @@
 			SELECT * FROM (
 				SELECT rownum rn, inner_query.* FROM (
 					SELECT B.BNO, B.TITLE, B.CONTENT, B.WRITER, B.REGDATE, B.UPDATEDATE, B.VIEWCOUNT,
-					B.NUM, B.SUMMARY, B.ID, B.CATEGORY, M.PRODUCTNAME, M.MARKETNAME, M.URL, M.IMGURL,
-					M.WON, M.DELIVERY, M.DELIVERYFEE, M.PCATEGORY,
+					B.NUM, B.ID, M.PRODUCTNAME, M.MARKETNAME, M.URL, M.IMGURL,
+					M.WON, M.DELIVERY, M.DELIVERYFEE,
 					ROW_NUMBER() OVER (ORDER BY ${sort} DESC) as row_num 
 					FROM TBL_BOARD B 
-					LEFT JOIN MARKET M ON B.NUM = M.NUM 
-					WHERE CATEGORY=#{category}
+					LEFT JOIN MARKET M ON B.NUM = M.NUM
 			]]>
 		<include refid="dynamicSearchQuery" />
 		<![CDATA[ 
@@ -60,20 +59,20 @@
 		]]>
 		<include refid="dynamicSearchQuery" />
 		<![CDATA[ 
-			bno>0 and category=#{category} 
+			bno>0 
 		]]>
 	</select>
 	<insert id="insert" parameterType="com.lucle.myp.domain.BoardVo">
 		insert into tbl_board(bno,
-		title, content, writer, summary, id, num, category)
-		values(seq_board.nextval, #{title}, #{content}, #{writer}, #{summary},
-		#{id}, #{num}, #{category})
+		title, content, writer, id, num)
+		values(seq_board.nextval, #{title}, #{content}, #{writer},
+		#{id}, #{num}
 	</insert>
 	<insert id="insertNumNull"
 		parameterType="com.lucle.myp.domain.BoardVo">
 		insert into tbl_board(bno, title, content, writer,
-		summary, id, num, category) values(seq_board.nextval, #{title},
-		#{content}, #{writer}, #{summary}, #{id}, null, #{category})
+		id, num) values(seq_board.nextval, #{title},
+		#{content}, #{writer}, #{id}, null)
 	</insert>
 	<insert id="insertSelectKey"
 		parameterType="com.lucle.myp.domain.BoardVo">
