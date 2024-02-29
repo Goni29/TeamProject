@@ -98,7 +98,7 @@
 		M.MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay', '11번가')
 		) AVG_MK
 		WHERE
-		AVG_MK.RN = 1;
+		AVG_MK.RN = 1
 
 	</select>
 
