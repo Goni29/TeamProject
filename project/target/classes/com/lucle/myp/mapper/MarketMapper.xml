@@ -6,9 +6,11 @@
 
 	<select id="getList" resultType="com.lucle.myp.domain.MarketVo">
 		SELECT M.*,
-		(SELECT COUNT(*) FROM MARKETVIEW MV WHERE MV.NUM = M.NUM) AS MARKETVIEWCOUNT
+		(SELECT COUNT(*) FROM MARKETVIEW MV WHERE MV.NUM = M.NUM)
+		AS MARKETVIEWCOUNT
 		FROM MARKET M
-		WHERE (PRODUCTNAME LIKE '%' || #{keyword} || '%'
+		WHERE (PRODUCTNAME LIKE '%' ||
+		#{keyword} || '%'
 		OR KEYWORD LIKE '%' || #{keyword} || '%')
 		AND (
 		<trim prefix="" suffix="" prefixOverrides="or">
@@ -25,7 +27,7 @@
 		</trim>
 		)
 	</select>
-	
+
 	<select id="proto" resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
 	SELECT A.*
@@ -38,8 +40,9 @@
 	WHERE A.RN = 1
 	]]>
 	</select>
-	
-	<select id="sortProto" resultType="com.lucle.myp.domain.MarketVo">
+
+	<select id="sortProto"
+		resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
 	SELECT A.*, A.RN
 	FROM (
@@ -52,13 +55,51 @@
 	]]>
 	</select>
 
-	<select id="groupBuying" resultType="com.lucle.myp.domain.MarketVo">
-	<![CDATA[
-	SELECT *
-	FROM MARKET
-	WHERE GROUPBUYING = 1
-	ORDER BY DBMS_RANDOM.VALUE
-	]]>
+	<!-- <select id="groupBuying" resultType="com.lucle.myp.domain.MarketVo"> 
+		<![CDATA[ SELECT * FROM MARKET WHERE GROUPBUYING = 1 ORDER BY DBMS_RANDOM.VALUE 
+		]]> </select> -->
+
+	<select id="groupBuying"
+		resultType="com.lucle.myp.domain.MarketVo">
+		
+		SELECT
+		AVG_MK.MARKETNAME,
+		AVG_MK.PRODUCTNAME,
+		AVG_MK.URL,
+		AVG_MK.IMGURL,
+		AVG_MK.WON
+		FROM (
+		SELECT
+		M.MARKETNAME,
+		M.PRODUCTNAME,
+		M.URL,
+		M.IMGURL,
+		M.WON,
+		M.KEYWORD,
+		ABS(M.WON - MK_AVG.AVG_PRICE) AS PRICE_DIFFERENCE,
+		ROW_NUMBER() OVER (
+		PARTITION BY M.KEYWORD
+		ORDER BY ABS(M.WON - MK_AVG.AVG_PRICE)
+		) AS RN
+		FROM
+		MARKET M
+		INNER JOIN (
+		SELECT
+		KEYWORD,
+		AVG(WON) AS AVG_PRICE
+		FROM
+		MARKET
+		WHERE
+		MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay', '11번가')
+		GROUP BY
+		KEYWORD
+		) MK_AVG ON M.KEYWORD = MK_AVG.KEYWORD
+		WHERE
+		M.MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay', '11번가')
+		) AVG_MK
+		WHERE
+		AVG_MK.RN = 1;
+
 	</select>
 
 
@@ -72,7 +113,8 @@
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT MV.*, M.*
 		FROM MARKETVIEW MV
-		INNER JOIN MARKET M ON MV.NUM = M.NUM
+		INNER JOIN MARKET M ON
+		MV.NUM = M.NUM
 		WHERE MV.ID = #{id}
 		ORDER BY viewDate DESC
 	</select>
