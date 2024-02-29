@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lucle.myp.mapper.BoardMapper">
+	<select id="getList" resultType="com.lucle.myp.domain.BoardVo">
+		<![CDATA[ 
+			select * from tbl_board where bno > 0
+		]]>
+		<if test="sort != null and sort != ''">
+			<![CDATA[ 
+				order by ${sort} desc
+			]]>
+		</if>
+	</select>
+	<sql id="dynamicSearchQuery">
+		<trim prefix="(" suffix=") and " prefixOverrides="or">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="or ">
+					<choose>
+						<when test="type == 'T'.toString()"> title like '%'||#{keyword}||'%' </when>
+						<when test="type == 'C'.toString()"> content like '%'||#{keyword}||'%' </when>
+						<when test="type == 'W'.toString()"> writer like '%'||#{keyword}||'%' </when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	<select id="getListWithPage"
+		parameterType="com.lucle.myp.domain.Criteria"
+		resultType="com.lucle.myp.domain.BoardVo">
+		<![CDATA[ 
+			SELECT * FROM (
+				SELECT rownum rn, inner_query.* FROM (
+					SELECT B.BNO, B.TITLE, B.CONTENT, B.WRITER, B.REGDATE, B.UPDATEDATE, B.VIEWCOUNT,
+					B.NUM, B.SUMMARY, B.ID, B.CATEGORY, M.PRODUCTNAME, M.MARKETNAME, M.URL, M.IMGURL,
+					M.WON, M.DELIVERY, M.DELIVERYFEE, M.PCATEGORY,
+					ROW_NUMBER() OVER (ORDER BY ${sort} DESC) as row_num 
+					FROM TBL_BOARD B 
+					LEFT JOIN MARKET M ON B.NUM = M.NUM 
+					WHERE CATEGORY=#{category}
+			]]>
+		<include refid="dynamicSearchQuery" />
+		<![CDATA[ 
+				) inner_query 
+				WHERE row_num <= #{pageNum} * #{amount} 
+			) 
+			WHERE rn > (#{pageNum} - 1) * #{amount} 
+		]]>
+	</select>
+	<select id="getCount" resultType="int"> 
+		<![CDATA[ 
+			select count(*) from tbl_board
+		]]>
+	</select>
+	<select id="getCountWithSearch"
+		parameterType="com.lucle.myp.domain.Criteria" resultType="int">
+		<![CDATA[ 
+			select count(*) from tbl_board where 
+		]]>
+		<include refid="dynamicSearchQuery" />
+		<![CDATA[ 
+			bno>0 and category=#{category} 
+		]]>
+	</select>
+	<insert id="insert" parameterType="com.lucle.myp.domain.BoardVo">
+		insert into tbl_board(bno,
+		title, content, writer, summary, id, num, category)
+		values(seq_board.nextval, #{title}, #{content}, #{writer}, #{summary},
+		#{id}, #{num}, #{category})
+	</insert>
+	<insert id="insertNumNull"
+		parameterType="com.lucle.myp.domain.BoardVo">
+		insert into tbl_board(bno, title, content, writer,
+		summary, id, num, category) values(seq_board.nextval, #{title},
+		#{content}, #{writer}, #{summary}, #{id}, null, #{category})
+	</insert>
+	<insert id="insertSelectKey"
+		parameterType="com.lucle.myp.domain.BoardVo">
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long"> select seq_board.nextval from dual </selectKey>
+		insert into tbl_board(bno, title, content, writer) values(#{bno},
+		#{title}, #{content}, #{writer})
+	</insert>
+	<select id="read" resultType="com.lucle.myp.domain.BoardVo"> 
+		<![CDATA[ 
+			SELECT * FROM TBL_BOARD B LEFT JOIN MARKET M ON B.NUM = M.NUM WHERE bno = ${bno}
+		]]>
+	</select>
+	<delete id="delete"> 
+		delete from tbl_board where bno = #{bno} 
+	</delete>
+	<update id="update"> 
+		update tbl_board set title = #{title}, content =
+		#{content}, writer = #{writer}, updatedate = sysdate where bno =
+		#{bno}
+	</update>
+	<update id="viewCountPlus"> 
+		update tbl_board set viewCount = viewCount + 1 where
+		bno = #{bno}
+	</update>
+	<update id="recommendPlus"> 
+		update tbl_board set recommend = recommend + 1 where
+		bno = #{bno}
+	</update>
+</mapper>

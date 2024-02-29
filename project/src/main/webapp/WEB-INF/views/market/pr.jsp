@@ -32,10 +32,17 @@
 					        <input name="delivery" value="${product.delivery}" hidden="hidden" />
 					        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
 					        <input name="keyword" value="${searchWord}" hidden="hidden" />
+<<<<<<< HEAD
 					        <button class="btn btn-primary">공동구매 참여하기</button>
 					    </form>
 					    
 					    <form class="actionForm" action="/market/detail" hidden="hidden">
+=======
+					        <button class="btn btn-primary">핫딜에 추천하기</button>
+					    </form>
+					    
+					    <form class="actionForm" action="/market/detail">
+>>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 					        <input name="num" value="${product.num}" hidden="hidden" />
 					        <input name="id" value="${loginVo.id}" hidden="hidden" />
 					        <button class="btn btn-success">상세 페이지</button>

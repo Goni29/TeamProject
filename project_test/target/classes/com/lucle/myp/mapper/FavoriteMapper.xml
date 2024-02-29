@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lucle.myp.mapper.FavoriteMapper">
+	<insert id="insert">
+		insert into favorite(fno, id, bno, favoriteDate)
+		values(seq_favorite.nextval, #{id}, sysdate)
+	</insert>
+
+	<delete id="delete">
+		delete from favorite where fno = #{fno}
+	</delete>
+
+	<select id="userFavoriteList" parameterType="String"
+		resultType="com.lucle.myp.domain.JoinBoardVo">
+		SELECT f.*, b.*, m.*
+		FROM LUCLE.FAVORITE f
+		LEFT JOIN LUCLE.TBL_BOARD b ON f.BNO = b.BNO
+		LEFT JOIN LUCLE.MARKET m ON b.NUM = m.NUM
+		WHERE f.ID = #{id}
+		ORDER BY favoriteDate DESC 
+	</select>
+
+	<select id="postFavoriteList"
+		resultType="com.lucle.myp.domain.UserVo">
+		SELECT u.*
+		FROM USERS u
+		WHERE u.ID IN (
+		SELECT f.ID
+		FROM
+		FAVORITE f
+		WHERE f.BNO = #{bno})
+	</select>
+</mapper>
