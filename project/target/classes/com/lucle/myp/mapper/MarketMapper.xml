@@ -5,28 +5,18 @@
 <mapper namespace="com.lucle.myp.mapper.MarketMapper">
 
 	<select id="getList" resultType="com.lucle.myp.domain.MarketVo">
-		SELECT M.*,
-		(SELECT COUNT(*) FROM MARKETVIEW MV WHERE MV.NUM = M.NUM)
-		AS MARKETVIEWCOUNT
-		FROM MARKET M
-		WHERE (PRODUCTNAME LIKE '%' ||
-		#{keyword} || '%'
-		OR KEYWORD LIKE '%' || #{keyword} || '%')
-		AND (
-		<trim prefix="" suffix="" prefixOverrides="or">
-			<foreach item="type" collection="marketNameArr">
-				<trim prefix="or ">
-					<choose>
-						<when test="type == 'ebay'"> MARKETNAME = 'Ebay' </when>
-						<when test="type == 'ama'"> MARKETNAME = 'Amazon' </when>
-						<when test="type == 'amaJp'"> MARKETNAME = 'Amazon Japan' </when>
-						<when test="type == '11st'"> MARKETNAME = '11번가' </when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
-		)
-	</select>
+	    SELECT M.*,
+           (SELECT COUNT(*)
+            FROM MARKETVIEW MV
+            WHERE MV.NUM = M.NUM) AS MARKETVIEWCOUNT
+    FROM MARKET M
+    WHERE 
+    (
+        SOUNDEX(M.PRODUCTNAME) = SOUNDEX(#{keyword})
+        OR UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{keyword}) || '%' -- Search in product name (case-insensitive)
+        OR UPPER(M.KEYWORD) LIKE '%' || UPPER(#{keyword}) || '%' -- Search in keywords (case-insensitive)
+    )
+    </select>
 
 	<select id="proto" resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
@@ -61,7 +51,7 @@
 
 	<select id="groupBuying"
 		resultType="com.lucle.myp.domain.MarketVo">
-		
+
 		SELECT
 		AVG_MK.MARKETNAME,
 		AVG_MK.PRODUCTNAME,
@@ -76,10 +66,13 @@
 		M.IMGURL,
 		M.WON,
 		M.KEYWORD,
-		ABS(M.WON - MK_AVG.AVG_PRICE) AS PRICE_DIFFERENCE,
+		ABS(M.WON - MK_AVG.AVG_PRICE) AS
+		PRICE_DIFFERENCE,
 		ROW_NUMBER() OVER (
 		PARTITION BY M.KEYWORD
-		ORDER BY ABS(M.WON - MK_AVG.AVG_PRICE)
+		ORDER BY
+		ABS(M.WON -
+		MK_AVG.AVG_PRICE)
 		) AS RN
 		FROM
 		MARKET M
@@ -90,12 +83,16 @@
 		FROM
 		MARKET
 		WHERE
-		MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay', '11번가')
+		MARKETNAME IN ('Amazon',
+		'Amazon
+		Japan', 'Ebay', '11번가')
 		GROUP BY
 		KEYWORD
-		) MK_AVG ON M.KEYWORD = MK_AVG.KEYWORD
+		) MK_AVG ON M.KEYWORD =
+		MK_AVG.KEYWORD
 		WHERE
-		M.MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay', '11번가')
+		M.MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay',
+		'11번가')
 		) AVG_MK
 		WHERE
 		AVG_MK.RN = 1
