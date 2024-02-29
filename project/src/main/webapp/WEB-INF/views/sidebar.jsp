@@ -60,7 +60,7 @@ $(document).ready(function () {
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">게시판</h6>
-                        <a class="collapse-item" href="/">추천게시판</a>
+                        <a class="collapse-item" href="/board/list">추천게시판</a>
                         <a class="collapse-item" href="/">요청게시판</a>
                     </div>
                 </div>
