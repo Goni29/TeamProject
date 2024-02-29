@@ -2997,10 +2997,6 @@ input[type="button"].btn-block {
 .dropdown-toggle {
   white-space: nowrap;
 }
-.dropdown_login {
-    left: auto;  /* 기존 위치 해제 */
-    right: 0;    /* 오른쪽 정렬 */
-}
 
 .dropdown-toggle::after {
   display: inline-block;
@@ -3016,6 +3012,7 @@ input[type="button"].btn-block {
 .dropdown-toggle:empty::after {
   margin-left: 0;
 }
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -5652,44 +5649,22 @@ a.close.disabled {
 .modal {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 1050;
   display: none;
-  width: 330px;
+  width: 100%;
   height: 100%;
-  overflow-y: auto;
-  outline: 0;
-  transform: translateX(100%);
-  transition: transform .3s ease-out;
-}
-
-.modal.open {
-  display: block;
-  transform: translateX(0);
-}
-
-.modal.right {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 1050;
-  width: auto;
-  height: auto;
-  display: none;
   overflow: hidden;
   outline: 0;
 }
 
-.modal.right .modal-dialog {
-    position: relative;
-    margin: 0.5rem;
-    pointer-events: none;
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  pointer-events: none;
 }
 
-.modal.right .modal-content {
-    height: 100%;
-    overflow-y: auto;
-}
 .modal.fade .modal-dialog {
   transition: transform 0.3s ease-out;
   transform: translate(0, -50px);
