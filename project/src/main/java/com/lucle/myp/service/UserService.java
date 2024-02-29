@@ -20,4 +20,6 @@ public interface UserService {
 
 	int modify(UserVo vo);
 	
+	void saveOrUpdateUserSession(UserVo userSession);
+	
 }

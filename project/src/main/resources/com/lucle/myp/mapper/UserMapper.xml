@@ -60,6 +60,14 @@
 		#{grade},
 		#{favorites})
 	</insert>
+	
+	<insert id="insertOrUpdateUserSession" parameterType="com.lucle.myp.domain.UserVo">
+    MERGE INTO users USING dual ON (session_id = #{session_id})
+    WHEN MATCHED THEN
+        UPDATE SET id = #{id}, LASTCONDATE = #{lastConDate}
+    WHEN NOT MATCHED THEN
+        INSERT (session_id, id, LASTCONDATE) VALUES (#{session_id}, #{id}, #{lastConDate})
+	</insert>
 
 
 </mapper>

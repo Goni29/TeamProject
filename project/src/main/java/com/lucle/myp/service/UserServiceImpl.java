@@ -86,4 +86,9 @@ public class UserServiceImpl implements UserService {
 	public int modify(UserVo vo) {
 		return mapper.update(vo);
 	}
+
+	@Override
+	public void saveOrUpdateUserSession(UserVo userSession) {
+		mapper.insertOrUpdateUserSession(userSession);
+	}
 }
