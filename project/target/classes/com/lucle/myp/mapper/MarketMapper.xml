@@ -9,7 +9,8 @@
 		M.*,
 		(
 		SELECT COUNT(*)
-		FROM MARKETVIEW MV
+		FROM
+		MARKETVIEW MV
 		WHERE MV.NUM = M.NUM
 		) AS MARKETVIEWCOUNT
 		FROM
@@ -17,38 +18,47 @@
 		WHERE
 		(
 		SOUNDEX(M.PRODUCTNAME) = SOUNDEX(#{keyword})
-		OR UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{keyword}) || '%'
-		OR UPPER(M.KEYWORD) LIKE '%' || UPPER(#{keyword}) || '%'
+		OR
+		UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{keyword}) || '%'
+		OR
+		UPPER(M.KEYWORD) LIKE '%' || UPPER(#{keyword}) || '%'
 		)
 	</select>
 
 
+	<!-- proto 쿼리 수정: MARKET, MarketView, Category 테이블 조인 (viewDate 제외) -->
 	<select id="proto" resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
-	SELECT A.*
-	FROM (
-    	SELECT MARKET.*, MARKETVIEW.VNO,
-           	ROW_NUMBER() OVER (PARTITION BY MARKET.NUM ORDER BY MARKETVIEW.VNO DESC) AS RN
-    	FROM MARKET
-		JOIN MARKETVIEW ON MARKET.NUM = MARKETVIEW.NUM
-	) A
-	WHERE A.RN = 1
+		SELECT 
+		    M.*,
+		    MV.latestVNO,
+		    C.Large AS LARGE, 
+		    C.Medium AS MEDIUM, 
+		    C.Small AS SMALL
+		FROM 
+    		MARKET M
+		LEFT JOIN 
+    		(SELECT NUM, MAX(VNO) AS latestVNO FROM MARKETVIEW GROUP BY NUM) MV ON M.NUM = MV.NUM
+		LEFT JOIN 
+    		Category C ON M.NUM = C.Num
 	]]>
 	</select>
+
 
 	<select id="sortProto"
 		resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
-	SELECT A.*, A.RN
-	FROM (
-    	SELECT MARKET.*,
-           	ROW_NUMBER() OVER (PARTITION BY MARKETNAME ORDER BY WON) AS RN
-    	FROM MARKET
-		WHERE MARKET.KEYWORD = #{keyword, jdbcType=VARCHAR}  -- keyword 파라미터에 대해 jdbcType을 VARCHAR로 지정합니다.
-	) A
-	WHERE A.RN = 1
+		SELECT A.*, C.Large AS LARGE, C.Medium AS MEDIUM, C.Small AS SMALL
+		FROM (
+    		SELECT M.*, ROW_NUMBER() OVER (PARTITION BY M.MARKETNAME ORDER BY M.WON) AS RN
+    			FROM MARKET M
+    			WHERE M.KEYWORD = #{keyword, jdbcType=VARCHAR}
+			 ) A
+		LEFT JOIN Category C ON A.NUM = C.Num
+		WHERE A.RN = 1
 	]]>
 	</select>
+
 
 	<!-- <select id="groupBuying" resultType="com.lucle.myp.domain.MarketVo"> 
 		<![CDATA[ SELECT * FROM MARKET WHERE GROUPBUYING = 1 ORDER BY DBMS_RANDOM.VALUE 
@@ -56,28 +66,30 @@
 
 	<select id="groupBuying"
 		resultType="com.lucle.myp.domain.MarketVo">
-
 		SELECT
+		AVG_MK.NUM,
 		AVG_MK.MARKETNAME,
 		AVG_MK.PRODUCTNAME,
 		AVG_MK.URL,
 		AVG_MK.IMGURL,
-		AVG_MK.WON
+		AVG_MK.WON,
+		AVG_MK.KEYWORD,
+		C.Large AS LARGE,
+		C.Medium AS MEDIUM,
+		C.Small AS SMALL
 		FROM (
 		SELECT
+		m.NUM,
 		M.MARKETNAME,
 		M.PRODUCTNAME,
 		M.URL,
 		M.IMGURL,
 		M.WON,
 		M.KEYWORD,
-		ABS(M.WON - MK_AVG.AVG_PRICE) AS
-		PRICE_DIFFERENCE,
+		ABS(M.WON - MK_AVG.AVG_PRICE) AS PRICE_DIFFERENCE,
 		ROW_NUMBER() OVER (
 		PARTITION BY M.KEYWORD
-		ORDER BY
-		ABS(M.WON -
-		MK_AVG.AVG_PRICE)
+		ORDER BY ABS(M.WON - MK_AVG.AVG_PRICE)
 		) AS RN
 		FROM
 		MARKET M
@@ -88,21 +100,18 @@
 		FROM
 		MARKET
 		WHERE
-		MARKETNAME IN ('Amazon',
-		'Amazon
-		Japan', 'Ebay', '11번가')
+		MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay', '11번가')
 		GROUP BY
 		KEYWORD
-		) MK_AVG ON M.KEYWORD =
-		MK_AVG.KEYWORD
+		) MK_AVG ON M.KEYWORD = MK_AVG.KEYWORD
 		WHERE
-		M.MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay',
-		'11번가')
+		M.MARKETNAME IN ('Amazon', 'Amazon Japan', 'Ebay', '11번가')
 		) AVG_MK
+		LEFT JOIN Category C ON AVG_MK.Num = C.Num -- 조인 조건 확인 필요
 		WHERE
 		AVG_MK.RN = 1
-
 	</select>
+
 
 
 	<insert id="marketViewPlus">

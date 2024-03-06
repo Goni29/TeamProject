@@ -1,8 +1,8 @@
 package com.lucle.myp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +35,29 @@ public class MarketController {
 	}
 	
 	@GetMapping("/pr")
-	public void pr(Model model, Criteria cri) {
+	public void pr(Model model, Criteria cri, HttpSession session) {
 		List<MarketVo> list = service.sortProto(cri);
 		model.addAttribute("products", list);
+		
+		List<MarketVo> list2 = service.groupBuying(cri);
+		List<MarketVo> recentViewedProducts = (List<MarketVo>) session.getAttribute("recentViewedProducts");
+	    if (recentViewedProducts == null) {
+	        recentViewedProducts = new ArrayList<>();
+	    }
+
+	    // 리스트의 각 상품을 최근 조회한 상품 목록에 추가
+	    for (MarketVo pr : list2) {
+	        if (!recentViewedProducts.contains(pr)) {
+	            recentViewedProducts.add(0, pr);
+	            if (recentViewedProducts.size() > 10) {
+	                recentViewedProducts.remove(recentViewedProducts.size() - 1); // 최대 크기 유지
+	            }
+	        }
+	    }
+
+	    // 세션에 최신 목록 저장
+	    session.setAttribute("recentViewedProducts", recentViewedProducts);
+	    System.out.println("=============" + recentViewedProducts + "============");
 	}
 	
 	// 상품 상세 페이지

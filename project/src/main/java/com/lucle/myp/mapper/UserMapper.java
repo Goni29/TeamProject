@@ -16,5 +16,4 @@ public interface UserMapper {
 	int lastConDateUpdate(String id);
 	int favoritesUpdate(UserVo vo);
 	int backUp(UserVo getVo);
-	void insertOrUpdateUserSession(UserVo userSession);
 }

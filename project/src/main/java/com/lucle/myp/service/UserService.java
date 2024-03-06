@@ -19,7 +19,4 @@ public interface UserService {
 	int delete(String id, String password, HttpSession session);
 
 	int modify(UserVo vo);
-	
-	void saveOrUpdateUserSession(UserVo userSession);
-	
 }

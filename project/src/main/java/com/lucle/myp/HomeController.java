@@ -2,6 +2,8 @@ package com.lucle.myp;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,7 @@ public class HomeController {
 	MarketService service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String proto(Model model, Criteria cri) {
+	public String proto(HttpServletRequest request, Model model, Criteria cri) {
 		List<MarketVo> list = service.proto(cri);
 		List<MarketVo> list2 = service.groupBuying(cri);
 		model.addAttribute("products", list);
