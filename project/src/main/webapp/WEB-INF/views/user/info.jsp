@@ -17,9 +17,9 @@
 <body>
 <div id="wrapper">
 <%@ include file="../sidebar.jsp"%>
-<div class="container mt-5 page-size">
+<div id="conteny-wrapper" class="d-flex flex-column page-size">
 <%@ include file="../topbar.jsp"%>
-	<div class="row justify-content-center">
+	<div id="content main-content" class="main-width">
 		<div class="col-md-8">
 			<div class="card">
 				<div class="card-header">회원 정보 수정</div>

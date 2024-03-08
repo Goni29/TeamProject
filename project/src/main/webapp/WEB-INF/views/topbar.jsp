@@ -93,6 +93,27 @@
     </ul>
 </nav>
 
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="passwordModalLabel">패스워드 확인</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2>상세 정보 페이지로 이동하기 위해 비밀번호를 입력해 주세요.</h2>
+        <form action="/user/info" method="post">
+          <input type="password" name="password" />
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="submit" class="btn btn-primary">상세 정보 페이지로</button>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+
 <script>
     $(document).ready(function() {
         $('#loginButton, #logoutButton').on('click', function(e) {
