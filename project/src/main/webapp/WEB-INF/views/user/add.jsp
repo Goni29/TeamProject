@@ -6,22 +6,21 @@
 
 <%@ include file="../header.jsp"%>
 
-<head>
-
-    <title>회원가입</title>
-</head>
-
+<style>
+.page-size{
+	width: 100vw;
+}
+</style>
 <body>
 
 <div id="wrapper">
     
 <%@ include file="../sidebar.jsp"%>
-<div id="conteny-wrapper" class="d-flex flex-column">       
-<%@ include file="../topbar.jsp"%>
-
-    <div class="container">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
+<div id="conteny-wrapper" class="d-flex flex-column page-size">
+	<%@ include file="../topbar.jsp"%>
+    <div class="container">       
+	
+        <div class="card o-hidden border-0 shadow-lg my-5 ">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
@@ -29,50 +28,76 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
                             </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                            <form action="/user/add" method="post">
+                                <div class="container-fluid">
+                                    <div class="form-group row mb-3">
+                                        <div class="col-sm-12">
+                                            <label for="inputId" class="form-label">아이디</label>
+                                            <input type="text" class="form-control" id="inputId" aria-describedby="idHelp" name="id" placeholder="아이디를 입력해주세요...">
+                                            <span id="idHelp" class="form-text"></span>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="inputPw" class="form-label">비밀번호</label>
+                                            <input type="password" class="form-control" id="inputPw" aria-describedby="pwHelp" name="password" placeholder="비밀번호를 입력해주세요...">
+                                            <span id="pwHelp" class="form-text"></span>
+                                        </div>
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
+
+                                <div class="container-fluid">
+                                    <div class="form-group row mb-3">
+                                        <div class="col-sm-6">
+                                            <label for="inputName" class="form-label">이름</label>
+                                            <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp" name="name" placeholder="성함을 기입해주세요...">
+                                            <span id="nameHelp" class="form-text"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="inputNickname" class="form-label">닉네임</label>
+                                            <input type="text" class="form-control" id="inputNickname" name="nickname" placeholder="닉네임을 작성해주세요...">
+                                        </div>
+                                    </div>
+                                </div>
                                 <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+
+                                <div class="mb-3 row align-items-center">
+                                    <label for="inputAge" class="col-sm-2 col-form-label">나이</label>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control" id="inputAge" aria-describedby="ageHelp" name="age" min="1" max="120" value="20">
+                                        <span id="ageHelp" class="form-text"></span>
+                                    </div>
+
+                                    <div class="col-sm-2"></div>
+
+                                    <label class="col-sm-2 col-form-label">성별</label>
+                                    <div class="col-sm-4">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="1" checked="checked">
+                                            <label class="form-check-label" for="inlineRadio1">남성</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="0">
+                                            <label class="form-check-label" for="inlineRadio2">여성</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <%@ include file="../address.jsp"%>
+
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">이메일</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email" placeholder="abc@example.com">
+                                        <span id="emailHelp" class="form-text"></span>
+                                    </div>
+                                </div>
+
+                                <button type="submit" id="submit" class="btn btn-primary mb-3">회원 가입</button>
                             </form>
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +106,7 @@
         </div>
 
     </div>
-	</div>
+</div>
 </div>
 
 </body>
