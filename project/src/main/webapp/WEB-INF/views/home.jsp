@@ -46,7 +46,7 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Product</h6>
                             </div>
                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product.imgUrl}" alt="Product Image"> <br>
-                   <a href="pr?keyword=${product.keyword}">
+                   <a href="pr?num=${product.num}">
                        <c:choose>
                            <c:when test="${fn:length(product.productName) > 20}">
                                ${fn:substring(product.productName, 0, 20)}...
@@ -80,7 +80,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Product</h6>
                                 </div>
                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product2.imgUrl}" alt="Product Image"> <br>
-                   <a href="pr?keyword=${product2.keyword}">
+                   <a href="pr?num=${product2.num}">
                        <c:choose>
                            <c:when test="${fn:length(product2.productName) > 20}">
                                ${fn:substring(product2.productName, 0, 20)}...

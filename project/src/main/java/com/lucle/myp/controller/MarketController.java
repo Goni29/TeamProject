@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,11 +36,9 @@ public class MarketController {
 	}
 	
 	@GetMapping("/pr")
-	public void pr(Model model, Criteria cri, HttpSession session) {
-		List<MarketVo> list = service.sortProto(cri);
+	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num) {
+		List<MarketVo> list = service.sortProto(num);
 		model.addAttribute("products", list);
-		
-		List<MarketVo> list2 = service.groupBuying(cri);
 //		List<MarketVo> recentViewedProducts = (List<MarketVo>) session.getAttribute("recentViewedProducts");
 //	    if (recentViewedProducts == null) {
 //	        recentViewedProducts = new ArrayList<>();

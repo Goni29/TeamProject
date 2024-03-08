@@ -18,6 +18,6 @@ public interface MarketMapper {
 	List<MarketVo> getHistoryOne(@Param("id") String id, Criteria cri); // 한 유저의 열람 이력.
 	List<UserVo> getHistoryProduct(@Param("num") Long num, Criteria cri); // 한 상품을 열람한 유저 목록.
 	List<MarketVo> proto(Criteria cri);
-	List<MarketVo> sortProto(Criteria cri);
+	List<MarketVo> sortProto(@Param("num") Long num);
 	List<MarketVo> groupBuying(Criteria cri);
 }

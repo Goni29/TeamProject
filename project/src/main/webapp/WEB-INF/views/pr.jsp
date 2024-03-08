@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="../topbar.jsp"%>
+<%@ include file="./topbar.jsp"%>
 <span class="titletext" hidden="hidden">해외 상품 가격 비교</span>
 <body>
 	<div class="container-fluid p-2 bg-dark text-white text-center">
@@ -71,4 +71,4 @@
 
 </html>
 
-<%@ include file="../footer.jsp"%>
+<%@ include file="./footer.jsp"%>
