@@ -18,8 +18,8 @@ public class MarketServiceImpl implements MarketService {
 	MarketMapper mapper;
 
 	@Override
-	public List<MarketVo> getList(Criteria cri) {
-		return mapper.getList(cri);
+	public List<MarketVo> getList(@Param("keyword") String keyword) {
+		return mapper.getList(keyword);
 	}
 
 	@Override

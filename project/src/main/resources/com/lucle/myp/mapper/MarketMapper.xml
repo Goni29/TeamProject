@@ -6,19 +6,11 @@
 
 	<select id="getList" resultType="com.lucle.myp.domain.MarketVo">
 		SELECT
-		M.*,
-		(
-		SELECT COUNT(*)
-		FROM
-		MARKETVIEW MV
-		WHERE MV.NUM = M.NUM
-		) AS MARKETVIEWCOUNT
+		M.*
 		FROM
 		MARKET M
 		WHERE
 		(
-		SOUNDEX(M.PRODUCTNAME) = SOUNDEX(#{keyword})
-		OR
 		UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{keyword}) || '%'
 		OR
 		UPPER(M.KEYWORD) LIKE '%' || UPPER(#{keyword}) || '%'
