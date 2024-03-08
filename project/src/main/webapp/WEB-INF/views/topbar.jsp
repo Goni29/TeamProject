@@ -113,13 +113,3 @@
       </div>
     </div>
   </div>
-
-<script>
-    $(document).ready(function() {
-        $('#loginButton, #logoutButton').on('click', function(e) {
-            e.preventDefault();
-            $('.redirectUrl').val(window.location.href);
-            $(this).closest("form").submit();
-        });
-    });
-</script>
