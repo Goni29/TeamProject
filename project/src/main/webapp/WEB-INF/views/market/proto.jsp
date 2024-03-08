@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@include file="../include.jsp"%>
+<%@ include file="../header.jsp"%>
 
 <head>
 
@@ -34,7 +34,7 @@
     
 <%@ include file="../sidebar.jsp"%>
 <div id="conteny-wrapper" class="d-flex flex-column">       
-<%@ include file="../nav.jsp"%>
+<%@ include file="../topbar.jsp"%>
 <div id="content main-content">  
 
                 <!-- Begin Page Content -->

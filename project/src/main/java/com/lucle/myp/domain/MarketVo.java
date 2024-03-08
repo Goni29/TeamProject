@@ -21,6 +21,7 @@ public class MarketVo {
 	private int LARGE;
 	private int MEDIUM;
 	private int SMALL;
+	private int SUB_CATEGORY;
 	
 	private Long marketViewCount;
 	

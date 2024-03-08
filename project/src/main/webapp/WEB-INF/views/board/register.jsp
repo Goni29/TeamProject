@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="../nav.jsp"%>
+<%@ include file="../topbar.jsp"%>
 <span class="titletext" hidden="hidden">게시글 작성</span>
 <body>
 	<div class="container-fluid p-2 bg-dark text-white text-center">

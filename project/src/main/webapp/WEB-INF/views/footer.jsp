@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <div id="footerarea">
 	<footer>
+	
 	</footer>
-</div>
 </div>
 
 <script>

@@ -10169,6 +10169,7 @@ a:focus {
 
 .topbar {
   height: 4.375rem;
+  flex: 0 0 auto;
 }
 
 .topbar #sidebarToggleTop {
@@ -10322,6 +10323,7 @@ a:focus {
 .sidebar {
   width: 6.5rem;
   min-height: 100vh;
+  flex: 0 0 auto;
 }
 
 .sidebar .nav-item {

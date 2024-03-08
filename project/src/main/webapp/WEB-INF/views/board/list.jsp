@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="../nav.jsp"%>
+<%@ include file="../topbar.jsp"%>
 <span class="titletext" hidden="hidden">게시글 목록</span>
 <body>
 	<div class="container-fluid p-5 bg-dark text-white text-center">
@@ -146,22 +146,22 @@
 										${pageMaker.cri.type eq null ? 'selected' : ''}>--검색
 										방법--</option>
 									<option value="T"
-										${pageMaker.cri.type eq 'T' ? 'selected' : ''}>제품</option>
+										${pageMaker.cri.type eq 'T' ? 'selected' : ''}>제목</option>
 									<option value="C"
 										${pageMaker.cri.type eq 'C' ? 'selected' : ''}>내용</option>
 									<option value="W"
 										${pageMaker.cri.type eq 'W' ? 'selected' : ''}>작성자</option>
 									<option value="TC"
-										${pageMaker.cri.type eq 'TC' ? 'selected' : ''}>제품 +
+										${pageMaker.cri.type eq 'TC' ? 'selected' : ''}>제목 +
 										내용</option>
 									<option value="TW"
-										${pageMaker.cri.type eq 'TW' ? 'selected' : ''}>제품 +
+										${pageMaker.cri.type eq 'TW' ? 'selected' : ''}>제목 +
 										작성자</option>
 									<option value="CW"
 										${pageMaker.cri.type eq 'CW' ? 'selected' : ''}>내용 +
 										작성자</option>
 									<option value="TCW"
-										${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}>제품 +
+										${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}>제목 +
 										내용 + 작성자</option>
 								</select>
 							</div>
