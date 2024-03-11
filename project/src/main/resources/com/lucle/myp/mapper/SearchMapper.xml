@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lucle.myp.mapper.SearchMapper">
+	<insert id="insert">
+		insert into search(sno, id, searchWord, searchDate,
+		visible, ip)
+		values(seq_search.nextval, #{id}, #{searchWord}, sysdate,
+		1, #{ip})
+	</insert>
+
+	<update id="delete">
+		update search
+		set visible = 0
+		where sno = #{sno}
+	</update>
+
+	<select id="getCountList"
+		resultType="com.lucle.myp.domain.SearchVo">
+		select searchWord, count(*) as searchCount
+		from search
+		where
+		searchDate >= sysdate - #{sortTime}
+		group by searchWord
+		order by
+		searchCount desc
+	</select>
+
+	<select id="getStatList"
+		resultType="com.lucle.myp.domain.SearchStatVo">
+		<![CDATA[
+SELECT   s.SEARCHWORD,   
+         COUNT(*) AS SEARCHCOUNT,   
+         SUM(CASE WHEN u.AGE BETWEEN 10 AND 19 THEN 1 ELSE 0 END) AS teens,   
+         SUM(CASE WHEN u.AGE BETWEEN 20 AND 29 THEN 1 ELSE 0 END) AS twenties,   
+         SUM(CASE WHEN u.AGE BETWEEN 30 AND 39 THEN 1 ELSE 0 END) AS thirties,   
+         SUM(CASE WHEN u.AGE BETWEEN 40 AND 49 THEN 1 ELSE 0 END) AS forties,   
+         SUM(CASE WHEN u.AGE BETWEEN 50 AND 59 THEN 1 ELSE 0 END) AS fifties,   
+         SUM(CASE WHEN u.AGE >= 60 THEN 1 ELSE 0 END) AS above,   
+         SUM(CASE WHEN u.GENDER = 1 THEN 1 ELSE 0 END) AS male,   
+         SUM(CASE WHEN u.GENDER = 0 THEN 1 ELSE 0 END) AS female,   
+         SUM(CASE WHEN u.ADDRESS = '서울특별시' THEN 1 ELSE 0 END) AS SEOUL,   
+         SUM(CASE WHEN u.ADDRESS = '경기도' THEN 1 ELSE 0 END) AS GYEONGGI   
+FROM     USERS u   
+JOIN     SEARCH s ON u.ID = s.ID   
+WHERE    searchDate >= sysdate - #{sortTime}
+GROUP BY s.SEARCHWORD
+ORDER BY ${sort} DESC
+		]]>
+	</select>
+
+	<select id="getOne" resultType="com.lucle.myp.domain.SearchVo">
+		select * from search where
+		searchWord = #{searchWord}
+	</select>
+
+	<select id="getList" resultType="com.lucle.myp.domain.SearchVo">
+		select * from search
+		order by
+		searchCount desc
+	</select>
+
+	<select id="getHistoryOne"
+		resultType="com.lucle.myp.domain.SearchVo">
+		select *
+		from search
+		where id = #{id}
+		order by searchDate desc
+	</select>
+
+	<select id="getHistoryOneIp"
+		resultType="com.lucle.myp.domain.SearchVo">
+		select *
+		from search
+		where ip = #{ip}
+		order by searchDate desc
+	</select>
+
+
+</mapper>
