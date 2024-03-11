@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../header.jsp"%>
+<style>
+    .page-size {
+        width: 100vw;
+    }
+</style>
+<body>
+<div id="wrapper">
+<%@ include file="../sidebar.jsp"%>
+<div id="conteny-wrapper" class="d-flex flex-column page-size">
 <%@ include file="../topbar.jsp"%>
 <span class="titletext" hidden="hidden">상품 검색 이력</span>
-<body>
-	<div class="container-fluid p-5 bg-dark text-white text-center">
+	<div class="container-fluid p-5 text-center">
 		<h1>상품 검색 이력</h1>
 	</div>
 
@@ -91,46 +103,30 @@
 
 				<!-- 검색과 관련된 폼 -->
 				<div class="col-md-6">
-					<form action="/board/list" id="searchForm" class="form-control"
-						method="get">
-						<div class="row">
-							<div class="col-md-6 text-end">
-								<select class="form-select" name="type">
-									<option value=""
-										${pageMaker.cri.type eq null ? 'selected' : ''}>--검색
-										방법--</option>
-									<option value="T"
-										${pageMaker.cri.type eq 'T' ? 'selected' : ''}>제목</option>
-									<option value="C"
-										${pageMaker.cri.type eq 'C' ? 'selected' : ''}>내용</option>
-									<option value="W"
-										${pageMaker.cri.type eq 'W' ? 'selected' : ''}>작성자</option>
-									<option value="TC"
-										${pageMaker.cri.type eq 'TC' ? 'selected' : ''}>제목 +
-										내용</option>
-									<option value="TW"
-										${pageMaker.cri.type eq 'TW' ? 'selected' : ''}>제목 +
-										작성자</option>
-									<option value="CW"
-										${pageMaker.cri.type eq 'CW' ? 'selected' : ''}>내용 +
-										작성자</option>
-									<option value="TCW"
-										${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}>제목 +
-										내용 + 작성자</option>
-								</select>
-							</div>
-							<div class="col-md-4">
-								<input type="text" class="form-control" name="keyword"
-									value="${pageMaker.cri.keyword}" />
-							</div>
-							<div class="col-md-2">
-								<input type="hidden" name="pageNum"
-									value="${pageMaker.cri.pageNum }" /> <input type="hidden"
-									name="amount" value="${pageMaker.cri.amount }" />
-								<button type="submit" class="btn btn-primary">검색</button>
-							</div>
-						</div>
-					</form>
+				    <form action="/board/list" id="searchForm" class="form-group" method="get">
+				        <div class="row">
+				            <div class="col-md-6 text-right">
+				                <select class="form-control" name="type">
+				                    <option value="" ${pageMaker.cri.type eq null ? 'selected' : ''}>--검색 방법--</option>
+				                    <option value="T" ${pageMaker.cri.type eq 'T' ? 'selected' : ''}>제목</option>
+				                    <option value="C" ${pageMaker.cri.type eq 'C' ? 'selected' : ''}>내용</option>
+				                    <option value="W" ${pageMaker.cri.type eq 'W' ? 'selected' : ''}>작성자</option>
+				                    <option value="TC" ${pageMaker.cri.type eq 'TC' ? 'selected' : ''}>제목 + 내용</option>
+				                    <option value="TW" ${pageMaker.cri.type eq 'TW' ? 'selected' : ''}>제목 + 작성자</option>
+				                    <option value="CW" ${pageMaker.cri.type eq 'CW' ? 'selected' : ''}>내용 + 작성자</option>
+				                    <option value="TCW" ${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}>제목 + 내용 + 작성자</option>
+				                </select>
+				            </div>
+				            <div class="col-md-4">
+				                <input type="text" class="form-control" name="keyword" value="${pageMaker.cri.keyword}" />
+				            </div>
+				            <div class="col-md-2">
+				                <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
+				                <input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
+				                <button type="submit" class="btn btn-primary">검색</button>
+				            </div>
+				        </div>
+				    </form>
 				</div>
 			</div>
 		</div>
@@ -141,6 +137,9 @@
 	<!-- 페이징과 관련된 폼(내용이 숨겨져 있다.) -->
 	<form action="/board/list" id="actionForm" method="get">
 	</form>
+</div>
+</div>
+</body>
 
 	<script>
 		$(document)
@@ -234,5 +233,4 @@
 
 						});
 	</script>
-</body>
 <%@include file="../footer.jsp"%>

@@ -29,15 +29,15 @@ public class MarketController {
 	
 	// 상품 검색 페이지
 	@GetMapping("/search")
-	public void search(Model model, Criteria cri) {
-		List<MarketVo> list = service.getList(cri);
+	public void search(Model model, Criteria cri, @Param("keyword") String keyword) {
+		List<MarketVo> list = service.getList(keyword);
 		model.addAttribute("products", list);
 		model.addAttribute("searchWord", cri.getKeyword());
 	}
 	
 	@GetMapping("/pr")
-	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num) {
-		List<MarketVo> list = service.sortProto(num);
+	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
+		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
 		model.addAttribute("products", list);
 //		List<MarketVo> recentViewedProducts = (List<MarketVo>) session.getAttribute("recentViewedProducts");
 //	    if (recentViewedProducts == null) {
