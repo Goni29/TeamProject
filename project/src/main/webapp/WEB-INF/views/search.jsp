@@ -15,7 +15,7 @@
 					<p>${product.num}</p>
 					<img src="${product.imgUrl}" alt="Image"> <br>
 					<p>${product.marketName}</p>
-					<a href="${product.url}">${product.productName}</a><br>
+					<a href="pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">${product.productName}</a><br>
 					<p>가격 : ${product.won}원</p>
 					<p>예상 기간 : ${product.delivery}</p>
 					<p>조회수 : ${product.marketViewCount}</p>
