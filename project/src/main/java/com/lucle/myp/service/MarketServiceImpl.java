@@ -18,8 +18,8 @@ public class MarketServiceImpl implements MarketService {
 	MarketMapper mapper;
 
 	@Override
-	public List<MarketVo> getList(Criteria cri) {
-		return mapper.getList(cri);
+	public List<MarketVo> getList(@Param("productName") String productName) {
+		return mapper.getList(productName);
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<MarketVo> sortProto(@Param("num") Long num) {
-		return mapper.sortProto(num);
+	public List<MarketVo> sortProto(@Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
+		return mapper.sortProto(num, large, medium, small, sub_category);
 	}
 
 	@Override

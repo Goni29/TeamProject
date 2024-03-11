@@ -36,9 +36,17 @@ public class HomeController {
 	}
 	
 	@GetMapping("/pr")
-	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num) {
-		List<MarketVo> list = service.sortProto(num);
+	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
+		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
 		model.addAttribute("products", list);
 	}
+	
+	// 상품 검색 페이지
+		@GetMapping("/search")
+		public void search(Model model, Criteria cri, @Param("productName") String productName, MarketVo vo) {
+			List<MarketVo> list = service.getList(productName);
+			model.addAttribute("products", list);
+			model.addAttribute("searchWord", vo.getProductName());
+		}
 	
 }

@@ -9,10 +9,10 @@ import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.UserVo;
 
 public interface MarketService {
-	List<MarketVo> getList(Criteria cri);
+	List<MarketVo> getList(@Param("productName") String productName);
 	int marketViewPlus(String id, Long num);
 	List<MarketVo> proto(Criteria cri);
-	List<MarketVo> sortProto(@Param("num") Long num);
+	List<MarketVo> sortProto(@Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category);
 	List<MarketVo> groupBuying(Criteria cri);
 
 	List<MarketVo> getHistoryOne(String id, Criteria cri); // 한 유저의 열람 이력.

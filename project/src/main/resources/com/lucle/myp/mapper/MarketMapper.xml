@@ -6,22 +6,12 @@
 
 	<select id="getList" resultType="com.lucle.myp.domain.MarketVo">
 		SELECT
-		M.*,
-		(
-		SELECT COUNT(*)
-		FROM
-		MARKETVIEW MV
-		WHERE MV.NUM = M.NUM
-		) AS MARKETVIEWCOUNT
+		M.*
 		FROM
 		MARKET M
 		WHERE
 		(
-		SOUNDEX(M.PRODUCTNAME) = SOUNDEX(#{keyword})
-		OR
-		UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{keyword}) || '%'
-		OR
-		UPPER(M.KEYWORD) LIKE '%' || UPPER(#{keyword}) || '%'
+		UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{productName}) || '%'
 		)
 	</select>
 
@@ -42,7 +32,7 @@
 		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY
 		FROM MARKET m
 		JOIN CATEGORY c ON m.NUM = c.NUM
-		where m.num = #{num}
+		WHERE c.LARGE = #{large} AND c.MEDIUM = #{medium} AND c.SMALL = #{small} AND c.SUB_CATEGORY = #{sub_category} AND m.num = #{num}
 	]]>
 	</select>
 
