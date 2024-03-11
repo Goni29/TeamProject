@@ -11,9 +11,7 @@
 		MARKET M
 		WHERE
 		(
-		UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{keyword}) || '%'
-		OR
-		UPPER(M.KEYWORD) LIKE '%' || UPPER(#{keyword}) || '%'
+		UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{productName}) || '%'
 		)
 	</select>
 

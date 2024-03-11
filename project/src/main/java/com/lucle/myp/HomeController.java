@@ -43,10 +43,10 @@ public class HomeController {
 	
 	// 상품 검색 페이지
 		@GetMapping("/search")
-		public void search(Model model, Criteria cri, @Param("keyword") String keyword) {
-			List<MarketVo> list = service.getList(keyword);
+		public void search(Model model, Criteria cri, @Param("productName") String productName, MarketVo vo) {
+			List<MarketVo> list = service.getList(productName);
 			model.addAttribute("products", list);
-			model.addAttribute("searchWord", cri.getKeyword());
+			model.addAttribute("searchWord", vo.getProductName());
 		}
 	
 }

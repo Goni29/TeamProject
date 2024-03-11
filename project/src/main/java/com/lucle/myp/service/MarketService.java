@@ -9,7 +9,7 @@ import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.UserVo;
 
 public interface MarketService {
-	List<MarketVo> getList(@Param("keyword") String keyword);
+	List<MarketVo> getList(@Param("productName") String productName);
 	int marketViewPlus(String id, Long num);
 	List<MarketVo> proto(Criteria cri);
 	List<MarketVo> sortProto(@Param("num") Long num);

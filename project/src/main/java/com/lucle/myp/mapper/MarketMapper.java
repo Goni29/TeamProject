@@ -10,7 +10,7 @@ import com.lucle.myp.domain.UserVo;
 
 
 public interface MarketMapper {
-	List<MarketVo> getList(@Param("keyword") String keyword);
+	List<MarketVo> getList(@Param("productName") String productName);
 	int getCount();
 	
 	int marketViewPlus(@Param("id") String id, @Param("num") Long num);
