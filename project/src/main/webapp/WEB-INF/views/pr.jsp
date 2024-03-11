@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="../nav.jsp"%>
+<%@ include file="./topbar.jsp"%>
 <span class="titletext" hidden="hidden">해외 상품 가격 비교</span>
 <body>
 	<div class="container-fluid p-2 bg-dark text-white text-center">
@@ -29,16 +29,13 @@
 					        <input name="url" value="${product.url}" hidden="hidden" />
 					        <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
 					        <input name="won" value="${product.won}" hidden="hidden" />
-					        <input name="dollar" value="${product.dollar}" hidden="hidden" />
 					        <input name="delivery" value="${product.delivery}" hidden="hidden" />
 					        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
-					        <input name="otherCosts" value="${product.otherCosts}" hidden="hidden" />
-					        <input name="k_ProductName" value="${product.k_ProductName}" hidden="hidden" />
 					        <input name="keyword" value="${searchWord}" hidden="hidden" />
-					        <button class="btn btn-primary">핫딜에 추천하기</button>
+					        <button class="btn btn-primary">공동구매 참여하기</button>
 					    </form>
 					    
-					    <form class="actionForm" action="/market/detail">
+					    <form class="actionForm" action="/market/detail" hidden="hidden">
 					        <input name="num" value="${product.num}" hidden="hidden" />
 					        <input name="id" value="${loginVo.id}" hidden="hidden" />
 					        <button class="btn btn-success">상세 페이지</button>
@@ -74,4 +71,4 @@
 
 </html>
 
-<%@ include file="../footer.jsp"%>
+<%@ include file="./footer.jsp"%>

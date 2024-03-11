@@ -2,6 +2,7 @@ package com.lucle.myp.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +43,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<MarketVo> sortProto(Criteria cri) {
-		return mapper.sortProto(cri);
+	public List<MarketVo> sortProto(@Param("num") Long num) {
+		return mapper.sortProto(num);
 	}
 
 	@Override
