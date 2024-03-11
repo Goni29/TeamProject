@@ -1,90 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="../topbar.jsp"%>
-<span class="titletext" hidden="hidden">게시글 목록</span>
+<span class="titletext" hidden="hidden">상품 검색 이력</span>
 <body>
 	<div class="container-fluid p-5 bg-dark text-white text-center">
-		<h1>게시판</h1>
+		<h1>상품 검색 이력</h1>
 	</div>
 
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col">
 
-				<!-- 로그인한 사용자만 게시글 작성 버튼 표시 -->
-				<c:if test="${loginVo != null}">
-					<div class="col-auto">
-						<a href='/board/register' class="newboard btn btn-primary mb-3">게시글
-							작성</a>
-					</div>
+				<!-- 주소창의 패러미터에 로그인한 아이디와 다른 아이디가 입력되었을 경우 뒤로 돌려보냄. 이 판정은 컨트롤러에서 함.-->
+				<c:if test="${sList == null}">
+					<script>
+					alert("잘못된 요청입니다");
+					</script>
 				</c:if>
 
 				<!-- 게시글 목록 테이블 -->
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>카테고리</th>
-							<th>제목</th>
-							<th></th>
-							<th>작성자</th>
-							<th>작성일</th>
+							<th>검색어</th>
+							<th>검색 일자</th>
+							<th>검색 ID</th>
+							<th>검색 IP</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<!-- 게시글 목록 반복 출력 -->
-						<c:forEach var="board" items="${list}">
+						<c:forEach var="search" items="${sList}">
 							<tr>
-								<!-- 카테고리 -->
-								<c:if test="${board.category == 0}">
-									<td>일반</td>
-								</c:if>
-								<c:if test="${board.category == 1}">
-									<td class="text-danger">핫딜</td>
-								</c:if>
-								<!-- 게시글 제목 -->
-								<td><a class="getMove" href="${board.bno}">
-										${board.title} <span class="replyCount text-success"></span>
-								</a></td>
-								<!-- 가격 -->
-								<td>${board.won}</td>
-								<!-- 작성자 -->
-								<td>${board.writer}</td>
-								<!-- 작성일 -->
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-										value="${board.regdate}" /></td>
+								<td><a href="/market/search?keyword=${search.searchWord}&type=11st&type=ama&type=amaJp&type=ebay" target="_blank">${search.searchWord}</a></td>
+								<td>${search.searchDate}</td>
+								<td>${search.id}</td>
+								<td>${search.ip}</td>
 							</tr>
-
-							<!-- 각 게시글의 댓글 수 조회 -->
-							<script>
-								var replyBno = ${board.bno}; // 게시글 번호
-								var replyCount;
-
-								(function(bno) {
-									replyService
-											.getCount(
-													{
-														bno : bno
-													},
-													function(resultData) {
-														replyCount = resultData;
-
-														// 댓글 수가 0이 아닌 경우 댓글 수를 표시
-														if (replyCount !== 0) {
-															$(
-																	'.getMove[href="${board.bno}"] .replyCount')
-																	.text(
-																			' ('
-																					+ replyCount
-																					+ ')');
-														}
-													}, function(error) {
-														console.error("에러 발생:",
-																error);
-													});
-								})(replyBno);
-							</script>
-
+							
 						</c:forEach>
 					</tbody>
 				</table>
@@ -186,18 +140,7 @@
 
 	<!-- 페이징과 관련된 폼(내용이 숨겨져 있다.) -->
 	<form action="/board/list" id="actionForm" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
-		<input type="hidden" name="type" value="${pageMaker.cri.type }" />
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }" />
-		<input type="hidden" name="category" value="${pageMaker.cri.category }" />
 	</form>
-
-	<div id="ex1" class="modal">
-		<p class="modalText">정상적으로 처리가 완료되었습니다</p>
-		<a href="#" rel="modal:close">Close</a>
-	</div>
-	</div>
 
 	<script>
 		$(document)

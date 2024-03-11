@@ -1,22 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="../topbar.jsp"%>
-<span class="titletext" hidden="hidden">게시글 목록</span>
+<span class="titletext" hidden="hidden">스크랩 목록</span>
 <body>
 	<div class="container-fluid p-5 bg-dark text-white text-center">
-		<h1>게시판</h1>
+		<h1>스크랩 목록</h1>
 	</div>
 
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col">
 
-				<!-- 로그인한 사용자만 게시글 작성 버튼 표시 -->
-				<c:if test="${loginVo != null}">
-					<div class="col-auto">
-						<a href='/board/register' class="newboard btn btn-primary mb-3">게시글
-							작성</a>
-					</div>
+				<!-- 주소창의 패러미터에 로그인한 아이디와 다른 아이디가 입력되었을 경우 뒤로 돌려보냄. 이 판정은 컨트롤러에서 함.-->
+				<c:if test="${fList == null}">
+					<script>
+					alert("잘못된 요청입니다");
+					</script>
 				</c:if>
 
 				<!-- 게시글 목록 테이블 -->
@@ -33,14 +32,14 @@
 
 					<tbody>
 						<!-- 게시글 목록 반복 출력 -->
-						<c:forEach var="board" items="${list}">
+						<c:forEach var="board" items="${fList}">
 							<tr>
 								<!-- 카테고리 -->
 								<c:if test="${board.category == 0}">
 									<td>일반</td>
 								</c:if>
 								<c:if test="${board.category == 1}">
-									<td class="text-danger">핫딜</td>
+									<td class="text-danger">상품 추천</td>
 								</c:if>
 								<!-- 게시글 제목 -->
 								<td><a class="getMove" href="${board.bno}">
@@ -186,18 +185,7 @@
 
 	<!-- 페이징과 관련된 폼(내용이 숨겨져 있다.) -->
 	<form action="/board/list" id="actionForm" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
-		<input type="hidden" name="type" value="${pageMaker.cri.type }" />
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }" />
-		<input type="hidden" name="category" value="${pageMaker.cri.category }" />
 	</form>
-
-	<div id="ex1" class="modal">
-		<p class="modalText">정상적으로 처리가 완료되었습니다</p>
-		<a href="#" rel="modal:close">Close</a>
-	</div>
-	</div>
 
 	<script>
 		$(document)
