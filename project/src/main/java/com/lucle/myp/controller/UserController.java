@@ -47,24 +47,18 @@ public class UserController {
 	// 로그인 처리
 	@PostMapping("/login")
 	public String login(String link, UserVo vo, HttpSession session, Model model) {
-	    int result = service.login(vo, session, model);
-	    if(result == 0) {
-	        return "/user/result";
-	    }
-	    if(link == null || link.equals("")) {
-	        link = "/"; // 여기에 기본 페이지의 주소를 넣으세요.
-	    }
-	    return "redirect:"+link;
+		int result = service.login(vo, session, model);
+		if(result == 0) {
+			return "/user/result";
+		}
+		return "redirect:"+link;
 	}
 	
 	// 로그아웃 처리
 	@GetMapping("/logout")
 	public String logout(String link, HttpSession session) {
-	    session.invalidate();
-	    if(link == null || link.equals("")) {
-	        link = "/"; // 여기에 기본 페이지의 주소를 넣으세요.
-	    }
-	    return "redirect:"+link;
+		session.invalidate();
+		return "redirect:"+link;
 	}
 	
 	// 사용자 정보 페이지로 이동

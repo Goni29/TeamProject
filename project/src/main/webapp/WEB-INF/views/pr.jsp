@@ -32,8 +32,41 @@
 					        <input name="delivery" value="${product.delivery}" hidden="hidden" />
 					        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
 					        <input name="keyword" value="${searchWord}" hidden="hidden" />
-					        <button class="btn btn-primary">공동구매 참여하기</button>
+					        <button class="participateButton">공동구매 참여하기</button>
 					    </form>
+					    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const participateButtons = document.querySelectorAll('.participateButton');
+    
+    participateButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            const productNum = this.getAttribute('data-num'); // 제품 고유 번호
+            const requestData = { num: productNum };
+            
+            fetch('/groupBuying/participate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 'success') {
+                    // 페이지의 목표일자와 목표인원 내용 업데이트
+                    document.querySelector('#goalDate'+productNum).textContent = '목표 일자: ' + data.goalDate;
+                    document.querySelector('#goalTarget'+productNum).textContent = '남은 목표 인원: ' + data.goalTarget;
+                    document.querySelector('#personNum'+productNum).textContent = '현재 참여 인원: ' + data.personNum;
+                } else {
+                    alert('공동 구매 참여에 실패했습니다.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+</script>
+					    
 					    
 					    <form class="actionForm" action="/market/detail" hidden="hidden">
 					        <input name="num" value="${product.num}" hidden="hidden" />

@@ -1,5 +1,8 @@
 package com.lucle.myp.domain;
 
+import lombok.Data;
+
+@Data
 public class GroupBuyingVo {
 
 	private Long gno;
@@ -9,4 +12,5 @@ public class GroupBuyingVo {
 	private String goaldate;
 	private Long goaltarget;
 	private Long num;
+	private Long personnum;
 }
