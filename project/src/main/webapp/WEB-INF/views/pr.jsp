@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="./topbar.jsp"%>
+<%@ include file="./header.jsp"%>
+<style>
+    .page-size {
+        width: 100vw;
+    }
+</style>
+
+<body id="page-top">
+    
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+        <%@ include file="./sidebar.jsp"%>
+        <div id="conteny-wrapper" class="d-flex flex-column page-size">       
+            <%@ include file="./topbar.jsp"%>
 <span class="titletext" hidden="hidden">해외 상품 가격 비교</span>
 <body>
 	<div class="container-fluid p-2 bg-dark text-white text-center">
@@ -103,7 +117,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-
+</div>
+</div>
 </html>
 
 <%@ include file="./footer.jsp"%>

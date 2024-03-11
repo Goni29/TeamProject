@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="./topbar.jsp"%>
+<%@ include file="./header.jsp"%>
+<style>
+    .page-size {
+        width: 100vw;
+    }
+</style>
+
+<body id="page-top">
+    
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+        <%@ include file="./sidebar.jsp"%>
+        <div id="conteny-wrapper" class="d-flex flex-column page-size">       
+            <%@ include file="./topbar.jsp"%>
 <span class="titletext" hidden="hidden">해외 상품 가격 비교</span>
 <body>
 	<div class="container-fluid p-2 bg-dark text-white text-center">
@@ -15,7 +29,7 @@
 					<p>${product.num}</p>
 					<img src="${product.imgUrl}" alt="Image"> <br>
 					<p>${product.marketName}</p>
-					<a href="pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">${product.productName}</a><br>
+					<a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">${product.productName}</a><br>
 					<p>가격 : ${product.won}원</p>
 					<p>예상 기간 : ${product.delivery}</p>
 					<p>조회수 : ${product.marketViewCount}</p>
@@ -71,7 +85,8 @@
 		</div>
 	</div>
 </div>
-
+</div>
+</div>
 </html>
 
 <%@ include file="./footer.jsp"%>
