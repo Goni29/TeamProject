@@ -118,3 +118,14 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var currentUrl = window.location.href;
+    var redirectUrlInputs = document.querySelectorAll('.redirectUrl');
+
+    redirectUrlInputs.forEach(function(input) {
+        input.value = currentUrl;
+    });
+});
+</script>
