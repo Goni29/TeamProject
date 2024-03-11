@@ -47,13 +47,6 @@
                                     <input type="hidden" name="keyword" value="${searchWord}" />
                                     <button type="submit" class="btn btn-primary participateButton">공동구매 참여하기</button>
                                 </form>
-                                
-                                <!-- 상세 페이지 버튼은 필요에 따라 주석 해제하여 사용 -->
-                                <!-- <form class="actionForm" action="/market/detail">
-                                    <input type="hidden" name="num" value="${product.num}" />
-                                    <input type="hidden" name="id" value="${loginVo.id}" />
-                                    <button type="submit" class="btn btn-success">상세 페이지</button>
-                                </form> -->
                             </div>
                         </div>
                     </c:forEach>
