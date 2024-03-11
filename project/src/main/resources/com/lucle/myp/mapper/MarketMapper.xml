@@ -5,10 +5,9 @@
 <mapper namespace="com.lucle.myp.mapper.MarketMapper">
 
 	<select id="getList" resultType="com.lucle.myp.domain.MarketVo">
-		SELECT
-		M.*
-		FROM
-		MARKET M
+		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY
+		FROM MARKET m
+		JOIN CATEGORY c ON m.NUM = c.NUM
 		WHERE
 		(
 		UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{productName}) || '%'

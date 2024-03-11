@@ -5,14 +5,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="./header.jsp"%>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
 <style>
     .page-size {
         width: 100vw;
     }
+    .pr-size {
+        width: 1000px;
+    }
 </style>
-
 <body id="page-top">
     
     <!-- Page Wrapper -->
@@ -21,95 +21,60 @@
         <%@ include file="./sidebar.jsp"%>
         <div id="content-wrapper" class="d-flex flex-column page-size">       
             <%@ include file="./topbar.jsp"%>
-            <div class="container-fluid">
-                <div class="row">
-                    <c:forEach var="product" items="${products}">
-                        <div class="col-md-3 border">
-                            <p>${product.num}</p>
-                            <img src="${product.imgUrl}" class="img-fluid" alt="Image"> <br>
-                            <p>${product.marketName}</p>
-                            <a href="${product.url}" class="text-decoration-none">${product.productName}</a><br>
-                            <p>가격 : ${product.won}원</p>
-                            <p>예상 기간 : ${product.delivery}</p>
-                            <p>조회수 : ${product.marketViewCount}</p>
-                            <br>
-
-                            <div class="btn-group" role="group" aria-label="Button group">
-                                <form class="actionForm" action="/board/register">
-                                    <input type="hidden" name="num" value="${product.num}" />
-                                    <input type="hidden" name="productName" value="${product.productName}" />
-                                    <input type="hidden" name="marketName" value="${product.marketName}" />
-                                    <input type="hidden" name="url" value="${product.url}" />
-                                    <input type="hidden" name="imgUrl" value="${product.imgUrl}" />
-                                    <input type="hidden" name="won" value="${product.won}" />
-                                    <input type="hidden" name="delivery" value="${product.delivery}" />
-                                    <input type="hidden" name="deliveryFee" value="${product.deliveryFee}" />
-                                    <input type="hidden" name="keyword" value="${searchWord}" />
-                                    <button type="submit" class="btn btn-primary participateButton">공동구매 참여하기</button>
-                                </form>
+            <div class="container-fluid pr-size">
+                <c:forEach var="product" items="${products}">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4">
+                                        <img src="${product.imgUrl}" class="img-fluid" alt="Image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </c:forEach>
-                </div>
+                        <div class="col-xl-8 col-lg-8">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4">
+                                        <p>${product.marketName}</p>
+                                        <a href="${product.url}" class="text-decoration-none">${product.productName}</a><br>
+                                        <p>가격 : ${product.won}원</p>
+                                        <p>예상 기간 : ${product.delivery}</p>
+                                        <p>조회수 : ${product.marketViewCount}</p>
+                                        <br>
+                                        <div class="col-auto">
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="progress progress-sm mr-2">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                </c:forEach>
             </div>
         </div>
     </div>
-</body>
 
-<div class="modal fade" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">로그인</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<p>Modal body text goes here.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary"
-					data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">변경 사항 저장</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-					    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const participateButtons = document.querySelectorAll('.participateButton');
-    
-    participateButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            const productNum = this.getAttribute('data-num'); // 제품 고유 번호
-            const requestData = { num: productNum };
-            
-            fetch('/groupBuying/participate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.status === 'success') {
-                    // 페이지의 목표일자와 목표인원 내용 업데이트
-                    document.querySelector('#goalDate'+productNum).textContent = '목표 일자: ' + data.goalDate;
-                    document.querySelector('#goalTarget'+productNum).textContent = '남은 목표 인원: ' + data.goalTarget;
-                    document.querySelector('#personNum'+productNum).textContent = '현재 참여 인원: ' + data.personNum;
-                } else {
-                    alert('공동 구매 참여에 실패했습니다.');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-});
-</script>
-
-</html>
 <%@ include file="./footer.jsp"%>
+</body>
+</html>

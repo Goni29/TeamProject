@@ -4,9 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<%@ include file="./topbar.jsp"%>
+<span class="titletext" hidden="hidden">해외 상품 가격 비교</span>
+
 <%@ include file="./header.jsp"%>
 
-<!-- CSS Styles -->
 <style>
     .page-size {
         width: 100vw;
@@ -27,7 +29,16 @@
                                 <p>${product.num}</p>
                                 <img src="${product.imgUrl}" alt="Image"> <br>
                                 <p>${product.marketName}</p>
-                                <a href="${product.url}">${product.productName}</a><br>
+                                <a href="pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
+                                    <c:choose>
+                                        <c:when test="${fn:length(product.productName) > 20}">
+                                            ${fn:substring(product.productName, 0, 20)}...
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${product.productName}
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a><br>
                                 <p>가격 : ${product.won}원</p>
                                 <p>예상 기간 : ${product.delivery}</p>
                                 <p>조회수 : ${product.marketViewCount}</p>
@@ -62,7 +73,6 @@
         </div>
     </div>
 
-    <!-- Modal for login -->
     <div class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -81,6 +91,6 @@
         </div>
     </div>
 
-    <%@ include file="./footer.jsp"%>
+<%@ include file="./footer.jsp"%>
 </body>
 </html>

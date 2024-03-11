@@ -129,4 +129,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
