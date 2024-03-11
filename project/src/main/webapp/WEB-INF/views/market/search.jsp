@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="../topbar.jsp"%>
-<span class="titletext" hidden="hidden">해외 상품 가격 비교</span>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ include file="../header.jsp"%>
+
+<style>
+    .page-size {
+        width: 100vw;
+    }
+</style>
+
 <body>
-	<div class="container-fluid p-2 bg-dark text-white text-center">
-		<p>
-			<b>국내외 상품 목록</b>
-		</p>
-	</div>
-	<div class="container">
+
+<div id="wrapper">
+<%@ include file="../sidebar.jsp"%>
+	<div class="container page-size">
+	<%@ include file="../topbar.jsp"%>
 		<div class="row">
 			<c:forEach var="product" items="${products}">
 				<div class="col-md-3 border">
@@ -47,6 +55,7 @@
 				</div>
 			</c:forEach>
 		</div>
+	</div>
 	</div>
 </body>
 
