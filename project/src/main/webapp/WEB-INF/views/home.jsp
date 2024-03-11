@@ -41,7 +41,7 @@
                                 <div class="">
                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product.imgUrl}" alt="Product Image"> <br>
                                 </div>
-                                <a href="pr?num=${product.num}">
+                                <a href="pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
                                     <c:choose>
                                         <c:when test="${fn:length(product.productName) > 20}">
                                             ${fn:substring(product.productName, 0, 20)}...
@@ -78,7 +78,7 @@
                                 <div class="">
                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product2.imgUrl}" alt="Product Image"> <br>
                                 </div>
-                                <a href="pr?num=${product2.num}">
+                                <a href="pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
                                     <c:choose>
                                         <c:when test="${fn:length(product2.productName) > 20}">
                                             ${fn:substring(product2.productName, 0, 20)}...

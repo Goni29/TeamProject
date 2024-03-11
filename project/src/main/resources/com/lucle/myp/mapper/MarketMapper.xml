@@ -32,7 +32,7 @@
 		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY
 		FROM MARKET m
 		JOIN CATEGORY c ON m.NUM = c.NUM
-		where m.num = #{num}
+		WHERE c.LARGE = #{large} AND c.MEDIUM = #{medium} AND c.SMALL = #{small} AND c.SUB_CATEGORY = #{sub_category} AND m.num = #{num}
 	]]>
 	</select>
 

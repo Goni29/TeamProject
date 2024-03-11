@@ -43,8 +43,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<MarketVo> sortProto(@Param("num") Long num) {
-		return mapper.sortProto(num);
+	public List<MarketVo> sortProto(@Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
+		return mapper.sortProto(num, large, medium, small, sub_category);
 	}
 
 	@Override

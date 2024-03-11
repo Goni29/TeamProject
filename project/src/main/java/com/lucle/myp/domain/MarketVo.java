@@ -18,10 +18,10 @@ public class MarketVo {
 	private String keyword;
 	private int visible;
 	
-	private int LARGE;
-	private int MEDIUM;
-	private int SMALL;
-	private int SUB_CATEGORY;
+	private int large;
+	private int medium;
+	private int small;
+	private int sub_category;
 	
 	private Long marketViewCount;
 	
