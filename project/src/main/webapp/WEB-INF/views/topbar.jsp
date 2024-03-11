@@ -62,7 +62,7 @@
                 <c:if test="${loginVo == null}">
                     <li class="nav-item">
                         <form id="loginForm" class="form-inline ml-auto" action="/user/login" method="post">
-                            <input type="hidden" name="redirectUrl" class="redirectUrl">
+                            <input type="hidden" name="link" class="redirectUrl" value="/">
                             <input type="text" class="form-control" id="idInput" name="id" placeholder="아이디">
                             &nbsp;<input type="password" class="form-control" id="pwInput" name="password"
                                 placeholder="비밀번호">
@@ -87,7 +87,7 @@
                     </li>
                     <li class="nav-item">
                         <form id="logoutForm" action="/user/logout" method="get">
-                            <input type="hidden" name="redirectUrl" class="redirectUrl">
+                            <input type="hidden" name="link" class="redirectUrl" value="/">
                             <button id="logoutButton" type="submit" class="btn btn-warning">로그아웃</button>
                         </form>
                     </li>
