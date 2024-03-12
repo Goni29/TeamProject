@@ -62,6 +62,7 @@
 							</div>
 
 							<c:if test="${loginVo.id == board.id}">
+<<<<<<< HEAD
     <form action="${pageContext.request.contextPath}/modify" method="post">
         <input type="hidden" name="bno" value="${board.bno}"/>
         <!-- 필요한 경우 추가적인 입력 필드를 여기에 추가 -->
@@ -78,6 +79,19 @@
         </div>
     </form>
 </c:if>
+=======
+								<form action="/board/remove" method="post">
+									<input type="hidden" name="bno" value="${board.bno}">
+
+									<button type="submit" class="btn btn-success">삭제</button>
+								</form>
+
+								<form action="/board/modify" method="get">
+									<input type="hidden" name="bno" value="${board.bno}">
+									<button type="submit" class="btn btn-success">수정</button>
+								</form>
+							</c:if>
+>>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 						</div>
 					</div>
 				</div>
@@ -101,8 +115,8 @@
 								<div class="mb-3 row">
 									<label for="productName" class="col-sm-2 col-form-label">상품명</label>
 									<div class="col-sm-10">
-										<a href="${board.url}" target="_blank"> <input type="text" readonly
-											class="form-control-plaintext" id="productName"
+										<a href="${board.url}" target="_blank"> <input type="text"
+											readonly class="form-control-plaintext" id="productName"
 											value="${board.productName}"
 											style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
 										</a>
@@ -348,7 +362,11 @@
 			        let replyContent = $('#replyContent').val();
 			        
 			        if(replyContent == null || replyContent == ""){
+<<<<<<< HEAD
 			            alert("작성된 내용이 없습니다.");
+=======
+			            alert("댓글 내용을 입력해주세요.");
+>>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 			        } else {
 			            replyService.add({
 			                    bno : bnoValue,
