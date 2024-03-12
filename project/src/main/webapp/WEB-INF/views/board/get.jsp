@@ -62,36 +62,17 @@
 							</div>
 
 							<c:if test="${loginVo.id == board.id}">
-<<<<<<< HEAD
-    <form action="${pageContext.request.contextPath}/modify" method="post">
-        <input type="hidden" name="bno" value="${board.bno}"/>
-        <!-- 필요한 경우 추가적인 입력 필드를 여기에 추가 -->
-        <div class="col-auto">
-            <button type="submit" class="btn btn-success">수정</button>
-        </div>
-    </form>
-
-    <form action="${pageContext.request.contextPath}/remove" method="post">
-        <input type="hidden" name="bno" value="${board.bno}"/>
-        <input type="hidden" name="_method" value="delete" /> <!-- HTML에서 DELETE 요청을 지원하지 않기 때문에, _method를 사용하여 요청 방식을 변경하는 방법을 사용할 수 있습니다. -->
-        <div class="col-auto">
-            <button type="submit" class="btn btn-success">삭제</button>
-        </div>
-    </form>
-</c:if>
-=======
-								<form action="/board/remove" method="post">
+								<form class="col-auto" action="/board/remove" method="post">
 									<input type="hidden" name="bno" value="${board.bno}">
 
 									<button type="submit" class="btn btn-success">삭제</button>
 								</form>
 
 								<form action="/board/modify" method="get">
-									<input type="hidden" name="bno" value="${board.bno}">
+									<input class="col-auto" type="hidden" name="bno" value="${board.bno}">
 									<button type="submit" class="btn btn-success">수정</button>
 								</form>
 							</c:if>
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 						</div>
 					</div>
 				</div>

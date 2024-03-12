@@ -5,7 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../header.jsp"%>
-<<<<<<< HEAD
 
 <style>
     .page-size {
@@ -21,10 +20,8 @@
         <%@ include file="../sidebar.jsp"%>
         <div id="conteny-wrapper" class="d-flex flex-column page-size">       
             <%@ include file="../topbar.jsp"%>
-=======
 <%@ include file="../topbar.jsp"%>
 <span class="titletext" hidden="hidden">게시글 수정</span>
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 <div id="contentarea">
 	<div>
 		<h2>게시글 수정 및 삭제</h2>
