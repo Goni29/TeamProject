@@ -49,12 +49,16 @@
 							</div>
 
 							<c:if test="${loginVo.id == board.id}">
-								<div class="col-auto">
-									<button id="delete" class="btn btn-success">삭제</button>
-								</div>
-								<div class="col-auto">
-									<button id="modify" class="btn btn-success">수정</button>
-								</div>
+								<form action="/board/remove" method="post">
+									<input type="hidden" name="bno" value="${board.bno}">
+
+									<button type="submit" class="btn btn-success">삭제</button>
+								</form>
+
+								<form action="/board/modify" method="get">
+									<input type="hidden" name="bno" value="${board.bno}">
+									<button type="submit" class="btn btn-success">수정</button>
+								</form>
 							</c:if>
 						</div>
 					</div>
@@ -79,8 +83,8 @@
 								<div class="mb-3 row">
 									<label for="productName" class="col-sm-2 col-form-label">상품명</label>
 									<div class="col-sm-10">
-										<a href="${board.url}" target="_blank"> <input type="text" readonly
-											class="form-control-plaintext" id="productName"
+										<a href="${board.url}" target="_blank"> <input type="text"
+											readonly class="form-control-plaintext" id="productName"
 											value="${board.productName}"
 											style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
 										</a>
@@ -338,7 +342,7 @@
 			        let replyContent = $('#replyContent').val();
 			        
 			        if(replyContent == null || replyContent == ""){
-			            alert("뒤질래?");
+			            alert("댓글 내용을 입력해주세요.");
 			        } else {
 			            replyService.add({
 			                    bno : bnoValue,
