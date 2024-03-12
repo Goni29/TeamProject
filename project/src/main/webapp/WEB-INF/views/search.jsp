@@ -4,9 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ include file="./topbar.jsp"%>
-<span class="titletext" hidden="hidden">해외 상품 가격 비교</span>
-
 <%@ include file="./header.jsp"%>
 
 <style>
@@ -26,7 +23,6 @@
                     <div class="row">
                         <c:forEach var="product" items="${products}">
                             <div class="col-md-3 border">
-                                <p>${product.num}</p>
                                 <img src="${product.imgUrl}" alt="Image"> <br>
                                 <p>${product.marketName}</p>
                                 <a href="pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">

@@ -42,7 +42,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="/board/list">
                 	<i class="fa-solid fa-clipboard icon"></i>
                     <span>게시판</span></a>
             </li>

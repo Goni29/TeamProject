@@ -1,11 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="../topbar.jsp"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ include file="../header.jsp"%>
+
+<style>
+    .page-size {
+        width: 100vw;
+    }
+</style>
+
 <span class="titletext" hidden="hidden">게시글 목록</span>
 <body>
-	<div class="container-fluid p-5 bg-dark text-white text-center">
-		<h1>게시판</h1>
-	</div>
+
+
+    <div id="wrapper">
+    
+        <%@ include file="../sidebar.jsp"%>
+        <div id="conteny-wrapper" class="d-flex flex-column page-size">       
+            <%@ include file="../topbar.jsp"%>
 
 	<div class="container mt-5">
 		<div class="row">
@@ -181,7 +196,7 @@
 			</div>
 		</div>
 
-
+</div>
 	</div>
 
 	<!-- 페이징과 관련된 폼(내용이 숨겨져 있다.) -->

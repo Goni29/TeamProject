@@ -1,7 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <%@ include file="../header.jsp"%>
-<span class="titletext" hidden="hidden">게시글 수정</span>
+
+<style>
+    .page-size {
+        width: 100vw;
+    }
+</style>
+<body id="page-top">
+<span class="titletext" hidden="hidden">게시글 상세 보기</span>
+    
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+        <%@ include file="../sidebar.jsp"%>
+        <div id="conteny-wrapper" class="d-flex flex-column page-size">       
+            <%@ include file="../topbar.jsp"%>
 <div id="contentarea">
 	<div>
 		<h2>게시글 수정 및 삭제</h2>
@@ -51,6 +69,8 @@
 			
 		</div>
 	</form>
+	</div>
+	</div>
 	</div>
 	<script>
 		$(document).ready(function(){

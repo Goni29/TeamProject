@@ -1,16 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ include file="../topbar.jsp"%>
+<%@ include file="../header.jsp"%>
+
+<style>
+    .page-size {
+        width: 100vw;
+    }
+</style>
+<body id="page-top">
 <span class="titletext" hidden="hidden">게시글 상세 보기</span>
+    
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+        <%@ include file="../sidebar.jsp"%>
+        <div id="conteny-wrapper" class="d-flex flex-column page-size">       
+            <%@ include file="../topbar.jsp"%>
 
-<body>
-	<div class="container-fluid p-2 bg-dark text-white text-center">
-		<p>게시글 보기</p>
-	</div>
 	<div class="container mt-5">
 		<div class="row justify-content-center">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div id="contentarea" class="card">
 					<div class="card-header">게시글</div>
 					<div class="card-body">
@@ -157,6 +170,8 @@
 			</c:if>
 		</div>
 	</div>
+	</div>
+	</div>
 
 </body>
 
@@ -199,20 +214,6 @@
 
  	        });
  			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
-
 		    function formatDate(date) {
 		        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
 		        return new Intl.DateTimeFormat('ko-KR', options).format(new Date(date));
