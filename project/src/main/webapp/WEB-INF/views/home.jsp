@@ -34,12 +34,14 @@
                     <!-- Content Row -->
                     <div class="row">
                         <c:forEach var="product" items="${products}" begin="0" end="3">
-                            <div class="col-xl-3 col-md-6 mb-4 border">
-                                <p>${product.marketName}</p>
-                                
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Product</h6>
+                                </div>
+                                <div class="">
+                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product.imgUrl}" alt="Product Image"> <br>
+                                </div>
                                 <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product.imgUrl}" alt="Product Image" > <br>
-                                    <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>
                                         <c:when test="${fn:length(product.productName) > 20}">
                                             ${fn:substring(product.productName, 0, 20)}...
@@ -48,13 +50,7 @@
                                             ${product.productName}
                                         </c:otherwise>
                                     </c:choose>
-                                    </h6>
                                 </a><br>
-                                      
-                                <div>
-                                    <p>가격 : ${product.won}원</p>
-                                    <p>조회수 : ${product.marketViewCount}</p>
-                                </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
                                         <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
@@ -64,29 +60,6 @@
                                             <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="btn-group" role="group" aria-label="Button group">
-                                    <form class="actionForm" action="/board/register">
-                                        <input name="num" value="${product.num}" hidden="hidden" />
-                                        <input name="productName" value="${product.productName}" hidden="hidden" />
-                                        <input name="marketName" value="${product.marketName}" hidden="hidden" />
-                                        <input name="url" value="${product.url}" hidden="hidden" />
-                                        <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
-                                        <input name="won" value="${product.won}" hidden="hidden" />
-                                        <input name="dollar" value="${product.dollar}" hidden="hidden" />
-                                        <input name="delivery" value="${product.delivery}" hidden="hidden" />
-                                        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
-                                        <input name="otherCosts" value="${product.otherCosts}" hidden="hidden" />
-                                        <input name="k_ProductName" value="${product.k_ProductName}" hidden="hidden" />
-                                        <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary">공동구매 참여하기</button>
-                                    </form>
-                                    
-                                    <form class="actionForm" action="/market/detail">
-                                        <input name="num" value="${product.num}" hidden="hidden" />
-                                        <input name="id" value="${loginVo.id}" hidden="hidden" />
-                                        <button class="btn btn-success">상세 페이지</button>
-                                    </form>
                                 </div>
                             </div>
                         </c:forEach>
@@ -98,11 +71,14 @@
                     </div>
                     <div class="row">
                         <c:forEach var="product2" items="${products2}" begin="0" end="3">
-                            <div class="col-xl-3 col-md-6 mb-4 border">
-                                <p>${product2.marketName}</p>
-                                <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Product</h6>
+                                </div>
+                                <div class="">
                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product2.imgUrl}" alt="Product Image"> <br>
-                                    <h6 class="m-0 font-weight-bold text-primary">
+                                </div>
+                                <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
                                     <c:choose>
                                         <c:when test="${fn:length(product2.productName) > 20}">
                                             ${fn:substring(product2.productName, 0, 20)}...
@@ -111,13 +87,7 @@
                                             ${product2.productName}
                                         </c:otherwise>
                                     </c:choose>
-                                    </h6>
                                 </a><br>
-                                       
-                                <div>
-                                    <p>가격 : ${product2.won}원</p>
-                                    <p>조회수 : ${product2.marketViewCount}</p>
-                                </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
                                         <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
@@ -127,29 +97,6 @@
                                             <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="btn-group" role="group" aria-label="Button group">
-                                    <form class="actionForm" action="/board/register">
-                                        <input name="num" value="${product2.num}" hidden="hidden" />
-                                        <input name="productName" value="${product2.productName}" hidden="hidden" />
-                                        <input name="marketName" value="${product2.marketName}" hidden="hidden" />
-                                        <input name="url" value="${product2.url}" hidden="hidden" />
-                                        <input name="imgUrl" value="${product2.imgUrl}" hidden="hidden" />
-                                        <input name="won" value="${product2.won}" hidden="hidden" />
-                                        <input name="dollar" value="${product2.dollar}" hidden="hidden" />
-                                        <input name="delivery" value="${product2.delivery}" hidden="hidden" />
-                                        <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
-                                        <input name="otherCosts" value="${product2.otherCosts}" hidden="hidden" />
-                                        <input name="k_ProductName" value="${product2.k_ProductName}" hidden="hidden" />
-                                        <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary">공동구매 참여하기</button>
-                                    </form>
-                                    
-                                    <form class="actionForm" action="/market/detail">
-                                        <input name="num" value="${product2.num}" hidden="hidden" />
-                                        <input name="id" value="${loginVo.id}" hidden="hidden" />
-                                        <button class="btn btn-success">상세 페이지</button>
-                                    </form>
                                 </div>
                             </div>
                         </c:forEach>

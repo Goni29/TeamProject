@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.ReplyVo;
@@ -51,4 +52,10 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.getCount(bno);
 	}
 	
+	@Transactional
+    @Override
+    public void addReply(ReplyVo replyVo) {
+        mapper.insert(replyVo);
+	
+}
 }

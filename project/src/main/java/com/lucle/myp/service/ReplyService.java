@@ -22,4 +22,6 @@ public interface ReplyService {
 	boolean remove(Long rno);
 	
 	boolean modify(ReplyVo reply);
+	
+	void addReply(ReplyVo replyVo);
 }

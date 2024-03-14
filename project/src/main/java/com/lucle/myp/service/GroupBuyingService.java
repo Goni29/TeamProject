@@ -3,6 +3,7 @@ package com.lucle.myp.service;
 import java.util.List;
 
 import com.lucle.myp.domain.GroupBuyingVo;
+import com.lucle.myp.domain.UserVo;
 
 public interface GroupBuyingService {
     void registerGroupBuying(GroupBuyingVo groupBuying);
@@ -10,4 +11,5 @@ public interface GroupBuyingService {
     void updateGroupBuying(GroupBuyingVo groupBuying);
     void removeGroupBuying(Long gno);
     List<GroupBuyingVo> listGroupBuying();
+    boolean participate(GroupBuyingVo groupBuyingVo, UserVo userVo);
 }
