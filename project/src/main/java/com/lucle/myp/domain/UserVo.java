@@ -19,6 +19,8 @@ public class UserVo {
 	private String nickname;
 	private int visible;
 	private String session_id; // 세션 ID
+	private String postcode;
+	private String extraAddress;
 	
 	private String addressDetail; // 상세 주소. 자유 기입
 	
