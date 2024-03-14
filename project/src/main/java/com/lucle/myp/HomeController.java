@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.SearchVo;
+import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.service.MarketService;
 import com.lucle.myp.service.SearchService;
 
@@ -29,7 +30,7 @@ public class HomeController {
 	MarketService service;
 	@Autowired
 	private SearchService searchService;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String proto(HttpServletRequest request, Model model, Criteria cri) {
 		List<MarketVo> list = service.proto(cri);
@@ -38,21 +39,34 @@ public class HomeController {
 		model.addAttribute("products2", list2);
 		return "home";
 	}
-	
+
 	@GetMapping("/pr")
-	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
+	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num,
+			@Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small,
+			@Param("sub_category") Integer sub_category) {
 		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
 		model.addAttribute("products", list);
 	}
-	
+
 	// 상품 검색 페이지
-		@GetMapping("/search")
-		public void search(Model model, Criteria cri, @Param("productName") String productName, MarketVo vo, SearchVo searchVo, HttpServletRequest req) {
-			List<MarketVo> list = service.getList(productName);
-			model.addAttribute("products", list);
-			model.addAttribute("searchWord", vo.getProductName());
-			searchVo.setSearchWord(productName);
-			searchService.insert(searchVo, req);
+	@GetMapping("/search")
+	public void search(Model model, Criteria cri, @Param("productName") String productName, MarketVo vo,
+			SearchVo searchVo, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		UserVo loginUser = (UserVo) session.getAttribute("loginVo");
+		String userId = null;
+
+		if (loginUser != null) {
+			// loginUser 객체에서 ID를 가져옵니다.
+			userId = loginUser.getId();
+			// 필요한 경우, 여기에서 userId를 사용할 수 있습니다.
 		}
-	
+		List<MarketVo> list = service.getList(productName);
+		model.addAttribute("products", list);
+		model.addAttribute("searchWord", vo.getProductName());
+		searchVo.setSearchWord(productName);
+		searchVo.setId(userId);
+		searchService.insert(searchVo, req);
+	}
+
 }
