@@ -87,7 +87,7 @@ public class GroupBuyingController {
         }
 
         ReplyVo replyVo = new ReplyVo();
-        replyVo.setBno(replyVo.getBno());
+        replyVo.setBno(groupBuyingVo.getGno());
         replyVo.setReply("공동구매에 참여했습니다!");
         replyVo.setReplyer(userVo.getId());
         replyVo.setVisible(1);

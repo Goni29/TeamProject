@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.service.MarketService;
+import com.lucle.myp.service.SearchService;
 
 /**
  * Handles requests for the application home page.
@@ -25,6 +27,8 @@ public class HomeController {
 
 	@Autowired
 	MarketService service;
+	@Autowired
+	private SearchService searchService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String proto(HttpServletRequest request, Model model, Criteria cri) {
@@ -43,10 +47,12 @@ public class HomeController {
 	
 	// 상품 검색 페이지
 		@GetMapping("/search")
-		public void search(Model model, Criteria cri, @Param("productName") String productName, MarketVo vo) {
+		public void search(Model model, Criteria cri, @Param("productName") String productName, MarketVo vo, SearchVo searchVo, HttpServletRequest req) {
 			List<MarketVo> list = service.getList(productName);
 			model.addAttribute("products", list);
 			model.addAttribute("searchWord", vo.getProductName());
+			searchVo.setSearchWord(productName);
+			searchService.insert(searchVo, req);
 		}
 	
 }
