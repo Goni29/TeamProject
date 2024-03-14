@@ -7,12 +7,14 @@
 <div class="form-group row">
     <label for="inputAddr" class="col-sm-2 col-form-label">주소</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control mb-2" id="sample6_postcode" placeholder="우편번호">
-        <input type="button" class="btn btn-secondary mb-2" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-        <input type="text" class="form-control mb-2" id="sample6_address" placeholder="주소">
-		<input type="text" class="form-control mb-2" id="sample6_extraAddress" placeholder="참고항목">
-        <input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
-    </div>
+    <input type="text" class="form-control mb-2" id="sample6_postcode" placeholder="우편번호">
+    <input type="button" class="btn btn-secondary mb-2" onclick="combineAddress()" value="우편번호 찾기">
+    <input type="text" class="form-control mb-2" id="sample6_address" placeholder="주소">
+    <input type="text" class="form-control mb-2" id="sample6_extraAddress" placeholder="참고항목">
+    <input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+    <!-- Hidden input for combined address -->
+    <input type="hidden" name="address" id="combinedAddress">
+</div>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -62,6 +64,21 @@
                 document.getElementById("sample6_detailAddress").focus();
             }
         }).open();
+    }
+    function combineAddress() {
+        var postcode = document.getElementById('sample6_postcode').value;
+        var address = document.getElementById('sample6_address').value;
+        var extraAddress = document.getElementById('sample6_extraAddress').value;
+        var detailAddress = document.getElementById('sample6_detailAddress').value;
+
+        // Combine the address parts with a separator, e.g., ', '
+        var combinedAddress = postcode + ', ' + address + ', ' + extraAddress + ', ' + detailAddress;
+
+        // Set the combined address to the hidden input
+        document.getElementById('combinedAddress').value = combinedAddress;
+
+        // Optionally, submit the form here if needed
+        // document.getElementById('yourFormId').submit();
     }
 </script>
 </html>
