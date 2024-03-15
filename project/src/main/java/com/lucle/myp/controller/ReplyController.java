@@ -69,13 +69,13 @@ public class ReplyController {
 	
 	// 특정 댓글 정보 가져오기
 	@GetMapping(value = "/{rno}")
-	public ReplyVo get(@PathVariable long rno) {
+	public ReplyVo get(@PathVariable("rno") long rno) {
 		return service.get(rno);
 	}
 	
 	// 댓글 삭제 처리
 	@DeleteMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public String remove(@PathVariable long rno) {
+	public String remove(@PathVariable("rno") long rno) {
 		if (service.remove(rno)) {
 			return "SUCCESS";	
 		}
@@ -84,7 +84,7 @@ public class ReplyController {
 	
 	// 댓글 수정 처리
 	@PutMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE }, consumes = { "application/json" })
-	public String modify(@PathVariable long rno, @RequestBody ReplyVo vo) {
+	public String modify(@PathVariable("rno") long rno, @RequestBody ReplyVo vo) {
 		vo.setRno(rno);
 		log.info("변경될 내용의 VO 객체 " + vo);
 		if (service.modify(vo)) {

@@ -72,10 +72,10 @@ WHERE rn > (#{cri.pageNum} - 1) * #{cri.amount}
 	<insert id="addReply"
 		parameterType="com.lucle.myp.domain.ReplyVo">
 		insert into tbl_reply(rno, reply, replyer, id,
-		REPLYDATE, VISIBLE)
+		REPLYDATE, VISIBLE, num)
 		values(seq_reply.nextval, #{reply},
 		#{replyer},
-		#{id}, sysdate, 1)
+		#{id}, sysdate, 1, #{num})
 	</insert>
 
 	<select id="readReply" resultType="com.lucle.myp.domain.ReplyVo">
