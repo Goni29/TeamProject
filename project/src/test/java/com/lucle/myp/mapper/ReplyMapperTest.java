@@ -1,5 +1,7 @@
 package com.lucle.myp.mapper;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -37,5 +39,23 @@ public class ReplyMapperTest {
 		list.forEach( board -> log.info(list));
 	}
 	
+	@Test
+	public void replyEnrollTest() {
+		
+		String id = "admin";
+		String reply = "김철수";
+		String replyer = "테스트";
+		Date REPLYDATE = new Date();
+		Long rno = 111L; 
+		ReplyVo vo = new ReplyVo();
+		vo.setId(id);
+		vo.setReply(reply);
+		vo.setReplyer(replyer);
+		vo.setReplydate(REPLYDATE);
+		vo.setRno(rno);
+		mapper.addReply(vo);
+		
+		
+	}
 
 }

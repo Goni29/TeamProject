@@ -3,20 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lucle.myp.mapper.ReplyMapper">
-  <select id="getList" resultType="com.lucle.myp.domain.ReplyVo">
-  		select rno, bno, reply, replyer, replydate, updatedate,
-		(select count(*) from tbl_reply where bno = #{bno}) as replyCount
-  		 from tbl_reply where bno = #{bno} order by rno desc
-  </select>
-<select id="getListAll" resultType="com.lucle.myp.domain.ReplyVo">
-    select * from tbl_reply order by rno desc
-</select>
+	<select id="getList" resultType="com.lucle.myp.domain.ReplyVo">
+		select rno, bno, reply, replyer,
+		replydate, updatedate,
+		(select count(*) from
+		tbl_reply where bno =
+		#{bno}) as replyCount
+		from tbl_reply where bno = #{bno} order by rno
+		desc
+	</select>
+	<select id="getListAll"
+		resultType="com.lucle.myp.domain.ReplyVo">
+		select * from tbl_reply order by rno desc
+	</select>
 
-  <select id="getCount" resultType="int">
-  		select count(*) from tbl_reply where bno = #{bno} and visible = 1
-  </select>
-  
-  <select id="getListWithPaging" resultType="com.lucle.myp.domain.ReplyVo">
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_reply
+		where bno = #{bno} and visible = 1
+	</select>
+
+	<select id="getListWithPaging"
+		resultType="com.lucle.myp.domain.ReplyVo">
 <![CDATA[
 SELECT bno, rno, reply, replyer, replydate, updatedate, id
 FROM (
@@ -34,27 +41,75 @@ FROM (
 )
 WHERE rn > (#{cri.pageNum} - 1) * #{cri.amount}
      ]]>
-  </select>
+	</select>
 
-  <insert id="insert" parameterType="com.lucle.myp.domain.ReplyVo">
-  	insert into tbl_reply(rno, bno, reply, replyer, id)
-  		values(seq_reply.nextval, #{bno}, #{reply}, #{replyer}, #{id})
-  </insert>
+	<insert id="insert" parameterType="com.lucle.myp.domain.ReplyVo">
+		insert into tbl_reply(rno,
+		bno, reply, replyer, id)
+		values(seq_reply.nextval, #{bno}, #{reply},
+		#{replyer}, #{id})
+	</insert>
 
-  <select id="read" resultType="com.lucle.myp.domain.ReplyVo">
-  	select * from tbl_reply where rno = #{rno}
-  </select>
-  
-  <update id="delete"> <!-- delete가 실제로 삭제하는 것은 아님. visible을 0으로 바꿈 -->
-  	  	update tbl_reply
-	  		set visible = 0
-  		where rno = #{rno}
-  </update>
-  
-  <update id="update">
-  	update tbl_reply
-	  		set reply = #{reply},
-	  			updatedate = sysdate
-  		where rno = #{rno}
-  </update>
+	<select id="read" resultType="com.lucle.myp.domain.ReplyVo">
+		select * from tbl_reply where rno =
+		#{rno}
+	</select>
+
+	<update id="delete"> <!-- delete가 실제로 삭제하는 것은 아님. visible을 0으로 바꿈 -->
+		update tbl_reply
+		set visible = 0
+		where rno = #{rno}
+	</update>
+
+	<update id="update">
+		update tbl_reply
+		set reply = #{reply},
+		updatedate =
+		sysdate
+		where rno = #{rno}
+	</update>
+
+	<insert id="addReply"
+		parameterType="com.lucle.myp.domain.ReplyVo">
+		insert into tbl_reply(rno, reply, replyer, id,
+		REPLYDATE, VISIBLE)
+		values(seq_reply.nextval, #{reply},
+		#{replyer},
+		#{id}, sysdate, 1)
+	</insert>
+
+	<select id="readReply" resultType="com.lucle.myp.domain.ReplyVo">
+    <![CDATA[
+    SELECT rno, reply, replyer, replydate, id
+    FROM (
+        SELECT
+        rownum rn, rno, reply, replyer, replydate, id
+        FROM (
+            SELECT *
+            FROM tbl_reply
+            WHERE rno=#{rno}
+            AND visible = 1
+            AND rno > 0
+            ORDER BY rno DESC
+        )
+        WHERE rownum <= #{cri.pageNum} * #{cri.amount}
+    )
+    WHERE rn > (#{cri.pageNum} - 1) * #{cri.amount}
+    ]]>
+	</select>
+
+	<select id="replyTotal" resultType="int">
+		select count(*) from
+		tbl_reply where num = #{num} and visible = 1
+	</select>
+
+	<select id="getListByProductNum" parameterType="long"
+		resultType="com.lucle.myp.domain.ReplyVo">
+		SELECT *
+		FROM tbl_reply
+		WHERE num = #{num}
+		AND visible = 1
+		ORDER BY rno DESC
+	</select>
+
 </mapper>

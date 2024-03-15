@@ -14,5 +14,5 @@ public class ReplyVo {
 	private Date updatedate;
 	private String id;
 	private int visible;
-
+	private Long num;
 }

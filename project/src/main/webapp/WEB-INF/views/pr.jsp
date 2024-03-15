@@ -49,8 +49,8 @@
 										<input name="deliveryFee" value="${product.deliveryFee}"
 											hidden="hidden" /> <input name="keyword"
 											value="${searchWord}" hidden="hidden" />
-										<button hidden="hidden" class="participateButton" data-num="${product.num}">공동구매
-											참여하기</button>
+										<button hidden="hidden" class="participateButton"
+											data-num="${product.num}">공동구매 참여하기</button>
 									</form>
 
 
@@ -120,296 +120,91 @@
 											<textarea class="form-control" id="replyContent" rows="3"
 												placeholder="댓글을 입력하세요"></textarea>
 										</div>
-										<button id="addReply" type="submit" class="btn btn-primary">댓글
+										<button id="addReply" type="button" class="btn btn-primary">댓글
 											작성</button>
 									</form>
 								</div>
 							</div>
 						</div>
 					</c:if>
+					<div class="container mt-5">
+						<div class="row justify-content-center">
+							<div class="col-md-8">
+								<div id="contentarea" class="card">
+									<div class="card-body">
+										<ul class="list-unstyled replyUl">
+											<c:forEach var="reply" items="${replies}">
+												<li class="media">
+													<div class="media-body">
+														<div class="d-flex justify-content-between">
+															<strong class="mt-0 mb-1">${reply.replyer}</strong> <small
+																class="text-muted">${reply.replydate}</small>
+														</div>
+														<p>${reply.reply}</p>
+													</div>
+												</li>
+											</c:forEach>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<c:if test="${pageInfo.prev}">
+								<li class="page-item"><a class="page-link"
+									href="?pageNum=${pageInfo.startPage - 1}">Previous</a></li>
+							</c:if>
+							<c:forEach begin="${pageInfo.startPage}"
+								end="${pageInfo.endPage}" var="pageNum">
+								<li class="page-item ${pageNum == cri.pageNum ? 'active' : ''}"><a
+									class="page-link" href="?pageNum=${pageNum}">${pageNum}</a></li>
+							</c:forEach>
+							<c:if test="${pageInfo.next}">
+								<li class="page-item"><a class="page-link"
+									href="?pageNum=${pageInfo.endPage + 1}">Next</a></li>
+							</c:if>
+						</ul>
+					</nav>
 
-					<!-- 					<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const participateButtons = document.querySelectorAll('.participateButton');
-    
-    participateButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            const productNum = this.getAttribute('data-num'); // 제품 고유 번호
-            const requestData = { num: productNum };
-            
-            fetch('/groupBuying/participate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
+					<script>
+$(document).ready(function(){
+    // 댓글 작성 버튼 클릭 이벤트
+    $('#addReply').off('click').on('click', function(e){
+        e.preventDefault(); // 기본 이벤트를 방지합니다.
+
+        let replyContent = $('#replyContent').val(); // 댓글 내용을 가져옵니다.
+
+        // 댓글 내용이 비어 있는 경우 경고 메시지를 표시합니다.
+        if(replyContent == null || replyContent.trim() == ""){
+            alert("댓글 내용을 입력해주세요.");
+        } else {
+            // AJAX를 사용하여 서버에 댓글 데이터를 전송합니다.
+            $.ajax({
+                url: '/reply/addReply', // 요청을 보낼 서버의 URL 주소
+                type: 'post', // HTTP 요청 방식 (GET, POST)
+                contentType: 'application/json', // 요청의 Content-Type
+                data: JSON.stringify({ // 서버로 보낼 데이터
+                    reply: replyContent,
+                    replyer: '${loginVo.nickname}', // 로그인한 사용자의 닉네임
+                    id: '${loginVo.id}' // 로그인한 사용자의 ID
+                }),
+                dataType: 'json', // 서버에서 보내줄 데이터의 타입
+                success: function(resultData){ // 요청이 성공했을 때 호출될 함수
+                    alert("댓글이 정상적으로 작성되었습니다.");
+                    $('#replyContent').val(""); // 댓글 입력 필드를 비웁니다.
+                    showList(1); // 댓글 목록을 다시 표시합니다.
                 },
-                body: JSON.stringify(requestData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.status === 'success') {
-                    // 페이지의 목표일자와 목표인원 내용 업데이트
-                    document.querySelector('#goalDate'+productNum).textContent = '목표 일자: ' + data.goalDate;
-                    document.querySelector('#goalTarget'+productNum).textContent = '남은 목표 인원: ' + data.goalTarget;
-                    document.querySelector('#personNum'+productNum).textContent = '현재 참여 인원: ' + data.personNum;
-                } else {
-                    alert('공동 구매 참여에 실패했습니다.');
+                error: function(xhr, status, error){ // 요청이 실패했을 때 호출될 함수
+                    alert("오류 발생: " + xhr.status + " " + error);
                 }
-            })
-            .catch(error => console.error('Error:', error));
-        });
+            });
+        }
     });
+
+	
 });
-</script> -->
-					<script>
-		
-		$(document).ready(function() {
-		    var bnoValue = ${board.bno};
-		    var $replyUl = $('.replyUl');
-			var pageNum = 1;
-			var replyCount = 0;
-			var $replyPageFooter  = $('nav[aria-label="Page navigation"]');	;
- 			showList(pageNum);
- 			
- 			
- 			
- 			
- 	        $('#favorite').off('click').on('click', function(e){
- 	        	e.preventDefault();
- 	        	
- 		            favoriteService.add({
-		                    id : '${loginVo.id}',
- 		                    bno : bnoValue
- 		                },
- 		                function(resultData){//여기에서 실패시 이미 스크랩된 게시글입니다 같은 거 쓰면 됨.
- 		                	if(resultData == 'SUCCESS'){
- 		                		alert('스크랩 성공');
- 		                	}else{
- 		                		alert('이미 스크랩된 게시글입니다');
- 		                	}
- 		                });
-
- 	        });
- 			
-function showList(page) {
-		    	console.log(page);
-		    	pageNum = page;
-		        // 특정 게시글을 보게 되면 해당 게시글의 댓글 목록이 나와야 한다.
-		        replyService.getList(
-		            { bno: bnoValue, page: page || 1 },
-		            function (list) {
-		            	
-						if(page == -1 ){
-							pageNum = Math.ceil(replyCount/10.0);
-							showList(pageNum);
-							return;
-						} //page == -1이면 마지막 페이지로 다시 보여주세요
-		            	
-						var str = "";
-
-						for (var i = 0; i < list.length; i++) {
-						    var formattedDate = formatDate(list[i].replydate);
-						    var buttonStr = ""; // 버튼을 저장할 변수
-						    // 로그인 사용자와 게시글 작성자가 같은 경우에만 수정 버튼 생성
-						    if ('${loginVo.id}' == list[i].id) {
-						        buttonStr = `<button class="btn btn-sm btn-primary mr-2 modifyReply" value="` +  list[i].rno + `">수정</button>
-						        	<button class="btn btn-sm btn-danger deleteReply" value="` +  list[i].rno + `">삭제</button>`;
-						    }
-
-						    str += `<li class="lucle">
-					            <div class="media-body">
-					                <div class="d-flex">
-					                    <strong class="mt-0 mb-1">` + list[i].replyer + `</strong>
-					                    <small class="text-muted ml-2">` + formattedDate + `</small>` +
-					                    buttonStr +
-					                    `</div>
-					                <p>` + list[i].reply + `<p>
-					            </div>
-					        </li>`;
-						}
-						
-			            $replyUl.html(str);
-			            if (list == null || list.length == 0) {
-			                $replyUl.html("<h5>댓글이 없습니다</h5>");
-			            }
-			            
-		                replyService.getCount({ bno: bnoValue }, function (resultData) {
-		                    var replyCount = resultData;
-			                showReplyPage(replyCount);
-		                }, function (error) {
-		                    console.error("에러 발생:", error);
-		                });
-	                });
-		                
-		    }
-		    
- 			function showReplyPage(replyCount){
- 				var endNum = Math.ceil(pageNum / 10.0) * 10;
- 				var startNum = endNum - 9;
- 				var prev = startNum != 1;
- 				var next = false;
- 				if( endNum *10 >= replyCount ){
- 					endNum = Math.ceil(replyCount/10.0);
- 				}
- 				
- 				if( endNum * 10 < replyCount){
- 					next = true;
- 				}
- 				
- 				var str = "<ul class='pagination'>";
-
- 				if (prev) {
- 				    str += `<li class="page-item"><a class="page-link"
- 				                href="${startNum-1}" aria-label="Previous"> <span
- 				                aria-hidden="true">&laquo;</span>
- 				        </a></li>`;
- 				} else {
- 				    str += `<li class="page-item disabled"><a class="page-link"
- 				                href="${startNum-1}" aria-label="Previous"> <span
- 				                aria-hidden="true">&laquo;</span>
- 				        </a></li>`;
- 				}
-				
- 				for (var i = startNum; i <= endNum; i++) {
- 				    // 각 페이지 번호에 대한 HTML 생성
- 				    var pageItemClass = (pageNum == i) ? 'page-item active' : 'page-item';
- 
- 				    // 페이지 번호에 대한 HTML 추가
- 				    str += '<li class="' + pageItemClass + '">';
- 				    str += '<a class="page-link" href="' + i + '">' + i + '</a>';
- 				    str += '</li>';
- 				}
-
- 				if (next) {
- 				    str += `<li class="page-item"><a class="page-link"
- 				                href="${endNum+1}" aria-label="Next"> <span
- 				                aria-hidden="true">&raquo;</span>
- 				        </a></li>`;
- 				} else {
- 				    str += `<li class="page-item disabled"><a class="page-link"
- 				                href="${endNum+1}" aria-label="Next"> <span
- 				                aria-hidden="true">&raquo;</span>
- 				        </a></li>`;
- 				}
-
- 				str += `</ul>`;
- 				$replyPageFooter.html(str);
-
- 				$replyPageFooter.off().on('click', 'li a', function(e) {
- 				    e.preventDefault();
- 				    pageNum = $(this).attr("href");
-
- 				    $('.page-link').parent().removeClass('active');
- 				    $(this).parent().addClass('active');
- 				    showList(pageNum);
- 				});
- 				
- 				
- 				// 댓글 작성
-		        $('#addReply').off('click').on('click', function(e){
-		        	e.preventDefault();
-			        let replyContent = $('#replyContent').val();
-			        
-			        if(replyContent == null || replyContent == ""){
-			            alert("댓글 내용을 입력해주세요.");
-			        } else {
-			            replyService.add({
-			                    bno : bnoValue,
-			                    reply : replyContent,
-			                    replyer : '${loginVo.nickname}',
-			                    id : '${loginVo.id}'
-			                },
-			                function(resultData){
-			                    alert("댓글이 정상적으로 작성되었습니다.");
-			                    $('#replyContent').val("");
-			                    showList(1);
-			                });
-			        }
-		        });
- 				
- 				//수정 기능. 아직 미탑재.
- 				
-		        $('.modifyReply').off('click').on('click', function(e){
-		        	e.preventDefault();
-		        	$("#replyContent").val($(this).parents("li.lucle").find('p').text());
-
-			        if(replyContent == null || replyContent == ""){
-			            alert("댓글을 입력해주세요.");
-			        } else {
-			            replyService.add({
-			                    bno : bnoValue,
-			                    reply : replyContent,
-			                    replyer : '${loginVo.nickname}',
-			                    id : '${loginVo.id}'
-			                },
-			                function(resultData){
-			                    alert("댓글이 정상적으로 작성되었습니다.");
-			                    $('#replyContent').val("");
-			                    showList(1);
-			                });
-			        }
-		        });
- 				
- 				
- 				//댓글 삭제. visible을 0으로 바꿈.
-		        $('.deleteReply').off('click').on('click', function(e){
-		        	e.preventDefault();
-		        	var rno = $(this).val();
-		        	console.log(rno);
-
-			            replyService.remove(rno,
-			                function(resultData){
-			                    alert("댓글이 정상적으로 삭제되었습니다.");
-			                    showList(1);
-			                });
-		        });
- 			}
-		});
-		</script>
-
-					<script>
-			$(document).ready(function() {
-
-				var $operForm = $('#operForm');
-				$('button[data-oper="modify"]').on('click', function() {
-					$operForm.attr('', '/board/modify').submit();
-				})
-
-				$('button[data-oper="list"]').on('click', function() {
-					$operForm.find("#bno").remove();
-					$operForm.attr('action', '/board/list').submit();
-				})
-			})
-		</script>
-
-					<script>
-						$(document).ready(function() {
-    					$('.participateButton').on('click', function() {
-        				var productNum = $(this).data('num'); // 버튼에서 data-num 속성 값을 읽어옴
-
-        				var requestData = {
-            			num: productNum // 공동구매 참여 요청 데이터에 상품 번호 포함
-        				};
-
-        				$.ajax({
-            			url: '/groupbuying/participate',
-            			type: 'POST',
-			            contentType: 'application/json',
-			            data: JSON.stringify(requestData),
-			            success: function(response) {
-			                alert(response.message); // 성공 메시지
-			            },
-			            error: function(xhr) {
-		                if (xhr.status === 401) {
-		                    alert("로그인 후 이용해주세요.");
-		                    location.reload();
-		                } else {
-		                    alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요." + xhr.status);
-		                }
-						            }
-						        });
-						    });
-						});
-
 </script>
 
 

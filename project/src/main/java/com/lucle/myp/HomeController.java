@@ -12,12 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.ReplyVo;
 import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.service.MarketService;
+import com.lucle.myp.service.ReplyService;
 import com.lucle.myp.service.SearchService;
 
 /**
@@ -30,6 +33,8 @@ public class HomeController {
 	MarketService service;
 	@Autowired
 	private SearchService searchService;
+	@Autowired
+	private ReplyService replyService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String proto(HttpServletRequest request, Model model, Criteria cri) {
@@ -45,6 +50,8 @@ public class HomeController {
 			@Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small,
 			@Param("sub_category") Integer sub_category) {
 		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
+		 List<ReplyVo> replies = replyService.getListByProductNum(num);
+		    model.addAttribute("replies", replies);
 		model.addAttribute("products", list);
 	}
 
