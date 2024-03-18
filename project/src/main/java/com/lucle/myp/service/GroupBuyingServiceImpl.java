@@ -48,19 +48,15 @@ public class GroupBuyingServiceImpl implements GroupBuyingService {
     
     @Transactional
     @Override
-    public boolean participate(GroupBuyingVo groupBuyingVo, UserVo userVo) {
-        try {
-            // 참여자 수 증가, 공동구매 참여자 목록에 사용자 추가 등의 로직 구현
-            // 예시로, GroupBuyingVo 객체에 참여자 수를 업데이트하는 로직을 추가
-            groupBuyingVo.setPersonnum(groupBuyingVo.getPersonnum() + 1);
-            updateGroupBuying(groupBuyingVo); // 참여자 수 업데이트
-
-            // 성공적으로 처리됐다고 가정
-            return true;
-        } catch (Exception e) {
-            // 예외 처리, 로그 기록 등
-            return false;
-        }
+    public boolean participate(GroupBuyingVo groupBuyingVo) {
+    	boolean result = false;
+    	Long num = groupBuyingVo.getNum();
+    	int imsi = mapper.updateParticipation(num);
+    	if( imsi !=0) {
+    		result = true;
+    	}
+    	return result;
     }
+    
 
 }

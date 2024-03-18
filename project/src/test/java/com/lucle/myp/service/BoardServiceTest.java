@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lucle.myp.domain.BoardVo;
+import com.lucle.myp.domain.GroupBuyingVo;
 import com.lucle.myp.mapper.ReplyMapperTest;
 
 import lombok.extern.log4j.Log4j;
@@ -67,6 +68,20 @@ public class BoardServiceTest {
 		board.setContent("이쁜 사랑하세요");	
 		
 		if (service.modify(board)) {
+			System.out.println("GOOD");
+		};
+		
+	}
+	
+	@Autowired
+	GroupBuyingService buyingService;
+	@Test
+	public void testService(GroupBuyingVo groupBuyingVo) {
+		boolean vo = buyingService.participate(groupBuyingVo);
+		if (vo == false ) {
+			System.out.println("fail");
+		}
+		if (vo == true ) {
 			System.out.println("GOOD");
 		};
 		

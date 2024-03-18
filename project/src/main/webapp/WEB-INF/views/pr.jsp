@@ -34,6 +34,10 @@
 								<p>예상 기간 : ${product.delivery}</p>
 								<p>조회수 : ${product.marketViewCount}</p>
 								<br>
+								<c:if test="${loginVo.id == null}">
+								<p>공동구매에 참여하고자할 때는 로그인되어있는 상태여야 합니다.</p>
+								</c:if>
+								<c:if test="${loginVo.id != null}">
 								<button class="participateButton" data-num="${product.num}">공동구매
 									참여하기</button>
 								<div class="btn-group" role="group" aria-label="Button group">
@@ -49,10 +53,11 @@
 										<input name="deliveryFee" value="${product.deliveryFee}"
 											hidden="hidden" /> <input name="keyword"
 											value="${searchWord}" hidden="hidden" />
+										
 										<button hidden="hidden" class="participateButton"
 											data-num="${product.num}">공동구매 참여하기</button>
 									</form>
-
+									</c:if>
 									<input type="hidden" id="productNum" value="${product.num}" />
 
 									<form class="actionForm" action="/market/detail"
@@ -431,7 +436,7 @@ $(document).ready(function() {
     $('.participateButton').click(function() {
         var productNum = $(this).data('num'); // 상품 번호 가져오기
         var isLoggedIn = ${loginVo.id != null}; // 로그인 상태 확인 (서버 사이드 코드 필요)
-
+		var userId = '${loginVo.id}'
         if (!isLoggedIn) {
             alert('로그인 후 이용해주세요.');
             return; // 로그인하지 않은 상태면 여기서 처리 중단
@@ -454,7 +459,7 @@ $(document).ready(function() {
                 if (xhr.status === 401) {
                     alert('로그인 후 이용해주세요.');
                 } else {
-                    alert('오류 발생: ' + error);
+                    alert('오류 발생: ' + xhr.responseText);
                 }
             }
         });
@@ -469,8 +474,8 @@ $(document).ready(function() {
             data: JSON.stringify({
                 num: productNum,
                 reply: commentText,
-                replyer: '${loginVo.nickname}', // 서버 사이드 코드로 로그인한 사용자의 닉네임 필요
-                id: '${loginVo.id}' // 서버 사이드 코드로 로그인한 사용자의 ID 필요
+                replyer: '${loginVo.nickname}',
+                id: '${loginVo.id}'// 서버 사이드 코드로 로그인한 사용자의 닉네임 필요
             }),
             dataType: 'json',
             success: function(resultData) {

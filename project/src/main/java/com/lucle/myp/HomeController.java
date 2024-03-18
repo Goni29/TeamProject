@@ -46,13 +46,14 @@ public class HomeController {
 	}
 
 	@GetMapping("/pr")
-	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num,
+	public String pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num,
 			@Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small,
 			@Param("sub_category") Integer sub_category) {
 		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
 		 List<ReplyVo> replies = replyService.getListByProductNum(num);
 		    model.addAttribute("replies", replies);
 		model.addAttribute("products", list);
+		return "/pr";
 	}
 
 	// 상품 검색 페이지
