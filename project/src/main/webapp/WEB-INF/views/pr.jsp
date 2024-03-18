@@ -425,6 +425,65 @@
 															});
 										});
 					</script>
+<script>
+$(document).ready(function() {
+    // 공동구매 참여 버튼 클릭 이벤트 처리
+    $('.participateButton').click(function() {
+        var productNum = $(this).data('num'); // 상품 번호 가져오기
+        var isLoggedIn = ${loginVo.id != null}; // 로그인 상태 확인 (서버 사이드 코드 필요)
+
+        if (!isLoggedIn) {
+            alert('로그인 후 이용해주세요.');
+            return; // 로그인하지 않은 상태면 여기서 처리 중단
+        }
+
+        // 공동구매 참여 요청 AJAX
+        $.ajax({
+            url: '/groupbuying/participate',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ num: productNum }),
+            dataType: 'json',
+            success: function(response) {
+                alert('성공적으로 참여되었습니다.');
+                // 공동구매 참여 성공 시 댓글 자동 작성 로직
+                postParticipationComment(productNum, '공동구매에 참여하였습니다.');
+            },
+            error: function(xhr, status, error) {
+                // 로그인하지 않았을 때의 처리는 서버 사이드에서 401 같은 상태 코드를 보내줄 때 사용
+                if (xhr.status === 401) {
+                    alert('로그인 후 이용해주세요.');
+                } else {
+                    alert('오류 발생: ' + error);
+                }
+            }
+        });
+    });
+
+    function postParticipationComment(productNum, commentText) {
+        // 댓글 작성 AJAX 요청
+        $.ajax({
+            url: '/reply/addReply', // 댓글 작성 API 엔드포인트
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                num: productNum,
+                reply: commentText,
+                replyer: '${loginVo.nickname}', // 서버 사이드 코드로 로그인한 사용자의 닉네임 필요
+                id: '${loginVo.id}' // 서버 사이드 코드로 로그인한 사용자의 ID 필요
+            }),
+            dataType: 'json',
+            success: function(resultData) {
+                alert("댓글이 정상적으로 작성되었습니다.");
+                location.reload(); // 페이지 새로고침
+            },
+            error: function(xhr, status, error) {
+                alert("댓글 작성 중 오류 발생: " + xhr.responseText);
+            }
+        });
+    }
+});
+</script>
 
 
 
