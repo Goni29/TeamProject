@@ -2,10 +2,12 @@ package com.lucle.myp.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lucle.myp.domain.Criteria;
+import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.ReplyPageDto;
 import com.lucle.myp.domain.ReplyVo;
+import com.lucle.myp.service.MarketService;
 import com.lucle.myp.service.ReplyService;
 
 import lombok.extern.log4j.Log4j;
@@ -64,13 +69,13 @@ public class ReplyController {
 	
 	// 특정 댓글 정보 가져오기
 	@GetMapping(value = "/{rno}")
-	public ReplyVo get(@PathVariable long rno) {
+	public ReplyVo get(@PathVariable("rno") long rno) {
 		return service.get(rno);
 	}
 	
 	// 댓글 삭제 처리
 	@DeleteMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public String remove(@PathVariable long rno) {
+	public String remove(@PathVariable("rno") long rno) {
 		if (service.remove(rno)) {
 			return "SUCCESS";	
 		}
@@ -79,7 +84,7 @@ public class ReplyController {
 	
 	// 댓글 수정 처리
 	@PutMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE }, consumes = { "application/json" })
-	public String modify(@PathVariable long rno, @RequestBody ReplyVo vo) {
+	public String modify(@PathVariable("rno") long rno, @RequestBody ReplyVo vo) {
 		vo.setRno(rno);
 		log.info("변경될 내용의 VO 객체 " + vo);
 		if (service.modify(vo)) {
@@ -87,4 +92,38 @@ public class ReplyController {
 		}
 		return "FAIL";
 	}
+	
+	@PostMapping("/addReply")
+	public ResponseEntity<?> addReply(@RequestBody ReplyVo vo) {
+	    service.addReply(vo);
+	    System.out.println(vo);
+	    return ResponseEntity.ok().body("{\"message\":\"댓글이 성공적으로 등록되었습니다.\"}");
+	}
+	
+//	/* 댓글 페이징 */
+//	@GetMapping(value="/list")
+//	public ReplyPageDto replyListPOST(Criteria cri) {
+//		return service.replyList(cri);
+//	}
+	
+//	// 상품 상세 정보와 댓글 목록을 함께 전달하는 예시 컨트롤러 메서드
+//	@GetMapping("/list")
+//	public String productDetail(@Param("num") Long num,
+//	@Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small,
+//	@Param("sub_category") Integer sub_category, Model model) {
+//	    // 상품 상세 정보 조회 로직 (가정)
+//	    List<MarketVo> product = marketService.sortProto(num, large, medium, small, sub_category);
+//	    model.addAttribute("product", product);
+//
+//	    // 댓글 목록 조회
+//	    Criteria cri = new Criteria(); // 필요한 경우 페이지 번호 등의 조건 설정
+//	    ReplyPageDto replyPageDto = service.replyList(cri);
+//	    model.addAttribute("replies", replyPageDto.getList());
+//	    model.addAttribute("pageInfo", replyPageDto.getPageInfo());
+//
+//	    return "pr"; // 상품 상세 페이지 뷰 이름
+//	}
+	
+	
+
 }

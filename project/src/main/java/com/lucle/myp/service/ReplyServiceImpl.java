@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.lucle.myp.domain.Criteria;
+import com.lucle.myp.domain.PageDto;
+import com.lucle.myp.domain.ReplyPageDto;
 import com.lucle.myp.domain.ReplyVo;
 import com.lucle.myp.mapper.ReplyMapper;
 
@@ -52,10 +53,28 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.getCount(bno);
 	}
 	
-	@Transactional
-    @Override
-    public void addReply(ReplyVo replyVo) {
-        mapper.insert(replyVo);
+	@Override
+	public int addReply(ReplyVo vo) {
+		
+		int result = mapper.addReply(vo);
+		
+		return result;
+	}
 	
-}
+	@Override
+	public ReplyPageDto replyList(Criteria cri) {
+		ReplyPageDto dto = new ReplyPageDto();
+		
+		dto.setList(mapper.readReply(cri));
+		dto.setPageInfo(new PageDto(mapper.replyTotal(cri.getRno()), cri));
+		
+		return dto;
+	}
+	
+	@Override
+	public List<ReplyVo> getListByProductNum(Long num) {
+	    return mapper.getListByProductNum(num);
+	}
+
+
 }

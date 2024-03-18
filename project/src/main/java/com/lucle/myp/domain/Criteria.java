@@ -20,6 +20,8 @@ public class Criteria {
 	private int visible = 1; // 1이면 보임. 기본값. 0이면 안 보임(삭제).
 	private int category = -1; // 0이면 일반. 1이 핫딜.
 	
+	private Long rno;
+	
 	public Criteria() {
 		this(1, 10);
 	}

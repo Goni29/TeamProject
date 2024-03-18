@@ -49,11 +49,11 @@
 										<input name="deliveryFee" value="${product.deliveryFee}"
 											hidden="hidden" /> <input name="keyword"
 											value="${searchWord}" hidden="hidden" />
-										<button hidden="hidden" class="participateButton" data-num="${product.num}">공동구매
-											참여하기</button>
+										<button hidden="hidden" class="participateButton"
+											data-num="${product.num}">공동구매 참여하기</button>
 									</form>
 
-
+									<input type="hidden" id="productNum" value="${product.num}" />
 
 									<form class="actionForm" action="/market/detail"
 										hidden="hidden">
@@ -120,296 +120,369 @@
 											<textarea class="form-control" id="replyContent" rows="3"
 												placeholder="댓글을 입력하세요"></textarea>
 										</div>
-										<button id="addReply" type="submit" class="btn btn-primary">댓글
+										<button id="addReply" type="button" class="btn btn-primary">댓글
 											작성</button>
 									</form>
 								</div>
 							</div>
 						</div>
 					</c:if>
+					<div class="container mt-5">
+						<div class="row justify-content-center">
+							<div class="col-md-8">
+								<div id="contentarea" class="card">
+									<div class="card-body">
+										<ul class="list-unstyled replyUl">
+											<c:forEach var="reply" items="${replies}">
+												<li class="media">
+													<div class="media-body">
+														<div class="d-flex justify-content-between">
+															<strong class="mt-0 mb-1">${reply.replyer}</strong> <small
+																class="text-muted">${reply.replydate}</small>
+															<!-- 수정 버튼 -->
+															<button type="button"
+																class="btn btn-primary modifyButton"
+																data-rno="${reply.rno}">수정</button>
+															<!-- 삭제 버튼 -->
+															<button type="button" class="btn btn-danger deleteButton"
+																data-rno="${reply.rno}">삭제</button>
 
-					<!-- 					<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const participateButtons = document.querySelectorAll('.participateButton');
-    
-    participateButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            const productNum = this.getAttribute('data-num'); // 제품 고유 번호
-            const requestData = { num: productNum };
-            
-            fetch('/groupBuying/participate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.status === 'success') {
-                    // 페이지의 목표일자와 목표인원 내용 업데이트
-                    document.querySelector('#goalDate'+productNum).textContent = '목표 일자: ' + data.goalDate;
-                    document.querySelector('#goalTarget'+productNum).textContent = '남은 목표 인원: ' + data.goalTarget;
-                    document.querySelector('#personNum'+productNum).textContent = '현재 참여 인원: ' + data.personNum;
-                } else {
-                    alert('공동 구매 참여에 실패했습니다.');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    });
-});
-</script> -->
-					<script>
-		
-		$(document).ready(function() {
-		    var bnoValue = ${board.bno};
-		    var $replyUl = $('.replyUl');
-			var pageNum = 1;
-			var replyCount = 0;
-			var $replyPageFooter  = $('nav[aria-label="Page navigation"]');	;
- 			showList(pageNum);
- 			
- 			
- 			
- 			
- 	        $('#favorite').off('click').on('click', function(e){
- 	        	e.preventDefault();
- 	        	
- 		            favoriteService.add({
-		                    id : '${loginVo.id}',
- 		                    bno : bnoValue
- 		                },
- 		                function(resultData){//여기에서 실패시 이미 스크랩된 게시글입니다 같은 거 쓰면 됨.
- 		                	if(resultData == 'SUCCESS'){
- 		                		alert('스크랩 성공');
- 		                	}else{
- 		                		alert('이미 스크랩된 게시글입니다');
- 		                	}
- 		                });
-
- 	        });
- 			
-function showList(page) {
-		    	console.log(page);
-		    	pageNum = page;
-		        // 특정 게시글을 보게 되면 해당 게시글의 댓글 목록이 나와야 한다.
-		        replyService.getList(
-		            { bno: bnoValue, page: page || 1 },
-		            function (list) {
-		            	
-						if(page == -1 ){
-							pageNum = Math.ceil(replyCount/10.0);
-							showList(pageNum);
-							return;
-						} //page == -1이면 마지막 페이지로 다시 보여주세요
-		            	
-						var str = "";
-
-						for (var i = 0; i < list.length; i++) {
-						    var formattedDate = formatDate(list[i].replydate);
-						    var buttonStr = ""; // 버튼을 저장할 변수
-						    // 로그인 사용자와 게시글 작성자가 같은 경우에만 수정 버튼 생성
-						    if ('${loginVo.id}' == list[i].id) {
-						        buttonStr = `<button class="btn btn-sm btn-primary mr-2 modifyReply" value="` +  list[i].rno + `">수정</button>
-						        	<button class="btn btn-sm btn-danger deleteReply" value="` +  list[i].rno + `">삭제</button>`;
-						    }
-
-						    str += `<li class="lucle">
-					            <div class="media-body">
-					                <div class="d-flex">
-					                    <strong class="mt-0 mb-1">` + list[i].replyer + `</strong>
-					                    <small class="text-muted ml-2">` + formattedDate + `</small>` +
-					                    buttonStr +
-					                    `</div>
-					                <p>` + list[i].reply + `<p>
-					            </div>
-					        </li>`;
-						}
-						
-			            $replyUl.html(str);
-			            if (list == null || list.length == 0) {
-			                $replyUl.html("<h5>댓글이 없습니다</h5>");
-			            }
-			            
-		                replyService.getCount({ bno: bnoValue }, function (resultData) {
-		                    var replyCount = resultData;
-			                showReplyPage(replyCount);
-		                }, function (error) {
-		                    console.error("에러 발생:", error);
-		                });
-	                });
-		                
-		    }
-		    
- 			function showReplyPage(replyCount){
- 				var endNum = Math.ceil(pageNum / 10.0) * 10;
- 				var startNum = endNum - 9;
- 				var prev = startNum != 1;
- 				var next = false;
- 				if( endNum *10 >= replyCount ){
- 					endNum = Math.ceil(replyCount/10.0);
- 				}
- 				
- 				if( endNum * 10 < replyCount){
- 					next = true;
- 				}
- 				
- 				var str = "<ul class='pagination'>";
-
- 				if (prev) {
- 				    str += `<li class="page-item"><a class="page-link"
- 				                href="${startNum-1}" aria-label="Previous"> <span
- 				                aria-hidden="true">&laquo;</span>
- 				        </a></li>`;
- 				} else {
- 				    str += `<li class="page-item disabled"><a class="page-link"
- 				                href="${startNum-1}" aria-label="Previous"> <span
- 				                aria-hidden="true">&laquo;</span>
- 				        </a></li>`;
- 				}
-				
- 				for (var i = startNum; i <= endNum; i++) {
- 				    // 각 페이지 번호에 대한 HTML 생성
- 				    var pageItemClass = (pageNum == i) ? 'page-item active' : 'page-item';
- 
- 				    // 페이지 번호에 대한 HTML 추가
- 				    str += '<li class="' + pageItemClass + '">';
- 				    str += '<a class="page-link" href="' + i + '">' + i + '</a>';
- 				    str += '</li>';
- 				}
-
- 				if (next) {
- 				    str += `<li class="page-item"><a class="page-link"
- 				                href="${endNum+1}" aria-label="Next"> <span
- 				                aria-hidden="true">&raquo;</span>
- 				        </a></li>`;
- 				} else {
- 				    str += `<li class="page-item disabled"><a class="page-link"
- 				                href="${endNum+1}" aria-label="Next"> <span
- 				                aria-hidden="true">&raquo;</span>
- 				        </a></li>`;
- 				}
-
- 				str += `</ul>`;
- 				$replyPageFooter.html(str);
-
- 				$replyPageFooter.off().on('click', 'li a', function(e) {
- 				    e.preventDefault();
- 				    pageNum = $(this).attr("href");
-
- 				    $('.page-link').parent().removeClass('active');
- 				    $(this).parent().addClass('active');
- 				    showList(pageNum);
- 				});
- 				
- 				
- 				// 댓글 작성
-		        $('#addReply').off('click').on('click', function(e){
-		        	e.preventDefault();
-			        let replyContent = $('#replyContent').val();
-			        
-			        if(replyContent == null || replyContent == ""){
-			            alert("댓글 내용을 입력해주세요.");
-			        } else {
-			            replyService.add({
-			                    bno : bnoValue,
-			                    reply : replyContent,
-			                    replyer : '${loginVo.nickname}',
-			                    id : '${loginVo.id}'
-			                },
-			                function(resultData){
-			                    alert("댓글이 정상적으로 작성되었습니다.");
-			                    $('#replyContent').val("");
-			                    showList(1);
-			                });
-			        }
-		        });
- 				
- 				//수정 기능. 아직 미탑재.
- 				
-		        $('.modifyReply').off('click').on('click', function(e){
-		        	e.preventDefault();
-		        	$("#replyContent").val($(this).parents("li.lucle").find('p').text());
-
-			        if(replyContent == null || replyContent == ""){
-			            alert("댓글을 입력해주세요.");
-			        } else {
-			            replyService.add({
-			                    bno : bnoValue,
-			                    reply : replyContent,
-			                    replyer : '${loginVo.nickname}',
-			                    id : '${loginVo.id}'
-			                },
-			                function(resultData){
-			                    alert("댓글이 정상적으로 작성되었습니다.");
-			                    $('#replyContent').val("");
-			                    showList(1);
-			                });
-			        }
-		        });
- 				
- 				
- 				//댓글 삭제. visible을 0으로 바꿈.
-		        $('.deleteReply').off('click').on('click', function(e){
-		        	e.preventDefault();
-		        	var rno = $(this).val();
-		        	console.log(rno);
-
-			            replyService.remove(rno,
-			                function(resultData){
-			                    alert("댓글이 정상적으로 삭제되었습니다.");
-			                    showList(1);
-			                });
-		        });
- 			}
-		});
-		</script>
+														</div>
+														<p>${reply.reply}</p>
+													</div>
+												</li>
+											</c:forEach>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modifyModal" tabindex="-1"
+						role="dialog" aria-labelledby="modifyModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="modifyModalLabel">댓글 수정</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<textarea class="form-control" id="modifyReplyContent"></textarea>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">닫기</button>
+									<button type="button" class="btn btn-primary"
+										id="saveModifiedReply">저장</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="modifyModal" tabindex="-1"
+						role="dialog" aria-labelledby="modifyModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="modifyModalLabel">댓글 수정</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<textarea class="form-control" id="modifyReplyContent"></textarea>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">닫기</button>
+									<button type="button" class="btn btn-primary"
+										id="saveModifiedReply">저장</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<c:if test="${pageInfo.prev}">
+								<li class="page-item"><a class="page-link"
+									href="?pageNum=${pageInfo.startPage - 1}">Previous</a></li>
+							</c:if>
+							<c:forEach begin="${pageInfo.startPage}"
+								end="${pageInfo.endPage}" var="pageNum">
+								<li class="page-item ${pageNum == cri.pageNum ? 'active' : ''}"><a
+									class="page-link" href="?pageNum=${pageNum}">${pageNum}</a></li>
+							</c:forEach>
+							<c:if test="${pageInfo.next}">
+								<li class="page-item"><a class="page-link"
+									href="?pageNum=${pageInfo.endPage + 1}">Next</a></li>
+							</c:if>
+						</ul>
+					</nav>
 
 					<script>
-			$(document).ready(function() {
+						$(document)
+								.ready(
+										function() {
+											// 댓글 작성 버튼 클릭 이벤트
+											$('#addReply')
+													.off('click')
+													.on(
+															'click',
+															function(e) {
+																e
+																		.preventDefault(); // 기본 이벤트를 방지합니다.
+																var num = $(
+																		'#productNum')
+																		.val();
+																let replyContent = $(
+																		'#replyContent')
+																		.val(); // 댓글 내용을 가져옵니다.
 
-				var $operForm = $('#operForm');
-				$('button[data-oper="modify"]').on('click', function() {
-					$operForm.attr('', '/board/modify').submit();
-				})
+																// 댓글 내용이 비어 있는 경우 경고 메시지를 표시합니다.
+																if (replyContent == null
+																		|| replyContent
+																				.trim() == "") {
+																	alert("댓글 내용을 입력해주세요.");
+																} else {
+																	// AJAX를 사용하여 서버에 댓글 데이터를 전송합니다.
+																	$
+																			.ajax({
+																				url : '/reply/addReply', // 요청을 보낼 서버의 URL 주소
+																				type : 'post', // HTTP 요청 방식 (GET, POST)
+																				contentType : 'application/json', // 요청의 Content-Type
+																				data : JSON
+																						.stringify({ // 서버로 보낼 데이터
+																							reply : replyContent,
+																							replyer : '${loginVo.nickname}', // 로그인한 사용자의 닉네임
+																							id : '${loginVo.id}', // 로그인한 사용자의 ID
+																							num : num
+																						}),
+																				dataType : 'json', // 서버에서 보내줄 데이터의 타입
+																				success : function(
+																						resultData) { // 요청이 성공했을 때 호출될 함수
+																					alert("댓글이 정상적으로 작성되었습니다.");
+																					$(
+																							'#replyContent')
+																							.val(
+																									""); // 댓글 입력 필드를 비웁니다.
+																					location
+																							.reload(); // 댓글 목록을 다시 표시합니다.
+																				},
+																				error : function(
+																						xhr,
+																						status,
+																						error) { // 요청이 실패했을 때 호출될 함수
+																					alert("오류 발생: "
+																							+ xhr.status
+																							+ " "
+																							+ error);
+																				}
+																			});
+																}
+															});
+											/* function deleteReply(rno) {
+												$.ajax({
+													url : `/reply/${rno}`,
+													type : 'DELETE',
+													success : function(result) {
+														alert("댓글 삭제 성공");
+														location.reload();
+													}
+												});
+											}
 
-				$('button[data-oper="list"]').on('click', function() {
-					$operForm.find("#bno").remove();
-					$operForm.attr('action', '/board/list').submit();
-				})
-			})
-		</script>
-
-					<script>
+											function modifyReply(rno) {
+												var requestURL = '/reply/' + rno;
+												let replyContent = // 수정된 댓글 내용 가져오기
+												$
+														.ajax({
+															url : requestURL,
+															type : 'PUT',
+															contentType : 'application/json',
+															data : JSON
+																	.stringify({
+																		reply : replyContent
+																	}),
+															success : function(
+																	result) {
+																alert("댓글 수정 성공");
+																location
+																		.reload();
+															}
+														});
+											}
+											 */
+										});
 						$(document).ready(function() {
-    					$('.participateButton').on('click', function() {
-        				var productNum = $(this).data('num'); // 버튼에서 data-num 속성 값을 읽어옴
+							// 삭제 버튼 클릭 이벤트
+							$('body').on('click', '.deleteButton', function() {
+								var rno = $(this).data('rno');
+								deleteReply(rno);
+							});
 
-        				var requestData = {
-            			num: productNum // 공동구매 참여 요청 데이터에 상품 번호 포함
-        				};
-
-        				$.ajax({
-            			url: '/groupbuying/participate',
-            			type: 'POST',
-			            contentType: 'application/json',
-			            data: JSON.stringify(requestData),
-			            success: function(response) {
-			                alert(response.message); // 성공 메시지
-			            },
-			            error: function(xhr) {
-		                if (xhr.status === 401) {
-		                    alert("로그인 후 이용해주세요.");
-		                    location.reload();
-		                } else {
-		                    alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요." + xhr.status);
-		                }
-						            }
-						        });
-						    });
+							// 수정 버튼 클릭 이벤트
+							$('body').on('click', '.modifyButton', function() {
+								var rno = $(this).data('rno');
+								openModifyModal(rno);
+							});
 						});
 
+						function deleteReply(rno) {
+							var requestURL = '/reply/' + rno;
+							if (!confirm("댓글을 삭제하시겠습니까?"))
+								return;
+							$.ajax({
+								url : requestURL,
+								type : 'DELETE',
+								success : function(result) {
+									alert("댓글이 삭제되었습니다.");
+									location.reload(); // 페이지 새로고침
+								},
+								error : function(xhr, status, error) {
+									alert("댓글 삭제 중 오류가 발생했습니다: "
+											+ xhr.responseText);
+								}
+							});
+						}
+
+						function openModifyModal(rno) {
+							console.log("Opening modify modal for rno: " + rno);
+							var requestURL = '/reply/' + rno;
+							// AJAX를 사용하여 댓글의 현재 내용을 서버로부터 가져옵니다.
+							$
+									.ajax({
+										url : requestURL,
+										type : 'GET',
+										success : function(reply) {
+											// 댓글 내용을 모달의 입력 필드에 설정
+											$('#modifyReplyContent').val(
+													reply.reply);
+											// '저장' 버튼에 현재 댓글의 ID를 데이터 속성으로 설정
+											$('#saveModifiedReply').data('rno',
+													rno);
+											// 모달 표시
+											$('#modifyModal').modal('show');
+										},
+										error : function(xhr, status, error) {
+											alert("댓글 정보 불러오기 실패: "
+													+ xhr.responseText);
+										}
+									});
+						}
+
+						$(document)
+								.ready(
+										function() {
+											// '저장' 버튼 클릭 이벤트 핸들러
+											$('#saveModifiedReply')
+													.click(
+															function() {
+																var rno = $(
+																		this)
+																		.data(
+																				'rno'); // 현재 수정하려는 댓글의 ID
+																var replyContent = $(
+																		'#modifyReplyContent')
+																		.val(); // 수정된 댓글 내용
+																var requestURL = '/reply/'
+																		+ rno;
+
+																if (!replyContent
+																		.trim()) {
+																	alert("댓글 내용을 입력하세요.");
+																	return;
+																}
+
+																// AJAX를 사용하여 수정된 댓글 내용을 서버에 전송
+																$
+																		.ajax({
+																			url : requestURL,
+																			type : 'PUT',
+																			contentType : 'application/json',
+																			data : JSON
+																					.stringify({
+																						reply : replyContent
+																					}),
+																			success : function(
+																					result) {
+																				alert("댓글이 수정되었습니다.");
+																				location
+																						.reload(); // 페이지 새로고침
+																			},
+																			error : function(
+																					xhr,
+																					status,
+																					error) {
+																				alert("댓글 수정 중 오류가 발생했습니다: "
+																						+ xhr.responseText);
+																			}
+																		});
+															});
+										});
+					</script>
+<script>
+$(document).ready(function() {
+    // 공동구매 참여 버튼 클릭 이벤트 처리
+    $('.participateButton').click(function() {
+        var productNum = $(this).data('num'); // 상품 번호 가져오기
+        var isLoggedIn = ${loginVo.id != null}; // 로그인 상태 확인 (서버 사이드 코드 필요)
+
+        if (!isLoggedIn) {
+            alert('로그인 후 이용해주세요.');
+            return; // 로그인하지 않은 상태면 여기서 처리 중단
+        }
+
+        // 공동구매 참여 요청 AJAX
+        $.ajax({
+            url: '/groupbuying/participate',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ num: productNum }),
+            dataType: 'json',
+            success: function(response) {
+                alert('성공적으로 참여되었습니다.');
+                // 공동구매 참여 성공 시 댓글 자동 작성 로직
+                postParticipationComment(productNum, '공동구매에 참여하였습니다.');
+            },
+            error: function(xhr, status, error) {
+                // 로그인하지 않았을 때의 처리는 서버 사이드에서 401 같은 상태 코드를 보내줄 때 사용
+                if (xhr.status === 401) {
+                    alert('로그인 후 이용해주세요.');
+                } else {
+                    alert('오류 발생: ' + error);
+                }
+            }
+        });
+    });
+
+    function postParticipationComment(productNum, commentText) {
+        // 댓글 작성 AJAX 요청
+        $.ajax({
+            url: '/reply/addReply', // 댓글 작성 API 엔드포인트
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                num: productNum,
+                reply: commentText,
+                replyer: '${loginVo.nickname}', // 서버 사이드 코드로 로그인한 사용자의 닉네임 필요
+                id: '${loginVo.id}' // 서버 사이드 코드로 로그인한 사용자의 ID 필요
+            }),
+            dataType: 'json',
+            success: function(resultData) {
+                alert("댓글이 정상적으로 작성되었습니다.");
+                location.reload(); // 페이지 새로고침
+            },
+            error: function(xhr, status, error) {
+                alert("댓글 작성 중 오류 발생: " + xhr.responseText);
+            }
+        });
+    }
+});
 </script>
 
 

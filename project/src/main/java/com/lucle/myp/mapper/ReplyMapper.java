@@ -23,8 +23,17 @@ public interface ReplyMapper {
 	
 	public int getCount(Long bno);
 	
+	public int addReply (ReplyVo vo);
+	
+	public List<ReplyVo> readReply(Criteria cri);
+	
+	public int replyTotal(Long rno);
+	
 	List<ReplyVo> getListWithPaging(
 			@Param("cri") Criteria cri,
 			@Param("bno") Long bno
 			);
+	
+	List<ReplyVo> getListByProductNum(@Param("num") Long num);
+
 }
