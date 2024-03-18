@@ -5,10 +5,15 @@
 <mapper namespace="com.lucle.myp.mapper.UserMapper">
 
 	<update id="insert">
-		insert into users(id, name, password, address, email, regiDate, lastConDate,
-		grade, gender, age, nickname)
-		values(#{id}, #{name}, #{password}, #{address}, #{email}, sysdate, sysdate, 0, #{gender}, #{age}, #{nickname})
-	</update>
+    insert into users(
+        id, name, password, address, email, regiDate, lastConDate,
+        grade, gender, age, nickname, postcode, extraAddress, addressdetail
+    )
+    values(
+        #{id}, #{name}, #{password}, #{address}, #{email}, sysdate, sysdate,
+        0, #{gender}, #{age}, #{nickname}, #{postcode}, #{extraAddress}, #{addressDetail}
+    )
+</update>
 
 	<delete id="delete">
 		delete from users where id =

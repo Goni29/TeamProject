@@ -1,5 +1,8 @@
 package com.lucle.myp.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,4 +132,15 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
+	// 로그인 상태 확인
+	@ResponseBody
+	@GetMapping("/check-login-status")
+	public Map<String, Boolean> checkLoginStatus(HttpSession session) {
+	    Map<String, Boolean> response = new HashMap<>();
+	    boolean isLoggedIn = session.getAttribute("loginVo") != null; // 'loginVo'는 로그인 세션 속성 이름입니다.
+	    response.put("loggedIn", isLoggedIn);
+	    return response;
+	}
+
 }

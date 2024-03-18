@@ -6,7 +6,7 @@
 	<insert id="insert">
 		insert into search(sno, id, searchWord, searchDate,
 		visible, ip)
-		values(seq_search.nextval, #{id}, #{searchWord}, sysdate,
+		values(seq_search.nextval, #{id, jdbcType=VARCHAR}, #{searchWord}, sysdate,
 		1, #{ip})
 	</insert>
 

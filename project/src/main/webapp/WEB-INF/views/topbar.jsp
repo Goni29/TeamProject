@@ -31,19 +31,20 @@
             </a>
             <div class="dropdown-login dropdown-menu-right p-3 shadow animated--grow-in"
                 aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small"
-                            placeholder="Search for..." aria-label="Search"
-                            aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+			    <form class="form-inline mr-auto w-100 navbar-search">
+			        <div class="input-group">
+			            <input type="text" class="form-control bg-light border-0 small" id="searchInput"
+			                placeholder="Search for..." aria-label="Search"
+			                aria-describedby="basic-addon2">
+			            <div class="input-group-append">
+			                <button class="btn btn-primary" type="button" id="searchButton">
+			                    <i class="bi bi-search"></i>
+			                </button>
+			            </div>
+			        </div>
+			    </form>
+			</div>
+
         </li>
 
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
@@ -120,6 +121,7 @@
 </div>
 
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
     var currentUrl = window.location.href;
     var redirectUrlInputs = document.querySelectorAll('.redirectUrl');
@@ -128,4 +130,15 @@ document.addEventListener('DOMContentLoaded', function() {
         input.value = currentUrl;
     });
 });
+
+document.getElementById("searchButton").addEventListener("click", function() {
+    var inputValue = document.getElementById("searchInput").value;
+    if (!inputValue.trim()) {
+        alert("검색어를 입력해주세요.");
+    }
+    // 입력값이 있을 때 원하는 검색 로직을 추가하세요.
+});
+
+</script>
+
 </script>

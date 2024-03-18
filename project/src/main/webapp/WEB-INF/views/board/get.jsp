@@ -1,29 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="../header.jsp"%>
-
-<style>
-    .page-size {
-        width: 100vw;
-    }
-</style>
-<body id="page-top">
+<%@ include file="../topbar.jsp"%>
 <span class="titletext" hidden="hidden">게시글 상세 보기</span>
-    
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-    
-        <%@ include file="../sidebar.jsp"%>
-        <div id="conteny-wrapper" class="d-flex flex-column page-size">       
-            <%@ include file="../topbar.jsp"%>
 
+<body>
+	<div class="container-fluid p-2 bg-dark text-white text-center">
+		<p>게시글 보기</p>
+	</div>
 	<div class="container mt-5">
 		<div class="row justify-content-center">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<div id="contentarea" class="card">
 					<div class="card-header">게시글</div>
 					<div class="card-body">
@@ -62,14 +49,14 @@
 							</div>
 
 							<c:if test="${loginVo.id == board.id}">
-								<form class="col-auto" action="/board/remove" method="post">
+								<form action="/board/remove" method="post">
 									<input type="hidden" name="bno" value="${board.bno}">
 
 									<button type="submit" class="btn btn-success">삭제</button>
 								</form>
 
 								<form action="/board/modify" method="get">
-									<input class="col-auto" type="hidden" name="bno" value="${board.bno}">
+									<input type="hidden" name="bno" value="${board.bno}">
 									<button type="submit" class="btn btn-success">수정</button>
 								</form>
 							</c:if>
@@ -174,8 +161,6 @@
 			</c:if>
 		</div>
 	</div>
-	</div>
-	</div>
 
 </body>
 
@@ -218,12 +203,21 @@
 
  	        });
  			
-		    function formatDate(date) {
-		        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-		        return new Intl.DateTimeFormat('ko-KR', options).format(new Date(date));
-		    }
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
 
-		    function showList(page) {
+ 	       function showList(page) {
 		    	console.log(page);
 		    	pageNum = page;
 		        // 특정 게시글을 보게 되면 해당 게시글의 댓글 목록이 나와야 한다.
@@ -275,79 +269,75 @@
 		                
 		    }
 		    
- 			function showReplyPage(replyCount){
- 				var endNum = Math.ceil(pageNum / 10.0) * 10;
- 				var startNum = endNum - 9;
- 				var prev = startNum != 1;
- 				var next = false;
- 				if( endNum *10 >= replyCount ){
- 					endNum = Math.ceil(replyCount/10.0);
- 				}
- 				
- 				if( endNum * 10 < replyCount){
- 					next = true;
- 				}
- 				
- 				var str = "<ul class='pagination'>";
-
- 				if (prev) {
- 				    str += `<li class="page-item"><a class="page-link"
- 				                href="${startNum-1}" aria-label="Previous"> <span
- 				                aria-hidden="true">&laquo;</span>
- 				        </a></li>`;
- 				} else {
- 				    str += `<li class="page-item disabled"><a class="page-link"
- 				                href="${startNum-1}" aria-label="Previous"> <span
- 				                aria-hidden="true">&laquo;</span>
- 				        </a></li>`;
- 				}
+			function showReplyPage(replyCount){
+				var endNum = Math.ceil(pageNum / 10.0) * 10;
+				var startNum = endNum - 9;
+				var prev = startNum != 1;
+				var next = false;
+				if( endNum *10 >= replyCount ){
+					endNum = Math.ceil(replyCount/10.0);
+				}
 				
- 				for (var i = startNum; i <= endNum; i++) {
- 				    // 각 페이지 번호에 대한 HTML 생성
- 				    var pageItemClass = (pageNum == i) ? 'page-item active' : 'page-item';
- 
- 				    // 페이지 번호에 대한 HTML 추가
- 				    str += '<li class="' + pageItemClass + '">';
- 				    str += '<a class="page-link" href="' + i + '">' + i + '</a>';
- 				    str += '</li>';
- 				}
+				if( endNum * 10 < replyCount){
+					next = true;
+				}
+				
+				var str = "<ul class='pagination'>";
 
- 				if (next) {
- 				    str += `<li class="page-item"><a class="page-link"
- 				                href="${endNum+1}" aria-label="Next"> <span
- 				                aria-hidden="true">&raquo;</span>
- 				        </a></li>`;
- 				} else {
- 				    str += `<li class="page-item disabled"><a class="page-link"
- 				                href="${endNum+1}" aria-label="Next"> <span
- 				                aria-hidden="true">&raquo;</span>
- 				        </a></li>`;
- 				}
+				if (prev) {
+				    str += `<li class="page-item"><a class="page-link"
+				                href="${startNum-1}" aria-label="Previous"> <span
+				                aria-hidden="true">&laquo;</span>
+				        </a></li>`;
+				} else {
+				    str += `<li class="page-item disabled"><a class="page-link"
+				                href="${startNum-1}" aria-label="Previous"> <span
+				                aria-hidden="true">&laquo;</span>
+				        </a></li>`;
+				}
+				
+				for (var i = startNum; i <= endNum; i++) {
+				    // 각 페이지 번호에 대한 HTML 생성
+				    var pageItemClass = (pageNum == i) ? 'page-item active' : 'page-item';
 
- 				str += `</ul>`;
- 				$replyPageFooter.html(str);
+				    // 페이지 번호에 대한 HTML 추가
+				    str += '<li class="' + pageItemClass + '">';
+				    str += '<a class="page-link" href="' + i + '">' + i + '</a>';
+				    str += '</li>';
+				}
 
- 				$replyPageFooter.off().on('click', 'li a', function(e) {
- 				    e.preventDefault();
- 				    pageNum = $(this).attr("href");
+				if (next) {
+				    str += `<li class="page-item"><a class="page-link"
+				                href="${endNum+1}" aria-label="Next"> <span
+				                aria-hidden="true">&raquo;</span>
+				        </a></li>`;
+				} else {
+				    str += `<li class="page-item disabled"><a class="page-link"
+				                href="${endNum+1}" aria-label="Next"> <span
+				                aria-hidden="true">&raquo;</span>
+				        </a></li>`;
+				}
 
- 				    $('.page-link').parent().removeClass('active');
- 				    $(this).parent().addClass('active');
- 				    showList(pageNum);
- 				});
- 				
- 				
- 				// 댓글 작성
+				str += `</ul>`;
+				$replyPageFooter.html(str);
+
+				$replyPageFooter.off().on('click', 'li a', function(e) {
+				    e.preventDefault();
+				    pageNum = $(this).attr("href");
+
+				    $('.page-link').parent().removeClass('active');
+				    $(this).parent().addClass('active');
+				    showList(pageNum);
+				});
+				
+				
+				// 댓글 작성
 		        $('#addReply').off('click').on('click', function(e){
 		        	e.preventDefault();
 			        let replyContent = $('#replyContent').val();
 			        
 			        if(replyContent == null || replyContent == ""){
-<<<<<<< HEAD
-			            alert("작성된 내용이 없습니다.");
-=======
 			            alert("댓글 내용을 입력해주세요.");
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 			        } else {
 			            replyService.add({
 			                    bno : bnoValue,
@@ -362,15 +352,15 @@
 			                });
 			        }
 		        });
- 				
- 				//수정 기능. 아직 미탑재.
- 				
+				
+				//수정 기능. 아직 미탑재.
+				
 		        $('.modifyReply').off('click').on('click', function(e){
 		        	e.preventDefault();
 		        	$("#replyContent").val($(this).parents("li.lucle").find('p').text());
 
 			        if(replyContent == null || replyContent == ""){
-			            alert("작성된 내용이 없습니다.");
+			            alert("뒤질래?");
 			        } else {
 			            replyService.add({
 			                    bno : bnoValue,
@@ -385,9 +375,9 @@
 			                });
 			        }
 		        });
- 				
- 				
- 				//댓글 삭제. visible을 0으로 바꿈.
+				
+				
+				//댓글 삭제. visible을 0으로 바꿈.
 		        $('.deleteReply').off('click').on('click', function(e){
 		        	e.preventDefault();
 		        	var rno = $(this).val();
@@ -399,7 +389,7 @@
 			                    showList(1);
 			                });
 		        });
- 			}
+			}
 		});
 		</script>
 

@@ -7,6 +7,7 @@
 <div class="form-group row">
     <label for="inputAddr" class="col-sm-2 col-form-label">주소</label>
     <div class="col-sm-10">
+<<<<<<< HEAD
     <input type="text" class="form-control mb-2" id="sample6_postcode" placeholder="우편번호">
     <input type="button" class="btn btn-secondary mb-2" onclick="combineAddress()" value="우편번호 찾기">
     <input type="text" class="form-control mb-2" id="sample6_address" placeholder="주소">
@@ -15,6 +16,14 @@
     <!-- Hidden input for combined address -->
     <input type="hidden" name="address" id="combinedAddress">
 </div>
+=======
+        <input type="text" class="form-control mb-2" id="postcode" placeholder="우편번호" name="postcode">
+        <input type="button" class="btn btn-secondary mb-2" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+        <input type="text" class="form-control mb-2" id="address" placeholder="주소" name="address">
+		<input type="text" class="form-control mb-2" id="extraAddress" placeholder="참고항목" name="extraAddress">
+        <input type="text" class="form-control" id="addressDetail" placeholder="상세주소" name="addressDetail">
+    </div>
+>>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -51,17 +60,17 @@
                         extraAddr = ' (' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                    document.getElementById("extraAddress").value = extraAddr;
                 
                 } else {
-                    document.getElementById("sample6_extraAddress").value = '';
+                    document.getElementById("extraAddress").value = '';
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
+                document.getElementById("addressDetail").focus();
             }
         }).open();
     }
