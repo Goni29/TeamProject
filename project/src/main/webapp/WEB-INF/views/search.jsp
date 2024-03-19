@@ -15,13 +15,6 @@
         <%@ include file="./sidebar.jsp"%>
         <div id="conteny-wrapper" class="d-flex flex-column page-size">       
             <%@ include file="./topbar.jsp"%>
-<span class="titletext" hidden="hidden">해외 상품 가격 비교</span>
-<body>
-	<div class="container-fluid p-2 bg-dark text-white text-center">
-		<p>
-			<b>국내외 상품 목록</b>
-		</p>
-	</div>
 	<div class="container">
 		<div class="row">
 			<c:forEach var="product" items="${products}">
@@ -73,17 +66,14 @@
                                         <button class="btn btn-primary">공동구매 참여하기</button>
                                     </form>
                                     
-                                    <form class="actionForm" action="/market/detail">
-                                        <input name="num" value="${product.num}" hidden="hidden" />
-                                        <input name="id" value="${loginVo.id}" hidden="hidden" />
+                                    <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
                                         <button class="btn btn-success">상세 페이지</button>
-                                    </form>
+                                    </a>
                                 </div>
                             </div>
 			</c:forEach>
 		</div>
 	</div>
-</body>
 
 
 <!-- 모달창. 숨겨져 있음 -->
@@ -108,6 +98,7 @@
 </div>
 </div>
 </div>
+</body>
 </html>
 
 <%@ include file="./footer.jsp"%>

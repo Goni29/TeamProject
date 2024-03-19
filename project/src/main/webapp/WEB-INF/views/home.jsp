@@ -82,11 +82,9 @@
                                         <button class="btn btn-primary">공동구매 참여하기</button>
                                     </form>
                                     
-                                    <form class="actionForm" action="/market/detail">
-                                        <input name="num" value="${product.num}" hidden="hidden" />
-                                        <input name="id" value="${loginVo.id}" hidden="hidden" />
+                                    <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
                                         <button class="btn btn-success">상세 페이지</button>
-                                    </form>
+                                    </a>
                                 </div>
                             </div>
                         </c:forEach>
@@ -145,11 +143,9 @@
                                         <button class="btn btn-primary">공동구매 참여하기</button>
                                     </form>
                                     
-                                    <form class="actionForm" action="/market/detail">
-                                        <input name="num" value="${product2.num}" hidden="hidden" />
-                                        <input name="id" value="${loginVo.id}" hidden="hidden" />
+                                    <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
                                         <button class="btn btn-success">상세 페이지</button>
-                                    </form>
+                                    </a>
                                 </div>
                             </div>
                         </c:forEach>
