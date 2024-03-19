@@ -52,4 +52,9 @@ public class MarketServiceImpl implements MarketService {
 		return mapper.groupBuying(cri);
 	}
 
+	@Override
+	public MarketVo getProductById(Long num) {
+		return mapper.getProductById(num);
+	}
+
 }

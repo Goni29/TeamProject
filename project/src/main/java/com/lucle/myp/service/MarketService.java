@@ -17,4 +17,5 @@ public interface MarketService {
 
 	List<MarketVo> getHistoryOne(String id, Criteria cri); // 한 유저의 열람 이력.
 	List<UserVo> getHistoryProduct(Long num, Criteria cri); // 한 상품을 열람한 유저 목록.
+	MarketVo getProductById(Long num);
 }

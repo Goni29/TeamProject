@@ -10,11 +10,8 @@ public class MarketVo {
 	private String url;
 	private String imgUrl;
 	private String won;
-	private String dollar;
 	private String delivery;
 	private String deliveryFee;
-	private String otherCosts;
-	private String k_ProductName;
 	private String keyword;
 	private int visible;
 	

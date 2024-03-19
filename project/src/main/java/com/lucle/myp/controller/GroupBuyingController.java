@@ -85,7 +85,6 @@ public class GroupBuyingController {
         if (!success) {
             return ResponseEntity.badRequest().body(Map.of("message", "공동구매 참여에 실패했습니다."));
         }
-        System.out.println("!!!!!!!!!!" + success);
         ReplyVo replyVo = new ReplyVo();
         replyVo.setNum(groupBuyingVo.getNum());
         replyVo.setReply("공동구매에 참여했습니다!");
