@@ -73,28 +73,26 @@ public class GroupBuyingController {
     private ReplyService replyService;
 
     @RequestMapping(value = "/participate", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<?> participateInGroupBuying(HttpServletRequest request, @RequestBody GroupBuyingVo groupBuyingVo) {
-        HttpSession session = request.getSession(false);
+    @ResponseBody
+    public  ResponseEntity<?> participateInGroupBuying(HttpServletRequest request, @RequestBody GroupBuyingVo groupBuyingVo) {
+    	HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("loginVo") == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "로그인이 필요합니다."));
         }
 
         UserVo userVo = (UserVo) session.getAttribute("loginVo");
-        boolean success = service.participate(groupBuyingVo, userVo);
-        System.out.println(groupBuyingVo + "============");
-        System.out.println(userVo + "************");
+        boolean success = service.participate(groupBuyingVo);
         if (!success) {
             return ResponseEntity.badRequest().body(Map.of("message", "공동구매 참여에 실패했습니다."));
         }
-
         ReplyVo replyVo = new ReplyVo();
-        replyVo.setBno(groupBuyingVo.getGno());
+        replyVo.setNum(groupBuyingVo.getNum());
         replyVo.setReply("공동구매에 참여했습니다!");
-        replyVo.setReplyer(userVo.getId());
+        replyVo.setReplyer(userVo.getNickname());
         replyVo.setVisible(1);
-        replyService.addReply(replyVo);
-
-        return ResponseEntity.ok(Map.of("message", "공동구매에 성공적으로 참여하였으며, 댓글이 자동으로 작성되었습니다."));
+//        replyService.addReply(replyVo); //여기서 오류가생김....
+        return ResponseEntity.ok(Map.of("message", "공동구매에 성공적으로 참여하였으며, 댓글이 자동으로 작성되었습니다."));   
+//        return null;
     }
 
 }

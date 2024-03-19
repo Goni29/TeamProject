@@ -75,5 +75,9 @@
 		order by viewDate
 		desc
 	</select>
-
+	
+	<select id="getProductById"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT * FROM market WHERE num = #{num}
+	</select>
 </mapper>

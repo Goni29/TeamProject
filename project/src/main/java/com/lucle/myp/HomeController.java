@@ -20,6 +20,7 @@ import com.lucle.myp.domain.ReplyVo;
 import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.service.MarketService;
+import com.lucle.myp.service.RecentlyViewedService;
 import com.lucle.myp.service.ReplyService;
 import com.lucle.myp.service.SearchService;
 
@@ -35,6 +36,9 @@ public class HomeController {
 	private SearchService searchService;
 	@Autowired
 	private ReplyService replyService;
+	@Autowired
+	private RecentlyViewedService recentlyViewedService; // 최근 본 상품 서비스 추가
+
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String proto(HttpServletRequest request, Model model, Criteria cri) {
@@ -42,17 +46,30 @@ public class HomeController {
 		List<MarketVo> list2 = service.groupBuying(cri);
 		model.addAttribute("products", list);
 		model.addAttribute("products2", list2);
+		
+		HttpSession session = request.getSession();
+	    List<MarketVo> recentlyViewed = recentlyViewedService.getRecentlyViewedProducts(session);
+	    model.addAttribute("recentlyViewedProducts", recentlyViewed);
 		return "home";
 	}
 
 	@GetMapping("/pr")
-	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num,
+	public String pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num,
 			@Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small,
 			@Param("sub_category") Integer sub_category) {
 		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
 		 List<ReplyVo> replies = replyService.getListByProductNum(num);
 		    model.addAttribute("replies", replies);
 		model.addAttribute("products", list);
+		
+		// 최근 본 상품 기능 통합
+        if (num != null) {
+            MarketVo product = service.getProductById(num); // 상품 정보 조회
+            if (product != null) {
+                recentlyViewedService.addRecentlyViewedProduct(session, product); // 세션에 최근 본 상품 추가
+            }
+        }
+		return "/pr";
 	}
 
 	// 상품 검색 페이지

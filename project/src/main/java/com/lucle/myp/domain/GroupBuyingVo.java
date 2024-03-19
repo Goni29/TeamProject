@@ -13,4 +13,6 @@ public class GroupBuyingVo {
 	private Long goaltarget;
 	private Long num;
 	private Long personnum;
+	private String id;
+	private String nickname;
 }
