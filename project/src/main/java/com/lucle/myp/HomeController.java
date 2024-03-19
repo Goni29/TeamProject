@@ -56,7 +56,7 @@ public class HomeController {
 	@GetMapping("/pr")
 	public String pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num,
 			@Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small,
-			@Param("sub_category") Integer sub_category) {
+			@Param("sub_category") Integer sub_category, @Param("id") String id) {
 		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
 		 List<ReplyVo> replies = replyService.getListByProductNum(num);
 		    model.addAttribute("replies", replies);
@@ -67,6 +67,7 @@ public class HomeController {
             MarketVo product = service.getProductById(num); // 상품 정보 조회
             if (product != null) {
                 recentlyViewedService.addRecentlyViewedProduct(session, product); // 세션에 최근 본 상품 추가
+                recentlyViewedService.addViewRecord(num, session);
             }
         }
 		return "/pr";

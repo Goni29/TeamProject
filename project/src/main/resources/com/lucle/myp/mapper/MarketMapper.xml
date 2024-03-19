@@ -51,10 +51,10 @@
 
 
 
-	<insert id="marketViewPlus">
+	<insert id="addViewRecord">
 		insert into marketView(vno, id, num, viewDate,
-		visible)
-		values(seq_marketView.nextval, #{id}, #{num}, sysdate, 1)
+		visible, PCATEGORY)
+		values(seq_marketView.nextval, #{id}, #{num}, sysdate, 1, null)
 	</insert>
 
 	<select id="getHistoryOne"
