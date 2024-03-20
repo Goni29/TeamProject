@@ -29,10 +29,16 @@
 	<select id="sortProto"
 		resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
-		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY
-		FROM MARKET m
-		JOIN CATEGORY c ON m.NUM = c.NUM
-		WHERE c.LARGE = #{large} AND c.MEDIUM = #{medium} AND c.SMALL = #{small} AND c.SUB_CATEGORY = #{sub_category} AND m.num = #{num}
+		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY, g.*
+FROM MARKET m
+JOIN CATEGORY c ON m.NUM = c.NUM
+JOIN GROUPBUYING g ON m.NUM = g.NUM
+WHERE c.LARGE = #{large} 
+AND c.MEDIUM = #{medium} 
+AND c.SMALL = #{small} 
+AND c.SUB_CATEGORY = #{sub_category} 
+AND m.num = #{num}
+
 	]]>
 	</select>
 

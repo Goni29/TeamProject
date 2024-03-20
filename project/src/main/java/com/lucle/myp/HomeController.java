@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lucle.myp.domain.Criteria;
+import com.lucle.myp.domain.MarketGroupBuyingVo;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.ReplyVo;
 import com.lucle.myp.domain.SearchVo;
@@ -57,7 +58,7 @@ public class HomeController {
 	public String pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num,
 			@Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small,
 			@Param("sub_category") Integer sub_category, @Param("id") String id) {
-		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
+		List<MarketGroupBuyingVo> list = service.sortProto(num, large, medium, small, sub_category);
 		 List<ReplyVo> replies = replyService.getListByProductNum(num);
 		    model.addAttribute("replies", replies);
 		model.addAttribute("products", list);

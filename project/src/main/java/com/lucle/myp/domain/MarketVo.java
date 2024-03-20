@@ -27,4 +27,15 @@ public class MarketVo {
 	private String id;
 	private String viewDate;
 	
+	private Long gno;
+	private String title;
+	private String content;
+	private String regidate;
+	private String goaldate;
+	private Long goaltarget;
+
+	private Long personnum;
+
+	private String nickname;
+	
 }
