@@ -1,5 +1,6 @@
 package com.lucle.myp.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -116,4 +117,11 @@ public class SearchController {
 		
 		return service.getStatList(cri); // 페이징 처리가 안 됨.
 	}
+	
+	@GetMapping("/region")
+    public String getUsersByRegion(Model model) {
+        List<String> regions = Arrays.asList("서울", "인천", "부산", "대구", "광주", "대전", "울산", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남");
+        model.addAttribute("regionData", service.getUsersByRegions(regions));
+        return "/search/adminPage"; // JSP 파일 이름
+    }
 }

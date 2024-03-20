@@ -76,6 +76,10 @@ ORDER BY ${sort} DESC
 		where ip = #{ip}
 		order by searchDate desc
 	</select>
+	
+	<select id="selectUsersByRegion" resultType="com.lucle.myp.domain.SearchVo">
+        SELECT * FROM USERS WHERE Address LIKE CONCAT('%', #{region}, '%')
+    </select>
 
 
 </mapper>

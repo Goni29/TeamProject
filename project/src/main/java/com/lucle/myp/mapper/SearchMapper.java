@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.domain.SearchVo;
+import com.lucle.myp.domain.UserVo;
 
 public interface SearchMapper {
 	
@@ -24,7 +25,7 @@ public interface SearchMapper {
 	List<SearchVo> getHistoryOneIp(@Param("ip") String ip, @Param("visible") int visible, Criteria cri); // 비회원용
 	List<SearchVo> getHistoryList(Criteria cri); // 검색 이력을 전부 확인할 수 있음. (관리자용 페이지)
 	
-	
+	List<UserVo> selectUsersByRegion(@Param("region") String region);
 	
 	
 

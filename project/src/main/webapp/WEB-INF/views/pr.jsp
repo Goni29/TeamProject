@@ -30,7 +30,7 @@
                             <a href="${product.url}">${product.productName}</a><br>
                             <p>가격 : ${product.won}원</p>
                             <p>마감 기간 : ${product.goaldate}</p>
-                            <p>목표 인원 : ${product.goaltarget}</p>
+                            <p>목표 인원 : ${product.goaltarget} </p>
                             <p>현재 참여 인원 : ${product.personnum}</p>
                             <br>
                             <button class="participateButton" data-num="${product.num}">공동구매 참여하기</button>

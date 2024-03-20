@@ -1,12 +1,14 @@
 package com.lucle.myp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.domain.SearchVo;
+import com.lucle.myp.domain.UserVo;
 
 public interface SearchService {
 	
@@ -20,4 +22,5 @@ public interface SearchService {
 	List<SearchVo> getHistoryOne(String id, int visible, Criteria cri); // 검색 이력을 쭉 보여 줌. (유저 검색 이력 페이지)
 	List<SearchVo> getHistoryOneIp(String ip, int visible, Criteria cri);
 	List<SearchVo> getHistoryList(Criteria cri); // 검색 이력을 전부 확인할 수 있음. (관리자용 페이지)
+	Map<String, List<UserVo>> getUsersByRegions(List<String> regions);
 }

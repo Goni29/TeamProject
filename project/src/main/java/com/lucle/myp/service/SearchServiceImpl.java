@@ -1,6 +1,8 @@
 package com.lucle.myp.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.domain.SearchVo;
+import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.mapper.SearchMapper;
 
 @Service
@@ -56,4 +59,13 @@ public class SearchServiceImpl implements SearchService {
 		return mapper.getStatList(cri);
 	}
 
+	 @Override
+	    public Map<String, List<UserVo>> getUsersByRegions(List<String> regions) {
+	        Map<String, List<UserVo>> regionData = new HashMap<>();
+	        for (String region : regions) {
+	            List<UserVo> users = mapper.selectUsersByRegion(region);
+	            regionData.put(region, users);
+	        }
+	        return regionData;
+	    }
 }

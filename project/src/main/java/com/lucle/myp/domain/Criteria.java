@@ -19,6 +19,16 @@ public class Criteria {
 	//기본 값은 36500 = 100년으로 했음. 사실상 모든 기간.
 	private int visible = 1; // 1이면 보임. 기본값. 0이면 안 보임(삭제).
 	private int category = -1; // 0이면 일반. 1이 핫딜.
+	private Long gno;
+	private String title;
+	private String content;
+	private String regidate;
+	private String goaldate;
+	private Long goaltarget;
+
+	private Long personnum;
+
+	private String nickname;
 	
 	private Long rno;
 	
