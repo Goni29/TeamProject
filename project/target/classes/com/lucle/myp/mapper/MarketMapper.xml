@@ -19,9 +19,10 @@
 	<!-- proto 쿼리 수정: MARKET, MarketView, Category 테이블 조인 (viewDate 제외) -->
 	<select id="proto" resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
-		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY
+		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY, g.*
 		FROM MARKET m
 		JOIN CATEGORY c ON m.NUM = c.NUM
+		JOIN GROUPBUYING g ON m.NUM = g.NUM
 	]]>
 	</select>
 
@@ -50,9 +51,10 @@ AND m.num = #{num}
 	<select id="groupBuying"
 		resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
-		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY
+		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY, g.*
 		FROM MARKET m
 		JOIN CATEGORY c ON m.NUM = c.NUM
+		JOIN GROUPBUYING g ON m.NUM = g.NUM
 	]]>
 	</select>
 
@@ -94,7 +96,8 @@ AND m.num = #{num}
 		SELECT
 		M.*,
 		F.Frequency,
-		C.*
+		C.*,
+		G.*
 		FROM
 		MARKET M
 		INNER JOIN (
@@ -107,6 +110,7 @@ AND m.num = #{num}
 		NUM
 		) F ON M.NUM = F.NUM
 		LEFT JOIN CATEGORY C ON M.NUM = C.NUM
+		LEFT JOIN GROUPBUYING G ON M.NUM = G.NUM -- GROUPBUYING 테이블을 추가한 부분
 		ORDER BY
 		F.Frequency DESC
 	</select>

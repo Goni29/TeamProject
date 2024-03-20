@@ -66,11 +66,6 @@
 			            <input class="form-check-input" type="radio" name="sortTime" id="searchSort4" value="36500">
 			            <label class="form-check-label" for="searchSort4">전체 기간</label>
 			        </div>
-			        <!-- 오른쪽 컨텐츠: 정렬 옵션 -->
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort1" value="searchCount" checked="checked">
-			            <label class="form-check-label" for="sort1">검색 회수</label>
-			        </div>
 			        <div class="form-check form-check-inline">
 			            <input class="form-check-input" type="radio" name="sort" id="sort2" value="male">
 			            <label class="form-check-label" for="sort2">남성</label>
@@ -78,14 +73,6 @@
 			        <div class="form-check form-check-inline">
 			            <input class="form-check-input" type="radio" name="sort" id="sort3" value="female">
 			            <label class="form-check-label" for="sort3">여성</label>
-			        </div>
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort4" value="gyeonggi">
-			            <label class="form-check-label" for="sort4">경기</label>
-			        </div>
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort5" value="seoul">
-			            <label class="form-check-label" for="sort5">서울</label>
 			        </div>
 			    </div>
 			    

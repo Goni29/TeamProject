@@ -52,7 +52,7 @@
                                       
                                 <div>
                                     <p>가격 : ${product.won}원</p>
-                                    <p>조회수 : ${product.marketViewCount}</p>
+                                    <p>현재 참여 인원 : ${product.personnum}</p>
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
@@ -77,11 +77,11 @@
                                         <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
                                     
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary">공동구매 참여하기</button>
+                                        <button class="btn btn-primary" hidden="hidden">공동구매 참여하기</button>
                                     </form>
                                     
                                     <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                                        <button class="btn btn-success">상세 페이지</button>
+                                        <button class="btn btn-success" hidden="hidden">상세 페이지</button>
                                     </a>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                        
                                 <div>
                                     <p>가격 : ${product2.won}원</p>
-                                    <p>조회수 : ${product2.marketViewCount}</p>
+                                    <p>현재 참여 인원 : ${product2.personnum}</p>
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
@@ -138,11 +138,11 @@
                                         <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
                                        
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary">공동구매 참여하기</button>
+                                        <button class="btn btn-primary" hidden="hidden">공동구매 참여하기</button>
                                     </form>
                                     
                                     <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
-                                        <button class="btn btn-success">상세 페이지</button>
+                                        <button class="btn btn-success" hidden="hidden">상세 페이지</button>
                                     </a>
                                 </div>
                             </div>
