@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.mapper.MarketMapper;
 
 @Service
@@ -50,15 +51,15 @@ public class RecentlyViewedService {
     
     public void addViewRecord(Long num, HttpSession session) {
         // 세션에서 사용자 ID 가져오기 (로그인 구현에 따라 달라질 수 있음)
-        String id = (String) session.getAttribute("loginVo");
-        System.out.println(id);
+    	UserVo userVo = (UserVo) session.getAttribute("loginVo");
+        String id = null;
 
-        if (id == null) {
-
-            id = session.getId();
+        if (userVo != null) {
+            id = userVo.getId(); // 가정: UserVo 클래스에 getId() 메소드가 있음
+        } else {
+        	id = null;
         }
-        // 사용자 ID와 상품 ID를 사용하여 조회 기록 추가
-        if (id != null && num != null) {
+        if (num != null) {
             mapper.addViewRecord(num, id);
         }
     }
