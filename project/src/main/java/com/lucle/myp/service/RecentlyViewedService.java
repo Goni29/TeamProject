@@ -2,14 +2,20 @@ package com.lucle.myp.service;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.UserVo;
+import com.lucle.myp.mapper.MarketMapper;
 
 @Service
-public class RecentlyViewedService {
-
+public class RecentlyViewedService implements Serializable {
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	MarketMapper mapper;
     // 세션에서 최근 본 상품 목록을 관리하기 위한 키
     private static final String RECENTLY_VIEWED_KEY = "recentlyViewed";
 
@@ -42,5 +48,20 @@ public class RecentlyViewedService {
             return new LinkedList<>();
         }
         return recentlyViewed;
+    }
+    
+    public void addViewRecord(Long num, HttpSession session) {
+        // 세션에서 사용자 ID 가져오기 (로그인 구현에 따라 달라질 수 있음)
+    	UserVo userVo = (UserVo) session.getAttribute("loginVo");
+        String id = null;
+
+        if (userVo != null) {
+            id = userVo.getId(); // 가정: UserVo 클래스에 getId() 메소드가 있음
+        } else {
+        	id = null;
+        }
+        if (num != null) {
+            mapper.addViewRecord(num, id);
+        }
     }
 }

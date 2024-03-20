@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lucle.myp.domain.Criteria;
+import com.lucle.myp.domain.MarketGroupBuyingVo;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.service.MarketService;
@@ -37,7 +38,7 @@ public class MarketController {
 	
 	@GetMapping("/pr")
 	public void pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
-		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
+		List<MarketGroupBuyingVo> list = service.sortProto(num, large, medium, small, sub_category);
 		model.addAttribute("products", list);
 		System.out.println(list);
 //		List<MarketVo> recentViewedProducts = (List<MarketVo>) session.getAttribute("recentViewedProducts");

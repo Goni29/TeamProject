@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lucle.myp.domain.Criteria;
+import com.lucle.myp.domain.MarketGroupBuyingVo;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.mapper.MarketMapper;
@@ -43,7 +44,7 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<MarketVo> sortProto(@Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
+	public List<MarketGroupBuyingVo> sortProto(@Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
 		return mapper.sortProto(num, large, medium, small, sub_category);
 	}
 
@@ -55,6 +56,11 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public MarketVo getProductById(Long num) {
 		return mapper.getProductById(num);
+	}
+
+	@Override
+	public List<MarketVo> rankedView() {
+		return mapper.rankedView();
 	}
 
 }

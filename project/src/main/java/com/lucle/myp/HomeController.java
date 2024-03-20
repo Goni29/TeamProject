@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lucle.myp.domain.Criteria;
+import com.lucle.myp.domain.MarketGroupBuyingVo;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.ReplyVo;
 import com.lucle.myp.domain.SearchVo;
@@ -42,7 +43,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String proto(HttpServletRequest request, Model model, Criteria cri) {
-		List<MarketVo> list = service.proto(cri);
+		List<MarketVo> list = service.rankedView();
 		List<MarketVo> list2 = service.groupBuying(cri);
 		model.addAttribute("products", list);
 		model.addAttribute("products2", list2);
@@ -56,8 +57,8 @@ public class HomeController {
 	@GetMapping("/pr")
 	public String pr(Model model, Criteria cri, HttpSession session, @Param("num") Long num,
 			@Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small,
-			@Param("sub_category") Integer sub_category) {
-		List<MarketVo> list = service.sortProto(num, large, medium, small, sub_category);
+			@Param("sub_category") Integer sub_category, @Param("id") String id) {
+		List<MarketGroupBuyingVo> list = service.sortProto(num, large, medium, small, sub_category);
 		 List<ReplyVo> replies = replyService.getListByProductNum(num);
 		    model.addAttribute("replies", replies);
 		model.addAttribute("products", list);
@@ -67,6 +68,7 @@ public class HomeController {
             MarketVo product = service.getProductById(num); // 상품 정보 조회
             if (product != null) {
                 recentlyViewedService.addRecentlyViewedProduct(session, product); // 세션에 최근 본 상품 추가
+                recentlyViewedService.addViewRecord(num, session);
             }
         }
 		return "/pr";
