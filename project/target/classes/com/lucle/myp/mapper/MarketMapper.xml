@@ -87,7 +87,8 @@
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT
 		M.*,
-		F.Frequency
+		F.Frequency,
+		C.*
 		FROM
 		MARKET M
 		INNER JOIN (
@@ -99,7 +100,8 @@
 		GROUP BY
 		NUM
 		) F ON M.NUM = F.NUM
+		LEFT JOIN CATEGORY C ON M.NUM = C.NUM
 		ORDER BY
-		F.Frequency desc
+		F.Frequency DESC
 	</select>
 </mapper>

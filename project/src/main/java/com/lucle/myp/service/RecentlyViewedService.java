@@ -5,14 +5,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.mapper.MarketMapper;
 
 @Service
-public class RecentlyViewedService {
-
+public class RecentlyViewedService implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Autowired
 	MarketMapper mapper;
     // 세션에서 최근 본 상품 목록을 관리하기 위한 키
