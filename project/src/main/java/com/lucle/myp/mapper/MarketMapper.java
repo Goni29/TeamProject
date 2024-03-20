@@ -22,4 +22,5 @@ public interface MarketMapper {
 	List<MarketVo> groupBuying(Criteria cri);
 	MarketVo getProductById(Long num);
 	void addViewRecord(@Param("num") Long num, @Param("id") String id);
+	List<MarketVo> rankedView();
 }

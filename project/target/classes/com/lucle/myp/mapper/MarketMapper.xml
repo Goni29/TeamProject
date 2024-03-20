@@ -5,7 +5,8 @@
 <mapper namespace="com.lucle.myp.mapper.MarketMapper">
 
 	<select id="getList" resultType="com.lucle.myp.domain.MarketVo">
-		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY
+		SELECT m.*, c.LARGE, c.MEDIUM,
+		c.SMALL, c.SUB_CATEGORY
 		FROM MARKET m
 		JOIN CATEGORY c ON m.NUM = c.NUM
 		WHERE
@@ -54,7 +55,8 @@
 	<insert id="addViewRecord">
 		insert into marketView(vno, id, num, viewDate,
 		visible, PCATEGORY)
-		values(seq_marketView.nextval, #{id,jdbcType=VARCHAR}, #{num}, sysdate, 1, null)
+		values(seq_marketView.nextval,
+		#{id,jdbcType=VARCHAR}, #{num}, sysdate, 1, null)
 	</insert>
 
 	<select id="getHistoryOne"
@@ -75,9 +77,29 @@
 		order by viewDate
 		desc
 	</select>
-	
+
 	<select id="getProductById"
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT * FROM market WHERE num = #{num}
+	</select>
+
+	<select id="rankedView"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT
+		M.*,
+		F.Frequency
+		FROM
+		MARKET M
+		INNER JOIN (
+		SELECT
+		NUM,
+		COUNT(*) AS Frequency
+		FROM
+		MARKETVIEW
+		GROUP BY
+		NUM
+		) F ON M.NUM = F.NUM
+		ORDER BY
+		F.Frequency desc
 	</select>
 </mapper>

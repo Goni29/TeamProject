@@ -57,4 +57,9 @@ public class MarketServiceImpl implements MarketService {
 		return mapper.getProductById(num);
 	}
 
+	@Override
+	public List<MarketVo> rankedView() {
+		return mapper.rankedView();
+	}
+
 }
