@@ -8,20 +8,20 @@
         <div id="content-detailed" style="display: none;" class="container">
             <div class="row">
                 <div class="col-md-4 overflow-auto border" style="max-height: 100px;">
-                    <div><strong>성별</strong></div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="male" id="male">
-                        <label class="form-check-label" for="male">
-                            남성
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="female" id="female">
-                        <label class="form-check-label" for="female">
-                            여성
-                        </label>
-                    </div>
-                </div>
+    <div><strong>성별</strong></div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="gender" value="male" id="male">
+        <label class="form-check-label" for="male">
+            남성
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="gender" value="female" id="female">
+        <label class="form-check-label" for="female">
+            여성
+        </label>
+    </div>
+</div>
                 <div class="col-md-4 overflow-auto border" style="max-height: 100px;">
                     <div><strong>연령대</strong></div>
                     <div class="form-check">
