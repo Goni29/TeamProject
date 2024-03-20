@@ -1,51 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-<%@ include file="../header.jsp"%>
-
-<style>
-	.border {
-        border: 1px solid #dee2e6;
-    }
-    .border table {
-        margin-bottom: 0;
-    }
-    .border th, .border td {
-        border: 1px solid #dee2e6;
-    }
-    .border thead th {
-        border-bottom-width: 2px;
-    }
-    .page-size {
-        width: 100vw;
-    }
-</style>
-
-<body>
-<div id="wrapper">
-    
-<%@ include file="../sidebar.jsp"%>
-<div id="content-wrapper" class="d-flex flex-column page-size">       
-<%@ include file="../topbar.jsp"%>
-
-<div class="container mt-3">
-	<select id="detailSelect" class="form-control">
-		<option value="general" selected>전반</option>
-		<option value="detailed">세부</option>
-	</select>
-</div>
-
-<span class="titletext" hidden="hidden">상품 검색 이력</span>
-<div class="container-fluid p-5 text-center">
-    <h1>상품 검색 이력</h1>
-</div>
-
-<div class="container mt-5">
-<<<<<<< HEAD
-    <div id="content-general" class="row content">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html>
+    <div id="content-general" style="display: none;" class="row content">
         <div class="col">
         	<div class="d-flex justify-content-between">
 			    <div class="flex-fill">
@@ -65,6 +24,11 @@
 			            <input class="form-check-input" type="radio" name="sortTime" id="searchSort4" value="36500">
 			            <label class="form-check-label" for="searchSort4">전체 기간</label>
 			        </div>
+			        <!-- 오른쪽 컨텐츠: 정렬 옵션 -->
+			        <div class="form-check form-check-inline">
+			            <input class="form-check-input" type="radio" name="sort" id="sort1" value="searchCount" checked="checked">
+			            <label class="form-check-label" for="sort1">검색 회수</label>
+			        </div>
 			        <div class="form-check form-check-inline">
 			            <input class="form-check-input" type="radio" name="sort" id="sort2" value="male">
 			            <label class="form-check-label" for="sort2">남성</label>
@@ -72,6 +36,14 @@
 			        <div class="form-check form-check-inline">
 			            <input class="form-check-input" type="radio" name="sort" id="sort3" value="female">
 			            <label class="form-check-label" for="sort3">여성</label>
+			        </div>
+			        <div class="form-check form-check-inline">
+			            <input class="form-check-input" type="radio" name="sort" id="sort4" value="gyeonggi">
+			            <label class="form-check-label" for="sort4">경기</label>
+			        </div>
+			        <div class="form-check form-check-inline">
+			            <input class="form-check-input" type="radio" name="sort" id="sort5" value="seoul">
+			            <label class="form-check-label" for="sort5">서울</label>
 			        </div>
 			    </div>
 			    
@@ -188,51 +160,4 @@
             
         </div>
     </div>
-    <div id="content-detailed" class="row content" style="display: none;">
-   	</div>
-=======
-	<%@ include file="./general_page.jsp"%>
-	<%@ include file="./detail_page.jsp"%>
-    
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
-</div>
-
-</div>
-</div>
-
-<script>
-    $(document).ready(function(){
-      $('input[type="checkbox"][name="filter"]').change(function() {
-        $('.table tr').attr('hidden', true);
-
-        $('input[type="checkbox"][name="filter"]:checked').each(function() {
-          const value = $(this).val();
-          $('.' + value).attr('hidden', false);
-        });
-      });
-    });
-    
-    function toggleContent() {
-        var selection = document.getElementById("detailSelect").value;
-        var generalContent = document.getElementById("content-general");
-        var detailedContent = document.getElementById("content-detailed");
-
-        if (selection === "general") {
-            generalContent.style.display = "block";
-            detailedContent.style.display = "none";
-        } else if (selection === "detailed") {
-            generalContent.style.display = "none";
-            detailedContent.style.display = "block";
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        toggleContent();
-    });
-
-    document.getElementById("detailSelect").addEventListener("change", toggleContent);
-    
-</script>
-
-<%@include file="../footer.jsp"%>
-</body>
+</html>

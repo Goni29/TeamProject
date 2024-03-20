@@ -77,7 +77,7 @@ ORDER BY ${sort} DESC
 		order by searchDate desc
 	</select>
 	
-	<select id="selectUsersByRegion" resultType="com.example.demo.domain.User">
+	<select id="selectUsersByRegion" resultType="com.lucle.myp.domain.SearchVo">
         SELECT * FROM USERS WHERE Address LIKE CONCAT('%', #{region}, '%')
     </select>
 
