@@ -44,7 +44,6 @@
 </div>
 
 <div class="container mt-5">
-<<<<<<< HEAD
     <div id="content-general" class="row content">
         <div class="col">
         	<div class="d-flex justify-content-between">
@@ -188,13 +187,11 @@
             
         </div>
     </div>
-    <div id="content-detailed" class="row content" style="display: none;">
-   	</div>
-=======
+    
 	<%@ include file="./general_page.jsp"%>
+	
 	<%@ include file="./detail_page.jsp"%>
     
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 </div>
 
 </div>

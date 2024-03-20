@@ -10,6 +10,17 @@
     .page-size {
         width: 100vw;
     }
+    
+    .img-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+	}
+
+.img-size {
+    max-width: 100px;
+    height: auto;
+	}
 </style>
 
 <body id="page-top">
@@ -56,11 +67,11 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product.personnum}%</div>
                                     </div>
                                     <div class="col">
                                         <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: ${product.personnum}%" aria-valuenow="${product.personnum}" aria-valuemin="0" aria-valuemax="${product.goaltarget}"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -117,11 +128,11 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product2.personnum}%</div>
                                     </div>
                                     <div class="col">
                                         <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: ${product2.personnum}%" aria-valuenow="${product2.personnum}" aria-valuemin="0" aria-valuemax="${product2.goaltarget}"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -154,34 +165,20 @@
                         <div class="row justify-content-center">
                             <!-- Left Column -->
                             <div class="col">
-                                <h3>국내외 상품 가격 비교</h3>
+                                <h3>최근본 상품 목록</h3>
                                 <hr>
 
                                 <div class="container">
-                                    <!-- Form for Searching Products -->
-                                    <div class="mb-3">
-                                        <form action="/market/search" method="get">
-                                            <label for="search" class="form-label">상품명 입력</label> 
-                                            <input type="text" class="form-control" id="search" name="keyword" placeholder="ex) logitech g102">
-                                            
-                                            <!-- Checkbox for Selecting Market Types -->
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="type" value="11st" checked="checked">
-                                                <label class="form-check-label" for="inlineCheckbox1">11번가</label>
-                                            </div>
-                                            <!-- Add more checkboxes here -->
-
-                                            <br>
-                                            <!-- Submit Button -->
-                                            <button type="submit" id="submit" class="btn btn-primary mb-3">검색</button>
-                                            <!-- Alert for Errors -->
-                                            <span id="alert" class="text-danger"></span>
-                                        </form>
-
-                                        <!-- Sample Image -->
-                                        <img src="https://cdn.011st.com/11dims/resize/248/11src/pd/v2/2/4/3/3/4/5/IbOMi/2823243345_B.png" alt="Image">
-                                    </div>
-                                </div>
+								    <div class="img-container">
+								        <c:forEach var="product2" items="${recentlyViewedProducts}" begin="0" end="3">
+								            <div class="mb-3">
+								                <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
+								                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product2.imgUrl}" alt="Product Image">
+								                </a>
+								            </div>
+								        </c:forEach>
+								    </div>
+								</div>
                             </div>
 
                             <!-- Right Column -->
