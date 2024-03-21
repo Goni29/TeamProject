@@ -59,7 +59,7 @@ public class RecentlyViewedService implements Serializable {
         return detailedRecentlyViewed;
     }
     
-    public void addViewRecord(Long num, HttpSession session) {
+    public void addViewRecord(Long num, HttpSession session, Integer large, Integer medium, Integer small, Integer sub_category) {
         // 세션에서 사용자 ID 가져오기 (로그인 구현에 따라 달라질 수 있음)
     	UserVo userVo = (UserVo) session.getAttribute("loginVo");
         String id = null;
@@ -70,7 +70,7 @@ public class RecentlyViewedService implements Serializable {
         	id = null;
         }
         if (num != null) {
-            mapper.addViewRecord(num, id);
+            mapper.addViewRecord(num, id, large, medium, small, sub_category);
         }
     }
 }
