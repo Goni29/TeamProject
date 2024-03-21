@@ -1,14 +1,10 @@
-package com.lucle.myp.service;
+package com.lucle.myp.mapper;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.lucle.myp.domain.MarketVo;
 
-@Service
-public interface ProductService {
-	List<MarketVo> findProductsByCategory(String category);
+public interface ProductMapper {
 	void insertProduct(MarketVo product);
     List<MarketVo> selectAllProducts();
     MarketVo selectProductById(int productId);

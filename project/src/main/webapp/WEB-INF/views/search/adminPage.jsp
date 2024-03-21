@@ -128,6 +128,7 @@
 	                        <th>전남</th>
 	                        <th>경북</th>
 	                        <th>경남</th>
+	                        <th>제주</th>
 	                    </tr>
 	                </thead>
 	                <tbody>

@@ -44,9 +44,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String proto(HttpServletRequest request, Model model, Criteria cri) {
 		List<MarketVo> list = service.rankedView();
-		List<MarketVo> list2 = service.groupBuying(cri);
 		model.addAttribute("products", list);
-		model.addAttribute("products2", list2);
 		
 		HttpSession session = request.getSession();
 	    List<MarketVo> recentlyViewed = recentlyViewedService.getRecentlyViewedProducts(session);
@@ -68,7 +66,7 @@ public class HomeController {
             MarketVo product = service.getProductById(num); // 상품 정보 조회
             if (product != null) {
                 recentlyViewedService.addRecentlyViewedProduct(session, product); // 세션에 최근 본 상품 추가
-                recentlyViewedService.addViewRecord(num, session);
+                recentlyViewedService.addViewRecord(num, session, large, medium, small, sub_category);
             }
         }
 		return "/pr";

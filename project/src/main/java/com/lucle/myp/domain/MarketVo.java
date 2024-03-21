@@ -14,6 +14,8 @@ public class MarketVo {
 	private String deliveryFee;
 	private String keyword;
 	private int visible;
+	private String groupbuying;
+	private String description;
 	
 	private int large;
 	private int medium;

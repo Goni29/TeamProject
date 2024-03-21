@@ -64,7 +64,7 @@ AND m.num = #{num}
 		insert into marketView(vno, id, num, viewDate,
 		visible, PCATEGORY)
 		values(seq_marketView.nextval,
-		#{id,jdbcType=VARCHAR}, #{num}, sysdate, 1, null)
+		#{id,jdbcType=VARCHAR}, #{num}, sysdate, 1, #{large} || #{medium} || #{small} || #{sub_category})
 	</insert>
 
 	<select id="getHistoryOne"
@@ -114,4 +114,11 @@ AND m.num = #{num}
 		ORDER BY
 		F.Frequency DESC
 	</select>
+	
+	<select id="selectMarketWithCategory" resultType="com.lucle.myp.domain.MarketVo">
+        SELECT m.*, c.large, c.medium, c.small, c.sub_category
+        FROM MARKET m
+        JOIN CATEGORY c ON m.num = c.num
+        WHERE m.num = #{num}
+    </select>
 </mapper>

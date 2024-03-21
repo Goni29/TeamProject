@@ -22,6 +22,7 @@ public interface MarketMapper {
 	List<MarketGroupBuyingVo> sortProto(@Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category);
 	List<MarketVo> groupBuying(Criteria cri);
 	MarketVo getProductById(Long num);
-	void addViewRecord(@Param("num") Long num, @Param("id") String id);
+	void addViewRecord(@Param("num") Long num, @Param("id") String id, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category);
 	List<MarketVo> rankedView();
+	MarketVo selectMarketWithCategory(Long num);
 }
