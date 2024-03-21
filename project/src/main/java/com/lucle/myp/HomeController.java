@@ -44,9 +44,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String proto(HttpServletRequest request, Model model, Criteria cri) {
 		List<MarketVo> list = service.rankedView();
-		List<MarketVo> list2 = service.groupBuying(cri);
 		model.addAttribute("products", list);
-		model.addAttribute("products2", list2);
 		
 		HttpSession session = request.getSession();
 	    List<MarketVo> recentlyViewed = recentlyViewedService.getRecentlyViewedProducts(session);

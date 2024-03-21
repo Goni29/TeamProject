@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lucle.myp.mapper.ProductMapper">
+
+	<insert id="insertProduct"
+		parameterType="com.lucle.myp.domain.MarketVo">
+<!-- 		INSERT INTO MARKET (num, PRODUCTNAME, MARKETNAME, URL,
+		IMGURL, WON, DELIVERY,
+		DELIVERYFEE, KEYWORD, VISIBLE, GROUPBUYING,
+		DESCRIPTION)
+		VALUES (seq_market.nextval, #{productName}, #{marketName},
+		#{url}, #{imgUrl}, #{won},
+		null, null, #{keyword}, 1, 1,
+		#{description}) -->
+
+		BEGIN
+		INSERT INTO MARKET (num, PRODUCTNAME, MARKETNAME, URL,
+		IMGURL, WON, DELIVERY,
+		DELIVERYFEE, KEYWORD, VISIBLE, GROUPBUYING,
+		DESCRIPTION)
+		VALUES (seq_market.nextval, #{productName}, #{marketName},
+		#{url}, #{imgUrl}, #{won},
+		null, null, #{keyword}, 1, 1,
+		#{description});
+
+		INSERT INTO CATEGORY (LARGE, MEDIUM, SMALL, SUB_CATEGORY, NUM)
+		VALUES (#{large}, #{medium}, #{small},
+		#{sub_category}, seq_market.CURRVAL);
+		END;
+	</insert>
+
+	<select id="selectAllProducts"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT NUM, PRODUCTNAME, MARKETNAME, URL, IMGURL, WON,
+		DELIVERY,
+		DELIVERYFEE, KEYWORD, VISIBLE, GROUPBUYING, DESCRIPTION
+		FROM
+		MARKET
+		WHERE VISIBLE = 1
+	</select>
+
+	<select id="selectProductById" parameterType="int"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT * FROM MARKET WHERE NUM = #{num} AND VISIBLE = 1
+	</select>
+
+	<update id="updateProduct"
+		parameterType="com.lucle.myp.domain.MarketVo">
+		UPDATE MARKET
+		SET PRODUCTNAME = #{productName},
+		MARKETNAME = #{marketName},
+		URL = #{url},
+		IMGURL = #{imgUrl},
+		WON =
+		#{won},
+		DELIVERY = #{delivery},
+		DELIVERYFEE = #{deliveryFee},
+		KEYWORD =
+		#{keyword},
+		VISIBLE = #{visible},
+		GROUPBUYING = #{groupBuying},
+		DESCRIPTION = #{description}
+		WHERE NUM = #{num}
+	</update>
+
+	<delete id="deleteProductById" parameterType="int">
+		DELETE FROM MARKET
+		WHERE NUM = #{num}
+	</delete>
+
+</mapper>

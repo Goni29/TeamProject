@@ -47,7 +47,16 @@ public class RecentlyViewedService implements Serializable {
         if (recentlyViewed == null) {
             return new LinkedList<>();
         }
-        return recentlyViewed;
+        
+        LinkedList<MarketVo> detailedRecentlyViewed = new LinkedList<>();
+        for (MarketVo product : recentlyViewed) {
+            // 각 상품 ID에 대해 상세 정보(카테고리 정보 포함)를 조회합니다.
+            MarketVo detailedProduct = mapper.selectMarketWithCategory(product.getNum());
+            if (detailedProduct != null) {
+                detailedRecentlyViewed.add(detailedProduct);
+            }
+        }
+        return detailedRecentlyViewed;
     }
     
     public void addViewRecord(Long num, HttpSession session) {

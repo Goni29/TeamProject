@@ -24,4 +24,5 @@ public interface MarketMapper {
 	MarketVo getProductById(Long num);
 	void addViewRecord(@Param("num") Long num, @Param("id") String id);
 	List<MarketVo> rankedView();
+	MarketVo selectMarketWithCategory(Long num);
 }
