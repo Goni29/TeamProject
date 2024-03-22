@@ -144,10 +144,14 @@
 	let cateSelect3 = $(".small");
 	let cateSelect4 = $(".sub_category");
 	
-	function makeCateArray(obj,array,cateList, category){
+	function makeCateArray(obj,array,cateList, large){
 		for(let i = 0; i < cateList.length; i++){
-			if(cateList[i].category === category){
+			if(cateList[i].large === large){
 				obj = new Object();
+				
+				obj.cateName = cateList[i].cateName;
+				obj.cateCode = cateList[i].cateCode;
+				obj.cateParent = cateList[i].cateParent;
 				
 				array.push(obj);				
 				

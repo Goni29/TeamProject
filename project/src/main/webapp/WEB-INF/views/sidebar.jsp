@@ -34,7 +34,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">공동구매!</h6>
-                        <a class="collapse-item" href="/prlist/">전체상품</a>
+                        <a class="collapse-item" href="/prlist/recolist">전체상품</a>
                         <a class="collapse-item" href="/prlist/poplist">인기상품</a>
                         <a class="collapse-item" href="/">추천상품</a>
                     </div>
