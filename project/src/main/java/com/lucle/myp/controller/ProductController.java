@@ -81,41 +81,36 @@ public class ProductController {
         return "/prlist/poplist"; // This is the JSP file name without the .jsp extension
     }
 
-    @GetMapping("/large")
-    public String getLargeCategories(Model model) {
-        // 여기서는 예시로 모든 대분류를 가져오는 로직을 가정합니다.
-        // 실제로는 서비스 계층에서 대분류 목록을 반환하는 메소드를 호출해야 합니다.
-        List<MarketVo> largeCategories = productService.getCategoriesByLarge(0); // 0은 모든 대분류를 의미
-        model.addAttribute("largeCategories", largeCategories);
-        return "/prlist/categorySelection";
+    @GetMapping("prlist/large")
+    public String listProductsByLarge(@RequestParam("category") int large, Model model) {
+        List<MarketVo> products = productService.getProductsByLargeCategory(large);
+        model.addAttribute("products", products);
+        return "prlist/list-products";
     }
 
-    @GetMapping("/medium")
-    public String getMediumCategories(@RequestParam("large") int large, Model model) {
-        List<MarketVo> mediumCategories = productService.getCategoriesByMedium(large, 0); // 0은 해당 대분류의 모든 중분류를 의미
-        model.addAttribute("mediumCategories", mediumCategories);
-        return "/prlist/categorySelection";
+    @GetMapping("prlist/medium")
+    public String listProductsByMedium(@RequestParam("category") int medium, Model model) {
+        List<MarketVo> products = productService.getProductsByMediumCategory(medium);
+        model.addAttribute("products", products);
+        return "prlist/list-products";
     }
 
-    @GetMapping("/small")
-    public String getSmallCategories(@RequestParam("large") int large,
-                                     @RequestParam("medium") int medium, Model model) {
-        List<MarketVo> smallCategories = productService.getCategoriesBySmall(large, medium, 0); // 0은 해당 중분류의 모든 소분류를 의미
-        model.addAttribute("smallCategories", smallCategories);
-        return "/prlist/categorySelection";
+    @GetMapping("prlist/small")
+    public String listProductsBySmall(@RequestParam("category") int small, Model model) {
+        List<MarketVo> products = productService.getProductsBySmallCategory(small);
+        model.addAttribute("products", products);
+        return "prlist/list-products";
     }
 
-    @GetMapping("/sub")
-    public String getSubCategories(@RequestParam("large") int large,
-                                   @RequestParam("medium") int medium,
-                                   @RequestParam("small") int small, Model model) {
-        List<MarketVo> subCategories = productService.getCategoriesBySub(large, medium, small, 0); // 0은 해당 소분류의 모든 세부분류를 의미
-        model.addAttribute("subCategories", subCategories);
-        return "/prlist/categorySelection";
+    @GetMapping("prlist/sub")
+    public String listProductsBySub(@RequestParam("category") int sub_category, Model model) {
+        List<MarketVo> products = productService.getProductsBySubCategory(sub_category);
+        model.addAttribute("products", products);
+        return "prlist/list-products";
     }
-
-    @GetMapping("/select")
-    public String showCategorySelection() {
-        return "prlist/categorySelection"; // categorySelection.jsp로 이동
+    
+    @GetMapping("/list-categories")
+    public String listCategories() {
+        return "/prlist/list-categories";
     }
 }

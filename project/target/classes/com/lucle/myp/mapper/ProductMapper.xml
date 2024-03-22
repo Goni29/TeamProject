@@ -34,8 +34,7 @@
 		SELECT *
 		FROM MARKET m
 		JOIN CATEGORY c ON m.NUM = c.NUM
-		JOIN
-		GROUPBUYING g ON m.NUM = g.NUM
+		JOIN GROUPBUYING g ON m.NUM = g.NUM
 		ORDER BY m.NUM ASC
 	</select>
 
@@ -87,46 +86,36 @@ WHERE sub.rn = 1
 ORDER BY CATEGORY_RANK, sub.NUM
 		]]>
 	</select>
-
-	<!-- Large Category with Products -->
-	<select id="selectByLargeCategory" parameterType="int"
-		resultType="com.lucle.myp.domain.MarketVo">
-		SELECT m.*, g.*, c.large
-		FROM category c
-		JOIN market m ON c.num = m.num
-		LEFT JOIN groupbuying g ON m.num = g.num
-		WHERE c.large = #{large}
-	</select>
-
-	<!-- Medium Category with Products -->
-	<select id="selectByMediumCategory" parameterType="map"
-		resultType="com.lucle.myp.domain.MarketVo">
-		SELECT m.*, g.*, c.large, c.medium
-		FROM category c
-		JOIN market m ON c.num = m.num
-		LEFT JOIN groupbuying g ON m.num = g.num
-		WHERE c.large = #{large} AND c.medium = #{medium}
-	</select>
-
-	<!-- Small Category with Products -->
-	<select id="selectBySmallCategory" parameterType="map"
-		resultType="com.lucle.myp.domain.MarketVo">
-		SELECT m.*, g.*, c.large, c.medium, c.small
-		FROM category c
-		JOIN market m ON c.num = m.num
-		LEFT JOIN groupbuying g ON m.num = g.num
-		WHERE c.large = #{large} AND c.medium = #{medium} AND c.small = #{small}
-	</select>
-
-	<!-- Sub Category with Products -->
-	<select id="selectBySubCategory" parameterType="map"
-		resultType="com.lucle.myp.domain.MarketVo">
-		SELECT m.*, g.*, c.large, c.medium, c.small, c.sub_category
-		FROM category c
-		JOIN market m ON c.num = m.num
-		LEFT JOIN groupbuying g ON m.num = g.num
-		WHERE c.large = #{large} AND c.medium = #{medium} AND c.small = #{small}
-		AND c.sub_category = #{sub_category}
-	</select>
-
+	
+    <select id="selectProductsByLargeCategory" resultType="com.lucle.myp.domain.MarketVo">
+        SELECT m.*, c.LARGE, g.*
+        FROM MARKET m
+        JOIN CATEGORY c ON m.NUM = c.NUM
+        LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
+        WHERE c.LARGE = #{large}
+    </select>
+    
+    <select id="selectProductsByMediumCategory" resultType="com.lucle.myp.domain.MarketVo">
+        SELECT m.*, c.MEDIUM, g.*
+        FROM MARKET m
+        JOIN CATEGORY c ON m.NUM = c.NUM
+        LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
+        WHERE c.MEDIUM = #{medium}
+    </select>
+    
+    <select id="selectProductsBySmallCategory" resultType="com.lucle.myp.domain.MarketVo">
+        SELECT m.*, c.SMALL, g.*
+        FROM MARKET m
+        JOIN CATEGORY c ON m.NUM = c.NUM
+        LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
+        WHERE c.SMALL = #{small}
+    </select>
+    
+    <select id="selectProductsBySubCategory" resultType="com.lucle.myp.domain.MarketVo">
+        SELECT m.*, c.SUB_CATEGORY, g.*
+        FROM MARKET m
+        JOIN CATEGORY c ON m.NUM = c.NUM
+        LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
+        WHERE c.SUB_CATEGORY = #{sub_category}
+    </select>
 </mapper>
