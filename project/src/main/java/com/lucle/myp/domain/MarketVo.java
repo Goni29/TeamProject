@@ -28,6 +28,7 @@ public class MarketVo {
 	private Long vno;
 	private String id;
 	private String viewDate;
+	private String pcategory;
 	
 	private Long gno;
 	private String title;
@@ -39,5 +40,6 @@ public class MarketVo {
 	private Long personnum;
 
 	private String nickname;
+	private String name;
 	
 }
