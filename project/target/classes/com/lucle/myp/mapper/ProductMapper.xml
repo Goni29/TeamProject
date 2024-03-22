@@ -4,39 +4,39 @@
 
 	<insert id="insertProduct"
 		parameterType="com.lucle.myp.domain.MarketVo">
-<!-- 		INSERT INTO MARKET (num, PRODUCTNAME, MARKETNAME, URL,
-		IMGURL, WON, DELIVERY,
-		DELIVERYFEE, KEYWORD, VISIBLE, GROUPBUYING,
-		DESCRIPTION)
-		VALUES (seq_market.nextval, #{productName}, #{marketName},
-		#{url}, #{imgUrl}, #{won},
-		null, null, #{keyword}, 1, 1,
-		#{description}) -->
+		<!-- INSERT INTO MARKET (num, PRODUCTNAME, MARKETNAME, URL, IMGURL, WON, 
+			DELIVERY, DELIVERYFEE, KEYWORD, VISIBLE, GROUPBUYING, DESCRIPTION) VALUES 
+			(seq_market.nextval, #{productName}, #{marketName}, #{url}, #{imgUrl}, #{won}, 
+			null, null, #{keyword}, 1, 1, #{description}) -->
 
 		BEGIN
 		INSERT INTO MARKET (num, PRODUCTNAME, MARKETNAME, URL,
-		IMGURL, WON, DELIVERY,
+		IMGURL,
+		WON, DELIVERY,
 		DELIVERYFEE, KEYWORD, VISIBLE, GROUPBUYING,
 		DESCRIPTION)
 		VALUES (seq_market.nextval, #{productName}, #{marketName},
-		#{url}, #{imgUrl}, #{won},
+		#{url},
+		#{imgUrl}, #{won},
 		null, null, #{keyword}, 1, 1,
 		#{description});
 
-		INSERT INTO CATEGORY (LARGE, MEDIUM, SMALL, SUB_CATEGORY, NUM)
-		VALUES (#{large}, #{medium}, #{small},
+		INSERT
+		INTO CATEGORY (LARGE, MEDIUM, SMALL, SUB_CATEGORY, NUM)
+		VALUES
+		(#{large}, #{medium}, #{small},
 		#{sub_category}, seq_market.CURRVAL);
 		END;
 	</insert>
 
 	<select id="selectAllProducts"
 		resultType="com.lucle.myp.domain.MarketVo">
-		SELECT NUM, PRODUCTNAME, MARKETNAME, URL, IMGURL, WON,
-		DELIVERY,
-		DELIVERYFEE, KEYWORD, VISIBLE, GROUPBUYING, DESCRIPTION
-		FROM
-		MARKET
-		WHERE VISIBLE = 1
+		SELECT *
+		FROM MARKET m
+		JOIN CATEGORY c ON m.NUM = c.NUM
+		JOIN
+		GROUPBUYING g ON m.NUM = g.NUM
+		ORDER BY m.NUM ASC
 	</select>
 
 	<select id="selectProductById" parameterType="int"
@@ -67,5 +67,66 @@
 		DELETE FROM MARKET
 		WHERE NUM = #{num}
 	</delete>
+
+	<select id="getProductDetails"
+		resultType="com.lucle.myp.domain.MarketVo">
+		<![CDATA[
+SELECT sub.*, DENSE_RANK() OVER (ORDER BY CATEGORY_VIEW_COUNT DESC) as CATEGORY_RANK
+FROM (
+  SELECT M.*, MV.VNO, MV.VIEWDATE, MV.PCATEGORY, G.TITLE, G.CONTENT, G.REGIDATE, G.GOALDATE, G.GOALTARGET, G.PERSONNUM, C.LARGE, C.MEDIUM, C.SMALL, C.SUB_CATEGORY,
+    COUNT(MV.PCATEGORY) OVER (PARTITION BY MV.PCATEGORY) as CATEGORY_VIEW_COUNT,
+    ROW_NUMBER() OVER (PARTITION BY M.NUM ORDER BY MV.VNO) as rn
+  FROM MARKET M
+  JOIN MARKETVIEW MV ON M.NUM = MV.NUM
+  JOIN GROUPBUYING G ON M.NUM = G.NUM
+  JOIN CATEGORY C ON M.NUM = C.NUM
+  WHERE MV.PCATEGORY IS NOT NULL
+  GROUP BY M.NUM, M.PRODUCTNAME, M.MARKETNAME, M.URL, M.IMGURL, M.WON, M.DELIVERY, M.DELIVERYFEE, M.KEYWORD, M.VISIBLE, M.GROUPBUYING, M.DESCRIPTION, MV.VNO, MV.ID, MV.VIEWDATE, MV.VISIBLE, MV.PCATEGORY, G.GNO, G.TITLE, G.CONTENT, G.REGIDATE, G.GOALDATE, G.GOALTARGET, G.PERSONNUM, G.NUM, C.LARGE, C.MEDIUM, C.SMALL, C.SUB_CATEGORY, C.NUM
+) sub
+WHERE sub.rn = 1
+ORDER BY CATEGORY_RANK, sub.NUM
+		]]>
+	</select>
+
+	<!-- Large Category with Products -->
+	<select id="selectByLargeCategory" parameterType="int"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT m.*, g.*, c.large
+		FROM category c
+		JOIN market m ON c.num = m.num
+		LEFT JOIN groupbuying g ON m.num = g.num
+		WHERE c.large = #{large}
+	</select>
+
+	<!-- Medium Category with Products -->
+	<select id="selectByMediumCategory" parameterType="map"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT m.*, g.*, c.large, c.medium
+		FROM category c
+		JOIN market m ON c.num = m.num
+		LEFT JOIN groupbuying g ON m.num = g.num
+		WHERE c.large = #{large} AND c.medium = #{medium}
+	</select>
+
+	<!-- Small Category with Products -->
+	<select id="selectBySmallCategory" parameterType="map"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT m.*, g.*, c.large, c.medium, c.small
+		FROM category c
+		JOIN market m ON c.num = m.num
+		LEFT JOIN groupbuying g ON m.num = g.num
+		WHERE c.large = #{large} AND c.medium = #{medium} AND c.small = #{small}
+	</select>
+
+	<!-- Sub Category with Products -->
+	<select id="selectBySubCategory" parameterType="map"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT m.*, g.*, c.large, c.medium, c.small, c.sub_category
+		FROM category c
+		JOIN market m ON c.num = m.num
+		LEFT JOIN groupbuying g ON m.num = g.num
+		WHERE c.large = #{large} AND c.medium = #{medium} AND c.small = #{small}
+		AND c.sub_category = #{sub_category}
+	</select>
 
 </mapper>

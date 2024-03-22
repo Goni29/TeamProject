@@ -57,11 +57,10 @@
                                         <input name="url" value="${product.url}" hidden="hidden" />
                                         <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
                                         <input name="won" value="${product.won}" hidden="hidden" />
-                                        <input name="dollar" value="${product.dollar}" hidden="hidden" />
+                                     
                                         <input name="delivery" value="${product.delivery}" hidden="hidden" />
                                         <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
-                                        <input name="otherCosts" value="${product.otherCosts}" hidden="hidden" />
-                                        <input name="k_ProductName" value="${product.k_ProductName}" hidden="hidden" />
+                                 
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
                                         <button class="btn btn-primary">공동구매 참여하기</button>
                                     </form>

@@ -23,17 +23,21 @@
             <div class="container">
                 <div class="row">
                     <c:forEach var="product" items="${products}">
-                        <div class="col-md-3 border">
-                            <p>${product.num}</p>
-                            <img src="${product.imgUrl}" alt="Image"> <br>
-                            <p>${product.marketName}</p>
-                            <a href="${product.url}">${product.productName}</a><br>
-                            <p>가격 : ${product.won}원</p>
+                        <div class="col-xl-6 col-lg-6">
+						    <a href="${product.url}" style="display: block; width: 100%; height: 100%; overflow: hidden;">
+                        		<p>${product.marketName}</p>
+						        <img src="${product.imgUrl}" alt="Image" style="width: auto; height: 80%; object-fit: cover;"><br />
+						    	${product.productName}
+						    </a>
+						</div>
+                        <div class="col-xl-6 col-lg-6">
+                        	<p>가격 : ${product.won}원</p>
                             <p>마감 기간 : ${product.goaldate}</p>
                             <p>목표 인원 : ${product.goaltarget} </p>
                             <p>현재 참여 인원 : ${product.personnum}</p>
+                            <p>제품 설명 : ${product.description}</p>
                             <br>
-                            <button class="participateButton" data-num="${product.num}">공동구매 참여하기</button>
+                            <button class="participateButton btn btn-Success" data-num="${product.num}">공동구매 참여하기</button>
                             <div class="btn-group" role="group" aria-label="Button group">
                                 <form class="actionForm" action="/market/register">
                                     <input name="num" value="${product.num}" hidden="hidden" /> 
@@ -45,19 +49,27 @@
                                     <input name="delivery" value="${product.delivery}" hidden="hidden" />
                                     <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" /> 
                                     <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                    <button hidden="hidden" class="participateButton" data-num="${product.num}">공동구매 참여하기</button>
+                                    <button hidden="hidden" class="participateButton" data-num="${product.num}">공동구매 참여하기</button><br /><br />
                                 </form>
 
                                 <input type="hidden" id="productNum" value="${product.num}" />
                             </div>
+                            <c:if test="${loginVo.grade >= 3}">
+				                <a href="/prlist/edit"><button class="btn btn-secondary">상품 정보 변경</button></a>
+			                </c:if>
+			                <div class="row no-gutters align-items-center">
+	                           <div class="col-auto">
+	                               <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product.personnum}%</div>
+	                           </div>
+	                           <div class="col">
+	                               <div class="progress progress-sm mr-2">
+	                                   <div class="progress-bar bg-info" role="progressbar" style="width: ${product.personnum}%" aria-valuenow="${product.personnum}" aria-valuemin="0" aria-valuemax="${product.goaltarget}"></div>
+	                               </div>
+	                           </div>
+	                       </div>
                         </div>
                     </c:forEach>
                 </div>
-            </div>
-
-            <!-- 모달창 -->
-            <div class="modal" tabindex="-1">
-                <!-- Modal content -->
             </div>
 
             <div class="container mt-5">
@@ -79,44 +91,42 @@
                             </div>
                         </div>
                     </div>
-                    <c:if test="${loginVo.id != null}">
-                        <div class="col-md-4">
-                            <div id="contentarea" class="card">
-                                <div class="card-body">
-                                    <form id="commentForm">
-                                        <div class="form-group">
-                                            <textarea class="form-control" id="replyContent" rows="3" placeholder="댓글을 입력하세요"></textarea>
-                                        </div>
-                                        <button id="addReply" type="button" class="btn btn-primary">댓글 작성</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </c:if>
                     <div class="container mt-5">
-                        <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                <div id="contentarea" class="card">
-                                    <div class="card-body">
-                                        <ul class="list-unstyled replyUl">
-                                            <c:forEach var="reply" items="${replies}">
-                                                <li class="media">
-                                                    <div class="media-body">
-                                                        <div class="d-flex justify-content-between">
-                                                            <strong class="mt-0 mb-1">${reply.replyer}</strong> <small class="text-muted">${reply.replydate}</small>
-                                                            <button type="button" class="btn btn-primary modifyButton" data-rno="${reply.rno}">수정</button>
-                                                            <button type="button" class="btn btn-danger deleteButton" data-rno="${reply.rno}">삭제</button>
-                                                        </div>
-                                                        <p>${reply.reply}</p>
-                                                    </div>
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+					    <div class="row justify-content-center">
+					        <div class="col-md-8">
+					            <div id="contentarea" class="card">
+					                <div class="card-body">
+					                    <ul class="list-unstyled replyUl">
+					                        <c:forEach var="reply" items="${replies}">
+					                            <li class="media">
+					                                <div class="media-body">
+					                                    <div class="d-flex justify-content-between">
+					                                        <strong class="mt-0 mb-1">${reply.replyer}</strong> <small class="text-muted">${reply.replydate}</small>
+					                                        <button type="button" class="btn btn-primary modifyButton" data-rno="${reply.rno}">수정</button>
+					                                        <button type="button" class="btn btn-danger deleteButton" data-rno="${reply.rno}">삭제</button>
+					                                    </div>
+					                                    <p>${reply.reply}</p>
+					                                </div>
+					                            </li>
+					                        </c:forEach>
+					                    </ul>
+					                </div>
+					            </div>
+					        </div>
+					        <div class="col-md-4">
+					            <div id="replyarea" class="card">
+					                <div class="card-body">
+					                    <form id="commentForm">
+					                        <div class="form-group">
+					                            <textarea class="form-control" id="replyContent" rows="3" placeholder="댓글을 입력하세요"></textarea>
+					                        </div>
+					                        <button id="addReply" type="button" class="btn btn-primary">댓글 작성</button>
+					                    </form>
+					                </div>
+					            </div>
+					        </div>
+					    </div>
+					</div>
                     <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
