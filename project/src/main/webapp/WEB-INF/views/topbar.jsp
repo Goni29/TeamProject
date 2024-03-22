@@ -50,14 +50,16 @@
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <c:if test="${loginVo.grade >= 3}">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/search/adminPage" id="navbarDarkDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false"> 관리자 페이지 </a>
-                        <ul class="dropdown-menu dropdown-menu-dark"
-                            aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/search/adminPage">상품 검색 통계</a></li>
-                        </ul>
-                    </li>
+	                <li class="nav-item dropdown">
+	                    <a class="nav-link dropdown-toggle btn" href="#" id="navbarDarkDropdownMenuLink" role="button"
+	                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                        관리자 페이지
+	                    </a>
+	                    <div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+	                        <a class="dropdown-item" href="/search/adminPage">상품 검색 통계</a>
+	                        <a class="dropdown-item" href="/prlist/register">상품 등록</a>
+	                    </div>
+	                </li>
                 </c:if>
 
                 <c:if test="${loginVo == null}">
@@ -75,7 +77,7 @@
 
                 <c:if test="${loginVo != null}">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        <a class="nav-link dropdown-toggle btn" href="#" id="navbarDropdownMenuLink" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             회원 정보
                         </a>

@@ -43,7 +43,7 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <c:forEach var="product" items="${products}" >
+                        <c:forEach var="product" items="${products}" begin="0" end="3">
                             <div class="col-xl-3 col-md-6 mb-4 border">
                                 <p>${product.marketName}</p>
                                 
