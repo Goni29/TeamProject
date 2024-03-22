@@ -55,7 +55,7 @@
                                 <input type="hidden" id="productNum" value="${product.num}" />
                             </div>
                             <c:if test="${loginVo.grade >= 3}">
-				                <a href="/prlist/edit"><button class="btn btn-secondary">상품 정보 변경</button></a>
+				                <a href="/prlist/edit/${product.num}"><button class="btn btn-secondary">상품 정보 변경</button></a>
 			                </c:if>
 			                <div class="row no-gutters align-items-center">
 	                           <div class="col-auto">
