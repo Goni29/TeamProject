@@ -53,23 +53,23 @@ public class ProductServiceImpl implements ProductService {
     }
 	
 	@Override
-    public List<MarketVo> getCategoriesByLarge(int large) {
-        return mapper.selectByLargeCategory(large);
+    public List<MarketVo> getProductsByLargeCategory(int large) {
+        return mapper.selectProductsByLargeCategory(large);
     }
 
     @Override
-    public List<MarketVo> getCategoriesByMedium(int large, int medium) {
-        return mapper.selectByMediumCategory(large, medium);
+    public List<MarketVo> getProductsByMediumCategory(int medium) {
+        return mapper.selectProductsByMediumCategory(medium);
     }
 
     @Override
-    public List<MarketVo> getCategoriesBySmall(int large, int medium, int small) {
-        return mapper.selectBySmallCategory(large, medium, small);
+    public List<MarketVo> getProductsBySmallCategory(int small) {
+        return mapper.selectProductsBySmallCategory(small);
     }
 
     @Override
-    public List<MarketVo> getCategoriesBySub(int large, int medium, int small, int sub_category) {
-        return mapper.selectBySubCategory(large, medium, small, sub_category);
+    public List<MarketVo> getProductsBySubCategory(int sub_category) {
+        return mapper.selectProductsBySubCategory(sub_category);
     }
 
 }

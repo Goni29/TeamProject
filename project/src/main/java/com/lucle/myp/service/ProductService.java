@@ -15,8 +15,8 @@ public interface ProductService {
     void updateProduct(MarketVo product);
     void deleteProductById(int productId);
     List<MarketVo> getRecommendedProductDetails();
-    List<MarketVo> getCategoriesByLarge(int large);
-    List<MarketVo> getCategoriesByMedium(int large, int medium);
-    List<MarketVo> getCategoriesBySmall(int large, int medium, int small);
-    List<MarketVo> getCategoriesBySub(int large, int medium, int small, int sub_category);
+    List<MarketVo> getProductsByLargeCategory(int large);
+    List<MarketVo> getProductsByMediumCategory(int medium);
+    List<MarketVo> getProductsBySmallCategory(int small);
+    List<MarketVo> getProductsBySubCategory(int sub_category);
 }
