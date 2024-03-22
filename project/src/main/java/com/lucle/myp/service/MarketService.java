@@ -14,7 +14,7 @@ public interface MarketService {
 	int marketViewPlus(String id, Long num);
 	List<MarketVo> proto(Criteria cri);
 	List<MarketGroupBuyingVo> sortProto(@Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category);
-	List<MarketVo> groupBuying(Criteria cri);
+	List<MarketVo> groupBuying();
 
 	List<MarketVo> getHistoryOne(String id, Criteria cri); // 한 유저의 열람 이력.
 	List<UserVo> getHistoryProduct(Long num, Criteria cri); // 한 상품을 열람한 유저 목록.

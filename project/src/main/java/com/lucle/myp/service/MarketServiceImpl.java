@@ -49,8 +49,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<MarketVo> groupBuying(Criteria cri) {
-		return mapper.groupBuying(cri);
+	public List<MarketVo> groupBuying() {
+		return mapper.groupBuying();
 	}
 
 	@Override

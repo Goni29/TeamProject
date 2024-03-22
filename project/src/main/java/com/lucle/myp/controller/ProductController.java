@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.service.MarketService;
 import com.lucle.myp.service.ProductService;
 
 @Controller
@@ -79,6 +80,16 @@ public class ProductController {
         List<MarketVo> productDetails = productService.getRecommendedProductDetails();
         model.addAttribute("productDetails", productDetails);
         return "/prlist/poplist"; // This is the JSP file name without the .jsp extension
+    }
+    
+    @Autowired
+    MarketService marketService;
+    
+    @GetMapping("/recolist")
+    public String allProduct(Model model) {
+        List<MarketVo> products = marketService.groupBuying();
+        model.addAttribute("products", products);
+        return "/prlist/recolist"; // This is the JSP file name without the .jsp extension
     }
 
     @GetMapping("prlist/large")
