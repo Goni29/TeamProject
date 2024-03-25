@@ -15,4 +15,5 @@ public interface ProductMapper {
     List<MarketVo> selectProductsByMediumCategory(int medium);
     List<MarketVo> selectProductsBySmallCategory(int small);
     List<MarketVo> selectProductsBySubCategory(int sub_category);
+    public List<MarketVo> cateList();
 }

@@ -118,4 +118,10 @@ ORDER BY CATEGORY_RANK, sub.NUM
         LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
         WHERE c.SUB_CATEGORY = #{sub_category}
     </select>
+    
+    <select id="cateList" resultType="com.lucle.myp.domain.MarketVo">
+  	
+  		select * from category order by catecode
+  	
+  	</select>
 </mapper>

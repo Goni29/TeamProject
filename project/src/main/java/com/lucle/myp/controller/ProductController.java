@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.service.MarketService;
 import com.lucle.myp.service.ProductService;
@@ -49,14 +50,14 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public String getProductById(@PathVariable("id") int productId, Model model) {
-    	MarketVo product = productService.selectProductById(productId);
+       MarketVo product = productService.selectProductById(productId);
         model.addAttribute("product", product);
         return "product_detail";
     }
 
     @GetMapping("/edit/{num}")
     public String showEditForm(@PathVariable("num") int productId, Model model) {
-    	MarketVo product = productService.selectProductById(productId);
+       MarketVo product = productService.selectProductById(productId);
         model.addAttribute("product", product);
         return "/prlist/edit";
     }
@@ -86,8 +87,15 @@ public class ProductController {
     MarketService marketService;
     
     @GetMapping("/recolist")
-    public String allProduct(Model model) {
+    public String allProduct(Model model) throws Exception {
         List<MarketVo> products = marketService.groupBuying();
+        List category = productService.cateList();
+      ObjectMapper objm = new ObjectMapper();
+      String cateList = objm.writeValueAsString(category);
+      model.addAttribute("cateList", cateList);
+      
+      System.out.println(category);
+      System.out.println(cateList);
         model.addAttribute("products", products);
         return "/prlist/recolist"; // This is the JSP file name without the .jsp extension
     }
