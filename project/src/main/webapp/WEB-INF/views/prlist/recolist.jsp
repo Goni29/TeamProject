@@ -10,6 +10,17 @@
     .page-size {
         width: 100vw;
     }
+    .products-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* 제품 간 간격을 조정합니다. */
+    }
+    .product {
+        border: 1px solid #ddd; /* 제품을 구분하기 위한 테두리 스타일 */
+        padding: 10px; /* 패딩 추가 */
+        width: calc(25% - 20px); /* 네 개의 제품을 한 줄에 표시하기 위한 계산 */
+        box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+    }
 </style>
 
 <body>
@@ -102,6 +113,9 @@
                             </div>
                         </c:forEach>
                     </div>
+                    <div class="products-container">
+                <!-- 동적으로 로드된 제품들이 여기에 표시됩니다. -->
+            </div>
             
             <%--
             필요시 추가하여 쓰세연
@@ -318,6 +332,54 @@ $(cateSelect3).on("change",function(){
 
 cateSelect4.children().remove();
 cateSelect4.append("<option value='none'>선택</option>");
+
+$(document).ready(function() {
+    $('.cate1, .cate2, .cate3, .cate4').on('change', function() {
+        let cateCode = $(this).val(); // 선택된 카테고리 코드
+        if(cateCode !== 'none') {
+            $.ajax({
+                url: 'productsByCategory',
+                type: 'GET',
+                data: {cateCode: cateCode},
+                success: function(data) {
+                	console.log(data);
+                    // 제품 목록을 페이지에 동적으로 표시하는 로직
+                    displayProducts(data);
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+    });
+});
+
+function displayProducts(xml) {
+    var productsHtml = '';
+    $(xml).find('item').each(function() {
+        var product = $(this);
+        var productName = product.find('productName').text(); // XML 내에서 'marketName' 태그의 텍스트를 찾습니다.
+        
+        // 해당 데이터를 HTML로 변환합니다.
+        productsHtml += '<div class="product">' + productName + '</div>'; // 'marketName'을 사용하여 HTML을 생성합니다.
+    });
+
+    $('.products-container').html(productsHtml); // 생성된 HTML을 '.products-container' 요소에 삽입합니다.
+}
+
+$.ajax({
+    url: 'productsByCategory',
+    type: 'GET',
+    dataType: 'xml', // 반환 데이터 타입을 'xml'로 지정합니다.
+    data: {cateCode: cateCode},
+    success: function(xmlData) {
+        displayProducts(xmlData);
+    },
+    error: function(error) {
+        console.log('Error:', error);
+    }
+});
+
 </script>
     </div>
 </body>

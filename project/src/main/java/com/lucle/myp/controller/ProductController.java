@@ -3,6 +3,7 @@ package com.lucle.myp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -131,5 +132,13 @@ public class ProductController {
     @GetMapping("/list-categories")
     public String listCategories() {
         return "/prlist/list-categories";
+    }
+    
+    @GetMapping("/productsByCategory")
+    public ResponseEntity<List<MarketVo>> getProductsByCategory(@RequestParam String cateCode) {
+        // cateCode에 해당하는 제품을 데이터베이스에서 조회
+        List<MarketVo> products = productService.getProductsByCategory(cateCode);
+        System.out.println(products);
+        return ResponseEntity.ok(products);
     }
 }

@@ -78,4 +78,8 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.cateList();
 	}
 
+	@Override
+    public List<MarketVo> getProductsByCategory(String cateCode) {
+        return mapper.findProductsByCategory(cateCode);
+    }
 }

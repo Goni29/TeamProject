@@ -124,4 +124,10 @@ ORDER BY CATEGORY_RANK, sub.NUM
   		select * from category order by catecode
   	
   	</select>
+  	
+  	<select id="findProductsByCategory" resultType="com.lucle.myp.domain.MarketVo">
+        SELECT m.*, c.*
+        FROM MARKET m
+        JOIN CATEGORY c ON m.category = c.cateCode
+    </select>
 </mapper>

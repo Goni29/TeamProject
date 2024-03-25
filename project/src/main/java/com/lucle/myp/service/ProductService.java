@@ -20,4 +20,5 @@ public interface ProductService {
     List<MarketVo> getProductsBySmallCategory(int small);
     List<MarketVo> getProductsBySubCategory(int sub_category);
     public List<MarketVo> cateList();
+    List<MarketVo> getProductsByCategory(String cateCode);
 }
