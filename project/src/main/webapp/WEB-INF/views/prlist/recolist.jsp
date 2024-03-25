@@ -18,6 +18,30 @@
         <div id="conteny-wrapper" class="d-flex flex-column page-size">       
             <%@ include file="../topbar.jsp"%>
             
+            <div class="cate_wrap">
+				<span>대분류</span>
+				<select class="cate1">
+					<option selected value="none">선택</option>
+				</select>
+			</div>
+			<div class="cate_wrap">
+				<span>중분류</span>
+				<select class="cate2">
+					<option selected value="none">선택</option>
+				</select>
+			</div>
+			<div class="cate_wrap">
+				<span>소분류</span>
+				<select class="cate3">
+					<option selected value="none">선택</option>
+				</select>
+			</div> 
+			<div class="cate_wrap">
+				<span>세부분류</span>
+				<select class="cate4" name="cateCode">
+					<option selected value="none">선택</option>
+				</select>
+			</div>            
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">추천상품</h1>
             </div>
@@ -114,6 +138,187 @@
                 </c:forEach>
             </div> --%>
         </div>
+        <script>
+$(document).ready(function(){
+   console.log('${cateList}');
+});
+let cateList = JSON.parse('${cateList}');
+
+let cate1Array = new Array();
+let cate2Array = new Array();
+let cate3Array = new Array();
+let cate4Array = new Array();
+let cate1Obj = new Object();
+let cate2Obj = new Object();
+let cate3Obj = new Object();
+let cate4Obj = new Object();
+
+let cateSelect1 = $(".cate1");      
+let cateSelect2 = $(".cate2");
+let cateSelect3 = $(".cate3");
+let cateSelect4 = $(".cate4");
+
+for(let i = 0; i < cateList.length; i++){
+   if(cateList[i].tier === 1){
+      cate1Obj = new Object();
+      
+      cate1Obj.cateName = cateList[i].cateName;
+      cate1Obj.cateCode = cateList[i].cateCode;
+      cate1Obj.cateParent = cateList[i].cateParent;
+      
+      cate1Array.push(cate1Obj);            
+      
+   }
+}   
+
+$(document).ready(function(){
+   console.log(cate1Array);
+});
+
+function makeCateArray(obj,array,cateList, tier){
+   for(let i = 0; i < cateList.length; i++){
+      if(cateList[i].tier === tier){
+         obj = new Object();
+         
+         obj.cateName = cateList[i].cateName;
+         obj.cateCode = cateList[i].cateCode;
+         obj.cateParent = cateList[i].cateParent;
+         
+         array.push(obj);            
+         
+      }
+   }
+}
+
+makeCateArray(cate1Obj,cate1Array,cateList,1);
+makeCateArray(cate2Obj,cate2Array,cateList,2);
+makeCateArray(cate3Obj,cate3Array,cateList,3);
+makeCateArray(cate4Obj,cate4Array,cateList,4);
+
+$(document).ready(function(){
+   console.log(cate1Array);
+   console.log(cate2Array);
+   console.log(cate3Array);
+   console.log(cate4Array);
+});
+
+for(let i = 0; i < cate1Array.length; i++){
+   cateSelect1.append("<option value='"+cate1Array[i].cateCode+"'>" + cate1Array[i].cateName + "</option>");
+}
+
+$(cateSelect1).on("change",function(){
+   
+});
+
+$(cateSelect1).on("change",function(){
+   
+   let selectVal1 = $(this).find("option:selected").val();   
+   
+});
+
+$(cateSelect1).on("change",function(){
+   
+   let selectVal1 = $(this).find("option:selected").val();   
+   
+   cateSelect2.children().remove();
+   
+   cateSelect2.append("<option value='none'>선택</option>")
+   
+});
+
+$(cateSelect1).on("change",function(){
+   
+   let selectVal1 = $(this).find("option:selected").val();   
+   
+   cateSelect2.children().remove();
+   
+   cateSelect2.append("<option value='none'>선택</option>");
+   
+   for(let i = 0; i < cate2Array.length; i++){
+      if(selectVal1 === cate2Array[i].cateParent){
+         cateSelect2.append("<option value='"+cate2Array[i].cateCode+"'>" + cate2Array[i].cateName + "</option>");   
+      }
+   }// for
+   
+});
+
+$(cateSelect2).on("change",function(){
+   
+   
+});
+
+$(cateSelect2).on("change",function(){
+   
+   let selectVal2 = $(this).find("option:selected").val();
+   
+});
+
+$(cateSelect2).on("change",function(){
+   
+   let selectVal2 = $(this).find("option:selected").val();
+   
+   cateSelect3.children().remove();
+   
+   cateSelect3.append("<option value='none'>선택</option>");      
+   
+});
+
+$(cateSelect2).on("change",function(){
+   
+   let selectVal2 = $(this).find("option:selected").val();
+   
+   cateSelect3.children().remove();
+   
+   cateSelect3.append("<option value='none'>선택</option>");      
+   
+   for(let i = 0; i < cate3Array.length; i++){
+      if(selectVal2 === cate3Array[i].cateParent){
+         cateSelect3.append("<option value='"+cate3Array[i].cateCode+"'>" + cate3Array[i].cateName + "</option>");   
+      }
+   }// for      
+   
+});
+
+$(cateSelect3).on("change",function(){
+   
+   
+});
+
+$(cateSelect3).on("change",function(){
+   
+   let selectVal3 = $(this).find("option:selected").val();
+   
+});
+
+$(cateSelect3).on("change",function(){
+   
+   let selectVal3 = $(this).find("option:selected").val();
+   
+   cateSelect4.children().remove();
+   
+   cateSelect4.append("<option value='none'>선택</option>");      
+   
+});
+
+$(cateSelect3).on("change",function(){
+   
+   let selectVal3 = $(this).find("option:selected").val();
+   
+   cateSelect4.children().remove();
+   
+   cateSelect4.append("<option value='none'>선택</option>");      
+   
+   for(let i = 0; i < cate3Array.length; i++){
+      if(selectVal3 === cate4Array[i].cateParent){
+         cateSelect4.append("<option value='"+cate4Array[i].cateCode+"'>" + cate4Array[i].cateName + "</option>");   
+      }
+   }// for      
+   
+});
+
+cateSelect4.children().remove();
+cateSelect4.append("<option value='none'>선택</option>");
+</script>
     </div>
 </body>
 </html>

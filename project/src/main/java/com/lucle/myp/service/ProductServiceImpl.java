@@ -71,5 +71,11 @@ public class ProductServiceImpl implements ProductService {
     public List<MarketVo> getProductsBySubCategory(int sub_category) {
         return mapper.selectProductsBySubCategory(sub_category);
     }
+    
+    /* 카테고리 리스트 */
+	@Override
+	public List<MarketVo> cateList() {
+		return mapper.cateList();
+	}
 
 }

@@ -19,4 +19,5 @@ public interface ProductService {
     List<MarketVo> getProductsByMediumCategory(int medium);
     List<MarketVo> getProductsBySmallCategory(int small);
     List<MarketVo> getProductsBySubCategory(int sub_category);
+    public List<MarketVo> cateList();
 }
