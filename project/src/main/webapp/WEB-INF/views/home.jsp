@@ -34,7 +34,6 @@
             <%@ include file="./topbar.jsp"%>
             <div id="content main-content" class="main-width">  
 
-                <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
