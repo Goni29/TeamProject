@@ -11,7 +11,11 @@
         width: 100vw;
     }
     .cate_wrap{
-    	margin-left: 1rem; margin-right: 1rem; 
+    	margin-left: 1rem; margin-right: 1rem; margin-top: auto; margin-bottom: auto;
+    }
+    
+    .category{
+    	display: flex;
     }
 
     .form_section_content select {
@@ -43,29 +47,30 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">인기상품</h1>
                     </div>
-                    <div class="mb-4">
-	                        <div class="cate_wrap">
-	                            <span>대분류</span> <select class="large">
-	                                <option selected value="none">선택</option>
-	                            </select>
-	                        </div>
-	                        <div class="cate_wrap">
-	                            <span>중분류</span> <select class="medium">
-	                                <option selected value="none">선택</option>
-	                            </select>
-	                        </div>
-	                        <div class="cate_wrap">
-	                            <span>소분류</span> <select class="small">
-	                                <option selected value="none">선택</option>
-	                            </select>
-	                        </div>
-	                        <div class="cate_wrap">
-	                            <span>세부분류</span> <select class="sub_category" name="cateCode">
-	                                <option selected value="none">선택</option>
-	                            </select>
-	                        </div>
+                    
+                    <div class="mb-4 category">
+                        <div class="cate_wrap">
+                            <span>대분류</span> <select class="large">
+                                <option selected value="none">선택</option>
+                            </select>
                         </div>
-                    </div>
+                        <div class="cate_wrap">
+                            <span>중분류</span> <select class="medium">
+                                <option selected value="none">선택</option>
+                            </select>
+                        </div>
+                        <div class="cate_wrap">
+                            <span>소분류</span> <select class="small">
+                                <option selected value="none">선택</option>
+                            </select>
+                        </div>
+                        <div class="cate_wrap">
+                            <span>세부분류</span> <select class="sub_category" name="cateCode">
+                                <option selected value="none">선택</option>
+                            </select>
+                       	</div>
+                     </div>
+                    
                     <div class="row">
 
                         <c:forEach var="product" items="${productDetails}">
@@ -127,12 +132,11 @@
                                 </div>
                             </div>
                         </c:forEach>
-
+						</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 	
 <script>
     $(document).ready(function(){

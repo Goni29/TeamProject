@@ -1,140 +1,125 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="../header.jsp"%>
-<%@ include file="../topbar.jsp"%>
-<span class="titletext" hidden="hidden">게시글 목록</span>
-<body>
-	<div class="container-fluid p-5 bg-dark text-white text-center">
-		<h1>게시판</h1>
-	</div>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-	<div class="container mt-5">
-		<div class="row">
-			<div class="col">
+<%@ include file="../header.jsp" %>
 
-				<!-- 로그인한 사용자만 게시글 작성 버튼 표시 -->
-				<c:if test="${loginVo.grade == 3}">
-					<div class="col-auto">
-						<a href='/board/register' class="newboard btn btn-primary mb-3">게시글
-							작성</a>
-					</div>
-				</c:if>
+<style>
+    .page-size {
+        width: 100vw;
+    }
+</style>
+<body id="page-top">
+    
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+        <%@ include file="../sidebar.jsp" %>
+        <div id="conteny-wrapper" class="d-flex flex-column page-size">       
+            <%@ include file="../topbar.jsp" %>
+            <div id="content main-content" class="main-width">  
 
-				<!-- 게시글 목록 테이블 -->
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>카테고리</th>
-							<th>제목</th>
-							<th></th>
-							<th>작성자</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
 
-					<tbody>
-						<!-- 게시글 목록 반복 출력 -->
-						<c:forEach var="board" items="${list}">
-							<tr>
-								<!-- 카테고리 -->
-								<c:if test="${board.category == 0}">
-									<td>일반</td>
-								</c:if>
-								<c:if test="${board.category == 1}">
-									<td class="text-danger">핫딜</td>
-								</c:if>
-								<!-- 게시글 제목 -->
-								<td><a class="getMove" href="${board.bno}">
-										${board.title} <span class="replyCount text-success"></span>
-								</a></td>
-								<!-- 가격 -->
-								<td>${board.won}</td>
-								<!-- 작성자 -->
-								<td>${board.writer}</td>
-								<!-- 작성일 -->
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-										value="${board.regdate}" /></td>
-							</tr>
+                            <!-- 로그인한 사용자만 게시글 작성 버튼 표시 -->
+                            <c:if test="${loginVo.grade == 3}">
+                                <div class="col-auto">
+                                    <a href='/board/register' class="newboard btn btn-primary mb-3">게시글 작성</a>
+                                </div>
+                            </c:if>
 
-							<!-- 각 게시글의 댓글 수 조회 -->
-							<script>
-								var replyBno = ${board.bno}; // 게시글 번호
-								var replyCount;
+                            <!-- 게시글 목록 테이블 -->
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>카테고리</th>
+                                        <th>제목</th>
+                                        <th></th>
+                                        <th>작성자</th>
+                                        <th>작성일</th>
+                                    </tr>
+                                </thead>
 
-								(function(bno) {
-									replyService
-											.getCount(
-													{
-														bno : bno
-													},
-													function(resultData) {
-														replyCount = resultData;
+                                <tbody>
+                                    <!-- 게시글 목록 반복 출력 -->
+                                    <c:forEach var="board" items="${list}">
+                                        <tr>
+                                            <!-- 카테고리 -->
+                                            <c:if test="${board.category == 0}">
+                                                <td>일반</td>
+                                            </c:if>
+                                            <c:if test="${board.category == 1}">
+                                                <td class="text-danger">핫딜</td>
+                                            </c:if>
+                                            <!-- 게시글 제목 -->
+                                            <td><a class="getMove" href="${board.bno}">${board.title} <span class="replyCount text-success"></span></a></td>
+                                            <!-- 가격 -->
+                                            <td>${board.won}</td>
+                                            <!-- 작성자 -->
+                                            <td>${board.writer}</td>
+                                            <!-- 작성일 -->
+                                            <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.regdate}" /></td>
+                                        </tr>
 
-														// 댓글 수가 0이 아닌 경우 댓글 수를 표시
-														if (replyCount !== 0) {
-															$(
-																	'.getMove[href="${board.bno}"] .replyCount')
-																	.text(
-																			' ('
-																					+ replyCount
-																					+ ')');
-														}
-													}, function(error) {
-														console.error("에러 발생:",
-																error);
-													});
-								})(replyBno);
-							</script>
+                                        <!-- 각 게시글의 댓글 수 조회 -->
+                                        <script>
+                                            var replyBno = ${board.bno}; // 게시글 번호
+                                            var replyCount;
 
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
+                                            (function(bno) {
+                                                replyService.getCount({
+                                                    bno: bno
+                                                }, function(resultData) {
+                                                    replyCount = resultData;
 
-		<div class="container">
-			<div class="row">
-				<!-- 페이지네이션 -->
-				<div class="col-md-6">
-					<nav aria-label="Page navigation">
-						<ul class="pagination">
-							<c:if test="${pageMaker.prev }">
-								<!-- 이전 페이지가 있을 때 -->
-								<li class="page-item"><a class="page-link"
-									href="${pageMaker.startPage-1 }" aria-label="Previous"> <span
-										aria-hidden="true">&laquo;</span>
-								</a></li>
-							</c:if>
-							<c:if test="${!pageMaker.prev }">
-								<!-- 이전 페이지가 없을 때 -->
-								<li class="page-item disabled"><a class="page-link"
-									href="${pageMaker.startPage-1 }" aria-label="Previous"> <span
-										aria-hidden="true">&laquo;</span>
-								</a></li>
-							</c:if>
-							<!-- 페이지 for문 -->
-							<c:forEach var="num" begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }">
-								<li
-									class="page-item ${pageMaker.cri.pageNum == num ? 'active' : ''}">
-									<a class="page-link" href="${num}">${num}</a>
-								</li>
-							</c:forEach>
-							<c:if test="${pageMaker.next}">
-								<li class="page-item"><a class="page-link"
-									href="${pageMaker.endPage+1 }" aria-label="Next"> <span
-										aria-hidden="true">&raquo;</span>
-								</a></li>
-							</c:if>
-							<c:if test="${!pageMaker.next}">
-								<li class="page-item disabled"><a class="page-link"
-									href="${pageMaker.endPage+1 }" aria-label="Next"> <span
-										aria-hidden="true">&raquo;</span>
-								</a></li>
-							</c:if>
-						</ul>
-					</nav>
-				</div>
+                                                    // 댓글 수가 0이 아닌 경우 댓글 수를 표시
+                                                    if (replyCount !== 0) {
+                                                        $('.getMove[href="${board.bno}"] .replyCount').text('(' + replyCount + ')');
+                                                    }
+                                                }, function(error) {
+                                                    console.error("에러 발생:", error);
+                                                });
+                                            })(replyBno);
+                                        </script>
+
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <!-- 페이지네이션 -->
+                            <div class="col-md-6">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <c:if test="${pageMaker.prev}">
+                                            <!-- 이전 페이지가 있을 때 -->
+                                            <li class="page-item"><a class="page-link" href="${pageMaker.startPage-1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                        </c:if>
+                                        <c:if test="${!pageMaker.prev}">
+                                            <!-- 이전 페이지가 없을 때 -->
+                                            <li class="page-item disabled"><a class="page-link" href="${pageMaker.startPage-1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                        </c:if>
+                                        <!-- 페이지 for문 -->
+                                        <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+                                            <li class="page-item ${pageMaker.cri.pageNum == num ? 'active' : ''}">
+                                                <a class="page-link" href="${num}">${num}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:if test="${pageMaker.next}">
+                                            <li class="page-item"><a class="page-link" href="${pageMaker.endPage+1 }" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                                        </c:if>
+                                        <c:if test="${!pageMaker.next}">
+                                            <li class="page-item disabled"><a class="page-link" href="${pageMaker.endPage+1 }" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                                        </c:if>
+                                    </ul>
+                                </nav>
+                            </div>
 
 				<!-- 검색과 관련된 폼 -->
 				<div class="col-md-6">
@@ -181,7 +166,8 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
+</div>
 
 	</div>
 

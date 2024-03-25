@@ -10,6 +10,29 @@
     .page-size {
         width: 100vw;
     }
+    .cate_wrap{
+    	margin-left: 1rem; margin-right: 1rem; margin-top: auto; margin-bottom: auto;
+    }
+    
+    .category{
+    	display: flex;
+    }
+
+    .form_section_content select {
+        width: 92%;
+        height: 35px;
+        font-size: 20px;
+        text-align-last: center;
+        margin-left: 5px;
+    }
+
+    .cate_wrap span {
+        font-weight: 600;
+    }
+
+    .cate_wrap:not(:first-child) {
+        margin-top: 20px;
+    }
 </style>
 
 <body>
@@ -17,35 +40,36 @@
         <%@ include file="../sidebar.jsp"%>
         <div id="conteny-wrapper" class="d-flex flex-column page-size">       
             <%@ include file="../topbar.jsp"%>
-            
-            <div class="cate_wrap">
-				<span>대분류</span>
-				<select class="cate1">
-					<option selected value="none">선택</option>
-				</select>
-			</div>
-			<div class="cate_wrap">
-				<span>중분류</span>
-				<select class="cate2">
-					<option selected value="none">선택</option>
-				</select>
-			</div>
-			<div class="cate_wrap">
-				<span>소분류</span>
-				<select class="cate3">
-					<option selected value="none">선택</option>
-				</select>
-			</div> 
-			<div class="cate_wrap">
-				<span>세부분류</span>
-				<select class="cate4" name="cateCode">
-					<option selected value="none">선택</option>
-				</select>
-			</div>            
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">추천상품</h1>
-            </div>
-            
+            <div id="content main-content" class="main-width">
+
+                <div class="container-fluid">
+
+		            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+		                <h1 class="h3 mb-0 text-gray-800">추천상품</h1>
+		            </div>
+                    
+                    <div class="mb-4 category">
+                        <div class="cate_wrap">
+                            <span>대분류</span> <select class="large">
+                                <option selected value="none">선택</option>
+                            </select>
+                        </div>
+                        <div class="cate_wrap">
+                            <span>중분류</span> <select class="medium">
+                                <option selected value="none">선택</option>
+                            </select>
+                        </div>
+                        <div class="cate_wrap">
+                            <span>소분류</span> <select class="small">
+                                <option selected value="none">선택</option>
+                            </select>
+                        </div>
+                        <div class="cate_wrap">
+                            <span>세부분류</span> <select class="sub_category" name="cateCode">
+                                <option selected value="none">선택</option>
+                            </select>
+                       	</div>
+                     </div>
             <div class="row">
                         <c:forEach var="product" items="${products}">
                             <div class="col-xl-3 col-md-6 mb-4 border">
@@ -101,6 +125,8 @@
                                 </div>
                             </div>
                         </c:forEach>
+                    </div>
+                    </div>
                     </div>
             
             <%--
