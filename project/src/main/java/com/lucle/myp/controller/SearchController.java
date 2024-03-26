@@ -82,7 +82,7 @@ public class SearchController {
 	public void adminPage(HttpServletRequest req, Model model, Criteria cri) {
 		
 		if(cri.getSort() == "bno") {
-			cri.setSort("searchCount");
+			cri.setSort("PCATEGORY_COUNT");
 		}
 		
 	    HttpSession session = req.getSession();

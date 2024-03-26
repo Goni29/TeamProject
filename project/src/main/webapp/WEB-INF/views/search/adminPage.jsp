@@ -100,8 +100,8 @@
 	                <tbody>
 	                    <tr class="gender common-class" hidden="hidden">
 	                        <td><a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
+	                            target="_blank">${s.PCATEGORY}</a></td>
+	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.male}</td>
 	                        <td>${s.female}</td>
 	                    </tr>
@@ -151,6 +151,7 @@
 	                        <td>${s.jeonnam}</td>
 	                        <td>${s.kyeongbuk}</td>
 	                        <td>${s.kyeongnam}</td>
+	                        <td>${s.JEJU}</td>
 	                    </tr>
 	                </tbody>
 	            </table>
@@ -172,8 +173,8 @@
 	                <tbody>
 	                    <tr class="age common-class" hidden="hidden">
 	                        <td><a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
+	                            target="_blank">${s.PCATEGORY}</a></td>
+	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.underteen}</td>
 	                        <td>${s.teen}</td>
 	                        <td>${s.twenty}</td>
