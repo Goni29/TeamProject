@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lucle.myp.domain.Criteria;
+import com.lucle.myp.domain.MarketviewVo;
 import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.domain.UserVo;
+import com.lucle.myp.service.MarketService;
 import com.lucle.myp.service.SearchService;
 
 import lombok.extern.log4j.Log4j;
@@ -81,8 +83,8 @@ public class SearchController {
 	@GetMapping("/adminPage")
 	public void adminPage(HttpServletRequest req, Model model, Criteria cri) {
 		
-		if(cri.getSort() == "bno") {
-			cri.setSort("searchCount");
+		if(cri.getSort() == "num") {
+			cri.setSort("marketViewCount");
 		}
 		
 	    HttpSession session = req.getSession();
@@ -94,7 +96,7 @@ public class SearchController {
 	        return;
 	    }
 
-	    List<SearchStatVo> list = service.getStatList(cri);
+	    List<MarketviewVo> list = service.getMarketviewList(cri);
 	    System.out.println(list);
 	    model.addAttribute("sList", list);
 	}

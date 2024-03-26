@@ -26,7 +26,7 @@
 			        </div>
 			        <!-- 오른쪽 컨텐츠: 정렬 옵션 -->
 			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort1" value="searchCount" checked="checked">
+			            <input class="form-check-input" type="radio" name="sort" id="sort1" value="marketViewCount" checked="checked">
 			            <label class="form-check-label" for="sort1">검색 회수</label>
 			        </div>
 			        <div class="form-check form-check-inline">
@@ -64,19 +64,19 @@
 	            <table class="table table-striped table-hover">
 	                <thead>
 	                    <tr class="gender common-class" hidden="hidden">
-	                        <th>검색어</th>
-	                        <th>검색 회수</th>
+	                        <th>상품</th>
+	                        <th>조회수</th>
 	                        <th>남성</th>
 	                        <th>여성</th>
 	                    </tr> 
 	                </thead>
 	                <tbody>
 	                    <tr class="gender common-class" hidden="hidden">
-	                        <td><a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
-	                        <td>${s.male}</td>
-	                        <td>${s.female}</td>
+	                        <td><a href="/market/search?keyword=${mv.pcategory}&type=11st&type=ama&type=amaJp&type=ebay"
+	                            target="_blank">${mv.pcategory}</a></td>
+	                        <td>${mv.marketViewCount}</td>
+	                        <td>${mv.male}</td>
+	                        <td>${mv.female}</td>
 	                    </tr>
 	                </tbody>
 	            </table>
@@ -101,28 +101,30 @@
 	                        <th>전남</th>
 	                        <th>경북</th>
 	                        <th>경남</th>
+	                        <th>제주</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
 	                    <tr class="locale common-class" hidden="hidden">
-	                        <td> <a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
-	                        <td>${s.seoul}</td>
-	                        <td>${s.incheon}</td>
-	                        <td>${s.busan}</td>
-	                        <td>${s.deagu}</td>
-	                        <td>${s.gwangju}</td>
-	                        <td>${s.deajeon}</td>
-	                        <td>${s.ulsan}</td>
-	                        <td>${s.gyeonggi}</td>
-	                        <td>${s.gangwon}</td>
-	                        <td>${s.chungbuk}</td>
-	                        <td>${s.chungnam}</td>
-	                        <td>${s.jeonbuk}</td>
-	                        <td>${s.jeonnam}</td>
-	                        <td>${s.kyeongbuk}</td>
-	                        <td>${s.kyeongnam}</td>
+	                        <td> <a href="/market/search?keyword=${mv.pcategory}&type=11st&type=ama&type=amaJp&type=ebay"
+	                            target="_blank">${mv.pcategory}</a></td>
+	                        <td>${mv.marketViewCount}</td>
+	                        <td>${mv.seoul}</td>
+	                        <td>${mv.incheon}</td>
+	                        <td>${mv.busan}</td>
+	                        <td>${mv.deagu}</td>
+	                        <td>${mv.gwangju}</td>
+	                        <td>${mv.deajeon}</td>
+	                        <td>${mv.ulsan}</td>
+	                        <td>${mv.gyeonggi}</td>
+	                        <td>${mv.gangwon}</td>
+	                        <td>${mv.chungbuk}</td>
+	                        <td>${mv.chungnam}</td>
+	                        <td>${mv.jeonbuk}</td>
+	                        <td>${mv.jeonnam}</td>
+	                        <td>${mv.kyeongbuk}</td>
+	                        <td>${mv.kyeongnam}</td>
+	                        <td>${mv.jeju}</td>
 	                    </tr>
 	                </tbody>
 	            </table>
@@ -143,16 +145,16 @@
 	                </thead>
 	                <tbody>
 	                    <tr class="age common-class" hidden="hidden">
-	                        <td><a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
-	                        <td>${s.underteen}</td>
-	                        <td>${s.teen}</td>
-	                        <td>${s.twenty}</td>
-	                        <td>${s.thirty}</td>
-	                        <td>${s.forty}</td>
-	                        <td>${s.fifty}</td>
-	                        <td>${s.sixtyover}</td>
+	                        <td><a href="/market/search?keyword=${mv.pcategory}&type=11st&type=ama&type=amaJp&type=ebay"
+	                            target="_blank">${mv.pcategory}</a></td>
+	                        <td>${mv.marketViewCount}</td>
+	                        <td>${mv.underteens}</td>
+	                        <td>${mv.teens}</td>
+	                        <td>${mv.twenties}</td>
+	                        <td>${mv.thirties}</td>
+	                        <td>${mv.forties}</td>
+	                        <td>${mv.fifties}</td>
+	                        <td>${mv.sixtiesover}</td>
 	                    </tr>
 	                </tbody>
 	            </table>

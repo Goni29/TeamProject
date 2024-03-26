@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lucle.myp.domain.Criteria;
+import com.lucle.myp.domain.MarketviewVo;
 import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.domain.UserVo;
@@ -68,4 +69,9 @@ public class SearchServiceImpl implements SearchService {
 	        }
 	        return regionData;
 	    }
+
+	@Override
+	public List<MarketviewVo> getMarketviewList(Criteria cri) {
+		return mapper.getMarketviewList(cri);
+	}
 }

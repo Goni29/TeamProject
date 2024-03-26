@@ -125,5 +125,5 @@ AND m.num = #{num}
 		JOIN CATEGORY c ON m.num = c.num
 		WHERE m.num = #{num}
 	</select>
-
+	
 </mapper>
