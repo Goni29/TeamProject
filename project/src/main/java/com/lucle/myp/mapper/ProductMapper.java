@@ -2,6 +2,8 @@ package com.lucle.myp.mapper;
 
 import java.util.List;
 
+import com.lucle.myp.domain.CategoryFilterVo;
+import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
 
 public interface ProductMapper {
@@ -16,4 +18,10 @@ public interface ProductMapper {
     List<MarketVo> selectProductsBySmallCategory(int small);
     List<MarketVo> selectProductsBySubCategory(int sub_category);
     public List<MarketVo> cateList();
+    
+    public String[] getCateList(Criteria cri);
+    
+    public CategoryFilterVo getCateInfo(Criteria cri);
+    
+    List<MarketVo> findProductsByCategory(String cateCode);
 }

@@ -26,70 +26,41 @@
 		order by
 		searchCount desc
 	</select>
-<!-- 
+
 	<select id="getStatList"
 		resultType="com.lucle.myp.domain.SearchStatVo">
 		<![CDATA[
-SELECT   s.SEARCHWORD,   
-         COUNT(*) AS SEARCHCOUNT,   
+SELECT   s.PCATEGORY,   
+         COUNT(*) AS PCATEGORY_COUNT,   
          SUM(CASE WHEN u.AGE BETWEEN 10 AND 19 THEN 1 ELSE 0 END) AS teens,   
          SUM(CASE WHEN u.AGE BETWEEN 20 AND 29 THEN 1 ELSE 0 END) AS twenties,   
          SUM(CASE WHEN u.AGE BETWEEN 30 AND 39 THEN 1 ELSE 0 END) AS thirties,   
          SUM(CASE WHEN u.AGE BETWEEN 40 AND 49 THEN 1 ELSE 0 END) AS forties,   
          SUM(CASE WHEN u.AGE BETWEEN 50 AND 59 THEN 1 ELSE 0 END) AS fifties,   
-         SUM(CASE WHEN u.AGE >= 60 THEN 1 ELSE 0 END) AS above,   
+         SUM(CASE WHEN u.AGE >= 60 THEN 1 ELSE 0 END) AS aboveSixty,   
          SUM(CASE WHEN u.GENDER = 1 THEN 1 ELSE 0 END) AS male,   
          SUM(CASE WHEN u.GENDER = 0 THEN 1 ELSE 0 END) AS female,   
-         SUM(CASE WHEN u.ADDRESS = '서울특별시' THEN 1 ELSE 0 END) AS SEOUL,   
-         SUM(CASE WHEN u.ADDRESS = '경기도' THEN 1 ELSE 0 END) AS GYEONGGI   
+         SUM(CASE WHEN u.ADDRESS LIKE '%서울%' THEN 1 ELSE 0 END) AS SEOUL,   
+         SUM(CASE WHEN u.ADDRESS LIKE '%경기%' THEN 1 ELSE 0 END) AS GYEONGGI,
+         SUM(CASE WHEN u.ADDRESS LIKE '%인천%' THEN 1 ELSE 0 END) AS incheon,
+         SUM(CASE WHEN u.ADDRESS LIKE '%부산%' THEN 1 ELSE 0 END) AS busan,
+         SUM(CASE WHEN u.ADDRESS LIKE '%대구%' THEN 1 ELSE 0 END) AS deagu,
+         SUM(CASE WHEN u.ADDRESS LIKE '%광주%' THEN 1 ELSE 0 END) AS gwangju,
+         SUM(CASE WHEN u.ADDRESS LIKE '%대전%' THEN 1 ELSE 0 END) AS deajeon,
+         SUM(CASE WHEN u.ADDRESS LIKE '%울산%' THEN 1 ELSE 0 END) AS ulsan,
+         SUM(CASE WHEN u.ADDRESS LIKE '%강원%' THEN 1 ELSE 0 END) AS gangwon,
+         SUM(CASE WHEN u.ADDRESS LIKE '%충북%' THEN 1 ELSE 0 END) AS chungbuk,
+         SUM(CASE WHEN u.ADDRESS LIKE '%충남%' THEN 1 ELSE 0 END) AS chungnam,
+         SUM(CASE WHEN u.ADDRESS LIKE '%전북%' THEN 1 ELSE 0 END) AS jeonbuk,
+         SUM(CASE WHEN u.ADDRESS LIKE '%전남%' THEN 1 ELSE 0 END) AS jeonnam,
+         SUM(CASE WHEN u.ADDRESS LIKE '%경북%' THEN 1 ELSE 0 END) AS kyeongbuk,
+         SUM(CASE WHEN u.ADDRESS LIKE '%경남%' THEN 1 ELSE 0 END) AS kyeongnam,
+         SUM(CASE WHEN u.ADDRESS LIKE '%제주%' THEN 1 ELSE 0 END) AS JEJU
 FROM     USERS u   
-JOIN     SEARCH s ON u.ID = s.ID   
-WHERE    searchDate >= sysdate - #{sortTime}
-GROUP BY s.SEARCHWORD
+JOIN     MARKETVIEW s ON u.ID = s.ID   
+WHERE    s.VIEWDATE >= sysdate - #{sortTime}
+GROUP BY s.PCATEGORY
 ORDER BY ${sort} DESC
-		]]>
-	</select> -->
-	
-	<select id="getMarketviewList"
-		resultType="com.lucle.myp.domain.MarketviewVo">
-		<![CDATA[
-SELECT
-    mv.pcategory,
-    COUNT(*) AS marketViewCount,
-    SUM(CASE WHEN u.AGE <= 9 THEN 1 ELSE 0 END) AS underteens,
-    SUM(CASE WHEN u.AGE BETWEEN 10 AND 19 THEN 1 ELSE 0 END) AS teens,
-    SUM(CASE WHEN u.AGE BETWEEN 20 AND 29 THEN 1 ELSE 0 END) AS twenties,
-    SUM(CASE WHEN u.AGE BETWEEN 30 AND 39 THEN 1 ELSE 0 END) AS thirties,
-    SUM(CASE WHEN u.AGE BETWEEN 40 AND 49 THEN 1 ELSE 0 END) AS forties,
-    SUM(CASE WHEN u.AGE BETWEEN 50 AND 59 THEN 1 ELSE 0 END) AS fifties,
-    SUM(CASE WHEN u.AGE >= 60 THEN 1 ELSE 0 END) AS sixtiesover,
-    SUM(CASE WHEN u.GENDER = 1 THEN 1 ELSE 0 END) AS male,
-    SUM(CASE WHEN u.GENDER = 0 THEN 1 ELSE 0 END) AS female,
-    SUM(CASE WHEN u.ADDRESS = '서울특별시' THEN 1 ELSE 0 END) AS seoul,
-    SUM(CASE WHEN u.ADDRESS = '인천광역시' THEN 1 ELSE 0 END) AS incheon,
-    SUM(CASE WHEN u.ADDRESS = '부산광역시' THEN 1 ELSE 0 END) AS busan,
-    SUM(CASE WHEN u.ADDRESS = '대구광역시' THEN 1 ELSE 0 END) AS deagu,
-    SUM(CASE WHEN u.ADDRESS = '광주광역시' THEN 1 ELSE 0 END) AS gwangju,
-    SUM(CASE WHEN u.ADDRESS = '대전광역시' THEN 1 ELSE 0 END) AS deajeon,
-    SUM(CASE WHEN u.ADDRESS = '울산광역시' THEN 1 ELSE 0 END) AS ulsan,
-    SUM(CASE WHEN u.ADDRESS = '경기도' THEN 1 ELSE 0 END) AS gyeonggi,
-    SUM(CASE WHEN u.ADDRESS = '강원도' THEN 1 ELSE 0 END) AS gangwon,
-    SUM(CASE WHEN u.ADDRESS = '충청북도' THEN 1 ELSE 0 END) AS chungbuk,
-    SUM(CASE WHEN u.ADDRESS = '충청남도' THEN 1 ELSE 0 END) AS chungnam,
-    SUM(CASE WHEN u.ADDRESS = '전라북도' THEN 1 ELSE 0 END) AS jeonbuk,
-    SUM(CASE WHEN u.ADDRESS = '전라남도' THEN 1 ELSE 0 END) AS jeonnam,
-    SUM(CASE WHEN u.ADDRESS = '경상북도' THEN 1 ELSE 0 END) AS kyeongbuk,
-    SUM(CASE WHEN u.ADDRESS = '경상남도' THEN 1 ELSE 0 END) AS kyeongnam
-FROM
-    USERS u
-JOIN
-    MARKETVIEW mv ON u.ID = mv.ID
-WHERE
-    searchDate >= sysdate - #{sortTime}
-GROUP BY
-    mv.pcategory
-ORDER BY
-    ${sort} DESC
 		]]>
 	</select>
 

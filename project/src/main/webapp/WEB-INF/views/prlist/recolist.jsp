@@ -10,28 +10,16 @@
     .page-size {
         width: 100vw;
     }
-    .cate_wrap{
-    	margin-left: 1rem; margin-right: 1rem; margin-top: auto; margin-bottom: auto;
+    .products-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* 제품 간 간격을 조정합니다. */
     }
-    
-    .category{
-    	display: flex;
-    }
-
-    .form_section_content select {
-        width: 92%;
-        height: 35px;
-        font-size: 20px;
-        text-align-last: center;
-        margin-left: 5px;
-    }
-
-    .cate_wrap span {
-        font-weight: 600;
-    }
-
-    .cate_wrap:not(:first-child) {
-        margin-top: 20px;
+    .product {
+        border: 1px solid #ddd; /* 제품을 구분하기 위한 테두리 스타일 */
+        padding: 10px; /* 패딩 추가 */
+        width: calc(25% - 20px); /* 네 개의 제품을 한 줄에 표시하기 위한 계산 */
+        box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
     }
 </style>
 
@@ -40,94 +28,38 @@
         <%@ include file="../sidebar.jsp"%>
         <div id="conteny-wrapper" class="d-flex flex-column page-size">       
             <%@ include file="../topbar.jsp"%>
-            <div id="content main-content" class="main-width">
-
-                <div class="container-fluid">
-
-		            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-		                <h1 class="h3 mb-0 text-gray-800">추천상품</h1>
-		            </div>
-                    
-                    <div class="mb-4 category">
-                        <div class="cate_wrap">
-                            <span>대분류</span> <select class="large">
-                                <option selected value="none">선택</option>
-                            </select>
-                        </div>
-                        <div class="cate_wrap">
-                            <span>중분류</span> <select class="medium">
-                                <option selected value="none">선택</option>
-                            </select>
-                        </div>
-                        <div class="cate_wrap">
-                            <span>소분류</span> <select class="small">
-                                <option selected value="none">선택</option>
-                            </select>
-                        </div>
-                        <div class="cate_wrap">
-                            <span>세부분류</span> <select class="sub_category" name="cateCode">
-                                <option selected value="none">선택</option>
-                            </select>
-                       	</div>
-                     </div>
-            <div class="row">
-                        <c:forEach var="product" items="${products}">
-                            <div class="col-xl-3 col-md-6 mb-4 border">
-                                <p>${product.marketName}</p>
-                                
-                                <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product.imgUrl}" alt="Product Image" > <br>
-                                    <h6 class="m-0 font-weight-bold text-primary">
-                                    <c:choose>
-                                        <c:when test="${fn:length(product.productName) > 20}">
-                                            ${fn:substring(product.productName, 0, 20)}...
-                                        </c:when>
-                                        <c:otherwise>
-                                            ${product.productName}
-                                        </c:otherwise>
-                                    </c:choose>
-                                    </h6>
-                                </a><br>
-                                      
-                                <div>
-                                    <p>가격 : ${product.won}원</p>
-                                    <p>현재 참여 인원 : ${product.personnum}</p>
-                                </div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product.personnum}%</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: ${product.personnum}%" aria-valuenow="${product.personnum}" aria-valuemin="0" aria-valuemax="${product.goaltarget}"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="btn-group" role="group" aria-label="Button group">
-                                    <form class="actionForm" action="/board/register">
-                                        <input name="num" value="${product.num}" hidden="hidden" />
-                                        <input name="productName" value="${product.productName}" hidden="hidden" />
-                                        <input name="marketName" value="${product.marketName}" hidden="hidden" />
-                                        <input name="url" value="${product.url}" hidden="hidden" />
-                                        <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
-                                        <input name="won" value="${product.won}" hidden="hidden" />
-                                       
-                                        <input name="delivery" value="${product.delivery}" hidden="hidden" />
-                                        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
-                                    
-                                        <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary" hidden="hidden">공동구매 참여하기</button>
-                                    </form>
-                                    
-                                    <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                                        <button class="btn btn-success" hidden="hidden">상세 페이지</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                    </div>
-                    </div>
+            
+            <div class="cate_wrap">
+				<span>대분류</span>
+				<select class="cate1">
+					<option selected value="none">선택</option>
+				</select>
+			</div>
+			<div class="cate_wrap">
+				<span>중분류</span>
+				<select class="cate2">
+					<option selected value="none">선택</option>
+				</select>
+			</div>
+			<div class="cate_wrap">
+				<span>소분류</span>
+				<select class="cate3">
+					<option selected value="none">선택</option>
+				</select>
+			</div> 
+			<div class="cate_wrap">
+				<span>세부분류</span>
+				<select class="cate4" name="cateCode">
+					<option selected value="none">선택</option>
+				</select>
+			</div>            
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">카테고리별 상품</h1>
+            </div>
+            
+                    <div class="products-container">
+                <!-- 동적으로 로드된 제품들이 여기에 표시됩니다. -->
+            </div>
             
             <%--
             필요시 추가하여 쓰세연
@@ -216,7 +148,6 @@ function makeCateArray(obj,array,cateList, tier){
    }
 }
 
-makeCateArray(cate1Obj,cate1Array,cateList,1);
 makeCateArray(cate2Obj,cate2Array,cateList,2);
 makeCateArray(cate3Obj,cate3Array,cateList,3);
 makeCateArray(cate4Obj,cate4Array,cateList,4);
@@ -344,6 +275,97 @@ $(cateSelect3).on("change",function(){
 
 cateSelect4.children().remove();
 cateSelect4.append("<option value='none'>선택</option>");
+
+$(document).ready(function() {
+    let cateList = JSON.parse('${cateList}');
+
+    function populateSelect($select, array, parentCode) {
+        $select.empty().append("<option value='none'>선택</option>");
+        array.forEach(function(item) {
+            if (!parentCode || item.cateParent === parentCode) {
+                $select.append("<option value='" + item.cateCode + "'>" + item.cateName + "</option>");
+            }
+        });
+    }
+
+    function getCategoryArray(tier) {
+        return cateList.filter(function(item) {
+            return item.tier === tier;
+        });
+    }
+
+    function displayProducts(data) {
+        var productsHtml = '';
+        $(data).find('item').each(function() {
+            var product = {
+                productName: $(this).find('productName').text(),
+                marketName: $(this).find('marketName').text(),
+                large: $(this).find('large').text(),
+                medium: $(this).find('medium').text(),
+                small: $(this).find('small').text(),
+                sub_category: $(this).find('sub_category').text(),
+                num: $(this).find('num').text(),
+                imgUrl: $(this).find('imgUrl').text(),
+                won: $(this).find('won').text(),
+                personnum: $(this).find('personnum').text()
+            };
+
+            var productNameDisplay = product.productName.length > 20 ? product.productName.substring(0, 20) + '...' : product.productName;
+            
+            productsHtml += '<div class="product">' +
+                '<p>' + product.marketName + '</p>' +
+                '<a href="/pr?large=' + product.large + '&medium=' + product.medium + '&small=' + product.small + '&sub_category=' + product.sub_category + '&num=' + product.num + '">' +
+                '<img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="' + product.imgUrl + '" alt="Product Image"><br>' +
+                '<h6 class="m-0 font-weight-bold text-primary">' + productNameDisplay + '</h6>' +
+                '</a><br>' +
+                '<div>' +
+                '<p>가격 : ' + product.won + '원</p>' +
+                '<p>현재 참여 인원 : ' + product.personnum + '</p>' +
+                '</div>' +
+                '</div>';
+        });
+        $('.products-container').html(productsHtml);
+    }
+
+    // Initialize category selects
+    populateSelect($(".cate1"), getCategoryArray(1));
+
+    // Set up change event handlers
+    $(".cate1").change(function() {
+        let selectedValue = $(this).val();
+        populateSelect($(".cate2"), getCategoryArray(2), selectedValue);
+    });
+
+    $(".cate2").change(function() {
+        let selectedValue = $(this).val();
+        populateSelect($(".cate3"), getCategoryArray(3), selectedValue);
+    });
+
+    $(".cate3").change(function() {
+        let selectedValue = $(this).val();
+        populateSelect($(".cate4"), getCategoryArray(4), selectedValue);
+    });
+
+    $(".cate4").change(function() {
+        let selectedValue = $(this).val();
+        if(selectedValue !== 'none') {
+            $.ajax({
+                url: 'productsByCategory',
+                type: 'GET',
+                data: { cateCode: selectedValue },
+                dataType: 'xml',
+                success: function(data) {
+                    displayProducts(data);
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+    });
+});
+
+
 </script>
     </div>
 </body>

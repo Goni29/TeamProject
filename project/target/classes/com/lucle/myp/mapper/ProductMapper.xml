@@ -34,7 +34,8 @@
 		SELECT *
 		FROM MARKET m
 		JOIN CATEGORY c ON m.NUM = c.NUM
-		JOIN GROUPBUYING g ON m.NUM = g.NUM
+		JOIN
+		GROUPBUYING g ON m.NUM = g.NUM
 		ORDER BY m.NUM ASC
 	</select>
 
@@ -86,42 +87,95 @@ WHERE sub.rn = 1
 ORDER BY CATEGORY_RANK, sub.NUM
 		]]>
 	</select>
-	
-    <select id="selectProductsByLargeCategory" resultType="com.lucle.myp.domain.MarketVo">
-        SELECT m.*, c.LARGE, g.*
-        FROM MARKET m
-        JOIN CATEGORY c ON m.NUM = c.NUM
-        LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
-        WHERE c.LARGE = #{large}
-    </select>
-    
-    <select id="selectProductsByMediumCategory" resultType="com.lucle.myp.domain.MarketVo">
-        SELECT m.*, c.MEDIUM, g.*
-        FROM MARKET m
-        JOIN CATEGORY c ON m.NUM = c.NUM
-        LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
-        WHERE c.MEDIUM = #{medium}
-    </select>
-    
-    <select id="selectProductsBySmallCategory" resultType="com.lucle.myp.domain.MarketVo">
-        SELECT m.*, c.SMALL, g.*
-        FROM MARKET m
-        JOIN CATEGORY c ON m.NUM = c.NUM
-        LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
-        WHERE c.SMALL = #{small}
-    </select>
-    
-    <select id="selectProductsBySubCategory" resultType="com.lucle.myp.domain.MarketVo">
-        SELECT m.*, c.SUB_CATEGORY, g.*
-        FROM MARKET m
-        JOIN CATEGORY c ON m.NUM = c.NUM
-        LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
-        WHERE c.SUB_CATEGORY = #{sub_category}
-    </select>
-    
-    <select id="cateList" resultType="com.lucle.myp.domain.MarketVo">
-  	
-  		select * from category order by catecode
-  	
-  	</select>
+
+	<select id="selectProductsByLargeCategory"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT m.*, c.LARGE, g.*
+		FROM MARKET m
+		JOIN CATEGORY c ON m.NUM = c.NUM
+		LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
+		WHERE c.LARGE = #{large}
+	</select>
+
+	<select id="selectProductsByMediumCategory"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT m.*, c.MEDIUM, g.*
+		FROM MARKET m
+		JOIN CATEGORY c ON m.NUM = c.NUM
+		LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
+		WHERE c.MEDIUM = #{medium}
+	</select>
+
+	<select id="selectProductsBySmallCategory"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT m.*, c.SMALL, g.*
+		FROM MARKET m
+		JOIN CATEGORY c ON m.NUM = c.NUM
+		LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
+		WHERE c.SMALL = #{small}
+	</select>
+
+	<select id="selectProductsBySubCategory"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT m.*, c.SUB_CATEGORY, g.*
+		FROM MARKET m
+		JOIN CATEGORY c ON m.NUM = c.NUM
+		LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
+		WHERE c.SUB_CATEGORY = #{sub_category}
+	</select>
+
+	<select id="cateList" resultType="com.lucle.myp.domain.MarketVo">
+
+		select * from category order by catecode
+
+	</select>
+
+	<select id="findProductsByCategory"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT
+  market_query.*
+FROM (
+  SELECT
+    m.NUM AS MARKET_NUM,
+    m.PRODUCTNAME,
+    m.MARKETNAME,
+    m.URL,
+    m.IMGURL,
+    m.WON,
+    m.DELIVERY,
+    m.DELIVERYFEE,
+    m.KEYWORD,
+    m.VISIBLE AS MARKET_VISIBLE,
+    m.GROUPBUYING,
+    m.DESCRIPTION,
+    m.CATEGORY AS MARKET_CATEGORY,
+    c.LARGE AS CATEGORY_LARGE,
+    c.MEDIUM AS CATEGORY_MEDIUM,
+    c.SMALL AS CATEGORY_SMALL,
+    c.SUB_CATEGORY AS CATEGORY_SUB_CATEGORY,
+    c.TIER,
+    c.CATENAME,
+    c.CATECODE,
+    c.CATEPARENT,
+    c.CNO,
+    g.GNO,
+    g.TITLE AS GROUPBUYING_TITLE,
+    g.CONTENT AS GROUPBUYING_CONTENT,
+    g.REGIDATE AS GROUPBUYING_REGIDATE,
+    g.GOALDATE,
+    g.GOALTARGET,
+    g.PERSONNUM,
+    g.NUM AS GROUPBUYING_NUM,
+    ROW_NUMBER() OVER(PARTITION BY m.PRODUCTNAME ORDER BY m.NUM) AS rn
+  FROM
+    MARKET m
+    JOIN CATEGORY c ON m.CATEGORY = c.CATECODE
+    JOIN GROUPBUYING g ON m.NUM = g.NUM
+  WHERE
+    c.CATECODE = #{cateCode}
+) market_query
+WHERE
+  market_query.rn = 1
+	</select>
+
 </mapper>

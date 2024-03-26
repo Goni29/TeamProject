@@ -48,29 +48,6 @@
                         <h1 class="h3 mb-0 text-gray-800">인기상품</h1>
                     </div>
                     
-                    <div class="mb-4 category ">
-                        <div class="cate_wrap">
-                            <span>대분류</span> <select class="large">
-                                <option selected value="none">선택</option>
-                            </select>
-                        </div>
-                        <div class="cate_wrap">
-                            <span>중분류</span> <select class="medium">
-                                <option selected value="none">선택</option>
-                            </select>
-                        </div>
-                        <div class="cate_wrap">
-                            <span>소분류</span> <select class="small">
-                                <option selected value="none">선택</option>
-                            </select>
-                        </div>
-                        <div class="cate_wrap">
-                            <span>세부분류</span> <select class="sub_category" name="cateCode">
-                                <option selected value="none">선택</option>
-                            </select>
-                       	</div>
-                     </div>
-                    
                     <div class="row">
 
                         <c:forEach var="product" items="${productDetails}">
@@ -137,51 +114,5 @@
                 </div>
             </div>
         </div>
-	
-<script>
-    $(document).ready(function(){
-        console.log('${cateList}');
-    });
-
-    let cateList = JSON.parse('${cateList}');
-
-    let largeArray = new Array();
-    let mediumArray = new Array();
-    let smallArray = new Array();
-    let sub_category = new Array();
-    let largeObj = new Object();
-    let mediumObj = new Object();
-    let smallObj = new Object();
-    let sub_categoryObj = new Object();
-
-    let cateSelect1 = $(".large");
-    let cateSelect2 = $(".medium");
-    let cateSelect3 = $(".small");
-    let cateSelect4 = $(".sub_category");
-
-    function makeCateArray(obj, array, cateList, large){
-        for(let i = 0; i < cateList.length; i++){
-            if(cateList[i].large === large){
-                obj = new Object();
-
-                obj.cateName = cateList[i].cateName;
-                obj.cateCode = cateList[i].cateCode;
-                obj.cateParent = cateList[i].cateParent;
-
-                array.push(obj);
-            }
-        }
-    }
-
-    makeCateArray(largeObj, largeArray, cateList, 1);
-    makeCateArray(mediumObj, mediumArray, cateList, 2);
-    makeCateArray(smallObj, smallArray, cateList, 3);
-
-    $(document).ready(function(){
-        console.log(largeArray);
-        console.log(mediumArray);
-        console.log(smallArray);
-    });
-</script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.lucle.myp.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -21,6 +23,7 @@ public class MarketVo {
 	private int medium;
 	private int small;
 	private int sub_category;
+	private Long category;
 	
 	private Long marketViewCount;
 	
@@ -53,5 +56,7 @@ public class MarketVo {
 	
 	/* 상위 카테고리 */
 	private String cateParent;
+	
+	private Date buyingdate;
 	
 }

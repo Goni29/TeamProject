@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lucle.myp.domain.Criteria;
-import com.lucle.myp.domain.MarketviewVo;
 import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.domain.UserVo;
@@ -27,7 +26,6 @@ public interface SearchMapper {
 	List<SearchVo> getHistoryList(Criteria cri); // 검색 이력을 전부 확인할 수 있음. (관리자용 페이지)
 	
 	List<UserVo> selectUsersByRegion(@Param("region") String region);
-	List<MarketviewVo> getMarketviewList(Criteria cri);
 	
 	
 

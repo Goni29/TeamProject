@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.lucle.myp.domain.Criteria;
-import com.lucle.myp.domain.MarketviewVo;
 import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.domain.UserVo;
@@ -19,7 +18,6 @@ public interface SearchService {
 	List<SearchVo> getCountList(Criteria cri); // 검색 키워드 : 검색 횟수를 확인할 수 있음.
 	// sortTime이 1일 경우 지금부터 1일(24시간) 이내에 검색된 키워드를 확인 가능. 365면 1년.
 	List<SearchStatVo> getStatList(Criteria cri);
-	List<MarketviewVo> getMarketviewList(Criteria cri);
 	
 	List<SearchVo> getHistoryOne(String id, int visible, Criteria cri); // 검색 이력을 쭉 보여 줌. (유저 검색 이력 페이지)
 	List<SearchVo> getHistoryOneIp(String ip, int visible, Criteria cri);
