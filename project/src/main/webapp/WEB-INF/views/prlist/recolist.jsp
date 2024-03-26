@@ -204,7 +204,6 @@ function makeCateArray(obj,array,cateList, tier){
    }
 }
 
-makeCateArray(cate1Obj,cate1Array,cateList,1);
 makeCateArray(cate2Obj,cate2Array,cateList,2);
 makeCateArray(cate3Obj,cate3Array,cateList,3);
 makeCateArray(cate4Obj,cate4Array,cateList,4);
@@ -334,51 +333,94 @@ cateSelect4.children().remove();
 cateSelect4.append("<option value='none'>선택</option>");
 
 $(document).ready(function() {
-    $('.cate1, .cate2, .cate3, .cate4').on('change', function() {
-        let cateCode = $(this).val(); // 선택된 카테고리 코드
-        if(cateCode !== 'none') {
+    let cateList = JSON.parse('${cateList}');
+
+    function populateSelect($select, array, parentCode) {
+        $select.empty().append("<option value='none'>선택</option>");
+        array.forEach(function(item) {
+            if (!parentCode || item.cateParent === parentCode) {
+                $select.append("<option value='" + item.cateCode + "'>" + item.cateName + "</option>");
+            }
+        });
+    }
+
+    function getCategoryArray(tier) {
+        return cateList.filter(function(item) {
+            return item.tier === tier;
+        });
+    }
+
+    function displayProducts(data) {
+        var productsHtml = '';
+        $(data).find('item').each(function() {
+            var product = {
+                productName: $(this).find('productName').text(),
+                marketName: $(this).find('marketName').text(),
+                large: $(this).find('large').text(),
+                medium: $(this).find('medium').text(),
+                small: $(this).find('small').text(),
+                sub_category: $(this).find('sub_category').text(),
+                num: $(this).find('num').text(),
+                imgUrl: $(this).find('imgUrl').text(),
+                won: $(this).find('won').text(),
+                personnum: $(this).find('personnum').text()
+            };
+
+            var productNameDisplay = product.productName.length > 20 ? product.productName.substring(0, 20) + '...' : product.productName;
+            
+            productsHtml += '<div class="product">' +
+                '<p>' + product.marketName + '</p>' +
+                '<a href="/pr?large=' + product.large + '&medium=' + product.medium + '&small=' + product.small + '&sub_category=' + product.sub_category + '&num=' + product.num + '">' +
+                '<img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="' + product.imgUrl + '" alt="Product Image"><br>' +
+                '<h6 class="m-0 font-weight-bold text-primary">' + productNameDisplay + '</h6>' +
+                '</a><br>' +
+                '<div>' +
+                '<p>가격 : ' + product.won + '원</p>' +
+                '<p>현재 참여 인원 : ' + product.personnum + '</p>' +
+                '</div>' +
+                '</div>';
+        });
+        $('.products-container').html(productsHtml);
+    }
+
+    // Initialize category selects
+    populateSelect($(".cate1"), getCategoryArray(1));
+
+    // Set up change event handlers
+    $(".cate1").change(function() {
+        let selectedValue = $(this).val();
+        populateSelect($(".cate2"), getCategoryArray(2), selectedValue);
+    });
+
+    $(".cate2").change(function() {
+        let selectedValue = $(this).val();
+        populateSelect($(".cate3"), getCategoryArray(3), selectedValue);
+    });
+
+    $(".cate3").change(function() {
+        let selectedValue = $(this).val();
+        populateSelect($(".cate4"), getCategoryArray(4), selectedValue);
+    });
+
+    $(".cate4").change(function() {
+        let selectedValue = $(this).val();
+        if(selectedValue !== 'none') {
             $.ajax({
                 url: 'productsByCategory',
                 type: 'GET',
-                data: {cateCode: cateCode},
+                data: { cateCode: selectedValue },
+                dataType: 'xml',
                 success: function(data) {
-                	console.log(data);
-                    // 제품 목록을 페이지에 동적으로 표시하는 로직
                     displayProducts(data);
                 },
                 error: function(error) {
-                    console.log('Error:', error);
+                    console.error('Error:', error);
                 }
             });
         }
     });
 });
 
-function displayProducts(xml) {
-    var productsHtml = '';
-    $(xml).find('item').each(function() {
-        var product = $(this);
-        var productName = product.find('productName').text(); // XML 내에서 'marketName' 태그의 텍스트를 찾습니다.
-        
-        // 해당 데이터를 HTML로 변환합니다.
-        productsHtml += '<div class="product">' + productName + '</div>'; // 'marketName'을 사용하여 HTML을 생성합니다.
-    });
-
-    $('.products-container').html(productsHtml); // 생성된 HTML을 '.products-container' 요소에 삽입합니다.
-}
-
-$.ajax({
-    url: 'productsByCategory',
-    type: 'GET',
-    dataType: 'xml', // 반환 데이터 타입을 'xml'로 지정합니다.
-    data: {cateCode: cateCode},
-    success: function(xmlData) {
-        displayProducts(xmlData);
-    },
-    error: function(error) {
-        console.log('Error:', error);
-    }
-});
 
 </script>
     </div>

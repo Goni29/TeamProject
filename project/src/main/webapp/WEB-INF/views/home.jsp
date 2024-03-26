@@ -34,7 +34,6 @@
             <%@ include file="./topbar.jsp"%>
             <div id="content main-content" class="main-width">  
 
-                <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
@@ -42,7 +41,6 @@
                         <h1 class="h3 mb-0 text-gray-800">인기 급상승 상품</h1>
                     </div>
 
-                    <!-- Content Row -->
                     <div class="row">
                         <c:forEach var="product" items="${products}" begin="0" end="3">
                             <div class="col-xl-3 col-md-6 mb-4 border">
@@ -63,8 +61,8 @@
                                 </a><br>
                                       
                                 <div>
-                                    <p>가격 : ${product.won}원</p>
-                                    <p>현재 참여 인원 : ${product.personnum}</p>
+	                               	<p>가격 : ${product.won}원</p>
+	                                <p>현재 참여 인원 : ${product.personnum}</p>
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
@@ -77,25 +75,40 @@
                                     </div>
                                 </div>
                                 <div class="btn-group" role="group" aria-label="Button group">
-                                    <form class="actionForm" action="/board/register">
-                                        <input name="num" value="${product.num}" hidden="hidden" />
-                                        <input name="productName" value="${product.productName}" hidden="hidden" />
-                                        <input name="marketName" value="${product.marketName}" hidden="hidden" />
-                                        <input name="url" value="${product.url}" hidden="hidden" />
-                                        <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
-                                        <input name="won" value="${product.won}" hidden="hidden" />
-                                       
-                                        <input name="delivery" value="${product.delivery}" hidden="hidden" />
-                                        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
-                                    
-                                        <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary" hidden="hidden">공동구매 참여하기</button>
-                                    </form>
-                                    
-                                    <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                                        <button class="btn btn-success" hidden="hidden">상세 페이지</button>
-                                    </a>
-                                </div>
+                                   <form class="actionForm" action="/board/register">
+                                       <input name="num" value="${product.num}" hidden="hidden" />
+                                       <input name="productName" value="${product.productName}" hidden="hidden" />
+                                       <input name="marketName" value="${product.marketName}" hidden="hidden" />
+                                       <input name="url" value="${product.url}" hidden="hidden" />
+                                       <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
+                                       <input name="won" value="${product.won}" hidden="hidden" />
+                                      
+                                       <input name="delivery" value="${product.delivery}" hidden="hidden" />
+                                       <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
+                                   
+                                       <input name="keyword" value="${searchWord}" hidden="hidden" />
+                                       <button class="btn btn-primary">공동구매 참여하기</button>
+                                   </form>
+                                   
+                                   <form class="actionForm" action="/user/save">
+                                       <input name="num" value="${product.num}" hidden="hidden" />
+                                       <input name="productName" value="${product.productName}" hidden="hidden" />
+                                       <input name="marketName" value="${product.marketName}" hidden="hidden" />
+                                       <input name="url" value="${product.url}" hidden="hidden" />
+                                       <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
+                                       <input name="won" value="${product.won}" hidden="hidden" />
+                                      
+                                       <input name="delivery" value="${product.delivery}" hidden="hidden" />
+                                       <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
+                                   
+                                       <input name="keyword" value="${searchWord}" hidden="hidden" />
+                                       <button class="btn btn-primary">찜하기</button>
+                                  	</form>
+                                   
+                                   <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
+                                       <button class="btn btn-success">상세 페이지</button>
+                                   </a>
+                               </div>
                             </div>
                         </c:forEach>
                     </div>
@@ -151,6 +164,21 @@
                                        
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
                                         <button class="btn btn-primary" hidden="hidden">공동구매 참여하기</button>
+                                    </form>
+                                    
+                                	<form class="actionForm" action="/user/save">
+                                        <input name="num" value="${product2.num}" hidden="hidden" />
+                                        <input name="productName" value="${product2.productName}" hidden="hidden" />
+                                        <input name="marketName" value="${product2.marketName}" hidden="hidden" />
+                                        <input name="url" value="${product2.url}" hidden="hidden" />
+                                        <input name="imgUrl" value="${product2.imgUrl}" hidden="hidden" />
+                                        <input name="won" value="${product2.won}" hidden="hidden" />
+                                   
+                                        <input name="delivery" value="${product2.delivery}" hidden="hidden" />
+                                        <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
+                                       
+                                        <input name="keyword" value="${searchWord}" hidden="hidden" />
+                                        <button class="btn btn-primary">찜하기</button>
                                     </form>
                                     
                                     <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">

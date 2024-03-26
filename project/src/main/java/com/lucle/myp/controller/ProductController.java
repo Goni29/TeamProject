@@ -100,45 +100,28 @@ public class ProductController {
         model.addAttribute("products", products);
         return "/prlist/recolist"; // This is the JSP file name without the .jsp extension
     }
-
-    @GetMapping("prlist/large")
-    public String listProductsByLarge(@RequestParam("category") int large, Model model) {
-        List<MarketVo> products = productService.getProductsByLargeCategory(large);
-        model.addAttribute("products", products);
-        return "prlist/list-products";
-    }
-
-    @GetMapping("prlist/medium")
-    public String listProductsByMedium(@RequestParam("category") int medium, Model model) {
-        List<MarketVo> products = productService.getProductsByMediumCategory(medium);
-        model.addAttribute("products", products);
-        return "prlist/list-products";
-    }
-
-    @GetMapping("prlist/small")
-    public String listProductsBySmall(@RequestParam("category") int small, Model model) {
-        List<MarketVo> products = productService.getProductsBySmallCategory(small);
-        model.addAttribute("products", products);
-        return "prlist/list-products";
-    }
-
-    @GetMapping("prlist/sub")
-    public String listProductsBySub(@RequestParam("category") int sub_category, Model model) {
-        List<MarketVo> products = productService.getProductsBySubCategory(sub_category);
-        model.addAttribute("products", products);
-        return "prlist/list-products";
-    }
     
-    @GetMapping("/list-categories")
-    public String listCategories() {
-        return "/prlist/list-categories";
+    @GetMapping("/allProduct")
+    public String allProducts(Model model) throws Exception {
+        List<MarketVo> products = marketService.groupBuying();
+        List category = productService.cateList();
+      ObjectMapper objm = new ObjectMapper();
+      String cateList = objm.writeValueAsString(category);
+      model.addAttribute("cateList", cateList);
+      
+      System.out.println(category);
+      System.out.println(cateList);
+        model.addAttribute("products", products);
+        return "/prlist/allProduct"; // This is the JSP file name without the .jsp extension
     }
     
     @GetMapping("/productsByCategory")
-    public ResponseEntity<List<MarketVo>> getProductsByCategory(@RequestParam String cateCode) {
+    public ResponseEntity<List<MarketVo>> getProductsByCategory(@RequestParam String cateCode, Model model) {
         // cateCode에 해당하는 제품을 데이터베이스에서 조회
         List<MarketVo> products = productService.getProductsByCategory(cateCode);
         System.out.println(products);
+        System.out.println("카테코드" + cateCode);
+        model.addAttribute("products", products);
         return ResponseEntity.ok(products);
     }
 }
