@@ -142,5 +142,3 @@ document.getElementById("searchButton").addEventListener("click", function() {
 });
 
 </script>
-
-</script>

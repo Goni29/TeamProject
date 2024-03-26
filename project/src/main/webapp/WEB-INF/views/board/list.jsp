@@ -20,7 +20,7 @@
             <%@ include file="../topbar.jsp" %>
             <div id="content main-content" class="main-width">  
 
-                <div class="container-fluid">
+                <div class="container">
                     <div class="row">
                         <div class="col">
 

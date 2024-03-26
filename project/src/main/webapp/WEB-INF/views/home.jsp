@@ -87,7 +87,7 @@
                                        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
                                    
                                        <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                       <button class="btn btn-primary">공동구매 참여하기</button>
+                                       <button class="btn btn-primary btn-needlogin">공동구매 참여하기</button>
                                    </form>
                                    
                                    <form class="actionForm" action="/user/save">
@@ -102,7 +102,7 @@
                                        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
                                    
                                        <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                       <button class="btn btn-primary">찜하기</button>
+                                       <button class="btn btn-primary btn-needlogin">찜하기</button>
                                   	</form>
                                    
                                    <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
@@ -123,7 +123,7 @@
                                 <p>${product2.marketName}</p>
 
                                 <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product2.imgUrl}" alt="Product Image"> <br>
+                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product2.imgUrl}" alt="Product Image"> <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>
                                         <c:when test="${fn:length(product2.productName) > 20}">
@@ -163,7 +163,7 @@
                                         <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
                                        
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary" hidden="hidden">공동구매 참여하기</button>
+                                        <button class="btn btn-primary btn-needlogin">공동구매 참여하기</button>
                                     </form>
                                     
                                 	<form class="actionForm" action="/user/save">
@@ -178,11 +178,11 @@
                                         <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
                                        
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary">찜하기</button>
+                                        <button class="btn btn-primary btn-needlogin">찜하기</button>
                                     </form>
                                     
                                     <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
-                                        <button class="btn btn-success" hidden="hidden">상세 페이지</button>
+                                        <button class="btn btn-success" >상세 페이지</button>
                                     </a>
                                 </div>
                             </div>
@@ -224,5 +224,20 @@
         </div>
     </div>
 </body>
+
+<script>
+
+document.querySelectorAll('.btn-needlogin').forEach(button => {
+    button.addEventListener('click', function(e) {
+    	 var isLoggedIn = ${loginVo.id != null};
+
+         if (!isLoggedIn) {
+            e.preventDefault();
+            alert('로그인 후 이용해주세요');
+        }
+    });
+});
+
+</script>
 
 </html>

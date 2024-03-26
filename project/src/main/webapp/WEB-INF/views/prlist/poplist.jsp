@@ -48,7 +48,7 @@
                         <h1 class="h3 mb-0 text-gray-800">인기상품</h1>
                     </div>
                     
-                    <div class="mb-4 category">
+                    <div class="mb-4 category ">
                         <div class="cate_wrap">
                             <span>대분류</span> <select class="large">
                                 <option selected value="none">선택</option>
