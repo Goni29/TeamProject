@@ -40,31 +40,16 @@
 
 	<!-- 참여 인원 업데이트를 위한 쿼리 추가 -->
 	<update id="updateParticipation" parameterType="long">
-		UPDATE
-		GROUPBUYING
+		UPDATE GROUPBUYING
 		SET PERSONNUM = PERSONNUM + 1
 		WHERE num = #{num}
 	</update>
-
+	
 	<insert id="addBuyingRecord">
-		INSERT INTO BUYING (ID, BUYNO, BUYINGDATE, CATEGORY,
-		NUM, PRODUCTNAME, AGE, GENDER, ADDRESS)
-		SELECT
-		#{id},
-		seq_buying.nextval,
-		SYSDATE,
-		m.CATEGORY,
-		m.NUM,
-		m.PRODUCTNAME,
-		u.AGE,
-		u.GENDER,
-		u.ADDRESS
-		FROM
-		USERS u
-		JOIN
-		BUYING b ON u.ID = b.ID
-		JOIN
-		MARKET m ON b.NUM = m.NUM
+		insert into buying(id, BUYNO, BUYINGDATE,
+		CATEGORY, NUM, PRODUCTNAME, AGE, GENDER, ADDRESS)
+		values(#{id}, seq_buying.nextval,
+		sysdate, #{category}, #{num}, #{productname}, #{age}, #{gender}, #{address})
 	</insert>
 
 </mapper>
