@@ -9,7 +9,7 @@
 
 <style>
 	.border {
-        border: 1px solid #dee2e6;
+        border: 3px solid #dee2e6;
     }
     .border table {
         margin-bottom: 0;
@@ -23,6 +23,7 @@
     .page-size {
         width: 100vw;
     }
+    
 </style>
 
 <body>
@@ -54,6 +55,7 @@
 	                    
 	                    <div class="border">
 	                        <div class="gender" hidden="hidden">
+	                        	<div class="border"><h3 class="text-center">성별</h3></div>
 	                            <table class="table table-striped table-hover">
 	                                <thead>
 	                                    <tr class="gender common-class" hidden="hidden">
@@ -66,7 +68,7 @@
 	                                <tbody>
 	                                    <c:forEach var="s" items="${sList}">
 	                                        <tr class="gender common-class" hidden="hidden">
-	                                            <td>${s.PCATEGORY}</td>
+	                                            <td>${s.pname}</td>
 	                                            <td>${s.PCATEGORY_COUNT}</td>
 	                                            <td>${s.male}</td>
 	                                            <td>${s.female}</td>
@@ -78,6 +80,7 @@
 	                        </div>
 	                        
 	                        <div class="locale" hidden="hidden">
+	                        	<div class="border"><h3 class="text-center">지역</h3></div>
 	                            <table class="table table-striped table-hover">
 	                                <thead>
 	                                    <tr class="locale common-class">
@@ -104,7 +107,7 @@
 	                                <tbody>
 	                                    <c:forEach var="s" items="${sList}">
 	                                        <tr class="locale common-class" hidden="hidden">
-	                                            <td>${s.PCATEGORY}</td>
+	                                            <td>${s.pname}</td>
 	                                            <td>${s.PCATEGORY_COUNT}</td>
 	                                            <td>${s.seoul}</td>
 	                                            <td>${s.incheon}</td>
@@ -130,6 +133,7 @@
 							</div>
 				
 							<div class="age" hidden="hidden">
+	                        	<div class="border"><h3 class="text-center">연령</h3></div>
 								<table class="table table-striped table-hover">
 									<thead>
 										<tr class="age common-class" hidden="hidden">
@@ -146,7 +150,7 @@
 									<tbody>
 										<c:forEach var="s" items="${sList}">
 											<tr class="age common-class" hidden="hidden">
-												<td>${s.PCATEGORY}</td>
+												<td>${s.pname}</td>
 												<td>${s.PCATEGORY_COUNT}</td>
 												<td>${s.teens}</td>
 												<td>${s.twenties}</td>
@@ -189,7 +193,7 @@
    var seoulCounts = [], busanCounts = [], incheonCounts = [], daeguCounts = [], gwangjuCounts = [], daejeonCounts = [], ulsanCounts = [], gyeonggiCounts = [], gangwonCounts = [], chungbukCounts = [], chungnamCounts = [], jeonbukCounts = [], jeonnamCounts = [], gyeongbukCounts = [], gyeongnamCounts = [], jejuCounts = [];
 
    <c:forEach items="${sList}" var="s">
-       categories.push("${s.PCATEGORY}");
+       categories.push("${s.pname}");
        maleCounts.push(${s.male});
        femaleCounts.push(${s.female});
        teensCounts.push(${s.teens});
