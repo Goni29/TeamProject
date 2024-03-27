@@ -6,6 +6,7 @@
 
 <%@ include file="../header.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
 <style>
 	.border {
@@ -165,6 +166,7 @@
 				</div>
 			</div>
 		</div>
+		<button onclick="exportToExcel()">엑셀로 내보내기</button>
 	</div>
 <script>
    $(document).ready(function(){
@@ -434,6 +436,59 @@
                }
            }
        });
+               
+               var dataList = [];
+
+               <%-- sList 데이터를 JavaScript 배열로 변환 --%>
+               <c:forEach items="${sList}" var="s">
+                   dataList.push({
+                       category: "${s.PCATEGORY}",
+                       count: ${s.PCATEGORY_COUNT},
+                       male: ${s.male},
+                       female: ${s.female},
+                       teens: ${s.teens},
+                       twenties: ${s.twenties},
+                       thirties: ${s.thirties},
+                       forties: ${s.forties},
+                       fifties: ${s.fifties},
+                       sixtiesAndAbove: ${s.above},
+                       seoul: ${s.seoul},
+                       busan: ${s.busan},
+                       incheon: ${s.incheon},
+                       daegu: ${s.daegu},
+                       gwangju: ${s.gwangju},
+                       daejeon: ${s.daejeon},
+                       ulsan: ${s.ulsan},
+                       gyeonggi: ${s.gyeonggi},
+                       gangwon: ${s.gangwon},
+                       chungbuk: ${s.chungbuk},
+                       chungnam: ${s.chungnam},
+                       jeonbuk: ${s.jeonbuk},
+                       jeonnam: ${s.jeonnam},
+                       gyeongbuk: ${s.gyeongbuk},
+                       gyeongnam: ${s.gyeongnam},
+                       jeju: ${s.JEJU}
+                   });
+               </c:forEach>
+
+               function exportToExcel() {
+                   var wb = XLSX.utils.book_new(); // 새 워크북 생성
+                   var ws_name = "상품 조회현황";
+                   
+                   // 첫 행에 들어갈 헤더 정보
+                   var ws_data = [
+                       ["카테고리", "조회수", "남성", "여성", "10대 이하", "20대", "30대", "40대", "50대", "60대 이상", "서울", "부산", "인천", "대구", "광주", "대전", "울산", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주"]
+                   ];
+                   
+                   // dataList의 각 항목을 엑셀 시트 데이터에 추가
+                   dataList.forEach(function(item) {
+                       ws_data.push([item.category, item.count, item.male, item.female, item.teens, item.twenties, item.thirties, item.forties, item.fifties, item.above, item.seoul, item.busan, item.incheon, item.daegu, item.gwangju, item.daejeon, item.ulsan, item.gyeonggi, item.gangwon, item.chungbuk, item.chungnam, item.jeonbuk, item.jeonnam, item.gyeongbuk, item.gyeongnam, item.jeju]);
+                   });
+
+                   var ws = XLSX.utils.aoa_to_sheet(ws_data);
+                   XLSX.utils.book_append_sheet(wb, ws, ws_name);
+                   XLSX.writeFile(wb, "product_statistics.xlsx");
+               }
 </script>
 <%@include file="../footer.jsp"%>
 
