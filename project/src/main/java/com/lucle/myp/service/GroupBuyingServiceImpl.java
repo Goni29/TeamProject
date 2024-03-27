@@ -57,6 +57,11 @@ public class GroupBuyingServiceImpl implements GroupBuyingService {
     	}
     	return result;
     }
+
+	@Override
+	public void addBuyingRecord(GroupBuyingVo groupBuying) {
+		mapper.addBuyingRecord(groupBuying);
+	}
     
 
 }

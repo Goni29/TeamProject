@@ -107,11 +107,6 @@ public class UserController {
 		
 		UserVo getVo = (UserVo) session.getAttribute("loginVo");
 		
-		if(!modPwd.equals(modPwdTwo)) {
-			//변경 비밀번호와 재확인이 틀릴 때
-			return "/user/info";
-		}
-		
 		getVo.setPassword(modPwd);
 		
 		if(modPwd == "" || modPwd == null) {
