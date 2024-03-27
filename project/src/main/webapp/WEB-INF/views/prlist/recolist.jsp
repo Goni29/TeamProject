@@ -277,11 +277,11 @@ $(document).ready(function() {
             var product = {
                 productName: $(this).find('productName').text(),
                 marketName: $(this).find('marketName').text(),
-                large: $(this).find('large').text(),
-                medium: $(this).find('medium').text(),
-                small: $(this).find('small').text(),
-                sub_category: $(this).find('sub_category').text(),
-                num: $(this).find('num').text(),
+                large: $(this).find('category_LARGE').text(),
+                medium: $(this).find('category_MEDIUM').text(),
+                small: $(this).find('category_SMALL').text(),
+                sub_category: $(this).find('category_SUB_CATEGORY').text(),
+                num: $(this).find('market_NUM').text(),
                 imgUrl: $(this).find('imgUrl').text(),
                 won: $(this).find('won').text(),
                 personnum: $(this).find('personnum').text()
@@ -345,6 +345,7 @@ $(document).ready(function() {
                 data: { cateCode: selectedValue },
                 dataType: 'xml',
                 success: function(data) {
+                	console.log(data);
                     displayProducts(data);
                 },
                 error: function(error) {

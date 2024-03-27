@@ -92,7 +92,6 @@ public class GroupBuyingController {
         replyVo.setReply("공동구매에 참여했습니다!");
         replyVo.setReplyer(userVo.getNickname());
         replyVo.setVisible(1);
-//        replyService.addReply(replyVo); //여기서 오류가생김....
         return ResponseEntity.ok(Map.of("message", "공동구매에 성공적으로 참여하였으며, 댓글이 자동으로 작성되었습니다."));   
 //        return null;
     }

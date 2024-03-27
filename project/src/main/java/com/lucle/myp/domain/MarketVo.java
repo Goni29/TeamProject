@@ -57,6 +57,10 @@ public class MarketVo {
 	/* 상위 카테고리 */
 	private String cateParent;
 	
-	private Date buyingdate;
+	private Long CATEGORY_LARGE;
+	private Long CATEGORY_MEDIUM;
+	private Long CATEGORY_SMALL;
+	private Long CATEGORY_SUB_CATEGORY;
+	private Long MARKET_NUM;
 	
 }
