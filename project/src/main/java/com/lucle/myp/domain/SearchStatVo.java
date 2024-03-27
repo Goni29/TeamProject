@@ -17,7 +17,7 @@ public class SearchStatVo {
 	private long thirties;
 	private long forties;
 	private long fifties;
-	private long above;
+	private long aboveSixty;
 	
 	//성별
 	private long male;

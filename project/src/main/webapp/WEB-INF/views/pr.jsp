@@ -37,7 +37,7 @@
                             <p>현재 참여 인원 : ${product.personnum}</p>
                             <p>제품 설명 : ${product.description}</p>
                             <br>
-                            <button class="participateButton btn btn-Success" data-num="${product.num}">공동구매 참여하기</button>
+                            <button class="participateButton btn btn-primary" data-num="${product.num}">공동구매 참여하기</button>
                             <div class="btn-group" role="group" aria-label="Button group">
                                 <form class="actionForm" action="/market/register">
                                     <input name="num" value="${product.num}" hidden="hidden" /> 

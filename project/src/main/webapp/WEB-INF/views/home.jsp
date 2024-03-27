@@ -75,20 +75,18 @@
                                     </div>
                                 </div>
                                 <div class="btn-group" role="group" aria-label="Button group">
-                                   <form class="actionForm" action="/board/register">
-                                       <input name="num" value="${product.num}" hidden="hidden" />
-                                       <input name="productName" value="${product.productName}" hidden="hidden" />
-                                       <input name="marketName" value="${product.marketName}" hidden="hidden" />
-                                       <input name="url" value="${product.url}" hidden="hidden" />
-                                       <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
-                                       <input name="won" value="${product.won}" hidden="hidden" />
-                                      
-                                       <input name="delivery" value="${product.delivery}" hidden="hidden" />
-                                       <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
-                                   
-                                       <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                       <button class="btn btn-primary btn-needlogin">공동구매 참여하기</button>
-                                   </form>
+                                   <form class="actionForm" action="/market/register">
+	                                    <input name="num" value="${product.num}" hidden="hidden" /> 
+	                                    <input name="productName" value="${product.productName}" hidden="hidden" /> 
+	                                    <input name="marketName" value="${product.marketName}" hidden="hidden" /> 
+	                                    <input name="url" value="${product.url}" hidden="hidden" /> 
+	                                    <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" /> 
+	                                    <input name="won" value="${product.won}" hidden="hidden" /> 
+	                                    <input name="delivery" value="${product.delivery}" hidden="hidden" />
+	                                    <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" /> 
+	                                    <input name="keyword" value="${searchWord}" hidden="hidden" />
+	                                    <button hidden="hidden" class="participateButton btn-primary btn-needlogin" data-num="${product.num}">공동구매 참여하기</button><br /><br />
+	                               	 </form>
                                    
                                    <form class="actionForm" action="/user/save">
                                        <input name="num" value="${product.num}" hidden="hidden" />
@@ -102,7 +100,7 @@
                                        <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
                                    
                                        <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                       <button class="btn btn-primary btn-needlogin">찜하기</button>
+                                       <button hidden="hidden" class="btn btn-primary btn-needlogin">찜하기</button>
                                   	</form>
                                    
                                    <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
