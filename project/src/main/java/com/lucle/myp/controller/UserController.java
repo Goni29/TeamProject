@@ -137,5 +137,10 @@ public class UserController {
 	    response.put("loggedIn", isLoggedIn);
 	    return response;
 	}
+	
+	@GetMapping("/custommerservice")
+	public String custommerservice() {
+		return "user/custommerservice";
+	}
 
 }

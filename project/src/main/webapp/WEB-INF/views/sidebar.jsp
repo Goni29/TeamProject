@@ -54,7 +54,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="/user/custommerservice">
                 <i class="fas fa-fw fa-cog icon"></i>
                     <span>고객센터</span></a>
             </li>

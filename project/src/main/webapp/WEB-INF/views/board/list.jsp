@@ -9,6 +9,13 @@
     .page-size {
         width: 100vw;
     }
+    /* 중앙 정렬과 상단 패딩 조정을 위한 스타일 추가 */
+    .center-title {
+        text-align: center;
+    }
+    .content-container {
+        padding-top: 50px; /* 여기서는 예시로 50px을 사용했습니다. 필요에 따라 조정하세요. */
+    }
 </style>
 <body id="page-top">
     
@@ -21,11 +28,14 @@
             <div id="content main-content" class="main-width">  
 
                 <div class="container">
+                
+                	<h1 class="mt-5 center-title">상품 요청 게시판</h1>
+                	
                     <div class="row">
                         <div class="col">
 
                             <!-- 로그인한 사용자만 게시글 작성 버튼 표시 -->
-                            <c:if test="${loginVo.grade == 3}">
+                            <c:if test="${loginVo.grade != null}">
                                 <div class="col-auto">
                                     <a href='/board/register' class="newboard btn btn-primary mb-3">게시글 작성</a>
                                 </div>
