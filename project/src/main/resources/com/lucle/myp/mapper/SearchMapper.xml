@@ -60,7 +60,7 @@ FROM     USERS u
 JOIN     MARKETVIEW s ON u.ID = s.ID   
 WHERE    s.VIEWDATE >= sysdate - #{sortTime}
 GROUP BY s.PCATEGORY
-ORDER BY ${sort} DESC
+ORDER BY ${sort2} DESC
 		]]>
 	</select>
 
