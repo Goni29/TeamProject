@@ -14,4 +14,5 @@ public interface GroupBuyingMapper {
     void deleteGroupBuying(Long gno);
 	List<GroupBuyingVo> listGroupBuying();
 	int updateParticipation(Long num);
+	void addBuyingRecord(GroupBuyingVo groupBuying);
 }

@@ -1,5 +1,7 @@
 package com.lucle.myp.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +17,12 @@ public class GroupBuyingVo {
 	private Long personnum;
 	private String id;
 	private String nickname;
+	private Date buyingdate;
+	private Long buyno;
+	private Long category;
+	private String productname;
+	private Integer age;
+	private Integer gender;
+	private String address;
+	
 }

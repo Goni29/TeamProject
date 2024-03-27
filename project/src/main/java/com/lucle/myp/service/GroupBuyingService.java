@@ -14,4 +14,5 @@ public interface GroupBuyingService {
     void removeGroupBuying(Long gno);
     List<GroupBuyingVo> listGroupBuying();
     boolean participate(GroupBuyingVo groupBuyingVo);
+    void addBuyingRecord(GroupBuyingVo groupBuying);
 }

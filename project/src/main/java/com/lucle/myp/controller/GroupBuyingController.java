@@ -82,6 +82,8 @@ public class GroupBuyingController {
 
         UserVo userVo = (UserVo) session.getAttribute("loginVo");
         boolean success = service.participate(groupBuyingVo);
+        groupBuyingVo.setId(userVo.getId());
+        service.addBuyingRecord(groupBuyingVo);
         if (!success) {
             return ResponseEntity.badRequest().body(Map.of("message", "공동구매 참여에 실패했습니다."));
         }
