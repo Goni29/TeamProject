@@ -48,12 +48,6 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/">
-                	<i class="fa-solid fa-heart icon"></i>
-                    <span>찜목록</span></a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link" href="/user/custommerservice">
                 <i class="fas fa-fw fa-cog icon"></i>
                     <span>고객센터</span></a>
