@@ -28,75 +28,52 @@
         <%@ include file="../sidebar.jsp"%>
         <div id="conteny-wrapper" class="d-flex flex-column page-size">       
             <%@ include file="../topbar.jsp"%>
-            
-            <div class="cate_wrap">
-				<span>대분류</span>
-				<select class="cate1">
-					<option selected value="none">선택</option>
-				</select>
-			</div>
-			<div class="cate_wrap">
-				<span>중분류</span>
-				<select class="cate2">
-					<option selected value="none">선택</option>
-				</select>
-			</div>
-			<div class="cate_wrap">
-				<span>소분류</span>
-				<select class="cate3">
-					<option selected value="none">선택</option>
-				</select>
-			</div> 
-			<div class="cate_wrap">
-				<span>세부분류</span>
-				<select class="cate4" name="cateCode">
-					<option selected value="none">선택</option>
-				</select>
-			</div>            
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">카테고리별 상품</h1>
-            </div>
-            
-                    <div class="products-container">
-                <!-- 동적으로 로드된 제품들이 여기에 표시됩니다. -->
-            </div>
-            
-            <%--
-            필요시 추가하여 쓰세연
-             <div class="row">
-                <c:forEach var="product" items="${products}" begin="0" end="7">
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Product</h6>
-                        </div>
-                        <div class="">
-                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product.imgUrl}" alt="Product Image"> <br>
-                        </div>
-                        <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                            <c:choose>
-                                <c:when test="${fn:length(product.productName) > 20}">
-                                    ${fn:substring(product.productName, 0, 20)}...
-                                </c:when>
-                                <c:otherwise>
-                                    ${product.productName}
-                                </c:otherwise>
-                            </c:choose>
-                        </a><br>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                            </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div> --%>
-        </div>
-        <script>
+            <div class="container">
+            	<div class="d-flex align-items-center justify-content-center mb-4">
+				    <h1 class="h3 mb-0 text-gray-800">검색 상품</h1>
+				</div>
+	            <div class="row border">
+				    <div class="col">
+				        <div class="cate_wrap form-group">
+				            <span>대분류</span>
+				            <select class="cate1 form-control">
+				                <option selected value="none">선택</option>
+				            </select>
+				        </div>
+				    </div> 
+				    <div class="col">
+				        <div class="cate_wrap form-group">
+				            <span>중분류</span>
+				            <select class="cate2 form-control">
+				                <option selected value="none">선택</option>
+				            </select>
+				        </div>
+				    </div>
+				    <div class="col">
+				        <div class="cate_wrap form-group">
+				            <span>소분류</span>
+				            <select class="cate3 form-control">
+				                <option selected value="none">선택</option>
+				            </select>
+				        </div>
+				    </div>
+				    <div class="col">
+				        <div class="cate_wrap form-group">
+				            <span>세부분류</span>
+				            <select class="cate4 form-control" name="cateCode">
+				                <option selected value="none">선택</option>
+				            </select>
+				        </div>
+				    </div> 
+				</div>
+	            <div class="products-container">
+	                <!-- 동적으로 로드된 제품들이 여기에 표시됩니다. -->
+	            </div>
+	         </div>
+		</div>
+	</div>
+	
+<script>
 $(document).ready(function(){
    console.log('${cateList}');
 });
@@ -322,6 +299,19 @@ $(document).ready(function() {
                 '<p>가격 : ' + product.won + '원</p>' +
                 '<p>현재 참여 인원 : ' + product.personnum + '</p>' +
                 '</div>' +
+                '<div class="row no-gutters align-items-center">'+
+                '<div class="col-auto">'+
+                '<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">'+product.personnum+'%</div>'+
+                '</div>'+'<div class="col">'+'<div class="progress progress-sm mr-2">'+
+                '<div class="progress-bar bg-info" role="progressbar" style="width: '+ product.personnum + '%" aria-valuenow="'+product.personnum+'" aria-valuemin="0" aria-valuemax="'+product.goaltarget+'"></div>'+
+                '</div>'+
+                '</div>'+
+                '</div>'+
+                '<div class="btn-group" role="group" aria-label="Button group">'+
+                '<a href="/pr?large=' + product.large + '&medium=' + product.medium + '&small=' + product.small + '&sub_category=' + product.sub_category + '&num=' + product.num + '">' +
+                '<button class="btn btn-success">상세 페이지</button>'+
+                '</a>'+
+                '</div>'+
                 '</div>';
         });
         $('.products-container').html(productsHtml);
@@ -367,6 +357,5 @@ $(document).ready(function() {
 
 
 </script>
-    </div>
 </body>
 </html>

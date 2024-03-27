@@ -161,7 +161,7 @@
                                         <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
                                        
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary btn-needlogin">공동구매 참여하기</button>
+                                        <button class="btn btn-primary btn-needlogin" hidden="hidden">공동구매 참여하기</button>
                                     </form>
                                     
                                 	<form class="actionForm" action="/user/save">
@@ -176,7 +176,7 @@
                                         <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
                                        
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary btn-needlogin">찜하기</button>
+                                        <button class="btn btn-primary btn-needlogin" hidden="hidden">찜하기</button>
                                     </form>
                                     
                                     <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">

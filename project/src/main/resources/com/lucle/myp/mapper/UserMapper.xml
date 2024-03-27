@@ -21,11 +21,16 @@
 	</delete>
 
 	<update id="update">
-		update users set name =
-		#{name}, password = #{password},
-		address = #{address}, email = #{email}
-		where id = #{id}
-	</update>
+      update users set name =
+      #{name}, password = #{password},
+      <if test="address != null">
+            , address = #{address}
+        </if>
+        <if test="email != null">
+            , email = #{email}
+        </if>
+      where id = #{id}
+   </update>
 
 	<select id="getCount" resultType="int">
 		select count(*) from users
