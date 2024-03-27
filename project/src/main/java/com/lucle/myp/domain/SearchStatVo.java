@@ -28,16 +28,16 @@ public class SearchStatVo {
 	private long gyeonggi;
 	private long incheon;
 	private long busan;
-	private long deagu;
+	private long daegu;
 	private long gwangju;
-	private long deajeon;
+	private long daejeon;
 	private long ulsan;
 	private long gangwon;
 	private long chungbuk;
 	private long chungnam;
 	private long jeonbuk;
 	private long jeonnam;
-	private long kyeongbuk;
-	private long kyeongnam;
+	private long gyeongbuk;
+	private long gyeongnam;
 	private long JEJU;
 }

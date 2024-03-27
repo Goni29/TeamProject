@@ -113,10 +113,10 @@
 
                     <!-- Additional Content Row -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">당신을 위한 상품!</h1>
+                        <h1 class="h3 mb-0 text-gray-800">전체상품</h1>
                     </div>
                     <div class="row">
-                        <c:forEach var="product2" items="${recentlyViewedProducts}" begin="0" end="3">
+                        <c:forEach var="product2" items="${products2}" begin="0" end="7">
                             <div class="col-xl-3 col-md-6 mb-4 border">
                                 <p>${product2.marketName}</p>
 

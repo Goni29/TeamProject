@@ -81,7 +81,7 @@ public class SearchController {
 	@GetMapping("/adminPage")
 	public void adminPage(HttpServletRequest req, Model model, Criteria cri) {
 		
-		if(cri.getSort() == "bno") {
+		if(cri.getSort() == "PCATEGORY_COUNT") {
 			cri.setSort("PCATEGORY_COUNT");
 		}
 		
