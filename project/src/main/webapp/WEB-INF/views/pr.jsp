@@ -74,23 +74,6 @@
 
             <div class="container mt-5">
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div id="contentarea" class="card">
-                            <div class="card-body">
-                                <ul class="list-unstyled replyUl">
-                                    <li class="media" hidden="hidden">
-                                        <div class="media-body">
-                                            <div class="d-flex justify-content-between">
-                                                <strong class="mt-0 mb-1">User00</strong> <small class="text-muted">2024-01-05</small>
-                                            </div>
-                                            <p>내용</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <nav aria-label="Page navigation" class="justify-content-center"></nav>
-                            </div>
-                        </div>
-                    </div>
                     <div class="container mt-5">
 					    <div class="row justify-content-center">
 					        <div class="col-md-8">

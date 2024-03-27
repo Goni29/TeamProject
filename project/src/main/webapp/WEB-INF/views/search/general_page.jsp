@@ -8,36 +8,6 @@
         <div class="col">
         	<div class="d-flex justify-content-between">
 			    <div class="flex-fill">
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sortTime" id="searchSort1" value="1" checked="checked">
-			            <label class="form-check-label" for="searchSort1">24시간</label>
-			        </div>
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sortTime" id="searchSort2" value="7">
-			            <label class="form-check-label" for="searchSort2">일주일</label>
-			        </div>
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sortTime" id="searchSort3" value="30">
-			            <label class="form-check-label" for="searchSort3">한 달</label>
-			        </div>
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sortTime" id="searchSort4" value="36500">
-			            <label class="form-check-label" for="searchSort4">전체 기간</label>
-			        </div>
-<<<<<<< HEAD
-=======
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort2" value="male">
-			            <label class="form-check-label" for="sort2">남성</label>
-			        </div>
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort3" value="female">
-			            <label class="form-check-label" for="sort3">여성</label>
-			        </div>
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
-			    </div>
-			    
-			    <div class="flex-fill">
 		            <label><input type="checkbox" name="filter" value="gender">성별 &nbsp;</label>
 		            <label><input type="checkbox" name="filter" value="locale">지역 &nbsp;</label>
 		            <label><input type="checkbox" name="filter" value="age">연령 &nbsp;</label>
@@ -54,11 +24,7 @@
 	            <table class="table table-striped table-hover">
 	                <thead>
 	                    <tr class="gender common-class" hidden="hidden">
-<<<<<<< HEAD
 	                        <th>조회항목</th>
-=======
-	                        <th>카테고리</th>
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 	                        <th>조회수</th>
 	                        <th>남성</th>
 	                        <th>여성</th>
@@ -67,7 +33,7 @@
 	                <tbody>
 	                <c:forEach var="s" items="${sList}">
 	                    <tr class="gender common-class" hidden="hidden">
-	                        <td>${s.PCATEGORY}</td>
+	                        <td id="productCategory">${s.PCATEGORY}</td>
 	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.male}</td>
 	                        <td>${s.female}</td>
@@ -102,7 +68,7 @@
 	                <tbody>
 	                	<c:forEach var="s" items="${sList}">
 	                    <tr class="locale common-class" hidden="hidden">
-	                        <td>${s.PCATEGORY}</td>
+	                        <td id="productCategory">${s.PCATEGORY}</td>
 	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.seoul}</td>
 	                        <td>${s.incheon}</td>
@@ -117,13 +83,8 @@
 	                        <td>${s.chungnam}</td>
 	                        <td>${s.jeonbuk}</td>
 	                        <td>${s.jeonnam}</td>
-<<<<<<< HEAD
-	                        <td>${s.kyeongbuk}</td>
-	                        <td>${s.kyeongnam}</td>
-=======
 	                        <td>${s.gyeongbuk}</td>
 	                        <td>${s.gyeongnam}</td>
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 	                        <td>${s.JEJU}</td>
 	                    </tr>
 	                    </c:forEach>
@@ -133,15 +94,9 @@
 	            <table class="table table-striped table-hover">
 	                <thead>
 	                    <tr class="age common-class" hidden="hidden">
-<<<<<<< HEAD
 	                        <th>조회항목</th>
 	                        <th>조회수</th>
-	                        <th>10대</th>
-=======
-	                        <th>검색어</th>
-	                        <th>검색 회수</th>
 	                        <th>10대 이하</th>
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 	                        <th>20대</th>
 	                        <th>30대</th>
 	                        <th>40대</th>
@@ -152,17 +107,7 @@
 	                <tbody>
 	                <c:forEach var="s" items="${sList}">
 	                    <tr class="age common-class" hidden="hidden">
-<<<<<<< HEAD
-	                        <td>${s.PCATEGORY}</td>
-	                        <td>${s.PCATEGORY_COUNT}</td>
-	                        <td>${s.teen}</td>
-	                        <td>${s.twenty}</td>
-	                        <td>${s.thirty}</td>
-	                        <td>${s.forty}</td>
-	                        <td>${s.fifty}</td>
-	                        <td>${s.aboveSixty}</td>
-=======
-	                        <td>${s.PCATEGORY}</a></td>
+	                        <td id="productCategory">${s.PCATEGORY}</td>
 	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.teens}</td>
 	                        <td>${s.twenties}</td>
@@ -170,7 +115,6 @@
 	                        <td>${s.forties}</td>
 	                        <td>${s.fifties}</td>
 	                        <td>${s.above}</td>
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 	                    </tr>
 	                    </c:forEach>
 	                </tbody>
@@ -179,9 +123,4 @@
             
         </div>
     </div>
-    <script>
-
-    
-    
-    </script>
 </html>
