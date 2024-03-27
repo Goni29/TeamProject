@@ -41,14 +41,14 @@
 	        <div class="container mt-5">
 	            <div class="row content">
 	                <div class="col">
-	                    <div class="d-flex justify-content-between">
+	                    <div class="d-flex justify-content-between btn-group">
 	                        <div class="flex-fill">
 	                            <label><input type="checkbox" name="filter" value="gender">성별 &nbsp;</label>
 	                            <label><input type="checkbox" name="filter" value="locale">지역 &nbsp;</label>
 	                            <label><input type="checkbox" name="filter" value="age">연령 &nbsp;</label>
 	                        </div>
-	                        <div class="flex-fill">
-	                        	<button onclick="exportToExcel()">엑셀로 내보내기</button>
+	                        <div >
+	                        	<button class="btn btn-warning" onclick="exportToExcel()">엑셀로 내보내기</button>
 	                        </div>
 	                    </div>
 	                    <c:if test="${sList == null}">
