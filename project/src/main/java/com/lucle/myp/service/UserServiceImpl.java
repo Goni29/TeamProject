@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	public int add(UserVo vo, HttpSession session, Model model) {
 		int result = mapper.insert(vo);
 		if (result != 1) {
-			model.addAttribute("message", vo.getId() + " 등록 실패<br/>");
+			model.addAttribute("message", "회원가입 중 오류가 발생 했습니다.<br/> 잠시후 다시 시도해주세요.");
 			return 0;
 		}
 
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 		session.setAttribute("loginVo", getVo);
 		session.setAttribute("gradeName", gradeName[getVo.getGrade()]);
 		System.out.println(session.getAttribute("loginVo") + "service===================");
-		model.addAttribute("message", result + "개의 자료가 입력되었습니다.<br/>" + vo.getName() + "님 환영합니다.");
+		model.addAttribute("message", "회원가입에 성공했습니다. <br/>" + vo.getName() + "님 환영합니다.");
 		return result;
 	}
 
