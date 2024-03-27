@@ -91,20 +91,21 @@
 	            <table class="table table-striped table-hover">
 	                <thead>
 	                    <tr class="gender common-class" hidden="hidden">
-	                        <th>검색어</th>
-	                        <th>검색 회수</th>
+	                        <th>카테고리</th>
+	                        <th>조회수</th>
 	                        <th>남성</th>
 	                        <th>여성</th>
 	                    </tr> 
 	                </thead>
 	                <tbody>
+	                <c:forEach var="s" items="${sList}">
 	                    <tr class="gender common-class" hidden="hidden">
-	                        <td><a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.PCATEGORY}</a></td>
+	                        <td>${s.PCATEGORY}</td>
 	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.male}</td>
 	                        <td>${s.female}</td>
 	                    </tr>
+	                    </c:forEach>
 	                </tbody>
 	            </table>
 	                
@@ -132,16 +133,16 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
+	                	<c:forEach var="s" items="${sList}">
 	                    <tr class="locale common-class" hidden="hidden">
-	                        <td> <a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
+	                        <td>${s.PCATEGORY}</td>
+	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.seoul}</td>
 	                        <td>${s.incheon}</td>
 	                        <td>${s.busan}</td>
-	                        <td>${s.deagu}</td>
+	                        <td>${s.daegu}</td>
 	                        <td>${s.gwangju}</td>
-	                        <td>${s.deajeon}</td>
+	                        <td>${s.daejeon}</td>
 	                        <td>${s.ulsan}</td>
 	                        <td>${s.gyeonggi}</td>
 	                        <td>${s.gangwon}</td>
@@ -149,10 +150,11 @@
 	                        <td>${s.chungnam}</td>
 	                        <td>${s.jeonbuk}</td>
 	                        <td>${s.jeonnam}</td>
-	                        <td>${s.kyeongbuk}</td>
-	                        <td>${s.kyeongnam}</td>
+	                        <td>${s.gyeongbuk}</td>
+	                        <td>${s.gyeongnam}</td>
 	                        <td>${s.JEJU}</td>
 	                    </tr>
+	                    </c:forEach>
 	                </tbody>
 	            </table>
 	                
@@ -162,7 +164,6 @@
 	                        <th>검색어</th>
 	                        <th>검색 회수</th>
 	                        <th>10대 이하</th>
-	                        <th>10대</th>
 	                        <th>20대</th>
 	                        <th>30대</th>
 	                        <th>40대</th>
@@ -171,18 +172,18 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
+	                <c:forEach var="s" items="${sList}">
 	                    <tr class="age common-class" hidden="hidden">
-	                        <td><a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.PCATEGORY}</a></td>
+	                        <td>${s.PCATEGORY}</a></td>
 	                        <td>${s.PCATEGORY_COUNT}</td>
-	                        <td>${s.underteen}</td>
-	                        <td>${s.teen}</td>
-	                        <td>${s.twenty}</td>
-	                        <td>${s.thirty}</td>
-	                        <td>${s.forty}</td>
-	                        <td>${s.fifty}</td>
-	                        <td>${s.sixtyover}</td>
+	                        <td>${s.teens}</td>
+	                        <td>${s.twenties}</td>
+	                        <td>${s.thirties}</td>
+	                        <td>${s.forties}</td>
+	                        <td>${s.fifties}</td>
+	                        <td>${s.above}</td>
 	                    </tr>
+	                    </c:forEach>
 	                </tbody>
 	            </table>
             </div>

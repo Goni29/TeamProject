@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketGroupBuyingVo;
 import com.lucle.myp.domain.MarketVo;
@@ -21,6 +22,7 @@ import com.lucle.myp.domain.ReplyVo;
 import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.service.MarketService;
+import com.lucle.myp.service.ProductService;
 import com.lucle.myp.service.RecentlyViewedService;
 import com.lucle.myp.service.ReplyService;
 import com.lucle.myp.service.SearchService;
@@ -39,12 +41,23 @@ public class HomeController {
 	private ReplyService replyService;
 	@Autowired
 	private RecentlyViewedService recentlyViewedService; // 최근 본 상품 서비스 추가
-
+	@Autowired
+	ProductService productService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String proto(HttpServletRequest request, Model model, Criteria cri) {
+	public String proto(HttpServletRequest request, Model model, Criteria cri) throws Exception {
 		List<MarketVo> list = service.rankedView();
 		model.addAttribute("products", list);
+		
+		List<MarketVo> products = service.groupBuying();
+        List category = productService.cateList();
+      ObjectMapper objm = new ObjectMapper();
+      String cateList = objm.writeValueAsString(category);
+      model.addAttribute("cateList", cateList);
+      
+      System.out.println(category);
+      System.out.println(cateList);
+        model.addAttribute("products2", products);
 		
 		HttpSession session = request.getSession();
 	    List<MarketVo> recentlyViewed = recentlyViewedService.getRecentlyViewedProducts(session);

@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
-    <div id="content-general" style="display: none;" class="row content">
+    <div id="content-general" class="row content">
         <div class="col">
         	<div class="d-flex justify-content-between">
 			    <div class="flex-fill">
@@ -24,11 +24,6 @@
 			            <input class="form-check-input" type="radio" name="sortTime" id="searchSort4" value="36500">
 			            <label class="form-check-label" for="searchSort4">전체 기간</label>
 			        </div>
-			        <!-- 오른쪽 컨텐츠: 정렬 옵션 -->
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort1" value="searchCount" checked="checked">
-			            <label class="form-check-label" for="sort1">검색 회수</label>
-			        </div>
 			        <div class="form-check form-check-inline">
 			            <input class="form-check-input" type="radio" name="sort" id="sort2" value="male">
 			            <label class="form-check-label" for="sort2">남성</label>
@@ -36,14 +31,6 @@
 			        <div class="form-check form-check-inline">
 			            <input class="form-check-input" type="radio" name="sort" id="sort3" value="female">
 			            <label class="form-check-label" for="sort3">여성</label>
-			        </div>
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort4" value="gyeonggi">
-			            <label class="form-check-label" for="sort4">경기</label>
-			        </div>
-			        <div class="form-check form-check-inline">
-			            <input class="form-check-input" type="radio" name="sort" id="sort5" value="seoul">
-			            <label class="form-check-label" for="sort5">서울</label>
 			        </div>
 			    </div>
 			    
@@ -64,20 +51,21 @@
 	            <table class="table table-striped table-hover">
 	                <thead>
 	                    <tr class="gender common-class" hidden="hidden">
-	                        <th>검색어</th>
-	                        <th>검색 회수</th>
+	                        <th>카테고리</th>
+	                        <th>조회수</th>
 	                        <th>남성</th>
 	                        <th>여성</th>
 	                    </tr> 
 	                </thead>
 	                <tbody>
+	                <c:forEach var="s" items="${sList}">
 	                    <tr class="gender common-class" hidden="hidden">
-	                        <td><a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
+	                        <td>${s.PCATEGORY}</td>
+	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.male}</td>
 	                        <td>${s.female}</td>
 	                    </tr>
+	                    </c:forEach>
 	                </tbody>
 	            </table>
 	                
@@ -101,19 +89,20 @@
 	                        <th>전남</th>
 	                        <th>경북</th>
 	                        <th>경남</th>
+	                        <th>제주</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
+	                	<c:forEach var="s" items="${sList}">
 	                    <tr class="locale common-class" hidden="hidden">
-	                        <td> <a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
+	                        <td>${s.PCATEGORY}</td>
+	                        <td>${s.PCATEGORY_COUNT}</td>
 	                        <td>${s.seoul}</td>
 	                        <td>${s.incheon}</td>
 	                        <td>${s.busan}</td>
-	                        <td>${s.deagu}</td>
+	                        <td>${s.daegu}</td>
 	                        <td>${s.gwangju}</td>
-	                        <td>${s.deajeon}</td>
+	                        <td>${s.daejeon}</td>
 	                        <td>${s.ulsan}</td>
 	                        <td>${s.gyeonggi}</td>
 	                        <td>${s.gangwon}</td>
@@ -121,9 +110,11 @@
 	                        <td>${s.chungnam}</td>
 	                        <td>${s.jeonbuk}</td>
 	                        <td>${s.jeonnam}</td>
-	                        <td>${s.kyeongbuk}</td>
-	                        <td>${s.kyeongnam}</td>
+	                        <td>${s.gyeongbuk}</td>
+	                        <td>${s.gyeongnam}</td>
+	                        <td>${s.JEJU}</td>
 	                    </tr>
+	                    </c:forEach>
 	                </tbody>
 	            </table>
 	                
@@ -133,7 +124,6 @@
 	                        <th>검색어</th>
 	                        <th>검색 회수</th>
 	                        <th>10대 이하</th>
-	                        <th>10대</th>
 	                        <th>20대</th>
 	                        <th>30대</th>
 	                        <th>40대</th>
@@ -142,18 +132,18 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
+	                <c:forEach var="s" items="${sList}">
 	                    <tr class="age common-class" hidden="hidden">
-	                        <td><a href="/market/search?keyword=${s.searchWord}&type=11st&type=ama&type=amaJp&type=ebay"
-	                            target="_blank">${s.searchWord}</a></td>
-	                        <td>${s.searchCount}</td>
-	                        <td>${s.underteen}</td>
-	                        <td>${s.teen}</td>
-	                        <td>${s.twenty}</td>
-	                        <td>${s.thirty}</td>
-	                        <td>${s.forty}</td>
-	                        <td>${s.fifty}</td>
-	                        <td>${s.sixtyover}</td>
+	                        <td>${s.PCATEGORY}</a></td>
+	                        <td>${s.PCATEGORY_COUNT}</td>
+	                        <td>${s.teens}</td>
+	                        <td>${s.twenties}</td>
+	                        <td>${s.thirties}</td>
+	                        <td>${s.forties}</td>
+	                        <td>${s.fifties}</td>
+	                        <td>${s.above}</td>
 	                    </tr>
+	                    </c:forEach>
 	                </tbody>
 	            </table>
             </div>
