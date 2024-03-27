@@ -44,5 +44,12 @@
 		SET PERSONNUM = PERSONNUM + 1
 		WHERE num = #{num}
 	</update>
+	
+	<insert id="addBuyingRecord">
+		insert into marketView(id, BUYNO, BUYINGDATE,
+		CATEGORY, NUM, PRODUCTNAME, AGE, GENDER, ADDRESS)
+		values(#{id}, seq_buying.nextval,
+		#{buyingdate}, #{category}, #{num}, #{productname}, #{age}, #{gender}, #{address})
+	</insert>
 
 </mapper>
