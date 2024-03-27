@@ -47,6 +47,9 @@
 	                            <label><input type="checkbox" name="filter" value="locale">지역 &nbsp;</label>
 	                            <label><input type="checkbox" name="filter" value="age">연령 &nbsp;</label>
 	                        </div>
+	                        <div class="flex-fill">
+	                        	<button onclick="exportToExcel()">엑셀로 내보내기</button>
+	                        </div>
 	                    </div>
 	                    <c:if test="${sList == null}">
 	                        <script>
@@ -170,7 +173,6 @@
 				</div>
 			</div>
 		</div>
-		<button onclick="exportToExcel()">엑셀로 내보내기</button>
 	</div>
 <script>
    $(document).ready(function(){
