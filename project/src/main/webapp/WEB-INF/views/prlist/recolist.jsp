@@ -284,7 +284,8 @@ $(document).ready(function() {
                 num: $(this).find('market_NUM').text(),
                 imgUrl: $(this).find('imgUrl').text(),
                 won: $(this).find('won').text(),
-                personnum: $(this).find('personnum').text()
+                personnum: $(this).find('personnum').text(),
+                achievementrate: $(this).find('achievementrate').text()
             };
 
             var productNameDisplay = product.productName.length > 20 ? product.productName.substring(0, 20) + '...' : product.productName;

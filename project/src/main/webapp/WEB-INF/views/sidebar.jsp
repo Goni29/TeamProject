@@ -9,6 +9,17 @@
   width: 30px;
   height: 30px;
 }
+    
+    .img-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+	}
+
+.img-size {
+    max-width: 100px;
+    height: auto;
+	}
 </style>
 
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled sidebar-width" id="accordionSidebar">
@@ -52,6 +63,7 @@
                 <i class="fas fa-fw fa-cog icon"></i>
                     <span>고객센터</span></a>
             </li>
+
 
         </ul>
 
