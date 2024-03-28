@@ -110,6 +110,40 @@
 					        </div>
 					    </div>
 					</div>
+					<!-- 공동구매 참여 모달 -->
+<div class="modal fade" id="participateModal" tabindex="-1" role="dialog" aria-labelledby="participateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="participateModalLabel">공동구매 참여</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="participateForm">
+                    <div class="form-group">
+                        <label for="recipientName">수령인</label>
+                        <input type="text" class="form-control" id="recipientName" placeholder="수령인 이름">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">연락처</label>
+                        <input type="text" class="form-control" id="contact" placeholder="연락처">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">주소</label>
+                        <input type="text" class="form-control" id="address" placeholder="주소">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" id="submitParticipation">주문</button>
+            </div>
+        </div>
+    </div>
+</div>
+					
                     <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -262,12 +296,18 @@ document.addEventListener('DOMContentLoaded', function() {
         $('.participateButton').click(function() {
             var productNum = $(this).data('num'); // 상품 번호 가져오기
             var isLoggedIn = ${loginVo.id != null}; // 로그인 상태 확인 (서버 사이드 코드 필요)
-
+            $('#participateModal').modal('show');
             if (!isLoggedIn) {
                 alert('로그인 후 이용해주세요.');
                 return; // 로그인하지 않은 상태면 여기서 처리 중단
             }
-
+        });
+        $('#submitParticipation').click(function() {
+            // 입력된 정보를 변수에 저장합니다.
+            var recipientName = $('#recipientName').val();
+            var contact = $('#contact').val();
+            var address = $('#address').val();
+            var productNum = $('#productNum').val();
             // 공동구매 참여 요청 AJAX
             $.ajax({
                 url: '/groupbuying/participate',

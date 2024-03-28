@@ -40,16 +40,33 @@
 
 	<!-- 참여 인원 업데이트를 위한 쿼리 추가 -->
 	<update id="updateParticipation" parameterType="long">
-		UPDATE GROUPBUYING
+		UPDATE
+		GROUPBUYING
 		SET PERSONNUM = PERSONNUM + 1
 		WHERE num = #{num}
 	</update>
-	
-	<insert id="addBuyingRecord">
-		insert into buying(id, BUYNO, BUYINGDATE,
-		CATEGORY, NUM, PRODUCTNAME, AGE, GENDER, ADDRESS)
-		values(#{id}, seq_buying.nextval,
-		sysdate, #{category}, #{num}, #{productname}, #{age}, #{gender}, #{address})
-	</insert>
 
+	<insert id="addBuyingRecord">
+		INSERT INTO BUYING (ID, BUYNO, BUYINGDATE, CATEGORY,
+		NUM, PRODUCTNAME, AGE, GENDER, ADDRESS)
+		SELECT
+		U.ID,
+		seq_buying.nextval,
+		SYSDATE,
+		M.CATEGORY,
+		M.NUM,
+		M.PRODUCTNAME,
+		U.AGE,
+		U.GENDER,
+		U.ADDRESS
+		FROM
+		USERS U, MARKET M
+		WHERE
+		U.ID = #{id} AND M.NUM = #{num}
+	</insert>
+	
+	<select id="BuyingRecord"
+		resultType="com.lucle.myp.domain.GroupBuyingVo">
+		SELECT * FROM Buying
+	</select>
 </mapper>

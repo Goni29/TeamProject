@@ -50,7 +50,12 @@
 
                      <c:if test="${loginVo.id == board.id}">
                         <div class="col-auto">
-                           <button id="delete" class="btn btn-success">삭제</button>
+                           <form action="/board/remove" method="post">
+    <input type="hidden" name="bno" value="bno">
+    <!-- 여기에 추가적인 필드(예: Criteria 정보)를 포함할 수 있습니다. -->
+    <button type="submit" class="btn btn-success">삭제</button>
+</form>
+
                         </div>
                         <div class="col-auto">
                            <button id="modify" class="btn btn-success">수정</button>

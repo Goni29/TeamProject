@@ -1,5 +1,6 @@
 package com.lucle.myp.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,6 +84,8 @@ public class GroupBuyingController {
         UserVo userVo = (UserVo) session.getAttribute("loginVo");
         boolean success = service.participate(groupBuyingVo);
         groupBuyingVo.setId(userVo.getId());
+        groupBuyingVo.getCategory();
+        groupBuyingVo.setGender(userVo.getGender());
         service.addBuyingRecord(groupBuyingVo);
         if (!success) {
             return ResponseEntity.badRequest().body(Map.of("message", "공동구매 참여에 실패했습니다."));
@@ -94,6 +97,20 @@ public class GroupBuyingController {
         replyVo.setVisible(1);
         return ResponseEntity.ok(Map.of("message", "공동구매에 성공적으로 참여하였으며, 댓글이 자동으로 작성되었습니다."));   
 //        return null;
+    }
+    
+ // 주문 목록
+    @RequestMapping(value = "/orderlist", method = RequestMethod.GET)
+    public void getOrderList(HttpSession session, GroupBuyingVo groupBuyingVo, Model model) throws Exception {
+     
+     UserVo member = (UserVo)session.getAttribute("loginVo");
+     String userId = member.getId();
+     
+     groupBuyingVo.setId(userId);
+     
+     List<GroupBuyingVo> orderList = service.BuyingRecord(groupBuyingVo);
+     
+     model.addAttribute("orderList", orderList);
     }
 
 }

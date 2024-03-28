@@ -15,4 +15,5 @@ public interface GroupBuyingService {
     List<GroupBuyingVo> listGroupBuying();
     boolean participate(GroupBuyingVo groupBuyingVo);
     void addBuyingRecord(GroupBuyingVo groupBuying);
+    List<GroupBuyingVo> BuyingRecord(GroupBuyingVo groupBuying);
 }

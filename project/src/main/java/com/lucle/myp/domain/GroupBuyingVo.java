@@ -17,7 +17,7 @@ public class GroupBuyingVo {
 	private Long personnum;
 	private String id;
 	private String nickname;
-	private Date buyingdate;
+	private String buyingdate;
 	private Long buyno;
 	private Long category;
 	private String productname;
@@ -25,5 +25,8 @@ public class GroupBuyingVo {
 	private Integer gender;
 	private String address;
 	private int achievementrate;
+	private String detailaddress;
+	private String extraaddress;
+	private String delivery;
 	
 }
