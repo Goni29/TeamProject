@@ -23,6 +23,7 @@
             <div class="container">
                 <div class="row">
                     <c:forEach var="product" items="${products}">
+                    	<c:set var="calculationResult" value="${product.personnum * 100 / product.goaltarget}" />
                         <div class="col-xl-6 col-lg-6">
 						    <a href="${product.url}" style="display: block; width: 100%; height: 100%; overflow: hidden;">
                         		<p>${product.marketName}</p>
@@ -59,11 +60,11 @@
 			                </c:if>
 			                <div class="row no-gutters align-items-center">
 	                           <div class="col-auto">
-	                               <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product.achievementrate}%</div>
+	                               <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><fmt:formatNumber value="${calculationResult}" pattern="#"/>%</div>
 	                           </div>
 	                           <div class="col">
 	                               <div class="progress progress-sm mr-2">
-	                                   <div class="progress-bar bg-info" role="progressbar" style="width: ${product.achievementrate}%" aria-valuenow="${product.achievementrate}" aria-valuemin="0" aria-valuemax="100"></div>
+	                                   <div class="progress-bar bg-info" role="progressbar" style="width: <fmt:formatNumber value="${calculationResult}" pattern="#"/>%" aria-valuenow="<fmt:formatNumber value="${calculationResult}" pattern="#"/>" aria-valuemin="0" aria-valuemax="100"></div>
 	                               </div>
 	                           </div>
 	                       </div>

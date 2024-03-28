@@ -285,10 +285,7 @@ $(document).ready(function() {
                 imgUrl: $(this).find('imgUrl').text(),
                 won: $(this).find('won').text(),
                 personnum: $(this).find('personnum').text(),
-<<<<<<< HEAD
-=======
                 goaltarget: $(this).find('goaltarget').text(),
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
                 achievementrate: $(this).find('achievementrate').text()
             };
 
