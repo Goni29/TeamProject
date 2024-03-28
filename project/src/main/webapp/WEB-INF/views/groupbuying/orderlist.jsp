@@ -19,6 +19,7 @@
    <p><span>주소</span>${orderList.address}${orderList.detailaddress}${orderList.extraaddress}</p>
    <p><span>주문상품</span>${orderList.productname}</p>
    <p><span>주문날짜</span>${orderList.buyingdate}</p>
+   <p><span>배송상태</span>${orderList.delivery}</p>
   </div>
   </li>
   </c:forEach>
