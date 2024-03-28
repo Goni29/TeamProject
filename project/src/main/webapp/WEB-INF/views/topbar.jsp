@@ -84,6 +84,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/search/userPage?id=${loginVo.id}">상품 검색 이력</a>
                             <a class="dropdown-item" href="/market/userPage?id=${loginVo.id}">상품 조회 목록</a>
+                            <a class="dropdown-item" href="/groupbuying/orderlist?id=${loginVo.id}">구매 목록</a>
                             <a class="dropdown-item" data-toggle="modal" data-target="#passwordModal">회원 정보 수정</a>
                         </div>
                     </li>
