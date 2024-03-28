@@ -297,6 +297,7 @@ $(document).ready(function() {
                 '</a><br>' +
                 '<div>' +
                 '<p>가격 : ' + product.won + '원</p>' +
+                '<p>목표 인원 : ' + product.goaltarget + '</p>' +
                 '<p>현재 참여 인원 : ' + product.personnum + '</p>' +
                 '</div>' +
                 '<div class="row no-gutters align-items-center">'+
