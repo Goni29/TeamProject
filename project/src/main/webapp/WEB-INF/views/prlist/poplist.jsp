@@ -76,37 +76,47 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div
-                                            class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product.personnum}%</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product.achievementrate}%</div>
                                     </div>
                                     <div class="col">
                                         <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar"
-                                                style="width: ${product.personnum}%" aria-valuenow="${product.personnum}"
-                                                aria-valuemin="0" aria-valuemax="${product.goaltarget}"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: ${product.achievementrate}%" aria-valuenow="${product.achievementrate}" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="btn-group" role="group" aria-label="Button group">
-                                    <form class="actionForm" action="/board/register">
-                                        <input name="num" value="${product.num}" hidden="hidden" /> <input
-                                            name="productName" value="${product.productName}" hidden="hidden" /> <input
-                                            name="marketName" value="${product.marketName}" hidden="hidden" /> <input
-                                            name="url" value="${product.url}" hidden="hidden" /> <input
-                                            name="imgUrl" value="${product.imgUrl}" hidden="hidden" /> <input
-                                            name="won" value="${product.won}" hidden="hidden" /> <input
-                                            name="delivery" value="${product.delivery}" hidden="hidden" /> <input
-                                            name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" /> <input
-                                            name="keyword" value="${searchWord}" hidden="hidden" />
-                                        <button class="btn btn-primary" hidden="hidden">공동구매
-                                            참여하기</button>
-                                    </form>
-
-                                    <a
-                                        href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                                        <button class="btn btn-success" hidden="hidden">상세 페이지</button>
-                                    </a>
-                                </div>
+                                   <form class="actionForm" action="/market/register">
+	                                    <input name="num" value="${product.num}" hidden="hidden" /> 
+	                                    <input name="productName" value="${product.productName}" hidden="hidden" /> 
+	                                    <input name="marketName" value="${product.marketName}" hidden="hidden" /> 
+	                                    <input name="url" value="${product.url}" hidden="hidden" /> 
+	                                    <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" /> 
+	                                    <input name="won" value="${product.won}" hidden="hidden" /> 
+	                                    <input name="delivery" value="${product.delivery}" hidden="hidden" />
+	                                    <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" /> 
+	                                    <input name="keyword" value="${searchWord}" hidden="hidden" />
+	                                    <button hidden="hidden" class="participateButton btn-primary btn-needlogin" data-num="${product.num}">공동구매 참여하기</button><br /><br />
+	                               	 </form>
+                                   
+                                   <form class="actionForm" action="/user/save">
+                                       <input name="num" value="${product.num}" hidden="hidden" />
+                                       <input name="productName" value="${product.productName}" hidden="hidden" />
+                                       <input name="marketName" value="${product.marketName}" hidden="hidden" />
+                                       <input name="url" value="${product.url}" hidden="hidden" />
+                                       <input name="imgUrl" value="${product.imgUrl}" hidden="hidden" />
+                                       <input name="won" value="${product.won}" hidden="hidden" />
+                                      
+                                       <input name="delivery" value="${product.delivery}" hidden="hidden" />
+                                       <input name="deliveryFee" value="${product.deliveryFee}" hidden="hidden" />
+                                   
+                                       <input name="keyword" value="${searchWord}" hidden="hidden" />
+                                       <button hidden="hidden" class="btn btn-primary btn-needlogin">찜하기</button>
+                                  	</form>
+                                   
+                                   <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
+                                       <button class="btn btn-success">상세 페이지</button>
+                                   </a>
+                               </div>
                             </div>
                         </c:forEach>
 						</div>

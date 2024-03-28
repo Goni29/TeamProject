@@ -5,14 +5,16 @@
 <mapper namespace="com.lucle.myp.mapper.MarketMapper">
 
 	<select id="getList" resultType="com.lucle.myp.domain.MarketVo">
-		SELECT m.*, c.LARGE, c.MEDIUM,
-		c.SMALL, c.SUB_CATEGORY
+	<![CDATA[
+		SELECT m.*, c.LARGE, c.MEDIUM, c.SMALL, c.SUB_CATEGORY, g.*
 		FROM MARKET m
 		JOIN CATEGORY c ON m.NUM = c.NUM
+		JOIN GROUPBUYING g ON m.NUM = g.NUM
 		WHERE
 		(
 		UPPER(M.PRODUCTNAME) LIKE '%' || UPPER(#{productName}) || '%'
 		)
+	]]>
 	</select>
 
 

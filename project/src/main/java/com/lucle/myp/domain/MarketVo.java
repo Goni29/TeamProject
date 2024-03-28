@@ -39,6 +39,7 @@ public class MarketVo {
 	private String regidate;
 	private String goaldate;
 	private Long goaltarget;
+	private int achievementrate;
 
 	private Long personnum;
 

@@ -24,5 +24,6 @@ public class GroupBuyingVo {
 	private Integer age;
 	private Integer gender;
 	private String address;
+	private int achievementrate;
 	
 }

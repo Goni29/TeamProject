@@ -59,11 +59,11 @@
 			                </c:if>
 			                <div class="row no-gutters align-items-center">
 	                           <div class="col-auto">
-	                               <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product.personnum}%</div>
+	                               <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product.achievementrate}%</div>
 	                           </div>
 	                           <div class="col">
 	                               <div class="progress progress-sm mr-2">
-	                                   <div class="progress-bar bg-info" role="progressbar" style="width: ${product.personnum}%" aria-valuenow="${product.personnum}" aria-valuemin="0" aria-valuemax="${product.goaltarget}"></div>
+	                                   <div class="progress-bar bg-info" role="progressbar" style="width: ${product.achievementrate}%" aria-valuenow="${product.achievementrate}" aria-valuemin="0" aria-valuemax="100"></div>
 	                               </div>
 	                           </div>
 	                       </div>
@@ -149,6 +149,39 @@
 </body>
 			
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    function updateAchievementRate() {
+        const currentPersonNumElement = document.querySelector('.currentPersonNum');
+        const goalTargetElement = document.querySelector('.goalTarget');
+        
+        if(currentPersonNumElement && goalTargetElement) {
+            const currentPersonNum = parseInt(currentPersonNumElement.textContent);
+            const goalTarget = parseInt(goalTargetElement.textContent);
+            const achievementRate = (currentPersonNum / goalTarget) * 100;
+
+            const achievementRateElement = document.querySelector('.achievementRate');
+            if(achievementRateElement) {
+                achievementRateElement.textContent = `${achievementRate.toFixed(2)}%`;
+                document.querySelector('.progress-bar').style.width = `${achievementRate.toFixed(2)}%`;
+            }
+        }
+    }
+
+    // '공동구매 참여하기' 버튼 클릭 이벤트
+    const participateButton = document.querySelector('.participateButton');
+    if (participateButton) {
+        participateButton.addEventListener('click', function() {
+            // 참여 인원 업데이트 로직
+            const currentPersonNumElement = document.querySelector('.currentPersonNum');
+            let currentPersonNum = parseInt(currentPersonNumElement.textContent);
+            currentPersonNumElement.textContent = ++currentPersonNum;
+
+            // 달성률을 다시 계산하고 업데이트합니다.
+            updateAchievementRate();
+        });
+    }
+});
+
     $(document).ready(function() {
         // 댓글 작성 버튼 클릭 이벤트
         $('#addReply').off('click').on('click', function(e) {

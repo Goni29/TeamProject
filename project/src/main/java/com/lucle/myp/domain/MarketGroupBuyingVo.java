@@ -11,4 +11,5 @@ public class MarketGroupBuyingVo {
         this.marketVo = marketVo;
         this.groupBuyingVo = groupBuyingVo;
     }
+	
 }

@@ -29,7 +29,18 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<MarketVo> selectAllProducts() {
-		return mapper.selectAllProducts();
+		List<MarketVo> list = mapper.selectAllProducts(); // 데이터베이스에서 목록을 가져옴
+
+	    for (MarketVo market : list) {
+	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
+	            market.setAchievementrate(0);
+	        } else {
+	            long achievementRate = (market.getPersonnum() * 100) / market.getGoaltarget();
+	            market.setAchievementrate((int) achievementRate);
+	        }
+	    }
+
+	    return list;
 	}
 
 	@Override
@@ -49,8 +60,18 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
     public List<MarketVo> getRecommendedProductDetails() {
-        return mapper.getProductDetails();
-    }
+        List<MarketVo> list = mapper.getProductDetails(); // 데이터베이스에서 목록을 가져옴
+	    for (MarketVo market : list) {
+	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
+	            market.setAchievementrate(0);
+	        } else {
+	            long achievementRate = (market.getPersonnum() * 100) / market.getGoaltarget();
+	            market.setAchievementrate((int) achievementRate);
+	        }
+	    }
+
+	    return list;
+	}
 	
 	@Override
     public List<MarketVo> getProductsByLargeCategory(int large) {
@@ -80,6 +101,16 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
     public List<MarketVo> getProductsByCategory(String cateCode) {
-        return mapper.findProductsByCategory(cateCode);
-    }
+        List<MarketVo> list = mapper.findProductsByCategory(cateCode); // 데이터베이스에서 목록을 가져옴
+	    for (MarketVo market : list) {
+	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
+	            market.setAchievementrate(0);
+	        } else {
+	            long achievementRate = (market.getPersonnum() * 100) / market.getGoaltarget();
+	            market.setAchievementrate((int) achievementRate);
+	        }
+	    }
+
+	    return list;
+	}
 }
