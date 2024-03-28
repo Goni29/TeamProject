@@ -285,6 +285,10 @@ $(document).ready(function() {
                 imgUrl: $(this).find('imgUrl').text(),
                 won: $(this).find('won').text(),
                 personnum: $(this).find('personnum').text(),
+<<<<<<< HEAD
+=======
+                goaltarget: $(this).find('goaltarget').text(),
+>>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
                 achievementrate: $(this).find('achievementrate').text()
             };
 
@@ -298,6 +302,7 @@ $(document).ready(function() {
                 '</a><br>' +
                 '<div>' +
                 '<p>가격 : ' + product.won + '원</p>' +
+                '<p>목표 인원 : ' + product.goaltarget + '</p>' +
                 '<p>현재 참여 인원 : ' + product.personnum + '</p>' +
                 '</div>' +
                 '<div class="row no-gutters align-items-center">'+
