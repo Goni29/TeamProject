@@ -9,6 +9,17 @@
   width: 30px;
   height: 30px;
 }
+    
+    .img-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+	}
+
+.img-size {
+    max-width: 100px;
+    height: auto;
+	}
 </style>
 
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled sidebar-width" id="accordionSidebar">
@@ -52,7 +63,29 @@
                 <i class="fas fa-fw fa-cog icon"></i>
                     <span>고객센터</span></a>
             </li>
-
+            
+            <hr class="sidebar-divider">
+            
+			<li class="nav-item">
+			    <div class="row justify-content-center">
+			        <!-- Left Column -->
+			        <div class="nav-link">
+			            <span>최근본 상품 목록</span>
+			            <hr>
+			            <div class="container">
+			                <div class="img-container">
+			                    <c:forEach var="product2" items="${recentlyViewedProducts}" begin="0" end="3">
+			                        <div class="mb-3">
+			                            <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
+			                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product2.imgUrl}" alt="Product Image">
+			                            </a>
+			                        </div>
+			                    </c:forEach>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</li>
         </ul>
 
 <script>
