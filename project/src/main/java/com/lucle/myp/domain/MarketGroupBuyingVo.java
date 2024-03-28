@@ -6,7 +6,6 @@ import lombok.Data;
 public class MarketGroupBuyingVo {
 	MarketVo marketVo;
 	GroupBuyingVo groupBuyingVo;
-	private int achievementRate;
 	
 	public MarketGroupBuyingVo(MarketVo marketVo, GroupBuyingVo groupBuyingVo) {
         this.marketVo = marketVo;
@@ -20,5 +19,7 @@ public class MarketGroupBuyingVo {
 	public Long getGoalTarget() {
 		return marketVo.getGoaltarget();
 	}
+	
+	private int achievementRate;
 	
 }

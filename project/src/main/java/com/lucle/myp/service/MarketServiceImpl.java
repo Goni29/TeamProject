@@ -20,20 +20,8 @@ public class MarketServiceImpl implements MarketService {
 
 	@Override
 	public List<MarketVo> getList(@Param("productName") String productName) {
-		List<MarketVo> list = mapper.getList(productName); // 데이터베이스에서 목록을 가져옴
-
-	    for (MarketVo market : list) {
-	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
-	            market.setAchievementrate(0);
-	        } else {
-	            long achievementRate = (market.getPersonnum() * 100) / market.getGoaltarget();
-	            market.setAchievementrate((int) achievementRate);
-	        }
-	    }
-
-	    return list;
+		return mapper.getList(productName);
 	}
-
 
 	@Override
 	public int marketViewPlus(String id, Long num) {
@@ -57,32 +45,12 @@ public class MarketServiceImpl implements MarketService {
 
 	@Override
 	public List<MarketGroupBuyingVo> sortProto(@Param("num") Long num, @Param("large") Integer large, @Param("medium") Integer medium, @Param("small") Integer small, @Param("sub_category") Integer sub_category) {
-		List<MarketGroupBuyingVo> list = mapper.sortProto(num, large, medium, small, sub_category);
-		for (MarketGroupBuyingVo market : list) {
-	        if (market.getGoalTarget() == 0) { // 0으로 나누는 것을 방지
-	            market.setAchievementRate(0);
-	        } else {
-	            long achievementRate = (market.getPersonNum() * 100) / market.getGoalTarget();
-	            market.setAchievementRate((int) achievementRate);
-	        }
-	    }
-		
-		return list;
+		return mapper.sortProto(num, large, medium, small, sub_category);
 	}
 
 	@Override
 	public List<MarketVo> groupBuying() {
-		List<MarketVo> list = mapper.groupBuying(); // 데이터베이스에서 목록을 가져옴
-	    for (MarketVo market : list) {
-	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
-	            market.setAchievementrate(0);
-	        } else {
-	            long achievementRate = (market.getPersonnum() * 100) / market.getGoaltarget();
-	            market.setAchievementrate((int) achievementRate);
-	        }
-	    }
-
-	    return list;
+		return mapper.groupBuying();
 	}
 
 	@Override
@@ -92,18 +60,7 @@ public class MarketServiceImpl implements MarketService {
 
 	@Override
 	public List<MarketVo> rankedView() {
-	    List<MarketVo> list = mapper.rankedView(); // 데이터베이스에서 목록을 가져옴
-
-	    for (MarketVo market : list) {
-	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
-	            market.setAchievementrate(0);
-	        } else {
-	            long achievementRate = (market.getPersonnum() * 100) / market.getGoaltarget();
-	            market.setAchievementrate((int) achievementRate);
-	        }
-	    }
-
-	    return list;
+		return mapper.rankedView();
 	}
 
 }
