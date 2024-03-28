@@ -24,5 +24,8 @@ public class GroupBuyingVo {
 	private Integer age;
 	private Integer gender;
 	private String address;
+	private String detailaddress;
+	private String extraaddress;
+	private String delivery;
 	
 }

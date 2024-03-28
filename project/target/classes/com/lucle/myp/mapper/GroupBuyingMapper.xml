@@ -64,4 +64,9 @@
 		WHERE
 		U.ID = #{id} AND M.NUM = #{num}
 	</insert>
+	
+	<select id="BuyingRecord"
+		resultType="com.lucle.myp.domain.GroupBuyingVo">
+		SELECT * FROM Buying
+	</select>
 </mapper>

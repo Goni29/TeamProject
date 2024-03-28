@@ -15,4 +15,5 @@ public interface GroupBuyingMapper {
 	List<GroupBuyingVo> listGroupBuying();
 	int updateParticipation(Long num);
 	void addBuyingRecord(GroupBuyingVo groupBuying);
+	List<GroupBuyingVo> BuyingRecord(GroupBuyingVo groupBuying);
 }

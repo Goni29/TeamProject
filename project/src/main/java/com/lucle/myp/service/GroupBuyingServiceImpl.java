@@ -63,6 +63,11 @@ public class GroupBuyingServiceImpl implements GroupBuyingService {
 		System.out.println(groupBuying);
 		mapper.addBuyingRecord(groupBuying);
 	}
+
+	@Override
+	public List<GroupBuyingVo> BuyingRecord(GroupBuyingVo groupBuying) {
+		return mapper.BuyingRecord(groupBuying);
+	}
     
 
 }
