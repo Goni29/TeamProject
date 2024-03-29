@@ -234,10 +234,9 @@
                             </c:if>
                         </ul>
                     </nav>
+            <%@ include file="./footer.jsp"%>
                 </div>
             </div>
-        </div>
-    </div>
 </body>
 			
 <script>
@@ -463,5 +462,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
-
-<%@ include file="./footer.jsp"%>

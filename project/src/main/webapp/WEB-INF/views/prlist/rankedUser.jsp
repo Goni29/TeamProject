@@ -95,12 +95,10 @@
                             </div>
                         </c:forEach>
                     </div>
-                    <div class="products-container">
-                <!-- 동적으로 로드된 제품들이 여기에 표시됩니다. -->
-            </div>
             </div>
             </div>
         </div>
     </div>
 </body>
+<%@include file="../footer.jsp"%>
 </html>
