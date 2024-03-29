@@ -22,14 +22,14 @@
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col">
-
-				<!-- 주소창의 패러미터에 로그인한 아이디와 다른 아이디가 입력되었을 경우 뒤로 돌려보냄. 이 판정은 컨트롤러에서 함.-->
-				<c:if test="${sList == null}">
-					<script>
+				
+				<% if (session.getAttribute("loginVo") == null) { %>
+						    <script>
 					alert("잘못된 요청입니다");
+					 window.location.href = '/';
 					</script>
-				</c:if>
-
+				<% }%>
+				
 				<!-- 게시글 목록 테이블 -->
 				<table class="table table-striped table-hover">
 					<thead>
@@ -179,58 +179,5 @@
 								$actionForm.submit();
 								$actionForm.find('input[name="bno"]').remove();
 							})
-							
-							// 게시글 검색과 관련된 부분
-							let $searchForm = $('#searchForm');
-
-							$('#searchForm button')
-									.on(
-											'click',
-											function(e) {
-												e.preventDefault();
-												if (!$searchForm.find(
-														"option:selected")
-														.val()) {
-													alert("검색 방법(종류)를 선택하세요");
-													return;
-												}
-												/*
-												 if( ! $searchForm.find('input[name="keyword"]').val() ){
-												 alert("검색 키워드를 입력하세요");
-												 return;
-												 }
-												 // 거의 대부분 공백 입력을 고려하지 않는경우가 많다 
-												 //   검색 키워드에서 사용자가 실수로 앞 또는 뒤에 공백이 들어있을 경우 사용자의 의도대로 검색이 안 될 수도 있다.
-												
-												 if( ! ( $searchForm.find('input[name="keyword"]').val().trim()  ) ){
-												 alert("검색어에 공백만 들어있습니다. 검색어를 확인하세요");
-												 return;
-												 }
-												 */
-												if (!($searchForm
-														.find(
-																'input[name="keyword"]')
-														.val().trim())) {
-													alert("검색어가 입력되지 않았거나 검색어로 공백만 입력되었습니다.");
-													return;
-												}
-												//여기서 부터				
-												let trimNotkeyword = $searchForm
-														.find(
-																'input[name="keyword"]')
-														.val().trim();
-												$searchForm
-														.find(
-																'input[name="keyword"]')
-														.val(trimNotkeyword)
-												//여기 까지는 공백으로 시작하거나 공백으로 끝나는 키워드를 입력했더라도 정확한 키워드만 서버에 전달되도록 한다.
-												$searchForm
-														.find(
-																'input[name="pageNum"]')
-														.val("1");
-												$searchForm.submit();
-											});
-
-						});
 	</script>
 <%@include file="../footer.jsp"%>

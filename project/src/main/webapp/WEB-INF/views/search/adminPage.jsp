@@ -496,6 +496,5 @@
                    XLSX.writeFile(wb, "product_statistics.xlsx");
                }
 </script>
-<%@include file="../footer.jsp"%>
 
 </body>

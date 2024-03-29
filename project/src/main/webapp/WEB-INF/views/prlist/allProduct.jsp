@@ -97,8 +97,8 @@
                     </div>
             </div>
             </div>
-            <%@ include file="../footer.jsp"%>
         </div>
     </div>
 </body>
+            <%@ include file="../footer.jsp"%>
 </html>

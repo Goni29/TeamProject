@@ -31,6 +31,7 @@
 				<c:if test="${mList == null}">
 					<script>
 					alert("잘못된 요청입니다");
+					 window.location.href = '/';
 					</script>
 				</c:if>
 

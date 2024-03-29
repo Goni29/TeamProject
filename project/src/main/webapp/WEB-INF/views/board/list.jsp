@@ -29,7 +29,7 @@
 
                 <div class="container">
                 
-                	<h1 class="mt-5 center-title">상품 요청 게시판</h1>
+                	<h1 class="mt-5 md-5 center-title">상품 요청 게시판</h1>
                 	
                     <div class="row">
                         <div class="col">
