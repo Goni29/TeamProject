@@ -86,6 +86,11 @@ public class GroupBuyingController {
         groupBuyingVo.setId(userVo.getId());
         groupBuyingVo.getCategory();
         groupBuyingVo.setGender(userVo.getGender());
+        groupBuyingVo.getAddress();
+        groupBuyingVo.getAddressdetail();
+        groupBuyingVo.getExtraaddress();
+        groupBuyingVo.getPhonenumber();
+        groupBuyingVo.getName();
         service.addBuyingRecord(groupBuyingVo);
         if (!success) {
             return ResponseEntity.badRequest().body(Map.of("message", "공동구매 참여에 실패했습니다."));

@@ -123,19 +123,72 @@
             </div>
             <div class="modal-body">
                 <form id="participateForm">
-                    <div class="form-group">
-                        <label for="recipientName">수령인</label>
-                        <input type="text" class="form-control" id="recipientName" placeholder="수령인 이름">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact">연락처</label>
-                        <input type="text" class="form-control" id="contact" placeholder="연락처">
-                    </div>
-                    <div class="form-group">
-                        <label for="address">주소</label>
-                        <input type="text" class="form-control" id="address" placeholder="주소">
-                    </div>
-                </form>
+    <div class="form-group">
+        <label for="recipientName">수령인</label>
+        <input type="text" class="form-control" id="name" placeholder="수령인 이름">
+    </div>
+    <div class="form-group">
+        <label for="contact">연락처</label>
+        <input type="text" class="form-control" id="phonenumber" placeholder="연락처">
+    </div>
+    <div class="form-group">
+        <label for="postcode">우편번호</label>
+        <input type="text" class="form-control mb-2" id="postcode" placeholder="우편번호" name="postcode">
+        <input type="button" class="btn btn-secondary mb-2" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+    </div>
+    <div class="form-group">
+        <label for="address">주소</label>
+        <input type="text" class="form-control mb-2" id="address" placeholder="주소" name="address">
+    </div>
+    <div class="form-group">
+        <label for="extraAddress">참고항목</label>
+        <input type="text" class="form-control mb-2" id="extraAddress" placeholder="참고항목" name="extraAddress">
+    </div>
+    <div class="form-group">
+        <label for="addressDetail">상세주소</label>
+        <input type="text" class="form-control" id="addressDetail" placeholder="상세주소" name="addressDetail">
+    </div>
+</form>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    // 다음 우편번호 서비스를 사용하여 주소를 찾는 함수입니다.
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
+                }
+
+                if(data.userSelectedType === 'R'){
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    document.getElementById("extraAddress").value = extraAddr;
+                } else {
+                    document.getElementById("extraAddress").value = '';
+                }
+
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                document.getElementById("addressDetail").focus();
+            }
+        }).open();
+    }
+</script>
+</div>
+</div>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -305,16 +358,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         $('#submitParticipation').click(function() {
             // 입력된 정보를 변수에 저장합니다.
-            var recipientName = $('#recipientName').val();
-            var contact = $('#contact').val();
+            var name = $('#name').val();
+            var phonenumber = $('#phonenumber').val();
             var address = $('#address').val();
             var productNum = $('#productNum').val();
-            // 공동구매 참여 요청 AJAX
+            var addressdetail = $('#addressDetail').val();
+            var extraaddress = $('#extraAddress').val();
+         // 공동구매 참여 요청 AJAX
             $.ajax({
                 url: '/groupbuying/participate',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ num: productNum }),
+                data: JSON.stringify({
+                	num: productNum,
+                    address: address,
+                    addressdetail: addressdetail,
+                    extraaddress: extraaddress,
+                    phonenumber: phonenumber,
+                    name: name
+                	}),
                 dataType: 'json',
                 success: function(response) {
                     alert('성공적으로 참여되었습니다.');
@@ -326,7 +388,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (xhr.status === 401) {
                         alert('로그인 후 이용해주세요.');
                     } else {
-                        alert('오류 발생: ' + error);
+                    	console.log(addressDetail);
+                        alert('오류 발생: ' + error + xhr.status);
                     }
                 }
             });

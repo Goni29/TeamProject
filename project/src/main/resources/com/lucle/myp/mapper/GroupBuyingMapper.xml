@@ -48,7 +48,7 @@
 
 	<insert id="addBuyingRecord">
 		INSERT INTO BUYING (ID, BUYNO, BUYINGDATE, CATEGORY,
-		NUM, PRODUCTNAME, AGE, GENDER, ADDRESS)
+		NUM, PRODUCTNAME, AGE, GENDER, ADDRESS, addressdetail, extraaddress, phonenumber, name)
 		SELECT
 		U.ID,
 		seq_buying.nextval,
@@ -58,7 +58,11 @@
 		M.PRODUCTNAME,
 		U.AGE,
 		U.GENDER,
-		U.ADDRESS
+		#{address},
+		#{addressdetail},
+		#{extraaddress},
+		#{phonenumber},
+		#{name}
 		FROM
 		USERS U, MARKET M
 		WHERE

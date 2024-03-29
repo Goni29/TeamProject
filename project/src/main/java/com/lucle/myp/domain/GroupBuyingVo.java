@@ -25,8 +25,10 @@ public class GroupBuyingVo {
 	private Integer gender;
 	private String address;
 	private int achievementrate;
-	private String detailaddress;
+	private String addressdetail;
 	private String extraaddress;
 	private String delivery;
+	private String phonenumber;
+	private String name;
 	
 }
