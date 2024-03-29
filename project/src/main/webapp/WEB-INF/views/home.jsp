@@ -11,6 +11,17 @@
     .page-size {
         width: 100vw;
     }
+    
+    .img-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+	}
+
+.img-size {
+    max-width: 100px;
+    height: auto;
+	}
 </style>
 
 <body id="page-top">
@@ -175,6 +186,30 @@
                             </div>
                         </c:forEach>
                     </div>
+                    <div class="nav-item">
+			    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecent" aria-expanded="true" aria-controls="collapseRecent">
+			        <i class="fas fa-history icon"></i>
+			        <span>최근본 상품</span>
+			    </a>
+			    <div id="collapseRecent" class="collapse" aria-labelledby="headingRecent" data-parent="#accordionSidebar">
+			        <div class="bg-white py-2 collapse-inner rounded">
+			            <h6 class="collapse-header">최근 본 상품:</h6>
+			            <div class="collapse-item">
+			                <div class="container">
+			                    <div class="img-container">
+			                        <c:forEach var="product2" items="${recentlyViewedProducts}" begin="0" end="3">
+			                            <div class="mb-3">
+			                                <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
+			                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product2.imgUrl}" alt="Product Image" style="width: 100px; height: 100px;">
+			                                </a>
+			                            </div>
+			                        </c:forEach>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
             </div>
         </div>
     </div>
