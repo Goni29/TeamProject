@@ -116,70 +116,70 @@
                         <h1 class="h3 mb-0 text-gray-800">전체상품</h1>
                     </div>
                     <div class="row">
-                        <c:forEach var="product2" items="${products2}" begin="0" end="7">
+                        <c:forEach var="rankView" items="${rankView}" begin="0" end="7">
                             <div class="col-xl-3 col-md-6 mb-4 border">
-                                <p>${product2.marketName}</p>
+                                <p>${rankView.marketName}</p>
 
-                                <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product2.imgUrl}" alt="Product Image"> <br>
+                                <a href="/pr?large=${rankView.large}&medium=${rankView.medium}&small=${rankView.small}&sub_category=${rankView.sub_category}&num=${rankView.num}">
+                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${rankView.imgUrl}" alt="Product Image"> <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>
-                                        <c:when test="${fn:length(product2.productName) > 20}">
-                                            ${fn:substring(product2.productName, 0, 20)}...
+                                        <c:when test="${fn:length(rankView.productName) > 20}">
+                                            ${fn:substring(rankView.productName, 0, 20)}...
                                         </c:when>
                                         <c:otherwise>
-                                            ${product2.productName}
+                                            ${rankView.productName}
                                         </c:otherwise>
                                     </c:choose>
                                     </h6>
                                 </a><br>
                                        
                                 <div>
-                                    <p>가격 : ${product2.won}원</p>
-                                    <p>현재 참여 인원 : ${product2.personnum}</p>
+                                    <p>가격 : ${rankView.won}원</p>
+                                    <p>현재 참여 인원 : ${rankView.personnum}</p>
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${product2.achievementrate}%</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${rankView.achievementrate}%</div>
                                     </div>
                                     <div class="col">
                                         <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: ${product2.achievementrate}%" aria-valuenow="${product2.achievementrate}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: ${rankView.achievementrate}%" aria-valuenow="${rankView.achievementrate}" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="btn-group" role="group" aria-label="Button group">
                                     <form class="actionForm" action="/board/register">
-                                        <input name="num" value="${product2.num}" hidden="hidden" />
-                                        <input name="productName" value="${product2.productName}" hidden="hidden" />
-                                        <input name="marketName" value="${product2.marketName}" hidden="hidden" />
-                                        <input name="url" value="${product2.url}" hidden="hidden" />
-                                        <input name="imgUrl" value="${product2.imgUrl}" hidden="hidden" />
-                                        <input name="won" value="${product2.won}" hidden="hidden" />
+                                        <input name="num" value="${rankView.num}" hidden="hidden" />
+                                        <input name="productName" value="${rankView.productName}" hidden="hidden" />
+                                        <input name="marketName" value="${rankView.marketName}" hidden="hidden" />
+                                        <input name="url" value="${rankView.url}" hidden="hidden" />
+                                        <input name="imgUrl" value="${rankView.imgUrl}" hidden="hidden" />
+                                        <input name="won" value="${rankView.won}" hidden="hidden" />
                                    
-                                        <input name="delivery" value="${product2.delivery}" hidden="hidden" />
-                                        <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
+                                        <input name="delivery" value="${rankView.delivery}" hidden="hidden" />
+                                        <input name="deliveryFee" value="${rankView.deliveryFee}" hidden="hidden" />
                                        
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
                                         <button class="btn btn-primary btn-needlogin" hidden="hidden">공동구매 참여하기</button>
                                     </form>
                                     
                                 	<form class="actionForm" action="/user/save">
-                                        <input name="num" value="${product2.num}" hidden="hidden" />
-                                        <input name="productName" value="${product2.productName}" hidden="hidden" />
-                                        <input name="marketName" value="${product2.marketName}" hidden="hidden" />
-                                        <input name="url" value="${product2.url}" hidden="hidden" />
-                                        <input name="imgUrl" value="${product2.imgUrl}" hidden="hidden" />
-                                        <input name="won" value="${product2.won}" hidden="hidden" />
+                                        <input name="num" value="${rankView.num}" hidden="hidden" />
+                                        <input name="productName" value="${rankView.productName}" hidden="hidden" />
+                                        <input name="marketName" value="${rankView.marketName}" hidden="hidden" />
+                                        <input name="url" value="${rankView.url}" hidden="hidden" />
+                                        <input name="imgUrl" value="${rankView.imgUrl}" hidden="hidden" />
+                                        <input name="won" value="${rankView.won}" hidden="hidden" />
                                    
-                                        <input name="delivery" value="${product2.delivery}" hidden="hidden" />
-                                        <input name="deliveryFee" value="${product2.deliveryFee}" hidden="hidden" />
+                                        <input name="delivery" value="${rankView.delivery}" hidden="hidden" />
+                                        <input name="deliveryFee" value="${rankView.deliveryFee}" hidden="hidden" />
                                        
                                         <input name="keyword" value="${searchWord}" hidden="hidden" />
                                         <button class="btn btn-primary btn-needlogin" hidden="hidden">찜하기</button>
                                     </form>
                                     
-                                    <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
+                                    <a href="/pr?large=${rankView.large}&medium=${rankView.medium}&small=${rankView.small}&sub_category=${rankView.sub_category}&num=${rankView.num}">
                                         <button class="btn btn-success" >상세 페이지</button>
                                     </a>
                                 </div>
@@ -193,8 +193,8 @@
 					            <div class="img-container" style="display: flex; overflow-x: auto;">
 					                <c:forEach var="product2" items="${recentlyViewedProducts}" begin="0" end="3">
 					                    <div class="mb-3 img-container" style="flex: 0 0 auto;">
-					                        <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
-					                            <img class="px-3 px-sm-4 mt-3 mb-4 img-size" src="${product2.imgUrl}" alt="Product Image" style="width: 100px; height: 100px;">
+					                        <a href="/pr?large=${rankView.large}&medium=${rankView.medium}&small=${rankView.small}&sub_category=${rankView.sub_category}&num=${rankView.num}">
+					                            <img class="px-3 px-sm-4 mt-3 mb-4 img-size" src="${rankView.imgUrl}" alt="Product Image" style="width: 100px; height: 100px;">
 					                        </a>
 					                    </div>
 					                </c:forEach>
