@@ -36,7 +36,12 @@
                         <h6 class="collapse-header">공동구매!</h6>
                         <a class="collapse-item" href="/prlist/allProduct"><i class="fa-solid fa-border-all"></i>&nbsp;전체상품</a>
                         <a class="collapse-item" href="/prlist/poplist"><i class="fa-solid fa-fire"></i>&nbsp;인기상품</a>
-                        <a class="collapse-item" href="/prlist/rankedUser"><i class="fa-solid fa-gift"></i>&nbsp;추천상품</a>
+                        <% if (session.getAttribute("loginVo") != null) { %>
+						    <a class="collapse-item" href="/prlist/rankedUser"><i class="fa-solid fa-gift"></i>&nbsp;추천상품</a>
+						<% } else { %>
+						    <p class="collapse-item">로그인시 <br />상품추천!</p>
+						<% } %>
+                        
                     </div>
                 </div>
             </li>

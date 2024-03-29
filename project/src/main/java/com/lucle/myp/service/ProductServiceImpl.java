@@ -116,6 +116,17 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<MarketVo> rankedViewByUser(String id) {
-		return mapper.rankedViewByUser(id);
+		List<MarketVo> list = mapper.rankedViewByUser(id); // 데이터베이스에서 목록을 가져옴
+
+	    for (MarketVo market : list) {
+	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
+	            market.setAchievementrate(0);
+	        } else {
+	            long achievementRate = (market.getPersonnum() * 100) / market.getGoaltarget();
+	            market.setAchievementrate((int) achievementRate);
+	        }
+	    }
+
+	    return list;
 	}
 }
