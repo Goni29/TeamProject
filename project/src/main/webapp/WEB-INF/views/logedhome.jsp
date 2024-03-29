@@ -120,7 +120,7 @@
                             <div class="col-xl-3 col-md-6 mb-4 border">
                                 <p>${rankView.marketName}</p>
 
-                                <a href="/pr?large=${rankView.large}&medium=${rankView.medium}&small=${rankView.small}&sub_category=${rankView.sub_category}&num=${rankView.num}">
+                                <a href="/pr?large=${rankView.CATEGORY_LARGE}&medium=${rankView.CATEGORY_MEDIUM}&small=${rankView.CATEGORY_SMALL}&sub_category=${rankView.CATEGORY_SUB_CATEGORY}&num=${rankView.MARKET_NUM}">
                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${rankView.imgUrl}" alt="Product Image"> <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>

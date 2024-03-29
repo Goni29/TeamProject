@@ -61,7 +61,10 @@ public class HomeController {
 	        String id = member.getId();
 	        List<MarketVo> rankView = productService.rankedViewByUser(id);
 	        model.addAttribute("rankView", rankView);
-
+	        System.out.println("Rank View for User ID: " + id);
+	        for (MarketVo item : rankView) {
+	            System.out.println(item.toString()); // MarketVo에 적절한 toString() 메소드가 정의되어 있어야 합니다.
+	        }
 	        List<MarketVo> recentlyViewed = recentlyViewedService.getRecentlyViewedProducts(session);
 	        model.addAttribute("recentlyViewedProducts", recentlyViewed);
 	        
