@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,6 +106,17 @@ public class HomeController {
 		searchVo.setSearchWord(productName);
 		searchVo.setId(userId);
 		searchService.insert(searchVo, req);
+	}
+	
+	@ControllerAdvice
+	public class GlobalExceptionHandler {
+
+	    // NullPointerException 처리
+	    @ExceptionHandler(NullPointerException.class)
+	    public String handleNullPointerException(NullPointerException e, HttpServletRequest request) {
+	        // 로그인 페이지나 메시지를 보여줄 커스텀 페이지로 리다이렉트
+	        return "redirect:/";
+	    }
 	}
 
 }
