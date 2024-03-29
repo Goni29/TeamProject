@@ -30,5 +30,6 @@ public class GroupBuyingVo {
 	private String delivery;
 	private String phonenumber;
 	private String name;
+	private int count_product;
 	
 }

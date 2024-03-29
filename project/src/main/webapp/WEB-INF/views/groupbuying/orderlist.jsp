@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@ include file="../header.jsp" %>
 
 <style>
@@ -39,7 +38,7 @@
 							           <div class="card-header" id="heading${status.index}">
 							               <h5 class="mb-0 center-title">
 							                   <button class="btn btn-link" data-toggle="collapse" data-target="#custommerservice-collapse${status.index}" aria-expanded="true" aria-controls="collapse${status.index}">
-							                       ${order.productname}
+							                       ${orderList.productname}
 							                   </button>
 							               </h5>
 							           </div>
@@ -58,12 +57,12 @@
 											    </thead>
 											    <tbody>
 											      <tr>
-											        <td>${order.id}</td>
-											        <td>${order.name}</td>
-											        <td>${order.address} ${order.addressdetail} ${order.extraaddress}</td>
-											        <td>${order.productname}</td>
-											        <td>${order.buyingdate}</td>
-											        <td>${order.delivery}</td>
+											        <td>${orderList.id}</td>
+											        <td>${orderList.name}</td>
+											        <td>${orderList.address} ${order.addressdetail} ${order.extraaddress}</td>
+											        <td>${orderList.productname}</td>
+											        <td>${orderList.buyingdate}</td>
+											        <td>${orderList.delivery}</td>
 											      </tr>
 											      <!-- 추가 데이터 행을 여기에 삽입 -->
 											    </tbody>

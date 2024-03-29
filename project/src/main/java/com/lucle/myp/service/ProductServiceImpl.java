@@ -113,4 +113,9 @@ public class ProductServiceImpl implements ProductService {
 
 	    return list;
 	}
+
+	@Override
+	public List<MarketVo> rankedViewByUser(String id) {
+		return mapper.rankedViewByUser(id);
+	}
 }
