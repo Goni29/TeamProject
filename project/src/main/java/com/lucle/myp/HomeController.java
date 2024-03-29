@@ -47,24 +47,43 @@ public class HomeController {
 	ProductService productService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String proto(HttpServletRequest request, Model model, Criteria cri) throws Exception {
-		List<MarketVo> list = service.rankedView();
-		model.addAttribute("products", list);
-		
-		List<MarketVo> products = service.groupBuying();
-        List category = productService.cateList();
-      ObjectMapper objm = new ObjectMapper();
-      String cateList = objm.writeValueAsString(category);
-      model.addAttribute("cateList", cateList);
-      
-      System.out.println(category);
-      System.out.println(cateList);
-        model.addAttribute("products2", products);
-		
-		HttpSession session = request.getSession();
-	    List<MarketVo> recentlyViewed = recentlyViewedService.getRecentlyViewedProducts(session);
-	    model.addAttribute("recentlyViewedProducts", recentlyViewed);
-		return "home";
+	public String home(HttpServletRequest request, Model model, Criteria cri) throws Exception {
+	    List<MarketVo> list = service.rankedView();
+	    model.addAttribute("products", list);
+	    
+	    HttpSession session = request.getSession();
+	    UserVo member = (UserVo) session.getAttribute("loginVo");
+	    
+	    // 로그인 상태를 체크합니다.
+	    if (member != null) {
+	        // 로그인한 사용자
+
+	        String id = member.getId();
+	        List<MarketVo> rankView = productService.rankedViewByUser(id);
+	        model.addAttribute("rankView", rankView);
+
+	        List<MarketVo> recentlyViewed = recentlyViewedService.getRecentlyViewedProducts(session);
+	        model.addAttribute("recentlyViewedProducts", recentlyViewed);
+	        
+	        // 로그인한 사용자를 위한 뷰 페이지 반환
+	        return "logedhome";
+	    } else {
+	        // 로그인하지 않은 사용자
+
+	        List<MarketVo> products = service.groupBuying();
+	        List category = productService.cateList();
+	        ObjectMapper objm = new ObjectMapper();
+	        String cateList = objm.writeValueAsString(category);
+	        model.addAttribute("cateList", cateList);
+	        
+	        model.addAttribute("products2", products);
+
+	        List<MarketVo> recentlyViewed = recentlyViewedService.getRecentlyViewedProducts(session);
+	        model.addAttribute("recentlyViewedProducts", recentlyViewed);
+	        
+	        // 로그인하지 않은 사용자를 위한 뷰 페이지 반환
+	        return "home";
+	    }
 	}
 
 	@GetMapping("/pr")
