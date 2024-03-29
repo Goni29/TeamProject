@@ -146,5 +146,5 @@ public class ProductController {
         model.addAttribute("isLoggedIn", isLoggedIn);
 
         return "/prlist/rankedUser";
-    }
+    }s
 }
