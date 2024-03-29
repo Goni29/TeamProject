@@ -141,6 +141,8 @@ public class ProductController {
         List<MarketVo> rankView = productService.rankedViewByUser(id);
         // 조회된 상품 리스트를 모델에 추가합니다. 여기서는 각 MarketVo 객체의 id를 따로 설정할 필요가 없습니다.
         model.addAttribute("rankView", rankView);
+        boolean isLoggedIn = session.getAttribute("loginVo") != null;
+        model.addAttribute("isLoggedIn", isLoggedIn);
 
         return "/prlist/rankedUser";
     }
