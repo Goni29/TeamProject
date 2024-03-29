@@ -19,6 +19,7 @@
    <p><span>수신인</span>${orderList.name}</p>
    <p><span>주소</span>${orderList.address}${orderList.addressdetail}${orderList.extraaddress}</p>
    <p><span>주문상품</span>${orderList.productname}</p>
+   <p><span>주문수량</span>${orderList.count_product}</p>
    <p><span>주문날짜</span>${orderList.buyingdate}</p>
    <p><span>배송상태</span>${orderList.delivery}</p>
   </div>

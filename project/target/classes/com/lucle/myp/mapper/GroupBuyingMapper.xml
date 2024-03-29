@@ -48,7 +48,8 @@
 
 	<insert id="addBuyingRecord">
 		INSERT INTO BUYING (ID, BUYNO, BUYINGDATE, CATEGORY,
-		NUM, PRODUCTNAME, AGE, GENDER, ADDRESS, addressdetail, extraaddress, phonenumber, name)
+		NUM, PRODUCTNAME, AGE, GENDER, ADDRESS, addressdetail, extraaddress, phonenumber, name,
+		count_product)
 		SELECT
 		U.ID,
 		seq_buying.nextval,
@@ -62,7 +63,8 @@
 		#{addressdetail},
 		#{extraaddress},
 		#{phonenumber},
-		#{name}
+		#{name},
+		#{count_product}
 		FROM
 		USERS U, MARKET M
 		WHERE
@@ -71,6 +73,6 @@
 	
 	<select id="BuyingRecord"
 		resultType="com.lucle.myp.domain.GroupBuyingVo">
-		SELECT * FROM Buying
+		SELECT * FROM Buying where id = #{id}
 	</select>
 </mapper>

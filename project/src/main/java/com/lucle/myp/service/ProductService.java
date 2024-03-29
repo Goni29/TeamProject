@@ -21,4 +21,5 @@ public interface ProductService {
     List<MarketVo> getProductsBySubCategory(int sub_category);
     public List<MarketVo> cateList();
     List<MarketVo> getProductsByCategory(String cateCode);
+    public List<MarketVo> rankedViewByUser(String id);
 }

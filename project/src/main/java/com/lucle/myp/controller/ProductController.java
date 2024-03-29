@@ -2,6 +2,8 @@ package com.lucle.myp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,11 +13,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lucle.myp.domain.GroupBuyingVo;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.service.MarketService;
 import com.lucle.myp.service.ProductService;
 
@@ -123,5 +128,20 @@ public class ProductController {
         System.out.println("카테코드" + cateCode);
         model.addAttribute("products", products);
         return ResponseEntity.ok(products);
+    }
+    
+    @RequestMapping(value = "/rankedUser", method = RequestMethod.GET)
+    public String getOrderList(HttpSession session, Model model) throws Exception {
+        // 로그인된 사용자 정보를 세션에서 가져옵니다.
+        UserVo member = (UserVo)session.getAttribute("loginVo");
+
+        // 로그인된 사용자의 ID를 가져옵니다.
+        String id = member.getId();
+        // 해당 유저 ID로 상품을 조회합니다.
+        List<MarketVo> rankView = productService.rankedViewByUser(id);
+        // 조회된 상품 리스트를 모델에 추가합니다. 여기서는 각 MarketVo 객체의 id를 따로 설정할 필요가 없습니다.
+        model.addAttribute("rankView", rankView);
+
+        return "/prlist/rankedUser";
     }
 }

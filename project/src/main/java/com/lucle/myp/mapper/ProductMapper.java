@@ -24,4 +24,6 @@ public interface ProductMapper {
     public CategoryFilterVo getCateInfo(Criteria cri);
     
     List<MarketVo> findProductsByCategory(String cateCode);
+    
+    public List<MarketVo> rankedViewByUser(String id);
 }

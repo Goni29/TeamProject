@@ -187,6 +187,10 @@
     }
 </script>
 </div>
+<div class="form-group">
+    <label for="quantity">수량 선택:</label>
+    <input type="number" class="form-control" id="count_product" name="count_product" min="1" value="1">
+</div>
 </div>
                 
             </div>
@@ -364,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var productNum = $('#productNum').val();
             var addressdetail = $('#addressDetail').val();
             var extraaddress = $('#extraAddress').val();
+            var count_product = $('#count_product').val();
          // 공동구매 참여 요청 AJAX
             $.ajax({
                 url: '/groupbuying/participate',
@@ -375,7 +380,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     addressdetail: addressdetail,
                     extraaddress: extraaddress,
                     phonenumber: phonenumber,
-                    name: name
+                    name: name,
+                    count_product: count_product
                 	}),
                 dataType: 'json',
                 success: function(response) {
