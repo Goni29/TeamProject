@@ -69,7 +69,7 @@
 	</delete>
 
 	<select id="getProductDetails"
-        resultType="com.lucle.myp.domain.MarketVo">
+		resultType="com.lucle.myp.domain.MarketVo">
     <![CDATA[
     SELECT * FROM (
         SELECT detailed.*, ROWNUM rnum FROM (
@@ -90,7 +90,7 @@
     )
     WHERE rnum BETWEEN #{offset} + 1 AND #{offset} + #{pageSize}
     ]]>
-</select>
+	</select>
 
 	<select id="selectProductsByLargeCategory"
 		resultType="com.lucle.myp.domain.MarketVo">
@@ -146,61 +146,7 @@
 	<select id="findProductsByCategory"
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT
-<<<<<<< HEAD
 		market_query.*
-=======
-  market_query.*
-FROM (
-  SELECT
-    m.NUM AS MARKET_NUM,
-    m.PRODUCTNAME,
-    m.MARKETNAME,
-    m.URL,
-    m.IMGURL,
-    m.WON,
-    m.DELIVERY,
-    m.DELIVERYFEE,
-    m.KEYWORD,
-    m.VISIBLE AS MARKET_VISIBLE,
-    m.GROUPBUYING,
-    m.DESCRIPTION,
-    m.CATEGORY AS MARKET_CATEGORY,
-    c.LARGE AS CATEGORY_LARGE,
-    c.MEDIUM AS CATEGORY_MEDIUM,
-    c.SMALL AS CATEGORY_SMALL,
-    c.SUB_CATEGORY AS CATEGORY_SUB_CATEGORY,
-    c.TIER,
-    c.CATENAME,
-    c.CATECODE,
-    c.CATEPARENT,
-    c.CNO,
-    g.GNO,
-    g.TITLE AS GROUPBUYING_TITLE,
-    g.CONTENT AS GROUPBUYING_CONTENT,
-    g.REGIDATE AS GROUPBUYING_REGIDATE,
-    g.GOALDATE,
-    g.GOALTARGET,
-    g.PERSONNUM,
-    g.NUM AS GROUPBUYING_NUM,
-    ROW_NUMBER() OVER(PARTITION BY m.PRODUCTNAME ORDER BY m.NUM) AS rn
-  FROM
-    MARKET m
-    JOIN CATEGORY c ON m.num = c.num
-    JOIN GROUPBUYING g ON m.NUM = g.NUM
-  WHERE
-    c.CATECODE = #{cateCode}
-) market_query
-WHERE
-  market_query.rn = 1
-	</select>
-	
-	<select id="rankedViewByUser"
-		resultType="com.lucle.myp.domain.MarketVo">
-		SELECT
-		market_query.*,
-		F.Frequency,
-		F.CategoryRank
->>>>>>> branch 'master' of https://github.com/Goni29/TeamProject.git
 		FROM (
 		SELECT
 		m.NUM AS MARKET_NUM,
@@ -324,9 +270,10 @@ WHERE
 		resultType="int">
 		SELECT COUNT(DISTINCT NUM) FROM marketview WHERE id = #{id}
 	</select>
-	
+
 	<select id="getTotalCount2" resultType="int">
-		SELECT COUNT(num) FROM market
+		SELECT COUNT(num) FROM
+		market
 	</select>
 
 

@@ -69,7 +69,7 @@
 	</delete>
 
 	<select id="getProductDetails"
-        resultType="com.lucle.myp.domain.MarketVo">
+		resultType="com.lucle.myp.domain.MarketVo">
     <![CDATA[
     SELECT * FROM (
         SELECT detailed.*, ROWNUM rnum FROM (
@@ -90,7 +90,7 @@
     )
     WHERE rnum BETWEEN #{offset} + 1 AND #{offset} + #{pageSize}
     ]]>
-</select>
+	</select>
 
 	<select id="selectProductsByLargeCategory"
 		resultType="com.lucle.myp.domain.MarketVo">
@@ -270,9 +270,10 @@
 		resultType="int">
 		SELECT COUNT(DISTINCT NUM) FROM marketview WHERE id = #{id}
 	</select>
-	
+
 	<select id="getTotalCount2" resultType="int">
-		SELECT COUNT(num) FROM market
+		SELECT COUNT(num) FROM
+		market
 	</select>
 
 
