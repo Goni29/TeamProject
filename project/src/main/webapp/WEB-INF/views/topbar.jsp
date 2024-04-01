@@ -48,7 +48,7 @@
         </li>
 
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <c:if test="${loginVo.grade >= 3}">
 	                <li class="nav-item dropdown">
 	                    <a class="nav-link dropdown-toggle btn" href="#" id="navbarDarkDropdownMenuLink" role="button"
@@ -88,8 +88,8 @@
                             <a class="dropdown-item" data-toggle="modal" data-target="#passwordModal">회원 정보 수정</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <form id="logoutForm" action="/user/logout" method="get">
+                    <li class="nav-item ">
+                        <form id="logoutForm" class="form-inline ml-auto nav-link" action="/user/logout" method="get">
                             <input type="hidden" name="link" class="redirectUrl" value="/">
                             <button id="logoutButton" type="submit" class="btn btn-warning">로그아웃</button>
                         </form>
