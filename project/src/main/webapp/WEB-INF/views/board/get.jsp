@@ -1,126 +1,133 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="../header.jsp"%>
-<%@ include file="../topbar.jsp"%>
 <span class="titletext" hidden="hidden">게시글 상세 보기</span>
+<style>
 
+    .page-size {
+        width: 100vw;
+    }
+    
+</style>
 <body>
-   <div class="container-fluid p-2 bg-dark text-white text-center">
-      <p>게시글 보기</p>
-   </div>
-   <div class="container mt-5">
-      <div class="row justify-content-center">
-         <div class="col-md-6">
-            <div id="contentarea" class="card">
-               <div class="card-header">게시글</div>
-               <div class="card-body">
-                  <div class="mb-3">
-                     <label for="title" class="form-label">제목</label> <input
-                        type="text" class="form-control" id="title" name="title"
-                        value="${board.title}" readonly="readonly">
-                  </div>
-                  <div class="mb-3">
-                     <label for="writer" class="form-label">닉네임</label> <input
-                        type="text" class="form-control" id="writer" name="writer"
-                        value="${board.writer}" readonly="readonly">
-                  </div>
-                  <div class="mb-3">
-                     <label for="regdate" class="form-label">등록 날짜</label> <input
-                        type="text" class="form-control" id="regdate" name="regdate"
-                        value="<fmt:formatDate pattern='yyyy-MM-dd HH:mm' value='${board.regdate}' />"
-                        readonly="readonly">
-                  </div>
+    <div id="wrapper">
+    
+        <%@ include file="../sidebar.jsp"%>
+        <div id="conteny-wrapper" class="d-flex flex-column page-size">       
+            <%@ include file="../topbar.jsp"%>
+            <div id="content main-content" class="main-width">  
 
-                  <div class="mb-3">
-                     <label for="content" class="form-label">내용</label>
-                     <textarea class="form-control" id="content" rows="5"
-                        name="content" readonly="readonly">${board.content}</textarea>
-                  </div>
-
-                  <div class="row d-flex">
-                     <div class="col-auto">
-                        <button id="favorite" class="btn btn-primary">스크랩</button>
-                     </div>
-                     <div class="col-auto">
-                        <button id="recommend" class="btn btn-success">추천</button>
-                     </div>
-                     <div class="col-auto">
-                        <a href='/board/list' class="btn btn-secondary">목록</a>
-                     </div>
-
-                     <c:if test="${loginVo.id == board.id}">
-                        <div class="col-auto">
-                           <form action="/board/remove" method="post">
-    <input type="hidden" name="bno" value="bno">
-    <!-- 여기에 추가적인 필드(예: Criteria 정보)를 포함할 수 있습니다. -->
-    <button type="submit" class="btn btn-success">삭제</button>
-</form>
-
-                        </div>
-                        <div class="col-auto">
-                           <button id="modify" class="btn btn-success">수정</button>
-                        </div>
-                     </c:if>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <c:if test="${board.num != null}">
-            <!-- board.num이 0인 경우는 상품 검색을 통해 접근하지 않았을 때 -->
-            <div class="col-md-6">
-               <div id="contentarea" class="card">
-                  <div class="card-header">상품 정보</div>
-                  <div class="card-body">
-                     <form action="/board/register" method="post">
-                        <img src="${board.imgUrl}" alt="Image"
-                           class="img-fluid rounded border">
-                        <div class="mb-3 row">
-                           <label for="marketName" class="col-sm-2 col-form-label">쇼핑몰</label>
-                           <div class="col-sm-10">
-                              <input type="text" readonly class="form-control-plaintext"
-                                 id="marketName" value="${board.marketName}">
-                           </div>
-                        </div>
-                        <div class="mb-3 row">
-                           <label for="productName" class="col-sm-2 col-form-label">상품명</label>
-                           <div class="col-sm-10">
-                              <a href="${board.url}" target="_blank"> <input type="text" readonly
-                                 class="form-control-plaintext" id="productName"
-                                 value="${board.productName}"
-                                 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                              </a>
-                           </div>
-                        </div>
-                        <div class="mb-3 row">
-                           <label for="won" class="col-sm-2 col-form-label">가격</label>
-                           <div class="col-sm-10">
-                              <input type="text" readonly class="form-control-plaintext"
-                                 id="won" value="${board.won}원">
-                           </div>
-                        </div>
-                        <div class="mb-3 row">
-                           <label for="deliveryFee" class="col-sm-2 col-form-label">배송비</label>
-                           <div class="col-sm-10">
-                              <input type="text" readonly class="form-control-plaintext"
-                                 id="deliveryFee" value="${board.deliveryFee}원">
-                           </div>
-                        </div>
-                        <div class="mb-3 row">
-                           <label for="delivery" class="col-sm-2 col-form-label">배송
-                              일정</label>
-                           <div class="col-sm-10">
-                              <input type="text" readonly class="form-control-plaintext"
-                                 id="delivery" value="${board.delivery}">
-                           </div>
-                        </div>
-
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </c:if>
-		<%@include file="../footer.jsp"%>
-      </div>
+                <div class="container-fluid">
+				      <div class="row justify-content-center">
+				         <div class="col-md-7">
+				            <div id="contentarea" class="card">
+				               <div class="card-header">게시글</div>
+				               <div class="card-body">
+				                  <div class="mb-4">
+				                     <label for="title" class="form-label">제목</label> <input
+				                        type="text" class="form-control" id="title" name="title"
+				                        value="${board.title}" readonly="readonly">
+				                  </div>
+				                  <div class="mb-4">
+				                     <label for="writer" class="form-label">닉네임</label> <input
+				                        type="text" class="form-control" id="writer" name="writer"
+				                        value="${board.writer}" readonly="readonly">
+				                  </div>
+				                  <div class="mb-4">
+				                     <label for="regdate" class="form-label">등록 날짜</label> <input
+				                        type="text" class="form-control" id="regdate" name="regdate"
+				                        value="<fmt:formatDate pattern='yyyy-MM-dd HH:mm' value='${board.regdate}' />"
+				                        readonly="readonly">
+				                  </div>
+				
+				                  <div class="mb-4">
+				                     <label for="content" class="form-label">내용</label>
+				                     <textarea class="form-control" id="content" rows="10"
+				                        name="content" readonly="readonly">${board.content}</textarea>
+				                  </div>
+				
+				                  <div class="row d-flex">
+				                     <div class="col-auto">
+				                        <button id="favorite" class="btn btn-primary">스크랩</button>
+				                     </div>
+				                     <div class="col-auto">
+				                        <button id="recommend" class="btn btn-success">추천</button>
+				                     </div>
+				                     <div class="col-auto">
+				                        <a href='/board/list' class="btn btn-secondary">목록</a>
+				                     </div>
+				
+				                     <c:if test="${loginVo.id == board.id}">
+				                        <div class="col-auto">
+				                           <form action="/board/remove" method="post">
+				    <input type="hidden" name="bno" value="bno">
+				    <!-- 여기에 추가적인 필드(예: Criteria 정보)를 포함할 수 있습니다. -->
+				    <button type="submit" class="btn btn-success">삭제</button>
+				</form>
+				
+				                        </div>
+				                        <div class="col-auto">
+				                           <button id="modify" class="btn btn-success">수정</button>
+				                        </div>
+				                     </c:if>
+				                  </div>
+				               </div>
+				            </div>
+				         </div>
+				         <c:if test="${board.num != null}">
+				            <!-- board.num이 0인 경우는 상품 검색을 통해 접근하지 않았을 때 -->
+				            <div class="col-md-6">
+				               <div id="contentarea" class="card">
+				                  <div class="card-header">상품 정보</div>
+				                  <div class="card-body">
+				                     <form action="/board/register" method="post">
+				                        <img src="${board.imgUrl}" alt="Image"
+				                           class="img-fluid rounded border">
+				                        <div class="mb-3 row">
+				                           <label for="marketName" class="col-sm-2 col-form-label">쇼핑몰</label>
+				                           <div class="col-sm-10">
+				                              <input type="text" readonly class="form-control-plaintext"
+				                                 id="marketName" value="${board.marketName}">
+				                           </div>
+				                        </div>
+				                        <div class="mb-3 row">
+				                           <label for="productName" class="col-sm-2 col-form-label">상품명</label>
+				                           <div class="col-sm-10">
+				                              <a href="${board.url}" target="_blank"> <input type="text" readonly
+				                                 class="form-control-plaintext" id="productName"
+				                                 value="${board.productName}"
+				                                 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+				                              </a>
+				                           </div>
+				                        </div>
+				                        <div class="mb-3 row">
+				                           <label for="won" class="col-sm-2 col-form-label">가격</label>
+				                           <div class="col-sm-10">
+				                              <input type="text" readonly class="form-control-plaintext"
+				                                 id="won" value="${board.won}원">
+				                           </div>
+				                        </div>
+				                        <div class="mb-3 row">
+				                           <label for="deliveryFee" class="col-sm-2 col-form-label">배송비</label>
+				                           <div class="col-sm-10">
+				                              <input type="text" readonly class="form-control-plaintext"
+				                                 id="deliveryFee" value="${board.deliveryFee}원">
+				                           </div>
+				                        </div>
+				                        <div class="mb-3 row">
+				                           <label for="delivery" class="col-sm-2 col-form-label">배송
+				                              일정</label>
+				                           <div class="col-sm-10">
+				                              <input type="text" readonly class="form-control-plaintext"
+				                                 id="delivery" value="${board.delivery}">
+				                           </div>
+				                        </div>
+				
+				                     </form>
+				                  </div>
+				               </div>
+				            </div>
+				         </c:if>
    </div>
 
 
@@ -163,6 +170,11 @@
          </c:if>
       </div>
    </div>
+						<%@include file="../footer.jsp"%>
+				      </div>
+				   </div>
+				   </div>
+				   </div>
 
 </body>
 

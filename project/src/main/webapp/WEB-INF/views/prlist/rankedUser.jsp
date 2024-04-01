@@ -97,28 +97,48 @@
                             </div>
                         </c:forEach>
                     </div>
-                    <!-- Pagination and footer -->
-                    <div class="pagination">
-                        <c:if test="${pageMaker.prev}">
-                            <a href="${pageContext.request.contextPath}/prlist/rankedUser?page=${pageMaker.startPage - 1}" class="btn">&laquo; 이전</a>
-                        </c:if>
-
-                        <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                            <c:choose>
-                                <c:when test="${pageNum == pageMaker.cri.pageNum}">
-                                    <span class="btn"><b>${pageNum}</b></span>
-                                </c:when>
-                                <c:otherwise>
-                                    <a href="${pageContext.request.contextPath}/prlist/rankedUser?page=${pageNum}" class="btn">${pageNum}</a>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-
-                        <c:if test="${pageMaker.next}">
-                            <a href="${pageContext.request.contextPath}/prlist/rankedUser?page=${pageMaker.endPage + 1}" class="btn">다음 &raquo;</a>
-                        </c:if>
-                    </div>
-                </div>
+                    <div class="text-center">
+						    <nav aria-label="Page navigation">
+						        <ul class="pagination justify-content-center">
+						            <c:if test="${pageMaker.prev}">
+						                <li class="page-item">
+						                    <a class="page-link" href="${pageContext.request.contextPath}/prlist/rankedUser?page=${pageMaker.startPage - 1}" aria-label="Previous">
+						                        &laquo; 이전
+						                    </a>
+						                </li>
+						            </c:if>
+						
+						            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+						                <c:choose>
+						                    <c:when test="${pageNum == pageMaker.cri.pageNum}">
+						                        <li class="page-item active" aria-current="page">
+						                            <span class="page-link">
+						                                ${pageNum}
+						                                <span class="sr-only">(current)</span>
+						                            </span>
+						                        </li>
+						                    </c:when>
+						                    <c:otherwise>
+						                        <li class="page-item">
+						                            <a class="page-link" href="${pageContext.request.contextPath}/prlist/rankedUser?page=${pageNum}">
+						                                ${pageNum}
+						                            </a>
+						                        </li>
+						                    </c:otherwise>
+						                </c:choose>
+						            </c:forEach>
+						
+						            <c:if test="${pageMaker.next}">
+						                <li class="page-item">
+						                    <a class="page-link" href="${pageContext.request.contextPath}/prlist/rankedUser?page=${pageMaker.endPage + 1}" aria-label="Next">
+						                        다음 &raquo;
+						                    </a>
+						                </li>
+						            </c:if>
+						        </ul>
+						    </nav>
+						</div>
+				</div>
             </div>
         </div>
     </div>

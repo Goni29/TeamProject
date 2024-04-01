@@ -42,7 +42,7 @@
                             </c:if>
 
                             <!-- 게시글 목록 테이블 -->
-                            <table class="table table-striped table-hover">
+                            <table class="table table-hover border">
                                 <thead>
                                     <tr>
                                         <th>카테고리</th>
@@ -133,12 +133,10 @@
 
 				<!-- 검색과 관련된 폼 -->
 				<div class="col-md-6">
-					<form action="/board/list" id="searchForm" class="form-control"
-						method="get">
-						<div class="row">
-							<div class="col-md-6 text-end">
-								<select class="form-select" name="type">
-									<option value=""
+						<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="/board/list" method="get">
+						    <div class="input-group">
+						        <select class="form-control bg-light border-0 small" id="searchOption">
+						            <option value=""
 										${pageMaker.cri.type eq null ? 'selected' : ''}>--검색
 										방법--</option>
 									<option value="T"
@@ -159,20 +157,19 @@
 									<option value="TCW"
 										${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}>제목 +
 										내용 + 작성자</option>
-								</select>
-							</div>
-							<div class="col-md-4">
-								<input type="text" class="form-control" name="keyword"
+						        </select>
+						        <div class="col-md-4">
+								<input type="text" class="form-control bg-light border-0 small" name="keyword"
 									value="${pageMaker.cri.keyword}" />
-							</div>
-							<div class="col-md-2">
-								<input type="hidden" name="pageNum"
-									value="${pageMaker.cri.pageNum }" /> <input type="hidden"
-									name="amount" value="${pageMaker.cri.amount }" />
+								</div>
+								<div class="col-md-2">
+									<input type="hidden" name="pageNum"
+										value="${pageMaker.cri.pageNum }" /> <input type="hidden"
+										name="amount" value="${pageMaker.cri.amount }" />
+								</div>
 								<button type="submit" class="btn btn-primary">검색</button>
-							</div>
-						</div>
-					</form>
+						    </div>
+						</form>
 				</div>
 			</div>
 		</div>
