@@ -136,6 +136,7 @@
             </div>
         </div>
     </div>
+<%@include file="./footer.jsp"%>
 </body>
 
 <script>
@@ -154,4 +155,3 @@ document.querySelectorAll('.btn-needlogin').forEach(button => {
 </script>
 
 </html>
-<%@ include file="./footer.jsp"%>

@@ -31,56 +31,61 @@
                 
 					<h1 class="mt-5 center-title">구매 목록 조회</h1>
 
-                    <div class="row mt-5">
-                           <c:forEach items="${orderList}" var="order" varStatus="status">
-                           	<div class="col-12">
-							   <div id="accordion${status.index}">
-							       <div class="card">
-							           <div class="card-header" id="heading${status.index}">
-							               <h5 class="mb-0 center-title">
-							                   <button class="btn btn-link" data-toggle="collapse" data-target="#custommerservice-collapse${status.index}" aria-expanded="true" aria-controls="collapse${status.index}">
-							                       ${order.productname}
-							                   </button>
-							               </h5>
-							           </div>
-							           <div id="custommerservice-collapse${status.index}" class="collapse" aria-labelledby="heading${status.index}" data-parent="#accordion${status.index}">
-							              <div class="table-responsive">
-											  <table class="table">
-											    <thead>
-											      <tr>
-											        <th>주문인</th>
-											        <th>수신인</th>
-											        <th>주소</th>
-											        <th>주문상품</th>
-											        <th>주문수량</th>
-											        <th>주문날짜</th>
-											        <th>배송상태</th>
-											      </tr>
-											    </thead>
-											    <tbody>
-											      <tr>
-											        <td>${order.id}</td>
-											        <td>${order.name}</td>
-											        <td>${order.address} ${order.addressdetail} ${order.extraaddress}</td>
-											        <td>${order.productname}</td>
-											        <td>${order.count_product}</td>
-											        <td>${order.buyingdate}</td>
-											        <td>${order.delivery}</td>
-											      </tr>
-											      <!-- 추가 데이터 행을 여기에 삽입 -->
-											    </tbody>
-											  </table>
-											</div>
-							           </div>
-							       </div>
-							   </div>
-							</div>
-						</c:forEach>
-                    </div>
+					<div class="row mt-5">
+					    <c:forEach items="${orderList}" var="order" varStatus="status">
+					        <div class="col-12">
+					            <div id="accordion${status.index}">
+					                <div class="card">
+					                    <div class="card-header" id="heading${status.index}">
+					                        <h5 class="mb-0 center-title">
+					                            <button class="btn btn-link" data-toggle="collapse" data-target="#rec-collapse${status.index}" aria-expanded="true" aria-controls="collapse${status.index}">
+					                                ${order.productname}
+					                            </button>
+					                        </h5>
+					                    </div>
+					                    <div id="rec-collapse${status.index}" class="table-responsive collapse" data-parent="#accordion${status.index}">
+					                        <table class="table table-bordered">
+					                            <tbody>
+					                                <tr>
+					                                    <td>주문인</td>
+					                                    <td>${order.id}</td>
+					                                </tr>
+					                                <tr>
+					                                    <td>수령인</td>
+					                                    <td>${order.name}</td>
+					                                </tr>
+					                                <tr>
+					                                    <td>주소</td>
+					                                    <td>${order.address} ${order.addressdetail} ${order.extraaddress}</td>
+					                                </tr>
+					                                <tr>
+					                                    <td>주문상품</td>
+					                                    <td>${order.productname}</td>
+					                                </tr>
+					                                <tr>
+					                                    <td>주문수량</td>
+					                                    <td>${order.count_product}</td>
+					                                </tr>
+					                                <tr>
+					                                    <td>주문날짜</td>
+					                                    <td>${order.buyingdate}</td>
+					                                </tr>
+					                                <tr>
+					                                    <td>배송상태</td>
+					                                    <td>${order.delivery}</td>
+					                                </tr>
+					                            </tbody>
+					                        </table>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					    </c:forEach>
+					</div>
                 </div>
             </div>
         </div>
     </div>
-</body>
 <%@include file="../footer.jsp"%>
+</body>
 </html>

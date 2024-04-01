@@ -38,7 +38,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">인기 급상승 상품</h1>
+                        <h1 class="h3 mb-0 text-gray-800">인기상품</h1>
                     </div>
 
                     <div class="row">
@@ -113,7 +113,7 @@
 
                     <!-- Additional Content Row -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">당신을 위한 상품!</h1>
+                        <h1 class="h3 mb-0 text-gray-800">추천상품!</h1>
                     </div>
                     <div class="row">
                         <c:forEach var="rankView" items="${rankView}" begin="0" end="7">
@@ -185,6 +185,7 @@
                                 </div>
                             </div>
                         </c:forEach>
+                        <a href="/prlist/rankedUser" class="btn btn-success float-rightㄴ">추천상품 더보기</a>
                     </div>
                     
                     <div class="container mt-5 md-5">
@@ -209,8 +210,19 @@
 					</div>
             </div>
         </div>
+		<div id="footerarea">
+		    <footer class="">
+			    <div class="footer-container text-center" style="color: rgba(0, 0, 0, 0.2);">
+			        <p>(주)고니고니 사업자 등록번호 : 507-19-98999</p>
+			        <p>주소 : 경기도 화성시 병점동 황제로 84 | 대표자 : 김태곤</p>
+			        <p>호스팅 제공자 : (주)아이티는현태 | 문의전화 : 128-38</p>
+			        <p>COPYRIGHTⓒ(주)고니고니 ALL RIGHT RESERVED</p>
+			    </div>
+			</footer>
+		</div>
     </div>
     </div>
+<%@include file="./footer.jsp"%>
 </body>
 
 <script>
@@ -227,6 +239,5 @@ document.querySelectorAll('.btn-needlogin').forEach(button => {
 });
 
 </script>
-<%@include file="./footer.jsp"%>
 
 </html>

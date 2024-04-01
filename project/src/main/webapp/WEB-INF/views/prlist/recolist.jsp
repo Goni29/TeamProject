@@ -72,6 +72,7 @@
 	         </div>
 		</div>
 	</div>
+<%@include file="../footer.jsp"%>
 	
 <script>
 $(document).ready(function(){
@@ -362,5 +363,4 @@ $(document).ready(function() {
 
 </script>
 </body>
-<%@include file="../footer.jsp"%>
 </html>
