@@ -33,6 +33,10 @@
     .cate_wrap:not(:first-child) {
         margin-top: 20px;
     }
+    
+    .text-center {
+    text-align: center;
+}
 </style>
 
 <body>
@@ -121,10 +125,10 @@
                         </c:forEach>
 						</div>
 						
-						<div class="pagination">
+						<div class="pagination text-center">
 						<c:if test="${pageMaker.prev}">
 							<a
-								href="${pageContext.request.contextPath}/prlist/poplist?page=${pageMaker.startPage - 1}">&laquo;
+								href="${pageContext.request.contextPath}/prlist/poplist?page=${pageMaker.startPage - 1}" class="btn">&laquo;
 								이전</a>
 						</c:if>
 
@@ -132,18 +136,18 @@
 							end="${pageMaker.endPage}" var="pageNum">
 							<c:choose>
 								<c:when test="${pageNum == pageMaker.cri.pageNum}">
-									<span><b>${pageNum}</b></span>
+									<span class="btn"><b>${pageNum}</b></span>
 								</c:when>
 								<c:otherwise>
 									<a
-										href="${pageContext.request.contextPath}/prlist/poplist?page=${pageNum}">${pageNum}</a>
+										href="${pageContext.request.contextPath}/prlist/poplist?page=${pageNum}" class="btn">${pageNum}</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next}">
 							<a
-								href="${pageContext.request.contextPath}/prlist/poplist?page=${pageMaker.endPage + 1}">다음
+								href="${pageContext.request.contextPath}/prlist/poplist?page=${pageMaker.endPage + 1}" class="btn">다음
 								&raquo;</a>
 						</c:if>
 					</div>
