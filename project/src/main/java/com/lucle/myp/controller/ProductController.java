@@ -98,16 +98,12 @@ public class ProductController {
     MarketService marketService;
     
     @GetMapping("/recolist")
-    public String allProduct(Model model, @RequestParam(value = "page", defaultValue = "1") int page, String id) throws Exception {
-    	Criteria criteria = new Criteria(page, 12);
+    public String allProduct(Model model, Criteria criteria) throws Exception {
         List<MarketVo> products = marketService.groupBuying(criteria);
         List category = productService.cateList();
       ObjectMapper objm = new ObjectMapper();
       String cateList = objm.writeValueAsString(category);
       model.addAttribute("cateList", cateList);
-      int total = productService.getTotalCount(id);
-      PageDto pageDTO = new PageDto(total, criteria);
-      model.addAttribute("pageMaker", pageDTO);
       System.out.println(category);
       System.out.println(cateList);
         model.addAttribute("products", products);
