@@ -180,7 +180,7 @@
                                         <button class="btn btn-primary btn-needlogin" hidden="hidden">찜하기</button>
                                     </form>
                                     
-                                    <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
+                                    <a href="/pr?large=${product2.CATEGORY_LARGE}&medium=${product2.CATEGORY_MEDIUM}&small=${product2.CATEGORY_SMALL}&sub_category=${product2.CATEGORY_SUB_CATEGORY}&num=${product2.MARKET_NUM}">
                                         <button class="btn btn-success" >상세 페이지</button>
                                     </a>
                                 </div>
