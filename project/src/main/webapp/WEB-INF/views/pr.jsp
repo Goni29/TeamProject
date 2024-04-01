@@ -352,7 +352,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // 공동구매 참여 버튼 클릭 이벤트 처리
         $('.participateButton').click(function() {
             var isLoggedIn = ${loginVo.id != null}; // 로그인 상태 확인 (서버 사이드 코드 필요)
-            $('#participateModal').modal('show');
             if (!isLoggedIn) {
                 alert('로그인 후 이용해주세요.');
                 return; // 로그인하지 않은 상태면 여기서 처리 중단
