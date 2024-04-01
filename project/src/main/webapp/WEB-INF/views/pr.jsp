@@ -351,13 +351,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 공동구매 참여 버튼 클릭 이벤트 처리
         $('.participateButton').click(function() {
-            var productNum = $(this).data('num'); // 상품 번호 가져오기
             var isLoggedIn = ${loginVo.id != null}; // 로그인 상태 확인 (서버 사이드 코드 필요)
-            $('#participateModal').modal('show');
             if (!isLoggedIn) {
                 alert('로그인 후 이용해주세요.');
                 return; // 로그인하지 않은 상태면 여기서 처리 중단
             }
+            var productNum = $(this).data('num'); // 상품 번호 가져오기
+            $('#participateModal').modal('show');
         });
         $('#submitParticipation').click(function() {
             // 입력된 정보를 변수에 저장합니다.
