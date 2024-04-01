@@ -121,7 +121,7 @@
                             <div class="col-xl-3 col-md-6 mb-4 border">
                                 <p>${product2.marketName}</p>
 
-                                <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
+                                <a href="/pr?large=${product2.CATEGORY_LARGE}&medium=${product2.CATEGORY_MEDIUM}&small=${product2.CATEGORY_SMALL}&sub_category=${product2.CATEGORY_SUB_CATEGORY}&num=${product2.MARKET_NUM}">
                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product2.imgUrl}" alt="Product Image"> <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>
@@ -180,7 +180,7 @@
                                         <button class="btn btn-primary btn-needlogin" hidden="hidden">찜하기</button>
                                     </form>
                                     
-                                    <a href="/pr?large=${product2.large}&medium=${product2.medium}&small=${product2.small}&sub_category=${product2.sub_category}&num=${product2.num}">
+                                    <a href="/pr?large=${product2.CATEGORY_LARGE}&medium=${product2.CATEGORY_MEDIUM}&small=${product2.CATEGORY_SMALL}&sub_category=${product2.CATEGORY_SUB_CATEGORY}&num=${product2.MARKET_NUM}">
                                         <button class="btn btn-success" >상세 페이지</button>
                                     </a>
                                 </div>

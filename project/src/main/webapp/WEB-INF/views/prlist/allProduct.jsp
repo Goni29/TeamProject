@@ -30,7 +30,7 @@
                             <div class="col-xl-3 col-md-6 mb-4 border">
                                 <p>${product.marketName}</p>
 
-                                <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
+                                <a href="/pr?large=${product.CATEGORY_LARGE}&medium=${product.CATEGORY_MEDIUM}&small=${product.CATEGORY_SMALL}&sub_category=${product.CATEGORY_SUB_CATEGORY}&num=${product.MARKET_NUM}">
                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
                                     src="${product.imgUrl}" alt="Product Image"> <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
