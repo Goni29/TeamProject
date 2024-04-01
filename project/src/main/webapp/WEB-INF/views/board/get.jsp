@@ -48,26 +48,21 @@
 				
 				                  <div class="row d-flex">
 				                     <div class="col-auto">
-				                        <button id="favorite" class="btn btn-primary">스크랩</button>
+				                        <a href='/board/list' class="btn btn-success">목록</a>
 				                     </div>
-				                     <div class="col-auto">
-				                        <button id="recommend" class="btn btn-success">추천</button>
-				                     </div>
-				                     <div class="col-auto">
-				                        <a href='/board/list' class="btn btn-secondary">목록</a>
-				                     </div>
+				                     
+			                        <div class="col-auto">
+			                           <button id="modify" class="btn btn-success">수정</button>
+			                        </div>
 				
 				                     <c:if test="${loginVo.id == board.id}">
 				                        <div class="col-auto">
 				                           <form action="/board/remove" method="post">
-				    <input type="hidden" name="bno" value="${board.bno}">
-				    <!-- 여기에 추가적인 필드(예: Criteria 정보)를 포함할 수 있습니다. -->
-				    <button type="submit" class="btn btn-success">삭제</button>
-				</form>
+											    <input type="hidden" name="bno" value="${board.bno}">
+											    <!-- 여기에 추가적인 필드(예: Criteria 정보)를 포함할 수 있습니다. -->
+											    <button type="submit" class="btn btn-secondary">삭제</button>
+											</form>
 				
-				                        </div>
-				                        <div class="col-auto">
-				                           <button id="modify" class="btn btn-success">수정</button>
 				                        </div>
 				                     </c:if>
 				                  </div>
@@ -128,48 +123,48 @@
 				               </div>
 				            </div>
 				         </c:if>
-   </div>
-
-
-   <div class="container mt-5">
-      <div class="row justify-content-center">
-         <div class="col-md-8">
-            <div id="contentarea" class="card">
-               <div class="card-body">
-                  <ul class="list-unstyled replyUl">
-                     <li class="media" hidden="hidden">
-                        <div class="media-body">
-                           <div class="d-flex justify-content-between">
-                              <strong class="mt-0 mb-1">User00</strong> <small
-                                 class="text-muted">2024-01-05</small>
-                           </div>
-                           <p>내용</p>
-                        </div>
-                     </li>
-                  </ul>
-
-                  <nav aria-label="Page navigation" class="justify-content-center"></nav>
-               </div>
-            </div>
-         </div>
-         <c:if test="${loginVo.id != null}">
-            <div class="col-md-4">
-               <div id="contentarea" class="card">
-                  <div class="card-body">
-                     <form id="commentForm">
-                        <div class="form-group">
-                           <textarea class="form-control" id="replyContent" rows="3"
-                              placeholder="댓글을 입력하세요"></textarea>
-                        </div>
-                        <button id="addReply" type="submit" class="btn btn-primary">댓글
-                           작성</button>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </c:if>
-      </div>
-   </div>
+					   </div>
+					
+					
+					   <div class="container mt-5">
+					      <div class="row justify-content-center">
+					         <div class="col-md-8">
+					            <div id="contentarea" class="card">
+					               <div class="card-body">
+					                  <ul class="list-unstyled replyUl">
+					                     <li class="media" hidden="hidden">
+					                        <div class="media-body">
+					                           <div class="d-flex justify-content-between">
+					                              <strong class="mt-0 mb-1">User00</strong> <small
+					                                 class="text-muted">2024-01-05</small>
+					                           </div>
+					                           <p>내용</p>
+					                        </div>
+					                     </li>
+					                  </ul>
+					
+					                  <nav aria-label="Page navigation" class="justify-content-center"></nav>
+					               </div>
+					            </div>
+					         </div>
+					         <c:if test="${loginVo.id != null}">
+					            <div class="col-md-4">
+					               <div id="contentarea" class="card">
+					                  <div class="card-body">
+					                     <form id="commentForm">
+					                        <div class="form-group">
+					                           <textarea class="form-control" id="replyContent" rows="3"
+					                              placeholder="댓글을 입력하세요"></textarea>
+					                        </div>
+					                        <button id="addReply" type="submit" class="btn btn-primary">댓글
+					                           작성</button>
+					                     </form>
+					                  </div>
+					               </div>
+					            </div>
+					         </c:if>
+					      </div>
+					   </div>
 						<%@include file="../footer.jsp"%>
 				      </div>
 				   </div>
