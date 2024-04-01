@@ -60,7 +60,7 @@
 				                     <c:if test="${loginVo.id == board.id}">
 				                        <div class="col-auto">
 				                           <form action="/board/remove" method="post">
-				    <input type="hidden" name="bno" value="bno">
+				    <input type="hidden" name="bno" value="${board.bno}">
 				    <!-- 여기에 추가적인 필드(예: Criteria 정보)를 포함할 수 있습니다. -->
 				    <button type="submit" class="btn btn-success">삭제</button>
 				</form>
@@ -413,19 +413,31 @@
       </script>
 
 <script>
-         $(document).ready(function() {
+    $(document).ready(function() {
+        var $operForm = $('#operForm');
 
-            var $operForm = $('#operForm');
-            $('button[data-oper="modify"]').on('click', function() {
-               $operForm.attr('', '/board/modify').submit();
-            })
+        $('#modify').on('click', function(e) {
+            e.preventDefault(); // 기본 이벤트를 방지
+            // 폼 데이터를 '/board/modify'로 전송하기 위해 폼의 action을 설정
+            $operForm.attr('action', '/board/modify').submit();
+        });
 
-            $('button[data-oper="list"]').on('click', function() {
-               $operForm.find("#bno").remove();
-               $operForm.attr('action', '/board/list').submit();
-            })
-         })
-      </script>
+        $('button[data-oper="list"]').on('click', function() {
+            $operForm.find("#bno").remove();
+            $operForm.attr('action', '/board/list').submit();
+        });
+
+        $('form[action="/board/remove"]').on('submit', function(e) {
+            console.log("삭제 버튼 클릭됨"); // 디버깅을 위해 추가
+            var confirmDelete = confirm("게시글을 삭제하시겠습니까?");
+            if (!confirmDelete) {
+                e.preventDefault();
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
 
 
 <%@ include file="../footer.jsp"%>
