@@ -137,6 +137,7 @@
 	<!-- 페이징과 관련된 폼(내용이 숨겨져 있다.) -->
 	<form action="/board/list" id="actionForm" method="get">
 	</form>
+	<%@include file="../footer.jsp"%>
 </div>
 </div>
 </body>
@@ -180,4 +181,3 @@
 								$actionForm.find('input[name="bno"]').remove();
 							})
 	</script>
-<%@include file="../footer.jsp"%>

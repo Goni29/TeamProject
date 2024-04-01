@@ -178,6 +178,7 @@
 		</div>
 	</div>
 </div>
+<%@include file="../footer.jsp"%>
 
 	</div>
 
@@ -289,4 +290,3 @@
 						});
 	</script>
 </body>
-<%@include file="../footer.jsp"%>

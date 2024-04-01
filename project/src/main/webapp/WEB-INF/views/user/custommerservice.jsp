@@ -175,8 +175,18 @@
                     </div>
                 </div>
             </div>
+			<div id="footerarea">
+			    <footer class="">
+				    <div class="footer-container text-center" style="color: rgba(0, 0, 0, 0.2);">
+				        <p>(주)고니고니 사업자 등록번호 : 507-19-98999</p>
+				        <p>주소 : 경기도 화성시 병점동 황제로 84 | 대표자 : 김태곤</p>
+				        <p>호스팅 제공자 : (주)아이티는현태 | 문의전화 : 128-38</p>
+				        <p>COPYRIGHTⓒ(주)고니고니 ALL RIGHT RESERVED</p>
+				    </div>
+				</footer>
+			</div>
+			<%@include file="../footer.jsp"%>
         </div>
     </div>
 </body>
-<%@include file="../footer.jsp"%>
 </html>

@@ -119,6 +119,7 @@
                </div>
             </div>
          </c:if>
+		<%@include file="../footer.jsp"%>
       </div>
    </div>
 
