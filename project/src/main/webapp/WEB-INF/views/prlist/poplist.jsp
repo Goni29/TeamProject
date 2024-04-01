@@ -120,6 +120,34 @@
                             </div>
                         </c:forEach>
 						</div>
+						
+						<div class="pagination">
+						<c:if test="${pageMaker.prev}">
+							<a
+								href="${pageContext.request.contextPath}/prlist/poplist?page=${pageMaker.startPage - 1}">&laquo;
+								이전</a>
+						</c:if>
+
+						<c:forEach begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}" var="pageNum">
+							<c:choose>
+								<c:when test="${pageNum == pageMaker.cri.pageNum}">
+									<span><b>${pageNum}</b></span>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="${pageContext.request.contextPath}/prlist/poplist?page=${pageNum}">${pageNum}</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next}">
+							<a
+								href="${pageContext.request.contextPath}/prlist/poplist?page=${pageMaker.endPage + 1}">다음
+								&raquo;</a>
+						</c:if>
+					</div>
+						
                     </div>
                 </div>
             </div>

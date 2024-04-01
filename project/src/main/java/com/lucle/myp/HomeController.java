@@ -47,7 +47,7 @@ public class HomeController {
 	ProductService productService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, Model model, Criteria cri) throws Exception {
+	public String home(HttpServletRequest request, Model model, Criteria cri, @RequestParam(value = "page", defaultValue = "1") int page) throws Exception {
 	    List<MarketVo> list = service.rankedView();
 	    model.addAttribute("products", list);
 	    
@@ -59,7 +59,7 @@ public class HomeController {
 	        // 로그인한 사용자
 
 	        String id = member.getId();
-	        List<MarketVo> rankView = productService.rankedViewByUser(id);
+	        List<MarketVo> rankView = productService.rankedViewByUser(id, cri);
 	        model.addAttribute("rankView", rankView);
 	        System.out.println("Rank View for User ID: " + id);
 	        for (MarketVo item : rankView) {
@@ -73,7 +73,7 @@ public class HomeController {
 	    } else {
 	        // 로그인하지 않은 사용자
 
-	        List<MarketVo> products = service.groupBuying();
+	        List<MarketVo> products = service.groupBuying(cri);
 	        List category = productService.cateList();
 	        ObjectMapper objm = new ObjectMapper();
 	        String cateList = objm.writeValueAsString(category);

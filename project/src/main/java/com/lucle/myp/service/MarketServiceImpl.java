@@ -1,6 +1,8 @@
 package com.lucle.myp.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +63,13 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<MarketVo> groupBuying() {
-		List<MarketVo> list = mapper.groupBuying(); // 데이터베이스에서 목록을 가져옴
+	public List<MarketVo> groupBuying(Criteria criteria) {
+		int pageSize = criteria.getAmount();
+	    int offset = (criteria.getPageNum() - 1) * pageSize;
+		Map<String, Object> params = new HashMap<>();
+		params.put("pageSize", pageSize);
+		params.put("offset", offset);
+		List<MarketVo> list = mapper.groupBuying(params); // 데이터베이스에서 목록을 가져옴
 	    for (MarketVo market : list) {
 	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
 	            market.setAchievementrate(0);
@@ -94,6 +101,11 @@ public class MarketServiceImpl implements MarketService {
 	    }
 
 	    return list;
+	}
+	
+	@Override
+	public int getTotalCount() {
+	    return mapper.getTotalCount();
 	}
 
 }

@@ -53,10 +53,44 @@ AND m.num = #{num}
 	<select id="groupBuying"
 		resultType="com.lucle.myp.domain.MarketVo">
 	<![CDATA[
-		SELECT m.*, c.*, g.*
-		FROM MARKET m
-		JOIN CATEGORY c ON m.NUM = c.NUM
-		JOIN GROUPBUYING g ON m.NUM = g.NUM
+		SELECT * FROM (
+    SELECT inner_query.*, ROWNUM rnum FROM (
+    SELECT
+    m.NUM AS MARKET_NUM,
+    m.PRODUCTNAME,
+    m.MARKETNAME,
+    m.URL,
+    m.IMGURL,
+    m.WON,
+    m.DELIVERY,
+    m.DELIVERYFEE,
+    m.KEYWORD,
+    m.VISIBLE AS MARKET_VISIBLE,
+    m.GROUPBUYING,
+    m.DESCRIPTION,
+    m.CATEGORY AS MARKET_CATEGORY,
+    c.LARGE AS CATEGORY_LARGE,
+    c.MEDIUM AS CATEGORY_MEDIUM,
+    c.SMALL AS CATEGORY_SMALL,
+    c.SUB_CATEGORY AS CATEGORY_SUB_CATEGORY,
+    c.TIER,
+    c.CATENAME,
+    c.CATECODE,
+    c.CATEPARENT,
+    c.CNO,
+    g.GNO,
+    g.TITLE AS GROUPBUYING_TITLE,
+    g.CONTENT AS GROUPBUYING_CONTENT,
+    g.REGIDATE AS GROUPBUYING_REGIDATE,
+    g.GOALDATE,
+    g.GOALTARGET,
+    g.PERSONNUM,
+    g.NUM AS GROUPBUYING_NUM
+    FROM MARKET m
+    JOIN CATEGORY c ON m.num = c.num
+    JOIN GROUPBUYING g ON m.NUM = g.NUM
+    ) inner_query
+    ) WHERE rnum BETWEEN #{offset} + 1 AND #{offset} + #{pageSize}
 	]]>
 	</select>
 
@@ -129,6 +163,10 @@ AND m.num = #{num}
 		MARKET m
 		JOIN CATEGORY c ON m.num = c.num
 		WHERE m.num = #{num}
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(num) FROM market
 	</select>
 
 </mapper>

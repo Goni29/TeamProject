@@ -67,13 +67,12 @@ public class MarketController {
 		service.marketViewPlus(id, num);
 	}
 	
-	@GetMapping("/proto")
-	public void proto(Model model, Criteria cri) {
-		List<MarketVo> list = service.proto(cri);
-		List<MarketVo> list2 = service.groupBuying();
-		model.addAttribute("products", list);
-		model.addAttribute("products2", list2);
-	}
+	/*
+	 * @GetMapping("/proto") public void proto(Model model, Criteria cri) {
+	 * List<MarketVo> list = service.proto(cri); List<MarketVo> list2 =
+	 * service.groupBuying(); model.addAttribute("products", list);
+	 * model.addAttribute("products2", list2); }
+	 */
 
 	// 사용자 페이지
 	@GetMapping("/userPage")

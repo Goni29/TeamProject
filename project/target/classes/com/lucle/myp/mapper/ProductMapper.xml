@@ -69,121 +69,84 @@
 	</delete>
 
 	<select id="getProductDetails"
-		resultType="com.lucle.myp.domain.MarketVo">
-		<![CDATA[
-SELECT sub.*, DENSE_RANK() OVER (ORDER BY CATEGORY_VIEW_COUNT DESC) as CATEGORY_RANK
-FROM (
-  SELECT M.*, MV.VNO, MV.VIEWDATE, MV.PCATEGORY, G.TITLE, G.CONTENT, G.REGIDATE, G.GOALDATE, G.GOALTARGET, G.PERSONNUM, C.LARGE, C.MEDIUM, C.SMALL, C.SUB_CATEGORY, c.catecode, c.catename, c.tier, c.cateparent, c.cno,
-    COUNT(MV.PCATEGORY) OVER (PARTITION BY MV.PCATEGORY) as CATEGORY_VIEW_COUNT,
-    ROW_NUMBER() OVER (PARTITION BY M.NUM ORDER BY MV.VNO) as rn
-  FROM MARKET M
-  JOIN MARKETVIEW MV ON M.NUM = MV.NUM
-  JOIN GROUPBUYING G ON M.NUM = G.NUM
-  JOIN CATEGORY C ON M.NUM = C.NUM
-  WHERE MV.PCATEGORY IS NOT NULL
-  GROUP BY M.NUM, M.PRODUCTNAME, M.MARKETNAME, M.URL, M.IMGURL, M.WON, M.DELIVERY, M.DELIVERYFEE, M.KEYWORD, M.VISIBLE, M.GROUPBUYING, M.DESCRIPTION, m.category, MV.VNO, MV.ID, MV.VIEWDATE, MV.VISIBLE, MV.PCATEGORY, G.GNO, G.TITLE, G.CONTENT, G.REGIDATE, G.GOALDATE, G.GOALTARGET, G.PERSONNUM, G.NUM, C.LARGE, C.MEDIUM, C.SMALL, C.SUB_CATEGORY, C.NUM, c.catecode, c.catename, c.tier, c.cateparent, c.cno
-) sub
-WHERE sub.rn = 1
-ORDER BY CATEGORY_RANK, sub.NUM
-		]]>
-	</select>
+        resultType="com.lucle.myp.domain.MarketVo">
+    <![CDATA[
+    SELECT * FROM (
+        SELECT detailed.*, ROWNUM rnum FROM (
+            SELECT sub.*, DENSE_RANK() OVER (ORDER BY CATEGORY_VIEW_COUNT DESC) as CATEGORY_RANK
+            FROM (
+                SELECT M.*, MV.VNO, MV.VIEWDATE, MV.PCATEGORY, G.TITLE, G.CONTENT, G.REGIDATE, G.GOALDATE, G.GOALTARGET, G.PERSONNUM, C.LARGE, C.MEDIUM, C.SMALL, C.SUB_CATEGORY, c.catecode, c.catename, c.tier, c.cateparent, c.cno,
+                    COUNT(MV.PCATEGORY) OVER (PARTITION BY MV.PCATEGORY) as CATEGORY_VIEW_COUNT,
+                    ROW_NUMBER() OVER (PARTITION BY M.NUM ORDER BY MV.VNO) as rn
+                FROM MARKET M
+                JOIN MARKETVIEW MV ON M.NUM = MV.NUM
+                JOIN GROUPBUYING G ON M.NUM = G.NUM
+                JOIN CATEGORY C ON M.NUM = C.NUM
+                WHERE MV.PCATEGORY IS NOT NULL
+                GROUP BY M.NUM, M.PRODUCTNAME, M.MARKETNAME, M.URL, M.IMGURL, M.WON, M.DELIVERY, M.DELIVERYFEE, M.KEYWORD, M.VISIBLE, M.GROUPBUYING, M.DESCRIPTION, m.category, MV.VNO, MV.ID, MV.VIEWDATE, MV.VISIBLE, MV.PCATEGORY, G.GNO, G.TITLE, G.CONTENT, G.REGIDATE, G.GOALDATE, G.GOALTARGET, G.PERSONNUM, G.NUM, C.LARGE, C.MEDIUM, C.SMALL, C.SUB_CATEGORY, C.NUM, c.catecode, c.catename, c.tier, c.cateparent, c.cno
+            ) sub
+            WHERE sub.rn = 1
+        ) detailed
+    )
+    WHERE rnum BETWEEN #{offset} + 1 AND #{offset} + #{pageSize}
+    ]]>
+</select>
 
 	<select id="selectProductsByLargeCategory"
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT m.*, c.LARGE, g.*
 		FROM MARKET m
-		JOIN CATEGORY c ON m.NUM = c.NUM
+		JOIN CATEGORY c ON
+		m.NUM = c.NUM
 		LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
-		WHERE c.LARGE = #{large}
+		WHERE c.LARGE =
+		#{large}
 	</select>
 
 	<select id="selectProductsByMediumCategory"
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT m.*, c.MEDIUM, g.*
 		FROM MARKET m
-		JOIN CATEGORY c ON m.NUM = c.NUM
+		JOIN CATEGORY c ON
+		m.NUM = c.NUM
 		LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
-		WHERE c.MEDIUM = #{medium}
+		WHERE c.MEDIUM =
+		#{medium}
 	</select>
 
 	<select id="selectProductsBySmallCategory"
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT m.*, c.SMALL, g.*
 		FROM MARKET m
-		JOIN CATEGORY c ON m.NUM = c.NUM
+		JOIN CATEGORY c ON
+		m.NUM = c.NUM
 		LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
-		WHERE c.SMALL = #{small}
+		WHERE c.SMALL =
+		#{small}
 	</select>
 
 	<select id="selectProductsBySubCategory"
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT m.*, c.SUB_CATEGORY, g.*
 		FROM MARKET m
-		JOIN CATEGORY c ON m.NUM = c.NUM
+		JOIN CATEGORY c
+		ON m.NUM = c.NUM
 		LEFT JOIN GROUPBUYING g ON m.NUM = g.NUM
-		WHERE c.SUB_CATEGORY = #{sub_category}
+		WHERE
+		c.SUB_CATEGORY = #{sub_category}
 	</select>
 
 	<select id="cateList" resultType="com.lucle.myp.domain.MarketVo">
 
-		select * from category order by catecode
+		select * from category order by
+		catecode
 
 	</select>
 
 	<select id="findProductsByCategory"
 		resultType="com.lucle.myp.domain.MarketVo">
 		SELECT
-  market_query.*
-FROM (
-  SELECT
-    m.NUM AS MARKET_NUM,
-    m.PRODUCTNAME,
-    m.MARKETNAME,
-    m.URL,
-    m.IMGURL,
-    m.WON,
-    m.DELIVERY,
-    m.DELIVERYFEE,
-    m.KEYWORD,
-    m.VISIBLE AS MARKET_VISIBLE,
-    m.GROUPBUYING,
-    m.DESCRIPTION,
-    m.CATEGORY AS MARKET_CATEGORY,
-    c.LARGE AS CATEGORY_LARGE,
-    c.MEDIUM AS CATEGORY_MEDIUM,
-    c.SMALL AS CATEGORY_SMALL,
-    c.SUB_CATEGORY AS CATEGORY_SUB_CATEGORY,
-    c.TIER,
-    c.CATENAME,
-    c.CATECODE,
-    c.CATEPARENT,
-    c.CNO,
-    g.GNO,
-    g.TITLE AS GROUPBUYING_TITLE,
-    g.CONTENT AS GROUPBUYING_CONTENT,
-    g.REGIDATE AS GROUPBUYING_REGIDATE,
-    g.GOALDATE,
-    g.GOALTARGET,
-    g.PERSONNUM,
-    g.NUM AS GROUPBUYING_NUM,
-    ROW_NUMBER() OVER(PARTITION BY m.PRODUCTNAME ORDER BY m.NUM) AS rn
-  FROM
-    MARKET m
-    JOIN CATEGORY c ON m.CATEGORY = c.CATECODE
-    JOIN GROUPBUYING g ON m.NUM = g.NUM
-  WHERE
-    c.CATECODE = #{cateCode}
-) market_query
-WHERE
-  market_query.rn = 1
-	</select>
-	
-	<select id="rankedViewByUser"
-		resultType="com.lucle.myp.domain.MarketVo">
-		SELECT
-		market_query.*,
-		F.Frequency,
-		F.CategoryRank
+		market_query.*
 		FROM (
 		SELECT
 		m.NUM AS MARKET_NUM,
@@ -202,6 +165,64 @@ WHERE
 		c.LARGE AS CATEGORY_LARGE,
 		c.MEDIUM AS CATEGORY_MEDIUM,
 		c.SMALL AS CATEGORY_SMALL,
+		c.SUB_CATEGORY
+		AS CATEGORY_SUB_CATEGORY,
+		c.TIER,
+		c.CATENAME,
+		c.CATECODE,
+		c.CATEPARENT,
+		c.CNO,
+		g.GNO,
+		g.TITLE AS GROUPBUYING_TITLE,
+		g.CONTENT AS
+		GROUPBUYING_CONTENT,
+		g.REGIDATE AS GROUPBUYING_REGIDATE,
+		g.GOALDATE,
+		g.GOALTARGET,
+		g.PERSONNUM,
+		g.NUM AS GROUPBUYING_NUM,
+		ROW_NUMBER()
+		OVER(PARTITION BY m.PRODUCTNAME ORDER BY m.NUM) AS rn
+		FROM
+		MARKET m
+		JOIN
+		CATEGORY c ON m.num = c.num
+		JOIN GROUPBUYING g ON m.NUM = g.NUM
+		WHERE
+		c.CATECODE = #{cateCode}
+		) market_query
+		WHERE
+		market_query.rn = 1
+	</select>
+
+	<select id="rankedViewByUser"
+		resultType="com.lucle.myp.domain.MarketVo">
+		SELECT * FROM (
+		SELECT inner_query.*, ROWNUM rnum FROM (
+		SELECT
+		market_query.*,
+		F.Frequency,
+		F.CategoryRank
+		FROM (
+		SELECT
+		m.NUM AS
+		MARKET_NUM,
+		m.PRODUCTNAME,
+		m.MARKETNAME,
+		m.URL,
+		m.IMGURL,
+		m.WON,
+		m.DELIVERY,
+		m.DELIVERYFEE,
+		m.KEYWORD,
+		m.VISIBLE AS MARKET_VISIBLE,
+		m.GROUPBUYING,
+		m.DESCRIPTION,
+		m.CATEGORY AS MARKET_CATEGORY,
+		c.LARGE AS
+		CATEGORY_LARGE,
+		c.MEDIUM AS CATEGORY_MEDIUM,
+		c.SMALL AS CATEGORY_SMALL,
 		c.SUB_CATEGORY AS CATEGORY_SUB_CATEGORY,
 		c.TIER,
 		c.CATENAME,
@@ -210,36 +231,49 @@ WHERE
 		c.CNO,
 		g.GNO,
 		g.TITLE AS GROUPBUYING_TITLE,
-		g.CONTENT AS GROUPBUYING_CONTENT,
+		g.CONTENT AS
+		GROUPBUYING_CONTENT,
 		g.REGIDATE AS GROUPBUYING_REGIDATE,
 		g.GOALDATE,
 		g.GOALTARGET,
 		g.PERSONNUM,
 		g.NUM AS GROUPBUYING_NUM,
-		ROW_NUMBER() OVER(PARTITION BY m.PRODUCTNAME ORDER BY m.NUM) AS rn
-		FROM
-		MARKET m
+		ROW_NUMBER()
+		OVER(PARTITION BY m.PRODUCTNAME ORDER BY m.NUM) AS rn
+		FROM MARKET m
 		JOIN CATEGORY c ON m.num = c.num
 		JOIN GROUPBUYING g ON m.NUM = g.NUM
-		) market_query
+		)
+		market_query
 		JOIN (
 		SELECT
 		MV.PCATEGORY,
 		COUNT(*) AS Frequency,
 		ROW_NUMBER() OVER(PARTITION BY MV.PCATEGORY ORDER BY COUNT(*) DESC) AS
 		CategoryRank
-		FROM
-		MARKETVIEW MV
+		FROM MARKETVIEW MV
 		JOIN USERS U ON MV.ID = U.ID
-		WHERE
-		U.ID = #{id}
-		GROUP BY
-		MV.PCATEGORY
-		) F ON market_query.MARKET_CATEGORY = F.PCATEGORY
-		WHERE
-		market_query.rn = 1
-		ORDER BY
-		F.Frequency DESC, F.CategoryRank
+		WHERE U.ID =
+		#{id}
+		GROUP BY MV.PCATEGORY
+		) F ON market_query.MARKET_CATEGORY =
+		F.PCATEGORY
+		WHERE market_query.rn = 1
+		ORDER BY F.Frequency DESC,
+		F.CategoryRank
+		) inner_query
+		) WHERE rnum BETWEEN #{offset} + 1 AND
+		#{offset} + #{pageSize}
 	</select>
+
+	<select id="getTotalCount" parameterType="String"
+		resultType="int">
+		SELECT COUNT(DISTINCT NUM) FROM marketview WHERE id = #{id}
+	</select>
+	
+	<select id="getTotalCount2" resultType="int">
+		SELECT COUNT(num) FROM market
+	</select>
+
 
 </mapper>

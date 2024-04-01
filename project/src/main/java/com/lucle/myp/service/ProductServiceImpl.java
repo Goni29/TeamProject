@@ -1,11 +1,13 @@
 package com.lucle.myp.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
 import com.lucle.myp.mapper.ProductMapper;
 
@@ -59,8 +61,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-    public List<MarketVo> getRecommendedProductDetails() {
-        List<MarketVo> list = mapper.getProductDetails(); // 데이터베이스에서 목록을 가져옴
+    public List<MarketVo> getRecommendedProductDetails(Criteria criteria) {
+		int pageSize = criteria.getAmount();
+	    int offset = (criteria.getPageNum() - 1) * pageSize;
+		Map<String, Object> params = new HashMap<>();
+		params.put("pageSize", pageSize);
+		params.put("offset", offset);
+        List<MarketVo> list = mapper.getProductDetails(params); // 데이터베이스에서 목록을 가져옴
 	    for (MarketVo market : list) {
 	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
 	            market.setAchievementrate(0);
@@ -115,9 +122,16 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<MarketVo> rankedViewByUser(String id) {
-		List<MarketVo> list = mapper.rankedViewByUser(id); // 데이터베이스에서 목록을 가져옴
-
+	public List<MarketVo> rankedViewByUser(String id, Criteria criteria) {
+		
+		int pageSize = criteria.getAmount();
+	    int offset = (criteria.getPageNum() - 1) * pageSize;
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		params.put("pageSize", pageSize);
+		params.put("offset", offset);
+		
+		List<MarketVo> list = mapper.rankedViewByUser(params); // 데이터베이스에서 목록을 가져옴
 	    for (MarketVo market : list) {
 	        if (market.getGoaltarget() == 0) { // 0으로 나누는 것을 방지
 	            market.setAchievementrate(0);
@@ -129,4 +143,17 @@ public class ProductServiceImpl implements ProductService {
 
 	    return list;
 	}
+	
+	@Override
+    public int getTotalCount(String id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return mapper.getTotalCount(params);
+    }
+	
+	@Override
+    public int getTotalCount2() {
+        Map<String, Object> params = new HashMap<>();
+        return mapper.getTotalCount2(params);
+    }
 }

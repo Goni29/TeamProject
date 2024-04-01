@@ -1,6 +1,7 @@
 package com.lucle.myp.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lucle.myp.domain.CategoryFilterVo;
 import com.lucle.myp.domain.Criteria;
@@ -12,7 +13,7 @@ public interface ProductMapper {
     MarketVo selectProductById(int productId);
     void updateProduct(MarketVo product);
     void deleteProductById(int productId);
-    List<MarketVo> getProductDetails();
+    List<MarketVo> getProductDetails(Map<String, Object> params);
     List<MarketVo> selectProductsByLargeCategory(int large);
     List<MarketVo> selectProductsByMediumCategory(int medium);
     List<MarketVo> selectProductsBySmallCategory(int small);
@@ -25,5 +26,9 @@ public interface ProductMapper {
     
     List<MarketVo> findProductsByCategory(String cateCode);
     
-    public List<MarketVo> rankedViewByUser(String id);
+    public List<MarketVo> rankedViewByUser(Map<String, Object> params);
+    
+    int getTotalCount(Map<String, Object> params);
+    
+    int getTotalCount2(Map<String, Object> params);
 }

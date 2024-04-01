@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lucle.myp.domain.GroupBuyingVo;
+import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.PageDto;
 import com.lucle.myp.domain.UserVo;
 import com.lucle.myp.service.MarketService;
 import com.lucle.myp.service.ProductService;
@@ -83,8 +84,12 @@ public class ProductController {
     }
     
     @GetMapping("/poplist")
-    public String viewRecommendations(Model model) {
-        List<MarketVo> productDetails = productService.getRecommendedProductDetails();
+    public String viewRecommendations(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    	Criteria criteria = new Criteria(page, 12);
+        List<MarketVo> productDetails = productService.getRecommendedProductDetails(criteria);
+        int total = productService.getTotalCount2();
+        PageDto pageDTO = new PageDto(total, criteria);
+        model.addAttribute("pageMaker", pageDTO);
         model.addAttribute("productDetails", productDetails);
         return "/prlist/poplist"; // This is the JSP file name without the .jsp extension
     }
@@ -93,13 +98,16 @@ public class ProductController {
     MarketService marketService;
     
     @GetMapping("/recolist")
-    public String allProduct(Model model) throws Exception {
-        List<MarketVo> products = marketService.groupBuying();
+    public String allProduct(Model model, @RequestParam(value = "page", defaultValue = "1") int page, String id) throws Exception {
+    	Criteria criteria = new Criteria(page, 12);
+        List<MarketVo> products = marketService.groupBuying(criteria);
         List category = productService.cateList();
       ObjectMapper objm = new ObjectMapper();
       String cateList = objm.writeValueAsString(category);
       model.addAttribute("cateList", cateList);
-      
+      int total = productService.getTotalCount(id);
+      PageDto pageDTO = new PageDto(total, criteria);
+      model.addAttribute("pageMaker", pageDTO);
       System.out.println(category);
       System.out.println(cateList);
         model.addAttribute("products", products);
@@ -107,15 +115,18 @@ public class ProductController {
     }
     
     @GetMapping("/allProduct")
-    public String allProducts(Model model) throws Exception {
-        List<MarketVo> products = marketService.groupBuying();
+    public String allProducts(Model model, @RequestParam(value = "page", defaultValue = "1") int page) throws Exception {
         List category = productService.cateList();
       ObjectMapper objm = new ObjectMapper();
       String cateList = objm.writeValueAsString(category);
       model.addAttribute("cateList", cateList);
-      
+      Criteria criteria = new Criteria(page, 12);
+      List<MarketVo> products = marketService.groupBuying(criteria);
+      int total = marketService.getTotalCount();
+      PageDto pageDTO = new PageDto(total, criteria);
       System.out.println(category);
       System.out.println(cateList);
+      model.addAttribute("pageMaker", pageDTO);
         model.addAttribute("products", products);
         return "/prlist/allProduct"; // This is the JSP file name without the .jsp extension
     }
@@ -131,17 +142,22 @@ public class ProductController {
     }
     
     @RequestMapping(value = "/rankedUser", method = RequestMethod.GET)
-    public String getOrderList(HttpSession session, Model model) throws Exception {
+    public String getOrderList(HttpSession session, Model model, @RequestParam(value = "page", defaultValue = "1") int page) throws Exception {
         // 로그인된 사용자 정보를 세션에서 가져옵니다.
         UserVo member = (UserVo)session.getAttribute("loginVo");
 
         // 로그인된 사용자의 ID를 가져옵니다.
         String id = member.getId();
+        
+        Criteria criteria = new Criteria(page, 12);
+        int total = productService.getTotalCount(id);
+        PageDto pageDTO = new PageDto(total, criteria);
         // 해당 유저 ID로 상품을 조회합니다.
-        List<MarketVo> rankView = productService.rankedViewByUser(id);
+        List<MarketVo> rankView = productService.rankedViewByUser(id, criteria);
         // 조회된 상품 리스트를 모델에 추가합니다. 여기서는 각 MarketVo 객체의 id를 따로 설정할 필요가 없습니다.
         model.addAttribute("rankView", rankView);
         System.out.println("프로덕트 " + rankView);
+        model.addAttribute("pageMaker", pageDTO);
         boolean isLoggedIn = session.getAttribute("loginVo") != null;
         model.addAttribute("isLoggedIn", isLoggedIn);
 
