@@ -38,7 +38,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">인기 급상승 상품</h1>
+                        <h1 class="h3 mb-0 text-gray-800">인기상품</h1>
                     </div>
 
                     <div class="row">
@@ -113,7 +113,7 @@
 
                     <!-- Additional Content Row -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">당신을 위한 상품!</h1>
+                        <h1 class="h3 mb-0 text-gray-800">추천상품!</h1>
                     </div>
                     <div class="row">
                         <c:forEach var="rankView" items="${rankView}" begin="0" end="7">
@@ -185,6 +185,7 @@
                                 </div>
                             </div>
                         </c:forEach>
+                        <a href="/prlist/rankedUser" class="btn btn-success float-rightㄴ">추천상품 더보기</a>
                     </div>
                     
                     <div class="container mt-5 md-5">

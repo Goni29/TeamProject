@@ -39,7 +39,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">인기 급상승 상품</h1>
+                        <h1 class="h3 mb-0 text-gray-800">인기상품</h1>
                     </div>
 
                     <div class="row">
@@ -186,6 +186,7 @@
                                 </div>
                             </div>
                         </c:forEach>
+                        <a href="/prlist/allProduct" class="btn btn-success float-right">전체상품 더보기</a>
                     </div>
                     <div class="container mt-5 md-5">
                         <div class="row justify-content-center">
