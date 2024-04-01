@@ -15,6 +15,9 @@
     .content-container {
         padding-top: 50px; 
     }
+    .main-item{
+     width: 10rem;
+    }
 </style>
 
 <body id="page-top">
@@ -43,39 +46,41 @@
 					                            </button>
 					                        </h5>
 					                    </div>
-					                    <div id="rec-collapse${status.index}" class="table-responsive collapse" data-parent="#accordion${status.index}">
-					                        <table class="table table-bordered">
-					                            <tbody>
-					                                <tr>
-					                                    <td>주문인</td>
-					                                    <td>${order.id}</td>
-					                                </tr>
-					                                <tr>
-					                                    <td>수령인</td>
-					                                    <td>${order.name}</td>
-					                                </tr>
-					                                <tr>
-					                                    <td>주소</td>
-					                                    <td>${order.address} ${order.addressdetail} ${order.extraaddress}</td>
-					                                </tr>
-					                                <tr>
-					                                    <td>주문상품</td>
-					                                    <td>${order.productname}</td>
-					                                </tr>
-					                                <tr>
-					                                    <td>주문수량</td>
-					                                    <td>${order.count_product}</td>
-					                                </tr>
-					                                <tr>
-					                                    <td>주문날짜</td>
-					                                    <td>${order.buyingdate}</td>
-					                                </tr>
-					                                <tr>
-					                                    <td>배송상태</td>
-					                                    <td>${order.delivery}</td>
-					                                </tr>
-					                            </tbody>
-					                        </table>
+					                    <div id="rec-collapse${status.index}" class="collapse" data-parent="#accordion${status.index}">
+					                        <div class="card-body">
+					                            <table class="table text-center table-bordered">
+					                                <tbody>
+					                                    <tr>
+					                                        <td class="main-item">주문인</td>
+					                                        <td>${order.id}</td>
+					                                    </tr>
+					                                    <tr>
+					                                        <td class="main-item">수령인</td>
+					                                        <td>${order.name}</td>
+					                                    </tr>
+					                                    <tr>
+					                                        <td class="main-item">주소</td>
+					                                        <td>${order.address} ${order.addressdetail} ${order.extraaddress}</td>
+					                                    </tr>
+					                                    <tr>
+					                                        <td class="main-item">주문상품</td>
+					                                        <td>${order.productname}</td>
+					                                    </tr>
+					                                    <tr>
+					                                        <td class="main-item">주문수량</td>
+					                                        <td>${order.count_product}</td>
+					                                    </tr>
+					                                    <tr>
+					                                        <td class="main-item">주문날짜</td>
+					                                        <td>${order.buyingdate}</td>
+					                                    </tr>
+					                                    <tr>
+					                                        <td class="main-item">배송상태</td>
+					                                        <td>${order.delivery}</td>
+					                                    </tr>
+					                                </tbody>
+					                            </table>
+					                        </div>
 					                    </div>
 					                </div>
 					            </div>
