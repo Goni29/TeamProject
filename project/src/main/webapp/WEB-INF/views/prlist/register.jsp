@@ -22,7 +22,7 @@
 		            <div class="col-md-8">
 		                <h2>제품 등록</h2>
 		
-		                <form:form modelAttribute="product" action="${pageContext.request.contextPath}/product/register" method="POST" class="mt-4">
+		                <form:form modelAttribute="product" action="${pageContext.request.contextPath}/prlist/register" method="POST" class="mt-4">
 		                    <div class="form-group">
 		                        <form:label path="productName">상품명 :</form:label>
 		                        <form:input path="productName" cssClass="form-control" />
@@ -56,6 +56,11 @@
 		                    <div class="form-group">
 		                        <form:label path="description">제품 설명 :</form:label>
 		                        <form:textarea path="description" cssClass="form-control" rows="5"></form:textarea>
+		                    </div>
+		                    
+		                    <div class="form-group">
+		                        <form:label path="goaltarget">목표 인원 :</form:label>
+		                        <form:input path="goaltarget" cssClass="form-control" />
 		                    </div>
 		                    
 		                    <div class="form-group">
