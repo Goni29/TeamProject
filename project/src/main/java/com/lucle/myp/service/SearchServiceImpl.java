@@ -88,6 +88,48 @@ public class SearchServiceImpl implements SearchService {
 	            vo.setPname("삼성프로젝터");
 	        } else if (Long.valueOf(1223).equals(pCategory)) {
 	            vo.setPname("엡손프로젝터");
+	        } else if (Long.valueOf(2111).equals(pCategory)) {
+	            vo.setPname("엘지데스크탑");
+	        } else if (Long.valueOf(2112).equals(pCategory)) {
+	            vo.setPname("삼성데스크탑");
+	        } else if (Long.valueOf(2113).equals(pCategory)) {
+	            vo.setPname("한성데스크탑");
+	        } else if (Long.valueOf(2121).equals(pCategory)) {
+	            vo.setPname("엘지노트북");
+	        } else if (Long.valueOf(2122).equals(pCategory)) {
+	            vo.setPname("삼성노트북");
+	        } else if (Long.valueOf(2123).equals(pCategory)) {
+	            vo.setPname("레노버노트북");
+	        } else if (Long.valueOf(2131).equals(pCategory)) {
+	            vo.setPname("엘지모니터");
+	        } else if (Long.valueOf(2132).equals(pCategory)) {
+	            vo.setPname("삼성모니터");
+	        } else if (Long.valueOf(2133).equals(pCategory)) {
+	            vo.setPname("필립스모니터");
+	        } else if (Long.valueOf(2211).equals(pCategory)) {
+	            vo.setPname("AMD CPU");
+	        } else if (Long.valueOf(2212).equals(pCategory)) {
+	            vo.setPname("인텔 CPU");
+	        } else if (Long.valueOf(2221).equals(pCategory)) {
+	            vo.setPname("ASUS 메인보드");
+	        } else if (Long.valueOf(2222).equals(pCategory)) {
+	        	vo.setPname("MSI 메인보드");
+	        } else if (Long.valueOf(2223).equals(pCategory)) {
+	            vo.setPname("ASROCK 메인보드");
+	        } else if (Long.valueOf(2231).equals(pCategory)) {
+	            vo.setPname("삼성 램");
+	        } else if (Long.valueOf(2232).equals(pCategory)) {
+	            vo.setPname("SK하이닉스 램");
+	        } else if (Long.valueOf(2233).equals(pCategory)) {
+	            vo.setPname("마이크론 램");
+	        } else if (Long.valueOf(2311).equals(pCategory)) {
+	            vo.setPname("로지텍 마우스");
+	        } else if (Long.valueOf(2312).equals(pCategory)) {
+	            vo.setPname("레이저 마우스");
+	        } else if (Long.valueOf(2321).equals(pCategory)) {
+	            vo.setPname("로지텍 키보드");
+	        } else if (Long.valueOf(2322).equals(pCategory)) {
+	            vo.setPname("앱코 키보드");
 	        } else {
 	            vo.setPname("미등록상품");
 	        }
