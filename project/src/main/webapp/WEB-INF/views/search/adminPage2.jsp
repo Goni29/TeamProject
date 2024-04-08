@@ -479,7 +479,7 @@
 
                function exportToExcel() {
                    var wb = XLSX.utils.book_new(); // 새 워크북 생성
-                   var ws_name = "상품 조회현황";
+                   var ws_name = "상품 구매현황";
                    
                    // 첫 행에 들어갈 헤더 정보
                    var ws_data = [
