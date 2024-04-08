@@ -22,10 +22,15 @@
 		#{description});
 
 		INSERT
-		INTO CATEGORY (LARGE, MEDIUM, SMALL, SUB_CATEGORY, NUM)
+		INTO CATEGORY (LARGE, MEDIUM, SMALL, SUB_CATEGORY, CATECODE, NUM, tier, catename, CATEPARENT, cno)
 		VALUES
 		(#{large}, #{medium}, #{small},
-		#{sub_category}, seq_market.CURRVAL);
+		#{sub_category}, #{large}||#{medium}||#{small}||#{sub_category}, seq_market.CURRVAL, 0, null, #{large}||#{medium}||#{small}||#{sub_category}, seq_category.nextval);
+		
+		INSERT
+		INTO GROUPBUYING (GNO, TITLE, CONTENT, REGIDATE, GOALDATE, GOALTARGET, PERSONNUM, NUM)
+		VALUES
+		(seq_GROUPBUYING.nextval, null, null, sysdate, ADD_MONTHS(SYSDATE, 1), #{goaltarget}, 0, seq_market.currval);
 		END;
 	</insert>
 
