@@ -19,9 +19,9 @@
 	}
 
 .img-size {
-    max-width: 100px;
-    height: auto;
-	}
+    max-width: 300px; /* 이미지 최대 너비를 150px로 조정 */
+    height: auto; /* 이미지 높이를 자동으로 조정 */
+}
 </style>
 
 <body id="page-top">
@@ -47,7 +47,7 @@
                                 <p>${product.marketName}</p>
                                 
                                 <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product.imgUrl}" alt="Product Image" > <br>
+                                    <img class="img-size img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product.imgUrl}" alt="Product Image" > <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>
                                         <c:when test="${fn:length(product.productName) > 20}">
@@ -121,7 +121,7 @@
                                 <p>${rankView.marketName}</p>
 
                                 <a href="/pr?large=${rankView.CATEGORY_LARGE}&medium=${rankView.CATEGORY_MEDIUM}&small=${rankView.CATEGORY_SMALL}&sub_category=${rankView.CATEGORY_SUB_CATEGORY}&num=${rankView.MARKET_NUM}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${rankView.imgUrl}" alt="Product Image"> <br>
+                                    <img class="img-size img-fluid px-3 px-sm-4 mt-3 mb-4" src="${rankView.imgUrl}" alt="Product Image"> <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>
                                         <c:when test="${fn:length(rankView.productName) > 20}">

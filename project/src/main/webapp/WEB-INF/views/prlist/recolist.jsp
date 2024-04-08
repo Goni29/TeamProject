@@ -23,7 +23,7 @@
     }
 
 .img-size {
-    max-width: 300px; /* 이미지 최대 너비를 150px로 조정 */
+    max-width: 200px; /* 이미지 최대 너비를 150px로 조정 */
     height: auto; /* 이미지 높이를 자동으로 조정 */
 }
 </style>
@@ -72,7 +72,7 @@
 				    </div> 
 				</div>
 	            <div class="products-container">
-	                <!-- 동적으로 로드된 제품들이 여기에 표시됩니다. -->
+	            
 	            </div>
 	         </div>
 		</div>
