@@ -56,7 +56,8 @@
 	                        관리자 페이지
 	                    </a>
 	                    <div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-	                        <a class="dropdown-item" href="/search/adminPage">상품 검색 통계</a>
+	                        <a class="dropdown-item" href="/search/adminPage">상품 조회 통계</a>
+	                        <a class="dropdown-item" href="/search/adminPage2">상품 구매 통계</a>
 	                        <a class="dropdown-item" href="/prlist/register">상품 등록</a>
 	                    </div>
 	                </li>

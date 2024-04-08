@@ -33,7 +33,7 @@
 	    <div id="content-wrapper" class="d-flex flex-column page-size">       
 	        <%@ include file="../topbar.jsp"%>
 	        
-	        <span class="titletext" hidden="hidden">상품 조회현황 페이지</span>
+	        <span class="titletext" hidden="hidden">상품 구매현황</span>
 	        <div class="container-fluid p-5 text-center">
 	            <h1>상품 조회현황 페이지</h1>
 	        </div>
