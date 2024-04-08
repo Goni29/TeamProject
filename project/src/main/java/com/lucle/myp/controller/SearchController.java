@@ -23,6 +23,7 @@ import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.domain.SearchVo;
 import com.lucle.myp.domain.UserVo;
+import com.lucle.myp.service.ProductService;
 import com.lucle.myp.service.SearchService;
 
 import lombok.extern.log4j.Log4j;
@@ -98,6 +99,30 @@ public class SearchController {
 	    System.out.println(list);
 	    model.addAttribute("sList", list);
 	}
+	
+	@Autowired
+	ProductService productService;
+	
+	// 관리자 페이지에서 전체 검색 기록 확인
+		@GetMapping("/adminPage2")
+		public void adminPage2(HttpServletRequest req, Model model, Criteria cri) {
+			
+			if(cri.getSort3() == "CATEGORY_COUNT") {
+				cri.setSort3("CATEGORY_COUNT");
+			}
+			
+		    HttpSession session = req.getSession();
+
+		    UserVo loginVo = (UserVo) session.getAttribute("loginVo");
+
+		    if (loginVo.getGrade() < 3) {
+		        System.out.println("admin 계정이 아님");
+		        return;
+		    }
+
+		    List<SearchStatVo> list = productService.getStatList(cri);
+		    model.addAttribute("sList", list);
+		}
 
 	// 특정 기간 동안의 검색 횟수 리스트 가져오기
 	@ResponseBody

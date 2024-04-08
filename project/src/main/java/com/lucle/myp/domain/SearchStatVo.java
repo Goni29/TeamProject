@@ -9,6 +9,8 @@ public class SearchStatVo {
 	private long searchCount; //검색 횟수
 	private Long PCATEGORY_COUNT;
 	private Long PCATEGORY;
+	private Long CATEGORY;
+	private Long CATEGORY_COUNT;
 	private String pname;
 	
 	//나이대

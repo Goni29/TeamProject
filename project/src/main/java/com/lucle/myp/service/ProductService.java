@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.SearchStatVo;
 
 @Service
 public interface ProductService {
@@ -25,4 +26,5 @@ public interface ProductService {
     public List<MarketVo> rankedViewByUser(String id, Criteria criteria);
     int getTotalCount(String id);
     int getTotalCount2();
+    List<SearchStatVo> getStatList(Criteria cri);
 }

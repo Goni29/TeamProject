@@ -10,6 +10,11 @@
 .page-size {
     width: 100vw;
 }
+
+.img-size {
+    max-width: 300px; /* 이미지 최대 너비를 150px로 조정 */
+    height: auto; /* 이미지 높이를 자동으로 조정 */
+}
 </style>
 
 <body>

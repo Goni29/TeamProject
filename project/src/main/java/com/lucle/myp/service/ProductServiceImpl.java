@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.SearchStatVo;
 import com.lucle.myp.mapper.ProductMapper;
 
 @Service
@@ -156,4 +157,46 @@ public class ProductServiceImpl implements ProductService {
         Map<String, Object> params = new HashMap<>();
         return mapper.getTotalCount2(params);
     }
+	
+	@Override
+	public List<SearchStatVo> getStatList(Criteria cri) {
+	    List<SearchStatVo> list = mapper.getStatList(cri);
+	    
+	    for(SearchStatVo vo : list) {
+	        Long category = vo.getCATEGORY(); // PCATEGORY 값 가져오기
+	        
+	        // PCATEGORY 값에 따라 PCATEGORYName 설정
+	        if (Long.valueOf(1111).equals(category)) {
+	            vo.setPname("엘지냉장고");
+	        } else if (Long.valueOf(1112).equals(category)) {
+	            vo.setPname("삼성냉장고");
+	        } else if (Long.valueOf(1113).equals(category)) {
+	            vo.setPname("위니아냉장고");
+	        } else if (Long.valueOf(1121).equals(category)) {
+	            vo.setPname("쿠쿠전기밥솥");
+	        } else if (Long.valueOf(1122).equals(category)) {
+	            vo.setPname("쿠첸전기밥솥");
+	        } else if (Long.valueOf(1131).equals(category)) {
+	            vo.setPname("엘지인덕션");
+	        } else if (Long.valueOf(1132).equals(category)) {
+	            vo.setPname("삼성인덕션");
+	        } else if (Long.valueOf(1133).equals(category)) {
+	            vo.setPname("쿠쿠인덕션");
+	        } else if (Long.valueOf(1211).equals(category)) {
+	            vo.setPname("엘지TV");
+	        } else if (Long.valueOf(1212).equals(category)) {
+	            vo.setPname("삼성TV");
+	        } else if (Long.valueOf(1221).equals(category)) {
+	            vo.setPname("엘지프로젝터");
+	        } else if (Long.valueOf(1222).equals(category)) {
+	            vo.setPname("삼성프로젝터");
+	        } else if (Long.valueOf(1223).equals(category)) {
+	            vo.setPname("엡손프로젝터");
+	        } else {
+	            vo.setPname("미등록상품");
+	        }
+	    }
+	    
+	    return list;
+	}
 }

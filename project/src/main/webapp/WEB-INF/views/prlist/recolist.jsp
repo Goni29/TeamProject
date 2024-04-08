@@ -21,6 +21,11 @@
         width: calc(25% - 20px); /* 네 개의 제품을 한 줄에 표시하기 위한 계산 */
         box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
     }
+
+.img-size {
+    max-width: 300px; /* 이미지 최대 너비를 150px로 조정 */
+    height: auto; /* 이미지 높이를 자동으로 조정 */
+}
 </style>
 
 <body>
@@ -295,7 +300,7 @@ $(document).ready(function() {
             productsHtml += '<div class="product">' +
                 '<p>' + product.marketName + '</p>' +
                 '<a href="/pr?large=' + product.large + '&medium=' + product.medium + '&small=' + product.small + '&sub_category=' + product.sub_category + '&num=' + product.num + '">' +
-                '<img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="' + product.imgUrl + '" alt="Product Image"><br>' +
+                '<img class="img-size img-fluid px-3 px-sm-4 mt-3 mb-4" src="' + product.imgUrl + '" alt="Product Image"><br>' +
                 '<h6 class="m-0 font-weight-bold text-primary">' + productNameDisplay + '</h6>' +
                 '</a><br>' +
                 '<div>' +

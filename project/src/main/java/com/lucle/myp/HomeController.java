@@ -130,15 +130,14 @@ public class HomeController {
 		searchService.insert(searchVo, req);
 	}
 	
-	@ControllerAdvice
-	public class GlobalExceptionHandler {
-
-	    // NullPointerException 처리
-	    @ExceptionHandler(NullPointerException.class)
-	    public String handleNullPointerException(NullPointerException e, HttpServletRequest request) {
-	        // 로그인 페이지나 메시지를 보여줄 커스텀 페이지로 리다이렉트
-	        return "redirect:/";
-	    }
-	}
+	/*
+	 * @ControllerAdvice public class GlobalExceptionHandler {
+	 * 
+	 * // NullPointerException 처리
+	 * 
+	 * @ExceptionHandler(NullPointerException.class) public String
+	 * handleNullPointerException(NullPointerException e, HttpServletRequest
+	 * request) { // 로그인 페이지나 메시지를 보여줄 커스텀 페이지로 리다이렉트 return "redirect:/"; } }
+	 */
 
 }

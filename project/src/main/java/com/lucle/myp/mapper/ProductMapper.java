@@ -6,6 +6,7 @@ import java.util.Map;
 import com.lucle.myp.domain.CategoryFilterVo;
 import com.lucle.myp.domain.Criteria;
 import com.lucle.myp.domain.MarketVo;
+import com.lucle.myp.domain.SearchStatVo;
 
 public interface ProductMapper {
 	void insertProduct(MarketVo product);
@@ -31,4 +32,6 @@ public interface ProductMapper {
     int getTotalCount(Map<String, Object> params);
     
     int getTotalCount2(Map<String, Object> params);
+    
+    List<SearchStatVo> getStatList(Criteria cri);
 }
