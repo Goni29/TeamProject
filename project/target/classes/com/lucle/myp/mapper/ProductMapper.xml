@@ -105,7 +105,9 @@
 		SET large = #{large},
 		medium = #{medium},
 		small = #{small},
-		sub_category = #{sub_category}
+		sub_category = #{sub_category},
+		catecode = #{large}||#{medium}||#{small}||#{sub_category},
+		cateparent = #{large}||#{medium}||#{small}||#{sub_category}
 		WHERE NUM = #{m_num}
 	</update>
 
