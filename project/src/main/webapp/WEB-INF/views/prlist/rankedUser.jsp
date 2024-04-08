@@ -36,7 +36,7 @@
                                 <p>${product.marketName}</p>
 
                                 <a href="/pr?large=${product.CATEGORY_LARGE}&medium=${product.CATEGORY_MEDIUM}&small=${product.CATEGORY_SMALL}&sub_category=${product.CATEGORY_SUB_CATEGORY}&num=${product.MARKET_NUM}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
+                                    <img class="img-size img-fluid px-3 px-sm-4 mt-3 mb-4"
                                     src="${product.imgUrl}" alt="Product Image">
                                     <h6 class="m-0 font-weight-bold text-primary">
                                         <c:choose>
