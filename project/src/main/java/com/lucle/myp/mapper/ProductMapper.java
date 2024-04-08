@@ -34,4 +34,7 @@ public interface ProductMapper {
     int getTotalCount2(Map<String, Object> params);
     
     List<SearchStatVo> getStatList(Criteria cri);
+    
+    void updateCategory(MarketVo product);
+    
 }

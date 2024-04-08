@@ -24,10 +24,16 @@
 		            <div class="col-md-8">
 		                <h2>제품 정보 수정</h2>
 		
-		                <form:form modelAttribute="product" action="${pageContext.request.contextPath}/product/update" method="POST">
+		                <form:form modelAttribute="product" action="${pageContext.request.contextPath}/prlist/update" method="POST">
 		                    <div class="form-group">
 		                        <form:label path="productName">상품명 : </form:label><br />
 		                        <form:input path="productName" cssClass="form-control" />
+		                    </div>
+		                    <br />
+		                    
+		                    <div class="form-group">
+		                        <form:label path="m_num">제품번호 : </form:label><br />
+		                        <form:input path="m_num" cssClass="form-control" />
 		                    </div>
 		                    <br />
 		
@@ -64,6 +70,30 @@
 		                    <div class="form-group">
 		                        <form:label path="description">제품 설명 : </form:label><br />
 		                        <form:textarea path="description" cssClass="form-control" rows="10" />
+		                    </div>
+		                    <br />
+		                    
+		                    <div class="form-group">
+		                        <form:label path="large">대분류 : </form:label><br />
+		                        <form:input path="large" cssClass="form-control" />
+		                    </div>
+		                    <br />
+		                    
+		                    <div class="form-group">
+		                        <form:label path="medium">중분류 : </form:label><br />
+		                        <form:input path="medium" cssClass="form-control" />
+		                    </div>
+		                    <br />
+		                    
+		                    <div class="form-group">
+		                        <form:label path="small">소분류 : </form:label><br />
+		                        <form:input path="small" cssClass="form-control" />
+		                    </div>
+		                    <br />
+		                    
+		                    <div class="form-group">
+		                        <form:label path="sub_category">세부분류 : </form:label><br />
+		                        <form:input path="sub_category" cssClass="form-control" />
 		                    </div>
 		                    <br />
 		

@@ -65,6 +65,7 @@ public class ProductController {
     @GetMapping("/edit/{num}")
     public String showEditForm(@PathVariable("num") int productId, Model model) {
        MarketVo product = productService.selectProductById(productId);
+       System.out.println("수정!!!!!" + product);
         model.addAttribute("product", product);
         return "/prlist/edit";
     }
@@ -72,6 +73,7 @@ public class ProductController {
     @PostMapping("/update")
     public String updateProduct(@ModelAttribute MarketVo product, RedirectAttributes redirectAttributes) {
         productService.updateProduct(product);
+        productService.updateCategory(product);
         redirectAttributes.addFlashAttribute("message", "Product successfully updated!");
         return "redirect:/";
     }

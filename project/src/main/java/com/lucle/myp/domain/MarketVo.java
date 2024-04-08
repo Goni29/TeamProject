@@ -18,6 +18,7 @@ public class MarketVo {
 	private int visible;
 	private String groupbuying;
 	private String description;
+	private String m_num;
 	
 	private int large;
 	private int medium;

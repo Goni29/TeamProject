@@ -22,15 +22,21 @@
 		#{description});
 
 		INSERT
-		INTO CATEGORY (LARGE, MEDIUM, SMALL, SUB_CATEGORY, CATECODE, NUM, tier, catename, CATEPARENT, cno)
+		INTO CATEGORY (LARGE, MEDIUM, SMALL, SUB_CATEGORY, CATECODE, NUM,
+		tier, catename, CATEPARENT, cno)
 		VALUES
 		(#{large}, #{medium}, #{small},
-		#{sub_category}, #{large}||#{medium}||#{small}||#{sub_category}, seq_market.CURRVAL, 0, null, #{large}||#{medium}||#{small}||#{sub_category}, seq_category.nextval);
-		
+		#{sub_category}, #{large}||#{medium}||#{small}||#{sub_category},
+		seq_market.CURRVAL, 0, null,
+		#{large}||#{medium}||#{small}||#{sub_category}, seq_category.nextval);
+
 		INSERT
-		INTO GROUPBUYING (GNO, TITLE, CONTENT, REGIDATE, GOALDATE, GOALTARGET, PERSONNUM, NUM)
+		INTO GROUPBUYING (GNO, TITLE, CONTENT, REGIDATE, GOALDATE,
+		GOALTARGET, PERSONNUM, NUM)
 		VALUES
-		(seq_GROUPBUYING.nextval, null, null, sysdate, ADD_MONTHS(SYSDATE, 1), #{goaltarget}, 0, seq_market.currval);
+		(seq_GROUPBUYING.nextval, null, null,
+		sysdate, ADD_MONTHS(SYSDATE, 1), #{goaltarget}, 0,
+		seq_market.currval);
 		END;
 	</insert>
 
@@ -46,7 +52,35 @@
 
 	<select id="selectProductById" parameterType="int"
 		resultType="com.lucle.myp.domain.MarketVo">
-		SELECT * FROM MARKET WHERE NUM = #{num} AND VISIBLE = 1
+		SELECT
+		M.NUM AS M_NUM,
+		M.PRODUCTNAME,
+		M.MARKETNAME,
+		M.URL,
+		M.IMGURL,
+		M.WON,
+		M.DELIVERY,
+		M.DELIVERYFEE,
+		M.KEYWORD,
+		M.VISIBLE AS M_VISIBLE,
+		M.GROUPBUYING,
+		M.DESCRIPTION,
+		M.CATEGORY,
+		C.NUM AS C_NUM,
+		C.LARGE,
+		C.MEDIUM,
+		C.SMALL,
+		C.SUB_CATEGORY,
+		C.TIER,
+		C.CATENAME,
+		C.CATECODE,
+		C.CATEPARENT,
+		C.CNO
+		FROM
+		MARKET M
+		INNER JOIN CATEGORY C ON M.NUM = C.NUM
+		WHERE
+		M.VISIBLE = 1 AND M.NUM = #{m_num}
 	</select>
 
 	<update id="updateProduct"
@@ -58,14 +92,21 @@
 		IMGURL = #{imgUrl},
 		WON =
 		#{won},
-		DELIVERY = #{delivery},
-		DELIVERYFEE = #{deliveryFee},
 		KEYWORD =
 		#{keyword},
-		VISIBLE = #{visible},
-		GROUPBUYING = #{groupBuying},
 		DESCRIPTION = #{description}
-		WHERE NUM = #{num}
+		WHERE NUM =
+		#{m_num}
+	</update>
+
+	<update id="updateCategory"
+		parameterType="com.lucle.myp.domain.MarketVo">
+		UPDATE CATEGORY
+		SET large = #{large},
+		medium = #{medium},
+		small = #{small},
+		sub_category = #{sub_category}
+		WHERE NUM = #{m_num}
 	</update>
 
 	<delete id="deleteProductById" parameterType="int">
@@ -280,7 +321,7 @@
 		SELECT COUNT(num) FROM
 		market
 	</select>
-	
+
 	<select id="getStatList"
 		resultType="com.lucle.myp.domain.SearchStatVo">
 		<![CDATA[

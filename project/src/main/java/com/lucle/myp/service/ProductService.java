@@ -27,4 +27,5 @@ public interface ProductService {
     int getTotalCount(String id);
     int getTotalCount2();
     List<SearchStatVo> getStatList(Criteria cri);
+    void updateCategory(MarketVo product);
 }

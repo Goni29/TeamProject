@@ -241,4 +241,9 @@ public class ProductServiceImpl implements ProductService {
 	    
 	    return list;
 	}
+
+	@Override
+	public void updateCategory(MarketVo product) {
+		mapper.updateCategory(product);
+	}
 }
