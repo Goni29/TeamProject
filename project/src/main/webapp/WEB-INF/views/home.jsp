@@ -20,7 +20,7 @@
 }
 
 .img-size {
-    max-width: 150px; /* 이미지 최대 너비를 150px로 조정 */
+    max-width: 300px; /* 이미지 최대 너비를 150px로 조정 */
     height: auto; /* 이미지 높이를 자동으로 조정 */
 }
 </style>
@@ -48,7 +48,7 @@
                                 <p>${product.marketName}</p>
                                 
                                 <a href="/pr?large=${product.large}&medium=${product.medium}&small=${product.small}&sub_category=${product.sub_category}&num=${product.num}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product.imgUrl}" alt="Product Image" > <br>
+                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product.imgUrl}" alt="Product Image" > <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>
                                         <c:when test="${fn:length(product.productName) > 20}">
@@ -122,7 +122,7 @@
                                 <p>${product2.marketName}</p>
 
                                 <a href="/pr?large=${product2.CATEGORY_LARGE}&medium=${product2.CATEGORY_MEDIUM}&small=${product2.CATEGORY_SMALL}&sub_category=${product2.CATEGORY_SUB_CATEGORY}&num=${product2.MARKET_NUM}">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="${product2.imgUrl}" alt="Product Image"> <br>
+                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 img-size" src="${product2.imgUrl}" alt="Product Image"> <br>
                                     <h6 class="m-0 font-weight-bold text-primary">
                                     <c:choose>
                                         <c:when test="${fn:length(product2.productName) > 20}">
