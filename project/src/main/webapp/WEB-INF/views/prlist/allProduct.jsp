@@ -10,6 +10,18 @@
 .page-size {
     width: 100vw;
 }
+    
+.img-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center; /* 이미지를 가운데 정렬 */
+}
+
+.img-size {
+    max-width: 150px; /* 이미지 최대 너비를 150px로 조정 */
+    height: auto; /* 이미지 높이를 자동으로 조정 */
+}
 </style>
 
 <body>
